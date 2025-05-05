@@ -1,0 +1,54 @@
+﻿using E_commerce.Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace E_commerce.Infrastructure.Repository
+{
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    {
+        private readonly AppDbContext _context;
+        private readonly DbSet<T> _dbSet;
+        public GenericRepository(AppDbContext context)
+        {
+            _context = context;
+            _dbSet = context.Set<T>();
+        }
+        public async Task<T> AddAsync(T entity)
+        {
+            _dbSet.Add(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task<T> DeleteAsync(int id)
+        {
+            var entity = await _dbSet.FindAsync(id);
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task<IQueryable<T>> GetAllAsync()
+        {
+            var entities = await _dbSet.ToListAsync();
+            return entities.AsQueryable();
+        }
+
+        public async Task<T> GetByIdAsync(int id)
+        {
+            var entity = await _dbSet.FindAsync(id);
+            return entity;
+        }
+
+        public async Task<T> UpdateAsync(T entity)
+        {
+            _dbSet.Update(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+    }
+}
