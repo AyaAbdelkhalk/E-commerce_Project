@@ -22,6 +22,7 @@ namespace E_commerce.Application.Services
         public async Task<Response<UserDetails>> AddNewUser(AddUserDTO userdto)
         {
             var user = userdto.Adapt<User>();
+            user.Password = PasswordHelper.HashPassword(userdto.Password);
             var response = await IsValidUser(userdto);
             if (response.Succeeded)
             {

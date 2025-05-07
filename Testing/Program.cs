@@ -13,25 +13,29 @@ namespace Testing
 
             var userservices = container.Resolve<IUserServices>();
 
-            AddUserDTO addUserDTO = new AddUserDTO();
-            addUserDTO.FirstName = "John";
-            addUserDTO.LastName = "Doe";
-            addUserDTO.UserName = "johndoe32";
-            addUserDTO.Email = "aya13@gmail.com";
-            addUserDTO.Password = "Password123";
-            addUserDTO.PasswordConfirmed = "Password123";
+            #region Test Add
+            //AddUserDTO addUserDTO = new AddUserDTO();
+            //addUserDTO.FirstName = "John";
+            //addUserDTO.LastName = "Doe";
+            //addUserDTO.UserName = "johndoe325";
+            //addUserDTO.Email = "aya143@gmail.com";
+            //addUserDTO.Password = "Password123";
+            //addUserDTO.PasswordConfirmed = "Password123";
 
-            userservices.AddNewUser(addUserDTO).ContinueWith(task =>
-            {
-                if (task.Result.Succeeded)
-                {
-                    Console.WriteLine("User added successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to add user: " + string.Join(", ", task.Result.Errors));
-                }
-            }).Wait();
+            //userservices.AddNewUser(addUserDTO).ContinueWith(task =>
+            //{
+            //    if (task.Result.Succeeded)
+            //    {
+            //        Console.WriteLine("User added successfully.");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Failed to add user: " + string.Join(", ", task.Result.Errors));
+            //    }
+            //}).Wait(); 
+            #endregion
+
+
         }
     }
 }
