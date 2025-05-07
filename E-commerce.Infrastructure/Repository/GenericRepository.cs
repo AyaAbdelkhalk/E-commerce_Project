@@ -34,8 +34,7 @@ namespace E_commerce.Infrastructure.Repository
 
         public async Task<IQueryable<T>> GetAllAsync()
         {
-            var entities = await _dbSet.ToListAsync();
-            return entities.AsQueryable();
+            return _dbSet.AsQueryable();
         }
 
         public async Task<T> GetByIdAsync(int id)
