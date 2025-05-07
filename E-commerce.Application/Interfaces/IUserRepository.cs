@@ -12,5 +12,7 @@ namespace E_commerce.Application.Interfaces
         Task<User> GetByEmailAsync(string email);
         Task<User> GetByUserNameAsync(string username);
         void UpdateUserRole(User user, string role);
+
+
     }
 }
