@@ -7,10 +7,12 @@ namespace E_commerce.Application.Hepler
         public bool Succeeded { get; set; }
         public List<string> Errors { get; set; }
         public T Data { get; set; }
+
         public Response()
         {
             Errors = new List<string>();
         }
+
         public Response(T data)
         {
             Succeeded = true;

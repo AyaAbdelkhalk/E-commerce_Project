@@ -18,7 +18,8 @@ namespace Testing
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<UserServices>().As<IUserServices>();
 
-
+            builder.RegisterType<ProductRepository>().As<IProductRepository>();
+            builder.RegisterType<ProductServices>().As<IProductServices>();
 
             var container = builder.Build();
             return container;
