@@ -21,7 +21,7 @@ namespace E_commerce.Core.Models
         public string LastName { get; set; }
         public bool IsActive { get; set; } = true;
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
-        public DateTime LastLoginDate { get; set; } = DateTime.UtcNow;
+        public DateTime LastLoginDate { get; set; } 
         public virtual ICollection<Order>? Orders { get; set; } // reference navigation property
 
     }

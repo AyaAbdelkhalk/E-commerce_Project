@@ -40,6 +40,58 @@ namespace E_commerce.Application.Services
             }
         }
 
+        public async Task<Response<UserDetails>> Login(LoginDTO loginDto)
+        {
+            var user = await _userRepository.GetByUserNameAsync(loginDto.UserName);
+            if (user == null)
+            {
+                return new Response<UserDetails>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "Invalid UserName or Password." }
+                };
+            }
+            if (!PasswordHelper.VerifyPassword(user.Password,loginDto.Password))
+            {
+                return new Response<UserDetails>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "Invalid UserName or Password." }
+                };
+            }
+
+            var userDetails = user.Adapt<UserDetails>();
+            user.LastLoginDate = DateTime.UtcNow;
+            SessionManager.Login(user);
+            await _userRepository.UpdateAsync(user);
+            return new Response<UserDetails>
+            {
+                Succeeded = true,
+                Data = userDetails
+            };
+        }
+
+        public Response<string> Logout()
+        {
+            if (SessionManager.IsLoggedIn)
+            {
+                SessionManager.Logout();
+                return new Response<string>
+                {
+                    Succeeded = true,
+                    Data = "Logout successful."
+                };
+            }
+            else
+            {
+                return new Response<string>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "User is not logged in." }
+                };
+            }
+        }
+
         private async Task<Response<UserDetails>> IsValidUser(AddUserDTO userDTO)
         {
             List<string> errors = new List<string>();
