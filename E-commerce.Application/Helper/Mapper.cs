@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace E_commerce.Application.Helper
 {
+
     public static class Mapper
     {
         public static void RegisterMapsterConfiguration()

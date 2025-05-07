@@ -35,6 +35,24 @@ namespace Testing
             //}).Wait(); 
             #endregion
 
+            #region Test Login
+            LoginDTO loginDTO = new LoginDTO();
+            loginDTO.UserName = "johndoe325";
+            loginDTO.Password = "Password123";
+            userservices.Login(loginDTO).ContinueWith(task =>
+            {
+                if (task.Result.Succeeded)
+                {
+                    Console.WriteLine("Login successful.");
+                }
+                else
+                {
+                    Console.WriteLine("Login failed: " + string.Join(", ", task.Result.Errors));
+                }
+            }).Wait();
+            #endregion
+
+
 
         }
     }

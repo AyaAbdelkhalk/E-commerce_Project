@@ -12,6 +12,14 @@ namespace E_commerce.Application.Services
     public interface IUserServices 
     {
         Task<Response<UserDetails>> AddNewUser(AddUserDTO userdto);
+        Task<Response<UserDetails>> Login(LoginDTO loginDto);
+        Response<string> Logout();
+
+
+
+
+
+
 
     }
 }
