@@ -21,5 +21,15 @@ namespace E_commerce.Infrastructure.Repository
             return user;
         }
 
+        public void UpdateUserRole(User user, string role)
+        {
+            var existingUser = _dbSet.Find(user.UserID);
+            if (existingUser != null)
+            {
+                existingUser.Role = (Core.Enum.Role)Enum.Parse(typeof(Core.Enum.Role), role);
+
+                _dbSet.Update(existingUser);
+            }
+        }
     }
 }

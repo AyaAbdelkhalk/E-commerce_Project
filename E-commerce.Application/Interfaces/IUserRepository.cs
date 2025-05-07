@@ -10,5 +10,6 @@ namespace E_commerce.Application.Interfaces
     public interface IUserRepository : IGenericRepository<User>
     {
         Task<User> GetByEmailAsync(string email);
+        void UpdateUserRole(User user, string role);
     }
 }
