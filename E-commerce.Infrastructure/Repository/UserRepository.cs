@@ -21,6 +21,12 @@ namespace E_commerce.Infrastructure.Repository
             return user;
         }
 
+        public Task<User> GetByUserNameAsync(string username)
+        {
+            var user = _dbSet.FirstOrDefaultAsync(u => u.UserName.ToLower() == username.ToLower());
+            return user;
+        }
+
         public void UpdateUserRole(User user, string role)
         {
             var existingUser = _dbSet.Find(user.UserID);

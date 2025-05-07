@@ -42,6 +42,11 @@ namespace E_commerce.Application.Services
         private async Task<Response<UserDetails>> IsValidUser(AddUserDTO userDTO)
         {
             List<string> errors = new List<string>();
+            var existingUserName = await _userRepository.GetByUserNameAsync(userDTO.UserName);
+            if (existingUserName != null)
+            {
+                errors.Add("The UserName is already registered.");
+            }
             var existingUser = await _userRepository.GetByEmailAsync(userDTO.Email);
             if (existingUser != null)
             {
