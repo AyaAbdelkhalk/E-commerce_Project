@@ -1,4 +1,6 @@
 ﻿using E_commerce.Application.Interfaces;
+using E_commerce.Core.Enum;
+using E_commerce.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +58,7 @@ namespace E_commerce.Application.Services
             }
 
             await _orderRepository.AddAsync(order);
-            await _cartItemRepository.ClearCartByUserIdAsync(userId);
+            await _cartItemRepository.(ClearCartByUserIdAsync(userId));
 
             return order.OrderID;
         }
