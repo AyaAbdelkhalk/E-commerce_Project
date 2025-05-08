@@ -58,7 +58,7 @@ namespace E_commerce.Application.Services
             }
 
             await _orderRepository.AddAsync(order);
-            await _cartItemRepository.(ClearCartByUserIdAsync(userId));
+            //await _cartItemRepository.ClearCartByUserIdAsync(userId));
 
             return order.OrderID;
         }

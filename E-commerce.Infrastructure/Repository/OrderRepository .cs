@@ -1,4 +1,7 @@
-﻿using System;
+﻿using E_commerce.Application.Interfaces;
+using E_commerce.Core.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +15,11 @@ namespace E_commerce.Infrastructure.Repository
         {
         }
 
-        public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(int userId)
+
+        public Task<IQueryable<Order>>GetOrdersByUserIdAsync(int userId)
         {
-            return await _dbSet
-                .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-                .Where(o => o.UserID == userId)
-                .ToListAsync();
-
-
+            var orders = _dbSet.Where(o => o.UserID == userId).AsQueryable();
+            return Task.FromResult(orders);
         }
     }
    
