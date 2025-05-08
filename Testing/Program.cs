@@ -43,34 +43,34 @@ namespace Testing
 
             #region Test Add Product
 
-            var category = new Category
-            {
-                Name = "Electronics", // اختر اسم الفئة
-                Description = "All kinds of electronic products"
-            };
+            //var category = new Category
+            //{
+            //    Name = "Electronics", // اختر اسم الفئة
+            //    Description = "All kinds of electronic products"
+            //};
 
 
-            CreateProductDto createProductDto = new CreateProductDto
-            {
-                Name = "New Product",
-                Description = "This is a test product",
-                Price = 99.99m,
-                CategoryID = 1 // Assuming this category exists
-            };
+            //CreateProductDto createProductDto = new CreateProductDto
+            //{
+            //    Name = "New Product",
+            //    Description = "This is a test product",
+            //    Price = 99.99m,
+            //    CategoryID = 1 // Assuming this category exists
+            //};
 
-            string imagePath = @"D:\github\Testing\ImagesTest\camera.jpeg";
+            //string imagePath = @"D:\github\Testing\ImagesTest\camera.jpeg";
 
-            productServices.AddProductAsync(createProductDto, imagePath).ContinueWith(task =>
-            {
-                if (task.Result.Succeeded)
-                {
-                    Console.WriteLine("Product added successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to add product: " + string.Join(", ", task.Result.Errors));
-                }
-            }).Wait();
+            //productServices.AddProductAsync(createProductDto, imagePath).ContinueWith(task =>
+            //{
+            //    if (task.Result.Succeeded)
+            //    {
+            //        Console.WriteLine("Product added successfully.");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Failed to add product: " + string.Join(", ", task.Result.Errors));
+            //    }
+            //}).Wait();
             #endregion
 
             #region Test Login
