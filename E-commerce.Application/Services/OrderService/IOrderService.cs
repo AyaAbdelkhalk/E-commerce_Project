@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_commerce.Application.Services
+namespace E_commerce.Application.Services.OrderService
 {
     public interface IOrderService
     {

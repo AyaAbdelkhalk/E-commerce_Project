@@ -8,7 +8,7 @@ using E_commerce.Application.DTOs;
 using E_commerce.Application.Interfaces;
 using E_commerce.Core.Models;
 
-namespace E_commerce.Application.Services
+namespace E_commerce.Application.Services.CartItemService
 {
     public class CartItemService : ICartItemService
     {
