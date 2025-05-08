@@ -17,7 +17,7 @@ namespace Testing
 
 
 
-            //#region Test Add
+            #region Test Add
             //AddUserDTO addUserDTO = new AddUserDTO();
             //addUserDTO.FirstName = "John";
             //addUserDTO.LastName = "Doe";
@@ -37,7 +37,7 @@ namespace Testing
             //        Console.WriteLine("Failed to add user: " + string.Join(", ", task.Result.Errors));
             //    }
             //}).Wait();
-            //#endregion
+            #endregion
 
             var productServices = container.Resolve<IProductServices>();
 
