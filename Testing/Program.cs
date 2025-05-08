@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using E_commerce.Application.DTOs.ProductDTOs;
-using E_commerce.Application.DTOs.UserDTOs;
+using E_commerce.Application.DTOs.Product;
+using E_commerce.Application.DTOs.User;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
 using E_commerce.Core.Models;

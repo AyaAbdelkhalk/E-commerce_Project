@@ -1,5 +1,7 @@
-﻿using E_commerce.Application.DTOs.ProductDTOs;
-using E_commerce.Application.DTOs.UserDTOs;
+﻿using E_commerce.Application.DTOs.Order;
+using E_commerce.Application.DTOs.Product;
+using E_commerce.Application.DTOs.User;
+using E_commerce.Core.Enum;
 using E_commerce.Core.Models;
 using Mapster;
 using System;
@@ -49,6 +51,41 @@ namespace E_commerce.Application.Helper
                     // UpdateProductDto → Product
                     TypeAdapterConfig<UpdateProductDto, Product>
                         .NewConfig();
+
+            #endregion
+
+            #region Order Mapping 
+
+            TypeAdapterConfig<Order, OrderDisDto>
+                .NewConfig()
+                // .Map(dest => dest.UserID, src => src.UserID)
+                .Map(dest => dest.OrderDate, src => src.OrderDate)
+                .Map(dest => dest.TotalAmount, src => src.TotalAmount)
+                .Map(dest => dest.Status, src => src.Status.ToString()) // Enum to string
+                .Map(dest => dest.DateProcessed, src => src.DateProcessed)
+                .Map(dest => dest.OrderDetails, src => src.OrderDetails);
+
+            TypeAdapterConfig<OrderDetail, OrderDetailDto>
+                .NewConfig()
+                .Map(dest => dest.ProductID, src => src.ProductID)
+                .Map(dest => dest.ProductName, src => src.Product.Name) // navigation property
+                .Map(dest => dest.Price, src => src.Price)
+                .Map(dest => dest.Quantity, src => src.Quantity);
+
+            TypeAdapterConfig<CreateOrderDto, Order>
+                .NewConfig()
+                // .Map(dest => dest.UserID, src => src.UserID)
+                .Map(dest => dest.OrderDetails, src => src.Items);
+
+            TypeAdapterConfig<CreateOrderDetailDto, OrderDetail>
+                .NewConfig()
+                .Map(dest => dest.ProductID, src => src.ProductID)
+                .Map(dest => dest.Quantity, src => src.Quantity);
+
+            TypeAdapterConfig < UpdateOrderStatusDto, Order>
+                 .NewConfig()
+                 .Map(dest => dest.Status, src => Enum.Parse<Status>(src.NewStatus))
+                 .Map(dest => dest.DateProcessed, src => src.DateProcessed);
 
             #endregion
 

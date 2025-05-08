@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_commerce.Application.DTOs.UserDTOs
+namespace E_commerce.Application.DTOs.User
 {
     public class AddUserDTO
     {

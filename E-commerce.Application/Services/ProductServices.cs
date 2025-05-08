@@ -1,4 +1,4 @@
-﻿using E_commerce.Application.DTOs.ProductDTOs;
+﻿using E_commerce.Application.DTOs.Product;
 using E_commerce.Application.Hepler; // عشان Response<T>
 using E_commerce.Application.Interfaces;
 using E_commerce.Core.Models;
