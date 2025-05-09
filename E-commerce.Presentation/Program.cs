@@ -1,5 +1,5 @@
 using Autofac;
-using E_commerce.Application.Services;
+using E_commerce.Application.Services.UserServices;
 
 namespace E_commerce.Presentation
 {

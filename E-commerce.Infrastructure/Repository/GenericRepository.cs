@@ -49,5 +49,10 @@ namespace E_commerce.Infrastructure.Repository
             await _context.SaveChangesAsync();
             return entity;
         }
+        public async Task DeleteRangeAsync(IEnumerable<T> entities)
+        {
+            _dbSet.RemoveRange(entities);
+            await _context.SaveChangesAsync();
+        }
     }
 }

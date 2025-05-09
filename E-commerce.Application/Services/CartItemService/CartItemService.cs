@@ -11,7 +11,7 @@ using E_commerce.Application.Interfaces;
 using E_commerce.Core.Models;
 using Mapster;
 
-namespace E_commerce.Application.Services
+namespace E_commerce.Application.Services.CartItemService
 {
     public class CartItemService : ICartItemService
     {

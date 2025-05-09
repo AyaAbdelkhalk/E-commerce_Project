@@ -21,5 +21,16 @@ namespace E_commerce.Infrastructure.Repository
                 .Where(ci => ci.UserID == userId)
                 .ToListAsync();
         }
+        public async Task<CartItem?> GetCartItemByUserIdAndProductIdAsync(int userId, int productId)
+        {
+            if(_dbSet != null)
+            {
+                return await _dbSet
+                    .Where(ci => ci.UserID == userId && ci.ProductID == productId)
+                    .FirstOrDefaultAsync();
+            }
+            return null;
+
+        }
     }
 }

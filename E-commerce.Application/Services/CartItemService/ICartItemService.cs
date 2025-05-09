@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using E_commerce.Application.DTOs;
 using E_commerce.Application.Hepler;
 
-namespace E_commerce.Application.Interfaces
+namespace E_commerce.Application.Services.CartItemService
 {
     public interface ICartItemService
     {

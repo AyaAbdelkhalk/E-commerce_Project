@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace E_commerce.Application.Services
+namespace E_commerce.Application.Services.ProductServices
 {
     public class ProductServices : IProductServices
     {
