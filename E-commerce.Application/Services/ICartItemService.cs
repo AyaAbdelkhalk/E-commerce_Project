@@ -5,15 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using E_commerce.Application.DTOs;
+using E_commerce.Application.Hepler;
 
 namespace E_commerce.Application.Interfaces
 {
     public interface ICartItemService
     {
-        Task AddToCartAsync(int userId, int productId, int quantity);
-        Task UpdateCartItemQuantityAsync(int cartItemId, int quantity);
-        Task RemoveFromCartAsync(int cartItemId);
-        Task<IEnumerable<CartItemDTO>> GetUserCartItemsAsync(int userId);
-        Task ClearCartAsync(int userId);
+        Task<Response<string>> AddToCartAsync(int userId, int productId, int quantity);
+        Task<Response<string>> UpdateCartItemQuantityAsync(int cartItemId, int quantity);
+        Task<Response<string>> RemoveFromCartAsync(int cartItemId);
+        Task<Response<IReadOnlyList<CartItemDTO>>> GetCartItemsByUserIdAsync(int userId);
+        Task<Response<string>> ClearCartAsync(int userId);
     }
 }

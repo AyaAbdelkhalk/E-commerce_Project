@@ -15,12 +15,11 @@ namespace E_commerce.Infrastructure.Repository
 
         public CartItemRepository(AppDbContext context) : base(context) { }
 
-        public async Task<IEnumerable<CartItem>> GetCartItemByUserIdAsync(int userId)
+        public async Task<IReadOnlyList<CartItem>> GetCartItemByUserIdAsync(int userId)
         {
             return await _dbSet
-               .Include(ci => ci.Product)
-               .Where(ci => ci.UserID == userId)
-               .ToListAsync();
+                .Where(ci => ci.UserID == userId)
+                .ToListAsync();
         }
     }
 }

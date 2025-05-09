@@ -16,6 +16,8 @@ namespace E_commerce.Presentation
             builder.RegisterType<AppDbContext>().AsSelf();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<UserServices>().As<IUserServices>();
+            builder.RegisterType<CartItemService>().As<ICartItemService>();
+            builder.RegisterType<CartItemRepository>().As<ICartItemRepository>();
 
 
 

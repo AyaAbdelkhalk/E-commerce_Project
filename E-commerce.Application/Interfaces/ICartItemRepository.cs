@@ -10,6 +10,6 @@ namespace E_commerce.Application.Interfaces
 {
     public interface ICartItemRepository : IGenericRepository<CartItem>
     {
-        Task<IEnumerable<CartItem>> GetCartItemByUserIdAsync(int userId);
+        public Task<IReadOnlyList<CartItem>> GetCartItemByUserIdAsync(int userId);
     }
 }

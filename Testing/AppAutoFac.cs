@@ -21,6 +21,8 @@ namespace Testing
             builder.RegisterType<ProductRepository>().As<IProductRepository>();
             builder.RegisterType<ProductServices>().As<IProductServices>();
 
+            builder.RegisterType<CartItemService>().As<ICartItemService>();
+            builder.RegisterType<CartItemRepository>().As<ICartItemRepository>();
             var container = builder.Build();
             return container;
         }

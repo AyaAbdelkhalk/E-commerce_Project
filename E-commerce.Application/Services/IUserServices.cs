@@ -14,12 +14,5 @@ namespace E_commerce.Application.Services
         Task<Response<UserDetails>> AddNewUser(AddUserDTO userdto);
         Task<Response<UserDetails>> Login(LoginDTO loginDto);
         Response<string> Logout();
-
-
-
-
-
-
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using E_commerce.Application.DTOs.Order;
+﻿using E_commerce.Application.DTOs;
+using E_commerce.Application.DTOs.CartItem;
+using E_commerce.Application.DTOs.Order;
 using E_commerce.Application.DTOs.Product;
 using E_commerce.Application.DTOs.User;
 using E_commerce.Core.Enum;
@@ -87,6 +89,32 @@ namespace E_commerce.Application.Helper
                  .Map(dest => dest.Status, src => Enum.Parse<Status>(src.NewStatus))
                  .Map(dest => dest.DateProcessed, src => src.DateProcessed);
 
+            #endregion
+
+            #region CartItem Mapping
+
+            TypeAdapterConfig<CartItem, CartItemDTO>
+                .NewConfig()
+                .Map(dest => dest.CartItemID, src => src.CartItemID)
+                .Map(dest => dest.UserID, src => src.UserID)
+                .Map(dest => dest.ProductID, src => src.ProductID)
+                .Map(dest => dest.Name, src => src.Product.Name)
+                .Map(dest => dest.Price, src => src.Product.Price)
+                .Map(dest => dest.Quantity, src => src.Quantity)
+                .Map(dest => dest.DateAdded, src => src.DateAdded)
+                .Map(dest => dest.TotalPrice, src => src.Product.Price * src.Quantity);
+
+            TypeAdapterConfig<CreateCartItemDTO, CartItem>
+                .NewConfig()
+                .Map(dest => dest.UserID, src => src.UserID)
+                .Map(dest => dest.ProductID, src => src.ProductID)
+                .Map(dest => dest.Quantity, src => src.Quantity)
+                .Map(dest => dest.DateAdded, src => DateTime.UtcNow);
+
+            TypeAdapterConfig<UpdateCartItemDTO, CartItem>
+                .NewConfig()
+                .Map(dest => dest.CartItemID, src => src.CartItemID)
+                .Map(dest => dest.Quantity, src => src.Quantity);
             #endregion
 
         }

@@ -43,6 +43,12 @@ namespace E_commerce.Infrastructure.Repository
                 .OrderBy(p => p.Name)
                 .ToListAsync();
         }
+        public async Task<IReadOnlyList<Product>> GetByIdsAsync(IEnumerable<int> productIds)
+        {
+            return await _dbSet
+                .Where(p => productIds.Contains(p.ProductID))
+                .ToListAsync();
+        }
 
 
 
