@@ -11,5 +11,6 @@ namespace E_commerce.Application.Interfaces
     public interface ICartItemRepository : IGenericRepository<CartItem>
     {
         Task<IEnumerable<CartItem>> GetCartItemByUserIdAsync(int userId);
+        Task<CartItem?> GetCartItemByUserIdAndProductIdAsync(int userId, int productId);
     }
 }

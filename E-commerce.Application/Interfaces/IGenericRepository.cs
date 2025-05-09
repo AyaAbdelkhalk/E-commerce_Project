@@ -13,5 +13,8 @@ namespace E_commerce.Application.Interfaces
         public Task<T> AddAsync(T entity);
         public Task<T> UpdateAsync(T entity);
         public Task<T> DeleteAsync(int id);
+
+        //delete range of entities
+        public Task DeleteRangeAsync(IEnumerable<T> entities);
     }
 }

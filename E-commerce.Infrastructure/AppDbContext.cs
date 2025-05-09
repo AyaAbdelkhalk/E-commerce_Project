@@ -7,7 +7,7 @@ namespace E_commerce.Infrastructure
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Data Source=VIRUS\\SQLEXPRESS;Initial Catalog=EcommerceDb;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Data Source=.;Initial Catalog=EcommerceDb;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
