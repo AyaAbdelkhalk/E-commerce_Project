@@ -22,7 +22,8 @@ namespace E_commerce.Presentation
             ApplicationConfiguration.Initialize();
             //System.Windows.Forms.Application.Run(new Form1());
             //System.Windows.Forms.Application.Run(new CartForm(cartItemService));
-            System.Windows.Forms.Application.Run(new Login_Form(IUserServices));
+            System.Windows.Forms.Application.Run(new Dashboard());
+            //System.Windows.Forms.Application.Run(new Login_Form(IUserServices));
 
         }
     }
