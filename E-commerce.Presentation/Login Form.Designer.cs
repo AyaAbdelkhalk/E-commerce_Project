@@ -40,16 +40,6 @@ namespace E_commerce.Presentation
             label2 = new Label();
             button1 = new Button();
             panel2 = new Panel();
-            label7 = new Label();
-            Exitbtn = new Button();
-            pictureBox1 = new PictureBox();
-            label3 = new Label();
-            loginUnderline = new Panel();
-            registerUnderline = new Panel();
-            Loginpanel = new Panel();
-            loginbtn = new Button();
-            togglePasswordButton = new IconButton();
-            PsswordTextBox = new CustomTextBox();
             REGpanel = new Panel();
             LastNamelbl = new Label();
             LastNametxt = new CustomTextBox();
@@ -65,10 +55,20 @@ namespace E_commerce.Presentation
             toggleRegConfirmPasswordButton = new IconButton();
             conpasswordtxt = new CustomTextBox();
             passwordtxt = new CustomTextBox();
+            label7 = new Label();
+            Exitbtn = new Button();
+            pictureBox1 = new PictureBox();
+            label3 = new Label();
+            loginUnderline = new Panel();
+            registerUnderline = new Panel();
+            Loginpanel = new Panel();
+            loginbtn = new Button();
+            togglePasswordButton = new IconButton();
+            PsswordTextBox = new CustomTextBox();
             panel2.SuspendLayout();
+            REGpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             Loginpanel.SuspendLayout();
-            REGpanel.SuspendLayout();
             SuspendLayout();
             // 
             // Loginbutton
@@ -98,7 +98,7 @@ namespace E_commerce.Presentation
             UserNametextBox.BorderFocusColor = Color.FromArgb(181, 191, 249);
             UserNametextBox.BorderSize = 1;
             UserNametextBox.ForeColor = Color.FromArgb(38, 32, 59);
-            UserNametextBox.Location = new Point(24, 130);
+            UserNametextBox.Location = new Point(24, 139);
             UserNametextBox.Multiline = false;
             UserNametextBox.Name = "UserNametextBox";
             UserNametextBox.Padding = new Padding(13);
@@ -130,7 +130,7 @@ namespace E_commerce.Presentation
             UserName.AutoSize = true;
             UserName.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             UserName.ForeColor = Color.MidnightBlue;
-            UserName.Location = new Point(24, 90);
+            UserName.Location = new Point(24, 99);
             UserName.Name = "UserName";
             UserName.Size = new Size(109, 37);
             UserName.TabIndex = 2;
@@ -142,7 +142,7 @@ namespace E_commerce.Presentation
             label2.AutoSize = true;
             label2.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             label2.ForeColor = Color.MidnightBlue;
-            label2.Location = new Point(24, 180);
+            label2.Location = new Point(24, 189);
             label2.Name = "label2";
             label2.Size = new Size(100, 37);
             label2.TabIndex = 3;
@@ -171,7 +171,6 @@ namespace E_commerce.Presentation
             // panel2
             // 
             panel2.Anchor = AnchorStyles.None;
-            panel2.Controls.Add(REGpanel);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(Exitbtn);
             panel2.Controls.Add(pictureBox1);
@@ -181,148 +180,12 @@ namespace E_commerce.Presentation
             panel2.Controls.Add(loginUnderline);
             panel2.Controls.Add(registerUnderline);
             panel2.Controls.Add(Loginpanel);
+            panel2.Controls.Add(REGpanel);
             panel2.Location = new Point(162, 12);
             panel2.Name = "panel2";
             panel2.Size = new Size(810, 718);
             panel2.TabIndex = 7;
             panel2.Paint += panel2_Paint;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Simplified Arabic Fixed", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.MidnightBlue;
-            label7.Location = new Point(37, 544);
-            label7.Margin = new Padding(0);
-            label7.Name = "label7";
-            label7.RightToLeft = RightToLeft.Yes;
-            label7.Size = new Size(290, 40);
-            label7.TabIndex = 12;
-            label7.Text = "Join us Today";
-            label7.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Exitbtn
-            // 
-            Exitbtn.Anchor = AnchorStyles.None;
-            Exitbtn.BackColor = Color.Transparent;
-            Exitbtn.Cursor = Cursors.Hand;
-            Exitbtn.FlatAppearance.BorderSize = 0;
-            Exitbtn.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 0, 0, 0);
-            Exitbtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, 181, 191, 249);
-            Exitbtn.FlatStyle = FlatStyle.Flat;
-            Exitbtn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            Exitbtn.ForeColor = Color.White;
-            Exitbtn.Location = new Point(55, 627);
-            Exitbtn.Name = "Exitbtn";
-            Exitbtn.Size = new Size(123, 50);
-            Exitbtn.TabIndex = 10;
-            Exitbtn.Text = "Exit";
-            Exitbtn.UseVisualStyleBackColor = false;
-            Exitbtn.Click += button3_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(55, 176);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(306, 226);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 8;
-            pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Simplified Arabic Fixed", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.MidnightBlue;
-            label3.Location = new Point(3, 61);
-            label3.Name = "label3";
-            label3.Size = new Size(353, 80);
-            label3.TabIndex = 6;
-            label3.Text = "Welcome To \r\n      Our System";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // loginUnderline
-            // 
-            loginUnderline.BackColor = Color.MidnightBlue;
-            loginUnderline.Location = new Point(602, 78);
-            loginUnderline.Name = "loginUnderline";
-            loginUnderline.Size = new Size(142, 2);
-            loginUnderline.TabIndex = 0;
-            // 
-            // registerUnderline
-            // 
-            registerUnderline.BackColor = Color.MidnightBlue;
-            registerUnderline.Location = new Point(440, 78);
-            registerUnderline.Name = "registerUnderline";
-            registerUnderline.Size = new Size(142, 2);
-            registerUnderline.TabIndex = 1;
-            // 
-            // Loginpanel
-            // 
-            Loginpanel.Controls.Add(UserName);
-            Loginpanel.Controls.Add(UserNametextBox);
-            Loginpanel.Controls.Add(label2);
-            Loginpanel.Controls.Add(loginbtn);
-            Loginpanel.Controls.Add(togglePasswordButton);
-            Loginpanel.Controls.Add(PsswordTextBox);
-            Loginpanel.Location = new Point(394, 103);
-            Loginpanel.Name = "Loginpanel";
-            Loginpanel.Size = new Size(407, 594);
-            Loginpanel.TabIndex = 10;
-            // 
-            // loginbtn
-            // 
-            loginbtn.Anchor = AnchorStyles.None;
-            loginbtn.BackColor = Color.MidnightBlue;
-            loginbtn.Cursor = Cursors.Hand;
-            loginbtn.FlatAppearance.BorderSize = 0;
-            loginbtn.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            loginbtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(181, 191, 249);
-            loginbtn.FlatStyle = FlatStyle.Flat;
-            loginbtn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            loginbtn.ForeColor = Color.White;
-            loginbtn.Location = new Point(131, 299);
-            loginbtn.Name = "loginbtn";
-            loginbtn.Size = new Size(123, 50);
-            loginbtn.TabIndex = 9;
-            loginbtn.Text = "Log In";
-            loginbtn.UseVisualStyleBackColor = false;
-            loginbtn.Click += loginbtn_Click;
-            // 
-            // togglePasswordButton
-            // 
-            togglePasswordButton.BackColor = Color.White;
-            togglePasswordButton.FlatAppearance.BorderSize = 0;
-            togglePasswordButton.FlatStyle = FlatStyle.Flat;
-            togglePasswordButton.IconChar = IconChar.Eye;
-            togglePasswordButton.IconColor = Color.Gray;
-            togglePasswordButton.IconFont = IconFont.Auto;
-            togglePasswordButton.IconSize = 24;
-            togglePasswordButton.Location = new Point(351, 237);
-            togglePasswordButton.Name = "togglePasswordButton";
-            togglePasswordButton.Size = new Size(30, 30);
-            togglePasswordButton.TabIndex = 10;
-            togglePasswordButton.UseVisualStyleBackColor = false;
-            togglePasswordButton.Click += TogglePasswordButton_Click;
-            // 
-            // PsswordTextBox
-            // 
-            PsswordTextBox.Anchor = AnchorStyles.None;
-            PsswordTextBox.BackColor = Color.White;
-            PsswordTextBox.BorderColor = Color.FromArgb(181, 191, 249);
-            PsswordTextBox.BorderFocusColor = Color.FromArgb(181, 191, 249);
-            PsswordTextBox.BorderSize = 1;
-            PsswordTextBox.ForeColor = Color.FromArgb(38, 32, 59);
-            PsswordTextBox.Location = new Point(24, 231);
-            PsswordTextBox.Multiline = false;
-            PsswordTextBox.Name = "PsswordTextBox";
-            PsswordTextBox.Padding = new Padding(13);
-            PsswordTextBox.PasswordChar = true;
-            PsswordTextBox.Size = new Size(367, 47);
-            PsswordTextBox.TabIndex = 1;
-            PsswordTextBox.UnderlinedStyle = false;
             // 
             // REGpanel
             // 
@@ -554,6 +417,143 @@ namespace E_commerce.Presentation
             passwordtxt.TabIndex = 2;
             passwordtxt.UnderlinedStyle = false;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Simplified Arabic Fixed", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.MidnightBlue;
+            label7.Location = new Point(37, 544);
+            label7.Margin = new Padding(0);
+            label7.Name = "label7";
+            label7.RightToLeft = RightToLeft.Yes;
+            label7.Size = new Size(290, 40);
+            label7.TabIndex = 12;
+            label7.Text = "Join us Today";
+            label7.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Exitbtn
+            // 
+            Exitbtn.Anchor = AnchorStyles.None;
+            Exitbtn.BackColor = Color.Transparent;
+            Exitbtn.Cursor = Cursors.Hand;
+            Exitbtn.FlatAppearance.BorderSize = 0;
+            Exitbtn.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 0, 0, 0);
+            Exitbtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, 181, 191, 249);
+            Exitbtn.FlatStyle = FlatStyle.Flat;
+            Exitbtn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            Exitbtn.ForeColor = Color.White;
+            Exitbtn.Location = new Point(55, 627);
+            Exitbtn.Name = "Exitbtn";
+            Exitbtn.Size = new Size(123, 50);
+            Exitbtn.TabIndex = 10;
+            Exitbtn.Text = "Exit";
+            Exitbtn.UseVisualStyleBackColor = false;
+            Exitbtn.Click += button3_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(55, 176);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(306, 226);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Simplified Arabic Fixed", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.MidnightBlue;
+            label3.Location = new Point(3, 61);
+            label3.Name = "label3";
+            label3.Size = new Size(353, 80);
+            label3.TabIndex = 6;
+            label3.Text = "Welcome To \r\n      Our System";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // loginUnderline
+            // 
+            loginUnderline.BackColor = Color.MidnightBlue;
+            loginUnderline.Location = new Point(602, 78);
+            loginUnderline.Name = "loginUnderline";
+            loginUnderline.Size = new Size(142, 2);
+            loginUnderline.TabIndex = 0;
+            // 
+            // registerUnderline
+            // 
+            registerUnderline.BackColor = Color.MidnightBlue;
+            registerUnderline.Location = new Point(440, 78);
+            registerUnderline.Name = "registerUnderline";
+            registerUnderline.Size = new Size(142, 2);
+            registerUnderline.TabIndex = 1;
+            // 
+            // Loginpanel
+            // 
+            Loginpanel.Controls.Add(UserName);
+            Loginpanel.Controls.Add(UserNametextBox);
+            Loginpanel.Controls.Add(label2);
+            Loginpanel.Controls.Add(loginbtn);
+            Loginpanel.Controls.Add(togglePasswordButton);
+            Loginpanel.Controls.Add(PsswordTextBox);
+            Loginpanel.Location = new Point(394, 103);
+            Loginpanel.Name = "Loginpanel";
+            Loginpanel.Size = new Size(407, 612);
+            Loginpanel.TabIndex = 10;
+            // 
+            // loginbtn
+            // 
+            loginbtn.Anchor = AnchorStyles.None;
+            loginbtn.BackColor = Color.MidnightBlue;
+            loginbtn.Cursor = Cursors.Hand;
+            loginbtn.FlatAppearance.BorderSize = 0;
+            loginbtn.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            loginbtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(181, 191, 249);
+            loginbtn.FlatStyle = FlatStyle.Flat;
+            loginbtn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            loginbtn.ForeColor = Color.White;
+            loginbtn.Location = new Point(131, 308);
+            loginbtn.Name = "loginbtn";
+            loginbtn.Size = new Size(123, 50);
+            loginbtn.TabIndex = 9;
+            loginbtn.Text = "Log In";
+            loginbtn.UseVisualStyleBackColor = false;
+            loginbtn.Click += loginbtn_Click;
+            // 
+            // togglePasswordButton
+            // 
+            togglePasswordButton.BackColor = Color.White;
+            togglePasswordButton.FlatAppearance.BorderSize = 0;
+            togglePasswordButton.FlatStyle = FlatStyle.Flat;
+            togglePasswordButton.IconChar = IconChar.Eye;
+            togglePasswordButton.IconColor = Color.Gray;
+            togglePasswordButton.IconFont = IconFont.Auto;
+            togglePasswordButton.IconSize = 24;
+            togglePasswordButton.Location = new Point(350, 246);
+            togglePasswordButton.Name = "togglePasswordButton";
+            togglePasswordButton.Size = new Size(30, 30);
+            togglePasswordButton.TabIndex = 10;
+            togglePasswordButton.UseVisualStyleBackColor = false;
+            togglePasswordButton.Click += TogglePasswordButton_Click;
+            // 
+            // PsswordTextBox
+            // 
+            PsswordTextBox.Anchor = AnchorStyles.None;
+            PsswordTextBox.BackColor = Color.White;
+            PsswordTextBox.BorderColor = Color.FromArgb(181, 191, 249);
+            PsswordTextBox.BorderFocusColor = Color.FromArgb(181, 191, 249);
+            PsswordTextBox.BorderSize = 1;
+            PsswordTextBox.ForeColor = Color.FromArgb(38, 32, 59);
+            PsswordTextBox.Location = new Point(24, 240);
+            PsswordTextBox.Multiline = false;
+            PsswordTextBox.Name = "PsswordTextBox";
+            PsswordTextBox.Padding = new Padding(13);
+            PsswordTextBox.PasswordChar = true;
+            PsswordTextBox.Size = new Size(367, 47);
+            PsswordTextBox.TabIndex = 1;
+            PsswordTextBox.UnderlinedStyle = false;
+            // 
             // Login_Form
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -568,11 +568,11 @@ namespace E_commerce.Presentation
             Load += Login_Form_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            REGpanel.ResumeLayout(false);
+            REGpanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             Loginpanel.ResumeLayout(false);
             Loginpanel.PerformLayout();
-            REGpanel.ResumeLayout(false);
-            REGpanel.PerformLayout();
             ResumeLayout(false);
         }
 
