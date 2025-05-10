@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
+using E_commerce.Application.Services.CartItemService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Infrastructure;
