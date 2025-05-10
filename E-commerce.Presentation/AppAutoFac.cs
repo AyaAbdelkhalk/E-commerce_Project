@@ -15,10 +15,12 @@ namespace E_commerce.Presentation
             // Register your services here
             // Example: builder.RegisterType<MyService>().As<IMyService>();
             builder.RegisterType<AppDbContext>().AsSelf();
+
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<UserServices>().As<IUserServices>();
             builder.RegisterType<CartItemService>().As<ICartItemService>();
             builder.RegisterType<CartItemRepository>().As<ICartItemRepository>();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>();
 
 
 
