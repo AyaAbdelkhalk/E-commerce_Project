@@ -21,6 +21,7 @@ namespace E_commerce.Presentation
             this.DoubleBuffered = true;
 
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            REGpanel.BringToFront();
 
 
         }

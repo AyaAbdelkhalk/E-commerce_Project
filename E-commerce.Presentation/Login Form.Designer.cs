@@ -40,6 +40,12 @@ namespace E_commerce.Presentation
             label2 = new Label();
             button1 = new Button();
             panel2 = new Panel();
+            label7 = new Label();
+            Exitbtn = new Button();
+            pictureBox1 = new PictureBox();
+            label3 = new Label();
+            loginUnderline = new Panel();
+            registerUnderline = new Panel();
             REGpanel = new Panel();
             LastNamelbl = new Label();
             LastNametxt = new CustomTextBox();
@@ -55,19 +61,13 @@ namespace E_commerce.Presentation
             toggleRegConfirmPasswordButton = new IconButton();
             conpasswordtxt = new CustomTextBox();
             passwordtxt = new CustomTextBox();
-            label7 = new Label();
-            Exitbtn = new Button();
-            pictureBox1 = new PictureBox();
-            label3 = new Label();
-            loginUnderline = new Panel();
-            registerUnderline = new Panel();
             Loginpanel = new Panel();
             loginbtn = new Button();
             togglePasswordButton = new IconButton();
             PsswordTextBox = new CustomTextBox();
             panel2.SuspendLayout();
-            REGpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            REGpanel.SuspendLayout();
             Loginpanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -179,13 +179,85 @@ namespace E_commerce.Presentation
             panel2.Controls.Add(Loginbutton);
             panel2.Controls.Add(loginUnderline);
             panel2.Controls.Add(registerUnderline);
-            panel2.Controls.Add(Loginpanel);
             panel2.Controls.Add(REGpanel);
+            panel2.Controls.Add(Loginpanel);
             panel2.Location = new Point(162, 12);
             panel2.Name = "panel2";
             panel2.Size = new Size(810, 718);
             panel2.TabIndex = 7;
             panel2.Paint += panel2_Paint;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Simplified Arabic Fixed", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.MidnightBlue;
+            label7.Location = new Point(37, 544);
+            label7.Margin = new Padding(0);
+            label7.Name = "label7";
+            label7.RightToLeft = RightToLeft.Yes;
+            label7.Size = new Size(290, 40);
+            label7.TabIndex = 12;
+            label7.Text = "Join us Today";
+            label7.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Exitbtn
+            // 
+            Exitbtn.Anchor = AnchorStyles.None;
+            Exitbtn.BackColor = Color.Transparent;
+            Exitbtn.Cursor = Cursors.Hand;
+            Exitbtn.FlatAppearance.BorderSize = 0;
+            Exitbtn.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 0, 0, 0);
+            Exitbtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, 181, 191, 249);
+            Exitbtn.FlatStyle = FlatStyle.Flat;
+            Exitbtn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            Exitbtn.ForeColor = Color.White;
+            Exitbtn.Location = new Point(55, 627);
+            Exitbtn.Name = "Exitbtn";
+            Exitbtn.Size = new Size(123, 50);
+            Exitbtn.TabIndex = 10;
+            Exitbtn.Text = "Exit";
+            Exitbtn.UseVisualStyleBackColor = false;
+            Exitbtn.Click += button3_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(55, 176);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(306, 331);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Simplified Arabic Fixed", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.MidnightBlue;
+            label3.Location = new Point(3, 61);
+            label3.Name = "label3";
+            label3.Size = new Size(353, 80);
+            label3.TabIndex = 6;
+            label3.Text = "Welcome To \r\n      Our System";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // loginUnderline
+            // 
+            loginUnderline.BackColor = Color.MidnightBlue;
+            loginUnderline.Location = new Point(602, 78);
+            loginUnderline.Name = "loginUnderline";
+            loginUnderline.Size = new Size(142, 2);
+            loginUnderline.TabIndex = 0;
+            // 
+            // registerUnderline
+            // 
+            registerUnderline.BackColor = Color.MidnightBlue;
+            registerUnderline.Location = new Point(440, 78);
+            registerUnderline.Name = "registerUnderline";
+            registerUnderline.Size = new Size(142, 2);
+            registerUnderline.TabIndex = 1;
             // 
             // REGpanel
             // 
@@ -360,7 +432,7 @@ namespace E_commerce.Presentation
             toggleRegPasswordButton.IconColor = Color.Gray;
             toggleRegPasswordButton.IconFont = IconFont.Auto;
             toggleRegPasswordButton.IconSize = 24;
-            toggleRegPasswordButton.Location = new Point(361, 232);
+            toggleRegPasswordButton.Location = new Point(351, 240);
             toggleRegPasswordButton.Name = "toggleRegPasswordButton";
             toggleRegPasswordButton.Size = new Size(20, 21);
             toggleRegPasswordButton.TabIndex = 16;
@@ -376,7 +448,7 @@ namespace E_commerce.Presentation
             toggleRegConfirmPasswordButton.IconColor = Color.Gray;
             toggleRegConfirmPasswordButton.IconFont = IconFont.Auto;
             toggleRegConfirmPasswordButton.IconSize = 24;
-            toggleRegConfirmPasswordButton.Location = new Point(351, 319);
+            toggleRegConfirmPasswordButton.Location = new Point(341, 325);
             toggleRegConfirmPasswordButton.Name = "toggleRegConfirmPasswordButton";
             toggleRegConfirmPasswordButton.Size = new Size(40, 25);
             toggleRegConfirmPasswordButton.TabIndex = 17;
@@ -416,78 +488,6 @@ namespace E_commerce.Presentation
             passwordtxt.Size = new Size(367, 47);
             passwordtxt.TabIndex = 2;
             passwordtxt.UnderlinedStyle = false;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Simplified Arabic Fixed", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label7.ForeColor = Color.MidnightBlue;
-            label7.Location = new Point(37, 544);
-            label7.Margin = new Padding(0);
-            label7.Name = "label7";
-            label7.RightToLeft = RightToLeft.Yes;
-            label7.Size = new Size(290, 40);
-            label7.TabIndex = 12;
-            label7.Text = "Join us Today";
-            label7.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // Exitbtn
-            // 
-            Exitbtn.Anchor = AnchorStyles.None;
-            Exitbtn.BackColor = Color.Transparent;
-            Exitbtn.Cursor = Cursors.Hand;
-            Exitbtn.FlatAppearance.BorderSize = 0;
-            Exitbtn.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 0, 0, 0);
-            Exitbtn.FlatAppearance.MouseOverBackColor = Color.FromArgb(100, 181, 191, 249);
-            Exitbtn.FlatStyle = FlatStyle.Flat;
-            Exitbtn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            Exitbtn.ForeColor = Color.White;
-            Exitbtn.Location = new Point(55, 627);
-            Exitbtn.Name = "Exitbtn";
-            Exitbtn.Size = new Size(123, 50);
-            Exitbtn.TabIndex = 10;
-            Exitbtn.Text = "Exit";
-            Exitbtn.UseVisualStyleBackColor = false;
-            Exitbtn.Click += button3_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(55, 176);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(306, 226);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 8;
-            pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Simplified Arabic Fixed", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.MidnightBlue;
-            label3.Location = new Point(3, 61);
-            label3.Name = "label3";
-            label3.Size = new Size(353, 80);
-            label3.TabIndex = 6;
-            label3.Text = "Welcome To \r\n      Our System";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // loginUnderline
-            // 
-            loginUnderline.BackColor = Color.MidnightBlue;
-            loginUnderline.Location = new Point(602, 78);
-            loginUnderline.Name = "loginUnderline";
-            loginUnderline.Size = new Size(142, 2);
-            loginUnderline.TabIndex = 0;
-            // 
-            // registerUnderline
-            // 
-            registerUnderline.BackColor = Color.MidnightBlue;
-            registerUnderline.Location = new Point(440, 78);
-            registerUnderline.Name = "registerUnderline";
-            registerUnderline.Size = new Size(142, 2);
-            registerUnderline.TabIndex = 1;
             // 
             // Loginpanel
             // 
@@ -568,9 +568,9 @@ namespace E_commerce.Presentation
             Load += Login_Form_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             REGpanel.ResumeLayout(false);
             REGpanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             Loginpanel.ResumeLayout(false);
             Loginpanel.PerformLayout();
             ResumeLayout(false);
