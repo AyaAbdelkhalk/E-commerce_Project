@@ -9,7 +9,8 @@ namespace E_commerce.Infrastructure
         {
             optionsBuilder
                    .UseLazyLoadingProxies()
-                   .UseSqlServer("Data Source=.;Initial Catalog=OurSystem;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;MultipleActiveResultSets=True");
+                   //.UseSqlServer("Data Source=.;Initial Catalog=OurSystem;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;MultipleActiveResultSets=True");
+                   .UseSqlServer("Data Source=.;Initial Catalog=EcommerceDb;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

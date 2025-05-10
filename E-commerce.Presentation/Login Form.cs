@@ -13,6 +13,13 @@ namespace E_commerce.Presentation
     {
         private readonly IUserServices _userServices;
 
+        public Login_Form()
+        {
+            InitializeComponent();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            REGpanel.BringToFront();
+        }
 
         public Login_Form(IUserServices userServices)
         {
@@ -66,7 +73,7 @@ namespace E_commerce.Presentation
                     if (SessionManager.IsAdmin())
                         new AdminDashboard().Show();
                     else
-                        new ClientDashboard().Show();
+                        new Dashboard().Show();
                 }
                 else
                 {
