@@ -63,11 +63,13 @@ namespace E_commerce.Application.Services.UserServices
             var userDetails = user.Adapt<UserDetails>();
             user.LastLoginDate = DateTime.UtcNow;
             SessionManager.Login(user);
+            int id = SessionManager.CurrentUser.UserID;
             await _userRepository.UpdateAsync(user);
             return new Response<UserDetails>
             {
                 Succeeded = true,
-                Data = userDetails
+                Data = userDetails,
+                Errors = new List<string> { "Login successful........." }
             };
         }
 
