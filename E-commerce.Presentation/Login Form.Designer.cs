@@ -98,7 +98,7 @@ namespace E_commerce.Presentation
             UserNametextBox.BorderFocusColor = Color.FromArgb(181, 191, 249);
             UserNametextBox.BorderSize = 1;
             UserNametextBox.ForeColor = Color.FromArgb(38, 32, 59);
-            UserNametextBox.Location = new Point(24, 131);
+            UserNametextBox.Location = new Point(24, 130);
             UserNametextBox.Multiline = false;
             UserNametextBox.Name = "UserNametextBox";
             UserNametextBox.Padding = new Padding(13);
@@ -115,7 +115,7 @@ namespace E_commerce.Presentation
             Emailtxt.BorderFocusColor = Color.FromArgb(181, 191, 249);
             Emailtxt.BorderSize = 0;
             Emailtxt.ForeColor = Color.FromArgb(38, 32, 59);
-            Emailtxt.Location = new Point(25, 40);
+            Emailtxt.Location = new Point(25, 49);
             Emailtxt.Multiline = false;
             Emailtxt.Name = "Emailtxt";
             Emailtxt.Padding = new Padding(13);
@@ -130,7 +130,7 @@ namespace E_commerce.Presentation
             UserName.AutoSize = true;
             UserName.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             UserName.ForeColor = Color.MidnightBlue;
-            UserName.Location = new Point(24, 91);
+            UserName.Location = new Point(24, 90);
             UserName.Name = "UserName";
             UserName.Size = new Size(109, 37);
             UserName.TabIndex = 2;
@@ -142,7 +142,7 @@ namespace E_commerce.Presentation
             label2.AutoSize = true;
             label2.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             label2.ForeColor = Color.MidnightBlue;
-            label2.Location = new Point(24, 181);
+            label2.Location = new Point(24, 180);
             label2.Name = "label2";
             label2.Size = new Size(100, 37);
             label2.TabIndex = 3;
@@ -171,6 +171,7 @@ namespace E_commerce.Presentation
             // panel2
             // 
             panel2.Anchor = AnchorStyles.None;
+            panel2.Controls.Add(REGpanel);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(Exitbtn);
             panel2.Controls.Add(pictureBox1);
@@ -179,7 +180,6 @@ namespace E_commerce.Presentation
             panel2.Controls.Add(Loginbutton);
             panel2.Controls.Add(loginUnderline);
             panel2.Controls.Add(registerUnderline);
-            panel2.Controls.Add(REGpanel);
             panel2.Controls.Add(Loginpanel);
             panel2.Location = new Point(162, 12);
             panel2.Name = "panel2";
@@ -267,9 +267,9 @@ namespace E_commerce.Presentation
             Loginpanel.Controls.Add(loginbtn);
             Loginpanel.Controls.Add(togglePasswordButton);
             Loginpanel.Controls.Add(PsswordTextBox);
-            Loginpanel.Location = new Point(391, 121);
+            Loginpanel.Location = new Point(394, 103);
             Loginpanel.Name = "Loginpanel";
-            Loginpanel.Size = new Size(407, 597);
+            Loginpanel.Size = new Size(407, 594);
             Loginpanel.TabIndex = 10;
             // 
             // loginbtn
@@ -283,7 +283,7 @@ namespace E_commerce.Presentation
             loginbtn.FlatStyle = FlatStyle.Flat;
             loginbtn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             loginbtn.ForeColor = Color.White;
-            loginbtn.Location = new Point(131, 300);
+            loginbtn.Location = new Point(131, 299);
             loginbtn.Name = "loginbtn";
             loginbtn.Size = new Size(123, 50);
             loginbtn.TabIndex = 9;
@@ -315,7 +315,7 @@ namespace E_commerce.Presentation
             PsswordTextBox.BorderFocusColor = Color.FromArgb(181, 191, 249);
             PsswordTextBox.BorderSize = 1;
             PsswordTextBox.ForeColor = Color.FromArgb(38, 32, 59);
-            PsswordTextBox.Location = new Point(24, 232);
+            PsswordTextBox.Location = new Point(24, 231);
             PsswordTextBox.Multiline = false;
             PsswordTextBox.Name = "PsswordTextBox";
             PsswordTextBox.Padding = new Padding(13);
@@ -341,9 +341,9 @@ namespace E_commerce.Presentation
             REGpanel.Controls.Add(toggleRegConfirmPasswordButton);
             REGpanel.Controls.Add(conpasswordtxt);
             REGpanel.Controls.Add(passwordtxt);
-            REGpanel.Location = new Point(391, 121);
+            REGpanel.Location = new Point(393, 103);
             REGpanel.Name = "REGpanel";
-            REGpanel.Size = new Size(408, 594);
+            REGpanel.Size = new Size(408, 612);
             REGpanel.TabIndex = 11;
             // 
             // LastNamelbl
@@ -352,7 +352,7 @@ namespace E_commerce.Presentation
             LastNamelbl.AutoSize = true;
             LastNamelbl.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             LastNamelbl.ForeColor = Color.MidnightBlue;
-            LastNamelbl.Location = new Point(25, 445);
+            LastNamelbl.Location = new Point(25, 454);
             LastNamelbl.Name = "LastNamelbl";
             LastNamelbl.Size = new Size(105, 37);
             LastNamelbl.TabIndex = 22;
@@ -366,7 +366,7 @@ namespace E_commerce.Presentation
             LastNametxt.BorderFocusColor = Color.FromArgb(181, 191, 249);
             LastNametxt.BorderSize = 0;
             LastNametxt.ForeColor = Color.FromArgb(38, 32, 59);
-            LastNametxt.Location = new Point(25, 484);
+            LastNametxt.Location = new Point(25, 493);
             LastNametxt.Multiline = false;
             LastNametxt.Name = "LastNametxt";
             LastNametxt.Padding = new Padding(13);
@@ -381,7 +381,7 @@ namespace E_commerce.Presentation
             FirstNamelbl.AutoSize = true;
             FirstNamelbl.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             FirstNamelbl.ForeColor = Color.MidnightBlue;
-            FirstNamelbl.Location = new Point(25, 358);
+            FirstNamelbl.Location = new Point(25, 367);
             FirstNamelbl.Name = "FirstNamelbl";
             FirstNamelbl.Size = new Size(109, 37);
             FirstNamelbl.TabIndex = 20;
@@ -395,7 +395,7 @@ namespace E_commerce.Presentation
             FirstNametxt.BorderFocusColor = Color.FromArgb(181, 191, 249);
             FirstNametxt.BorderSize = 0;
             FirstNametxt.ForeColor = Color.FromArgb(38, 32, 59);
-            FirstNametxt.Location = new Point(25, 395);
+            FirstNametxt.Location = new Point(25, 404);
             FirstNametxt.Multiline = false;
             FirstNametxt.Name = "FirstNametxt";
             FirstNametxt.Padding = new Padding(13);
@@ -410,7 +410,7 @@ namespace E_commerce.Presentation
             label6.AutoSize = true;
             label6.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             label6.ForeColor = Color.MidnightBlue;
-            label6.Location = new Point(25, 90);
+            label6.Location = new Point(25, 99);
             label6.Name = "label6";
             label6.Size = new Size(109, 37);
             label6.TabIndex = 15;
@@ -424,7 +424,7 @@ namespace E_commerce.Presentation
             usernametxt.BorderFocusColor = Color.FromArgb(181, 191, 249);
             usernametxt.BorderSize = 0;
             usernametxt.ForeColor = Color.FromArgb(38, 32, 59);
-            usernametxt.Location = new Point(25, 130);
+            usernametxt.Location = new Point(25, 139);
             usernametxt.Multiline = false;
             usernametxt.Name = "usernametxt";
             usernametxt.Padding = new Padding(13);
@@ -439,7 +439,7 @@ namespace E_commerce.Presentation
             label5.AutoSize = true;
             label5.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             label5.ForeColor = Color.MidnightBlue;
-            label5.Location = new Point(24, 268);
+            label5.Location = new Point(24, 277);
             label5.Name = "label5";
             label5.Size = new Size(174, 37);
             label5.TabIndex = 13;
@@ -451,7 +451,7 @@ namespace E_commerce.Presentation
             label4.AutoSize = true;
             label4.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             label4.ForeColor = Color.MidnightBlue;
-            label4.Location = new Point(25, 180);
+            label4.Location = new Point(25, 189);
             label4.Name = "label4";
             label4.Size = new Size(100, 37);
             label4.TabIndex = 12;
@@ -463,7 +463,7 @@ namespace E_commerce.Presentation
             label1.AutoSize = true;
             label1.Font = new Font("Urdu Typesetting", 12F, FontStyle.Bold | FontStyle.Italic);
             label1.ForeColor = Color.MidnightBlue;
-            label1.Location = new Point(25, 3);
+            label1.Location = new Point(25, 12);
             label1.Name = "label1";
             label1.Size = new Size(73, 37);
             label1.TabIndex = 12;
@@ -480,7 +480,7 @@ namespace E_commerce.Presentation
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(132, 544);
+            button2.Location = new Point(132, 553);
             button2.Name = "button2";
             button2.Size = new Size(123, 50);
             button2.TabIndex = 11;
@@ -528,7 +528,7 @@ namespace E_commerce.Presentation
             conpasswordtxt.BorderFocusColor = Color.FromArgb(181, 191, 249);
             conpasswordtxt.BorderSize = 0;
             conpasswordtxt.ForeColor = Color.FromArgb(38, 32, 59);
-            conpasswordtxt.Location = new Point(25, 307);
+            conpasswordtxt.Location = new Point(25, 316);
             conpasswordtxt.Multiline = false;
             conpasswordtxt.Name = "conpasswordtxt";
             conpasswordtxt.Padding = new Padding(13);
@@ -545,7 +545,7 @@ namespace E_commerce.Presentation
             passwordtxt.BorderFocusColor = Color.FromArgb(181, 191, 249);
             passwordtxt.BorderSize = 0;
             passwordtxt.ForeColor = Color.FromArgb(38, 32, 59);
-            passwordtxt.Location = new Point(25, 220);
+            passwordtxt.Location = new Point(25, 229);
             passwordtxt.Multiline = false;
             passwordtxt.Name = "passwordtxt";
             passwordtxt.Padding = new Padding(13);

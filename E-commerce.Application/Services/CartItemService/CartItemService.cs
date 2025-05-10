@@ -101,7 +101,7 @@ namespace E_commerce.Application.Services.CartItemService
         {
             try
             {
-                var cartItems = await _cartItemRepository.GetCartItemByUserIdAsync(SessionManager.CurrentUser.UserID);
+                var cartItems = await _cartItemRepository.GetCartItemByUserIdAsync(/*SessionManager.CurrentUser.UserID*/  1);
                 var productIds = cartItems.Select(ci => ci.ProductID).Distinct().ToList();
                 var products = await _productRepository.GetByIdsAsync(productIds); // Fetch only relevant products
                 var productDict = products.ToDictionary(p => p.ProductID, p => p);
