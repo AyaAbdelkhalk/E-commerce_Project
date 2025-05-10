@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E_commerce.Application.Helper;
 using E_commerce.Application.Interfaces;
 using E_commerce.Core.Models;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ namespace E_commerce.Infrastructure.Repository
         public async Task<IReadOnlyList<CartItem>> GetCartItemByUserIdAsync(int userId)
         {
             return await _dbSet
-                .Where(ci => ci.UserID == userId)
+                .Where(ci => ci.UserID == SessionManager.CurrentUser.UserID)
                 .ToListAsync();
         }
         public async Task<CartItem?> GetCartItemByUserIdAndProductIdAsync(int userId, int productId)
@@ -26,7 +27,7 @@ namespace E_commerce.Infrastructure.Repository
             if(_dbSet != null)
             {
                 return await _dbSet
-                    .Where(ci => ci.UserID == userId && ci.ProductID == productId)
+                    .Where(ci => ci.UserID == SessionManager.CurrentUser.UserID && ci.ProductID == productId)
                     .FirstOrDefaultAsync();
             }
             return null;
