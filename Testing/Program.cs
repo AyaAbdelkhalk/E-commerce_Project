@@ -44,11 +44,10 @@ namespace Testing
 
             #region Test Add Category
             var categoryServices = container.Resolve<ICategoryServices>();
-
-            CategoryDto createCategoryDto = new CategoryDto
+            CreateCategoryDto createCategoryDto = new CreateCategoryDto
             {
-                Name = "za3ror",
-                Description = "za3rora kbeera"
+                Name = "ashtota",
+                Description = "ashtota helwa thoghantota"
             };
 
             categoryServices.AddCategoryAsync(createCategoryDto).ContinueWith(task =>
@@ -91,22 +90,6 @@ namespace Testing
                 else
                 {
                     Console.WriteLine("Failed to add product: " + string.Join(", ", task.Result.Errors));
-                }
-            }).Wait();
-
-            productServices.GetAllProductsAvailableAsync().ContinueWith(task =>
-            {
-                if (task.Result.Succeeded)
-                {
-                    Console.WriteLine("Products retrieved successfully.");
-                    foreach (var product in task.Result.Data)
-                    {
-                        Console.WriteLine($"Product ID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Failed to retrieve products: " + string.Join(", ", task.Result.Errors));
                 }
             }).Wait();
             #endregion

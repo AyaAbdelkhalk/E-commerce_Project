@@ -19,11 +19,11 @@ namespace E_commerce.Application.Services.ProductServices
             _productRepository = productRepository;
         }
 
-        public async Task<Response<List<ProductDetailsDto>>> GetAllProductsAvailableAsync()
+        public async Task<Response<List<ProductListDto>>> GetAllProductsAvailableAsync()
         {
-            var products = await _productRepository.GetAllProductsAsync();
-            var data = products.Adapt<List<ProductDetailsDto>>();
-            return new Response<List<ProductDetailsDto>>(data);
+            var products = await _productRepository.GetAvailableProductsAsync();
+            var data = products.Adapt<List<ProductListDto>>();
+            return new Response<List<ProductListDto>>(data);
         }
 
         public async Task<Response<List<ProductListDto>>> GetProductsByCategoryAsync(int categoryId)
@@ -40,11 +40,11 @@ namespace E_commerce.Application.Services.ProductServices
             return new Response<List<ProductListDto>>(data);
         }
 
-        public async Task<Response<UpdateProductDto?>> GetProducByIdAsync(int id)
+        public async Task<Response<ProductDetailsDto?>> GetProducByIdAsync(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
-            var data = product?.Adapt<UpdateProductDto>();
-            return new Response<UpdateProductDto?>(data);
+            var data = product?.Adapt<ProductDetailsDto>();
+            return new Response<ProductDetailsDto?>(data);
         }
 
         public async Task<Response<string>> AddProductAsync(CreateProductDto dto, string? localImageFullPath = null)
@@ -82,8 +82,7 @@ namespace E_commerce.Application.Services.ProductServices
 
         }
 
-        public async Task<Response<string>> UpdateProductAsync(int id, CreateProductDto dto, string? localImageFullPath = null)
-
+        public async Task<Response<string>> UpdateProductAsync(int id, UpdateProductDto dto, string? localImageFullPath = null)
         {
             try
             {
@@ -140,7 +139,5 @@ namespace E_commerce.Application.Services.ProductServices
                 };
             }
         }
-
-        
     }
 }

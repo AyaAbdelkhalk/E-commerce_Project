@@ -59,7 +59,6 @@ namespace E_commerce.Presentation.Properties {
                 resourceCulture = value;
             }
         }
-
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -70,6 +69,5 @@ namespace E_commerce.Presentation.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
     }
 }
