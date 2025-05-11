@@ -1,4 +1,5 @@
-﻿using E_commerce.Application.Interfaces;
+﻿using E_commerce.Application.Helper;
+using E_commerce.Application.Interfaces;
 using E_commerce.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,14 @@ namespace E_commerce.Presentation
     public partial class Dashboard : Form
     {
         private readonly IUserRepository _userRepository;
+        public Dashboard(User user, IUserRepository userRepository)
+        {
+            InitializeComponent();
+            _userRepository = userRepository;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_employeeName.Text += user.FirstName;
+        }
 
         public Dashboard()
         {
@@ -30,6 +39,11 @@ namespace E_commerce.Presentation
         }
         public Dashboard(User user)
         {
+            InitializeComponent();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_employeeName.Text += user.FirstName;
+
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -100,6 +114,7 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
             {
                 this.Hide();
                 // Show the login form again
+                SessionManager.Logout();
                 var loginForm = new Login_Form();
                 loginForm.Show();
             }
@@ -120,8 +135,8 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
         private void pnl_sideBar_Paint(object sender, PaintEventArgs e)
         {
             using (LinearGradientBrush brush = new LinearGradientBrush(pnl_sideBar.ClientRectangle,
-Color.FromArgb(135, 206, 250),   // Sky Blue
-Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
+                    Color.FromArgb(135, 206, 250),   // Sky Blue
+                    Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
 
 //Color.FromArgb(63, 43, 150) , Color.FromArgb(42, 27, 161)
 
@@ -143,6 +158,18 @@ Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
         private void usrpicture_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void logoutbutton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                SessionManager.Logout();
+                this.Hide();
+                var loginForm = new Login_Form();
+                loginForm.Show();
+            }
         }
     }
 }

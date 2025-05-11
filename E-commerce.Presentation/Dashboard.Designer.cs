@@ -39,7 +39,7 @@ namespace E_commerce.Presentation
             // pnl_sideBar
             // 
             pnl_sideBar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            pnl_sideBar.BackColor = Color.White;
+            pnl_sideBar.BackColor = Color.FromArgb(80, 110, 160);
             pnl_sideBar.Controls.Add(productbtn);
             pnl_sideBar.Controls.Add(pictureBox3);
             pnl_sideBar.Controls.Add(customerbtn);
@@ -60,12 +60,6 @@ namespace E_commerce.Presentation
             pnl_sideBar.Name = "pnl_sideBar";
             pnl_sideBar.Size = new Size(323, 650);
             pnl_sideBar.TabIndex = 0;
-            //pnl_sideBar.Paint += pnl_sideBar_Paint;
-            pnl_sideBar.BackColor = Color.FromArgb(80, 110, 160);
-
-
-            //pnl_sideBar.BackColor = Color.FromArgb(60, 90, 140);
-
             // 
             // productbtn
             // 
@@ -225,6 +219,7 @@ namespace E_commerce.Presentation
             logoutbutton.Text = "Log Out      ";
             logoutbutton.TextAlign = ContentAlignment.MiddleLeft;
             logoutbutton.UseVisualStyleBackColor = false;
+            logoutbutton.Click += logoutbutton_Click;
             // 
             // logoutpicture
             // 
@@ -261,7 +256,7 @@ namespace E_commerce.Presentation
             lbl_employeeName.Name = "lbl_employeeName";
             lbl_employeeName.Size = new Size(171, 84);
             lbl_employeeName.TabIndex = 9;
-            lbl_employeeName.Text = "Welcome  \r\n  Aya";
+            lbl_employeeName.Text = "Welcome  \r\n  ";
             lbl_employeeName.Click += lbl_employeeName_Click;
             // 
             // Dashboard

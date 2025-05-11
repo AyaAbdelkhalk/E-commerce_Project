@@ -70,6 +70,8 @@ namespace E_commerce.Presentation
                 if (result.Succeeded)
                 {
                     this.Hide();
+
+                    SessionManager.Login(result.Data);
                     if (SessionManager.IsAdmin())
                         new AdminDashboard().Show();
                     else
@@ -146,7 +148,7 @@ namespace E_commerce.Presentation
             }
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e) //add user
         {
             try
             {
@@ -161,9 +163,10 @@ namespace E_commerce.Presentation
                 });
                 if (result.Succeeded)
                 {
-                    MessageBox.Show(result.Errors.ToString());
+                    SessionManager.Login(result.Data);
+                    MessageBox.Show("User Regitser sucessfully");
                     this.Hide();
-                    new ClientDashboard().Show();
+                    new Dashboard().Show();
                 }
                 else
                 {
