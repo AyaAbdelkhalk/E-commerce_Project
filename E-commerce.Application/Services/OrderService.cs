@@ -129,5 +129,88 @@ namespace E_commerce.Application.Services
 
 
         }
+        //Admin
+        public async Task<Response<string>> ApproveOrderAsync(int orderId)
+        {
+            var order = await _orderRepository.GetByIdAsync(orderId);
+            if (order == null)
+                return new Response<string> { Succeeded = false, Errors = new List<string> { "Order not found." } };
+
+            if (order.Status != Status.Pending)
+                return new Response<string> { Succeeded = false, Errors = new List<string> { "Only pending orders can be approved." } };
+
+            order.Status = Status.Approved;
+            await _orderRepository.UpdateAsync(order);
+
+            return new Response<string> { Succeeded = true, Data = "Order approved successfully." };
+
+        }
+        //Admin
+        public async Task<Response<string>> DenyOrderAsync(int orderId)
+        {
+            var order = await _orderRepository.GetByIdAsync(orderId);
+            if (order == null)
+                return new Response<string> { Succeeded = false, Errors = new List<string> { "Order not found." } };
+
+            if (order.Status != Status.Pending)
+                return new Response<string> { Succeeded = false, Errors = new List<string> { "Only pending orders can be approved." } };
+
+            order.Status = Status.Denied;
+            await _orderRepository.UpdateAsync(order);
+
+            return new Response<string> { Succeeded = true, Data = "Order denied  successfully." };
+
+        }
+
+        //public async Task<List<OrderDisDto>> GetOrdersByStatusAsync(Status? status = null)
+        //{
+        //    var orders = await _orderRepository.GetAllAsync();
+
+        //    if (status.HasValue)
+        //        orders = orders.Where(o => o.Status == status.Value).ToList();
+
+        //    return orders.Select(order => new OrderDisDto
+        //    {
+        //        OrderID = order.OrderID,
+        //        UserID = order.UserID,
+        //        OrderDate = order.OrderDate,
+        //        TotalAmount = order.TotalAmount,
+        //        Status = order.Status.ToString(),
+        //        DateProcessed = order.DateProcessed,
+        //        OrderDetails = order.OrderDetails.Select(od => new OrderDetailDto
+        //        {
+        //            ProductID = od.ProductID,
+        //            Quantity = od.Quantity,
+        //            Price = od.Price
+        //        }).ToList()
+        //    }).ToList();
+        //}
+
+
+        public async Task<List<OrderDisDto>> GetOrderHistoryByUserIdAsync(int userId)
+        {
+            var orders = await _orderRepository.GetOrdersByUserIdAsync(userId); 
+
+            return orders.Select(order => new OrderDisDto
+            {
+                OrderID = order.OrderID,
+                UserID = order.UserID,
+                OrderDate = order.OrderDate,
+                TotalAmount = order.TotalAmount,
+                Status = order.Status.ToString(),
+                DateProcessed = order.DateProcessed,
+                OrderDetails = order.OrderDetails.Select(od => new OrderDetailDto
+                {
+                    ProductID = od.ProductID,
+                    Quantity = od.Quantity,
+                    Price = od.Price
+                }).ToList()
+            }).ToList();
+        }
+
+        public Task<List<OrderDisDto>> GetOrdersByStatusAsync(Status? status = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
