@@ -45,7 +45,7 @@ namespace E_commerce.Application.Services
                 var data = categories.Adapt<List<CategoryWithProductsDto>>();
                 return new Response<List<CategoryWithProductsDto>>(data);
         }
-        public async Task<Response<string>> AddCategoryAsync(CategoryDto dto)
+        public async Task<Response<string>> AddCategoryAsync(CreateCategoryDto dto)
         {
             try
             {
