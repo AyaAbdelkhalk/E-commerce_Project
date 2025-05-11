@@ -15,6 +15,15 @@ namespace E_commerce.Infrastructure.Repository
         {
 
         }
+
+        public async Task<List<Product>> GetAllProductsAsync()
+        {
+            return await _dbSet
+                .Include(p => p.Category) 
+                .OrderBy(p => p.Name) 
+                .ToListAsync();
+        }
+
         public async Task<List<Product>> GetAvailableProductsAsync()
         {
             return await _dbSet
