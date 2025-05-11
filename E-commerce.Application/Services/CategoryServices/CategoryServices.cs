@@ -41,11 +41,11 @@ namespace E_commerce.Application.Services
 
         public async Task<Response<List<CategoryWithProductsDto>>> SearchCategoriesAsync(string keyword)
         {
-                var categories = await _categoryRepository.SearchCategoriesAsync(keyword);
-                var data = categories.Adapt<List<CategoryWithProductsDto>>();
-                return new Response<List<CategoryWithProductsDto>>(data);
+            var categories = await _categoryRepository.SearchCategoriesAsync(keyword);
+            var data = categories.Adapt<List<CategoryWithProductsDto>>();
+            return new Response<List<CategoryWithProductsDto>>(data);
         }
-        public async Task<Response<string>> AddCategoryAsync(CreateCategoryDto dto)
+        public async Task<Response<string>> AddCategoryAsync(CategoryDto dto)
         {
             try
             {
@@ -135,9 +135,35 @@ namespace E_commerce.Application.Services
             }
         }
 
+        public async Task<Response<string>> AddCategoryAsync(CreateCategoryDto dto)
+        {
+            try
+            {
+                bool exists = await _categoryRepository.CheckIfCategoryExistsAsync(dto.Name);
+                if (exists)
+                {
+                    return new Response<string>
+                    {
+                        Succeeded = false,
+                        Errors = new List<string> { "Category with the same name already exists." },
+                        Data = null
+                    };
+                }
+                var category = dto.Adapt<Category>();
+                await _categoryRepository.AddAsync(category);
+                return new Response<string>("Category added successfully.", true);
+            }
+            catch (Exception ex)
+            {
+                return new Response<string>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { ex.Message },
+                    Data = null
+                };
 
-
+            }
+        }
 
     }
-
 }

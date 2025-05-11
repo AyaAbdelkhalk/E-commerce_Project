@@ -1,7 +1,9 @@
 using Autofac;
-using E_commerce.Application.Helper;
+using E_commerce.Application.Services;
 using E_commerce.Application.Services.CartItemService;
+using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
+using E_commerce.Core.Models;
 
 namespace E_commerce.Presentation
 {
@@ -13,31 +15,25 @@ namespace E_commerce.Presentation
         [STAThread]
         static void Main()
         {
-            int lastUserId = Properties.Settings.Default.LastUserId;
-
             var container = AppAutoFac.Inject();
-            var IUserServices = container.Resolve<IUserServices>();
+            var userServices = container.Resolve<IUserServices>(); // Corrected variable name
 
             var cartItemService = container.Resolve<ICartItemService>();
+
+            var productServices = container.Resolve<IProductServices>();
+            var categoryServices = container.Resolve<ICategoryServices>();
 
             // To customize application configuration such as set high DPI settings or default font,  
             // see https://aka.ms/applicationconfiguration.  
             ApplicationConfiguration.Initialize();
             //System.Windows.Forms.Application.Run(new Form1());
             //System.Windows.Forms.Application.Run(new CartForm(cartItemService));
-            System.Windows.Forms.Application.Run(new Dashboard());
-            //System.Windows.Forms.Application.Run(new Login_Form(IUserServices));
+            //System.Windows.Forms.Application.Run(new Dashboard());
+            //System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
-            //check if the user is logged in
-            //if (SessionManager.IsLoggedIn)
-            //{
-            //    System.Windows.Forms.Application.Run(new Dashboard(SessionManager.CurrentUser));
-            //}
-            //else
-            //{
-            //    // Show the login form
-            //    System.Windows.Forms.Application.Run(new Login_Form(IUserServices));
-            //}
+            //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
+            System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
+
         }
     }
 }

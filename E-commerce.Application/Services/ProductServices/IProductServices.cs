@@ -13,17 +13,17 @@ namespace E_commerce.Application.Services.ProductServices
 {
     public interface IProductServices
     {
-        public Task<Response<List<ProductListDto>>> GetAllProductsAvailableAsync();
+        public Task<Response<List<ProductDetailsDto>>> GetAllProductsAvailableAsync();
 
         public Task<Response<List<ProductListDto>>> GetProductsByCategoryAsync(int categoryId);
 
         public Task<Response<List<ProductListDto>>> ProductsSearchByNameAsync(string name);
 
-        public Task<Response<ProductDetailsDto?>> GetProducByIdAsync(int id);
+        public Task<Response<UpdateProductDto?>> GetProducByIdAsync(int id);
 
         public Task<Response<string>> AddProductAsync(CreateProductDto dto, string? localImageFullPath = null);
 
-        public Task<Response<string>> UpdateProductAsync(int id, UpdateProductDto dto, string? localImageFullPath = null);
+        public Task<Response<string>> UpdateProductAsync(int id, CreateProductDto dto, string? localImageFullPath = null);
 
         public Task<Response<string>> DeleteProductAsync(int id);
     }
