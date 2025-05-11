@@ -1,4 +1,5 @@
 using Autofac;
+using E_commerce.Application.Helper;
 using E_commerce.Application.Services.CartItemService;
 using E_commerce.Application.Services.UserServices;
 
@@ -12,6 +13,8 @@ namespace E_commerce.Presentation
         [STAThread]
         static void Main()
         {
+            int lastUserId = Properties.Settings.Default.LastUserId;
+
             var container = AppAutoFac.Inject();
             var IUserServices = container.Resolve<IUserServices>();
 
@@ -25,6 +28,16 @@ namespace E_commerce.Presentation
             System.Windows.Forms.Application.Run(new Dashboard());
             //System.Windows.Forms.Application.Run(new Login_Form(IUserServices));
 
+            //check if the user is logged in
+            //if (SessionManager.IsLoggedIn)
+            //{
+            //    System.Windows.Forms.Application.Run(new Dashboard(SessionManager.CurrentUser));
+            //}
+            //else
+            //{
+            //    // Show the login form
+            //    System.Windows.Forms.Application.Run(new Login_Form(IUserServices));
+            //}
         }
     }
 }

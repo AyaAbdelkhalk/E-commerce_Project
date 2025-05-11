@@ -1,4 +1,5 @@
 ﻿using E_commerce.Application.Interfaces;
+using E_commerce.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,9 @@ namespace E_commerce.Presentation
         {
             InitializeComponent();
             _userRepository = userRepository;
+        }
+        public Dashboard(User user)
+        {
         }
 
         private void Dashboard_Load(object sender, EventArgs e)

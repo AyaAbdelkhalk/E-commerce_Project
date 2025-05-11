@@ -61,10 +61,10 @@ namespace E_commerce.Presentation
             pnl_sideBar.Size = new Size(323, 650);
             pnl_sideBar.TabIndex = 0;
             //pnl_sideBar.Paint += pnl_sideBar_Paint;
-            //pnl_sideBar.BackColor = Color.FromArgb(70, 130, 180); // Steel Blue (أزرق راقٍ وواضح)
+            pnl_sideBar.BackColor = Color.FromArgb(80, 110, 160);
 
 
-            pnl_sideBar.BackColor = Color.FromArgb(60, 90, 140);
+            //pnl_sideBar.BackColor = Color.FromArgb(60, 90, 140);
 
             // 
             // productbtn
