@@ -20,7 +20,7 @@ namespace E_commerce.Application.Services
         public Task<Response<CategoryWithProductsDto?>> GetCategoryWithProductsByIdAsync(int id);
 
         public Task<Response<List<CategoryWithProductsDto>>> SearchCategoriesAsync(string keyword);
-        public Task<Response<string>> AddCategoryAsync(CreateCategoryDto dto);
+        public Task<Response<string>> AddCategoryAsync(CategoryDto dto);
         public Task<Response<string>> UpdateCategoryAsync(UpdateCategoryDto dto);
 
         public Task<Response<string>> DeleteCategoryAsync(int id);

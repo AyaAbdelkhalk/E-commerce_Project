@@ -1,10 +1,17 @@
+
+﻿using System;
+
 ﻿using E_commerce.Application.Interfaces;
 using System;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+
+
 using System.Drawing.Drawing2D;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +21,11 @@ namespace E_commerce.Presentation
 {
     public partial class Dashboard : Form
     {
+
+        public Dashboard()
+        {
+            InitializeComponent();
+
         private readonly IUserRepository _userRepository;
 
         public Dashboard()
@@ -26,10 +38,16 @@ namespace E_commerce.Presentation
         {
             InitializeComponent();
             _userRepository = userRepository;
+
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+
+
+        }
+
+        
 
             this.WindowState = FormWindowState.Maximized;
 
@@ -140,5 +158,6 @@ Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
         {
 
         }
+
     }
 }

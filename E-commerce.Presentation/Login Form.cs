@@ -16,19 +16,29 @@ namespace E_commerce.Presentation
         public Login_Form()
         {
             InitializeComponent();
+
+            _userServices = userServices;
+
+            
+
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             REGpanel.BringToFront();
+
         }
 
         public Login_Form(IUserServices userServices)
         {
+
+            
+
             InitializeComponent();
             _userServices = userServices;
             this.DoubleBuffered = true;
 
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             REGpanel.BringToFront();
+
 
 
         }
