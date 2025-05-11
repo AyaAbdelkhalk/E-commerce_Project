@@ -1,4 +1,5 @@
 ﻿using E_commerce.Application.Interfaces;
+using E_commerce.Core.Enum;
 using E_commerce.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,15 @@ namespace E_commerce.Infrastructure.Repository
         public Task<IQueryable<Order>>GetOrdersByUserIdAsync(int userId)
         {
             var orders = _dbSet.Where(o => o.UserID == userId).AsQueryable();
+            return Task.FromResult(orders);
+        }
+        public Task<IQueryable<Order>> GetOrdersByStatusAsync(Status? status = null)
+        {
+            var orders = _dbSet.AsQueryable();
+            if (status.HasValue)
+            {
+                orders = orders.Where(o => o.Status == status.Value);
+            }
             return Task.FromResult(orders);
         }
     }

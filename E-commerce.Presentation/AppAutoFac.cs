@@ -2,8 +2,10 @@ using Autofac;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
 using E_commerce.Application.Services.CartItemService;
+using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
+
 using E_commerce.Infrastructure;
 using E_commerce.Infrastructure.Repository;
 
@@ -27,7 +29,7 @@ namespace E_commerce.Presentation
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>();
             builder.RegisterType<CategoryServices>().As<ICategoryServices>();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>();
-            //builder.RegisterType<OrderServices>().As<IOrderServices>();
+            builder.RegisterType<OrderService>().As<IOrderService>();
 
 
 
