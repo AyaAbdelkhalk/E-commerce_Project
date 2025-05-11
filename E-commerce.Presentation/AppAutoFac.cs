@@ -8,6 +8,7 @@ using E_commerce.Application.Services.UserServices;
 
 using E_commerce.Infrastructure;
 using E_commerce.Infrastructure.Repository;
+using E_commerce.Shared;
 
 namespace E_commerce.Presentation
 {
@@ -30,6 +31,8 @@ namespace E_commerce.Presentation
             builder.RegisterType<CategoryServices>().As<ICategoryServices>();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>();
             builder.RegisterType<OrderService>().As<IOrderService>();
+            builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
+
 
 
 
