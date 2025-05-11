@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using E_commerce.Application.DTOs;
 using E_commerce.Application.DTOs.CartItem;
+using E_commerce.Application.Helper;
 using E_commerce.Application.Hepler;
 using E_commerce.Application.Interfaces;
 using E_commerce.Core.Models;
@@ -57,7 +58,7 @@ namespace E_commerce.Application.Services.CartItemService
 
                 var createCartItemDTO = new CreateCartItemDTO
                 {
-                    UserID = userId,
+                    UserID = SessionManager.CurrentUser.UserID,
                     ProductID = productId,
                     Quantity = quantity
                 };
@@ -79,7 +80,7 @@ namespace E_commerce.Application.Services.CartItemService
         {
             try
             {
-                var cartItems = await _cartItemRepository.GetCartItemByUserIdAsync(userId);
+                var cartItems = await _cartItemRepository.GetCartItemByUserIdAsync(SessionManager.CurrentUser.UserID);
                 foreach (var cartItem in cartItems)
                 {
                     await _cartItemRepository.DeleteAsync(cartItem.CartItemID);
@@ -100,7 +101,7 @@ namespace E_commerce.Application.Services.CartItemService
         {
             try
             {
-                var cartItems = await _cartItemRepository.GetCartItemByUserIdAsync(userId);
+                var cartItems = await _cartItemRepository.GetCartItemByUserIdAsync(/*SessionManager.CurrentUser.UserID*/  1);
                 var productIds = cartItems.Select(ci => ci.ProductID).Distinct().ToList();
                 var products = await _productRepository.GetByIdsAsync(productIds); // Fetch only relevant products
                 var productDict = products.ToDictionary(p => p.ProductID, p => p);
