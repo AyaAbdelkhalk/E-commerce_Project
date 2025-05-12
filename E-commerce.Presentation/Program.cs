@@ -33,6 +33,7 @@ namespace E_commerce.Presentation
 
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
             System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
+            System.Windows.Forms.Application.Run(new Order());
 
         }
     }
