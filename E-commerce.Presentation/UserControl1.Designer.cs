@@ -55,6 +55,7 @@
             resources.ApplyResources(btnBuy1_1, "btnBuy1_1");
             btnBuy1_1.Name = "btnBuy1_1";
             btnBuy1_1.UseVisualStyleBackColor = false;
+            btnBuy1_1.Click += btnBuy1_1_Click;
             // 
             // ProductPrice
             // 
@@ -124,7 +125,6 @@
             ((System.ComponentModel.ISupportInitialize)ProductPicture).EndInit();
             ResumeLayout(false);
             PerformLayout();
-
         }
 
         #endregion

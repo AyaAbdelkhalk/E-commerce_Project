@@ -19,7 +19,7 @@ namespace E_commerce.Presentation
     {
         private readonly IUserServices _userServices;
 
-        public Dashboard(User user , IUserServices userServices)
+        public Dashboard(User user, IUserServices userServices)
         {
             InitializeComponent();
             _userServices = userServices;
@@ -36,7 +36,7 @@ namespace E_commerce.Presentation
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
         }
-    
+
 
         public Dashboard()
         {
@@ -47,7 +47,7 @@ namespace E_commerce.Presentation
 
         }
 
-        public Dashboard(IUserServices userServices,User user)
+        public Dashboard(IUserServices userServices, User user)
         {
             InitializeComponent();
             this.DoubleBuffered = true;
@@ -182,6 +182,11 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
                 var loginForm = new Login_Form(_userServices);
                 loginForm.Show();
             }
+        }
+
+        private void pnl_sideBarClient_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
