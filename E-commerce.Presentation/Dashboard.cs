@@ -1,4 +1,6 @@
-﻿using E_commerce.Application.Helper;
+﻿using E_commerce.Application.DTOs.User;
+using E_commerce.Application.Helper;
+using E_commerce.Application.Hepler;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
@@ -44,6 +46,14 @@ namespace E_commerce.Presentation
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
+            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
+            customTextBox23.Text += SessionManager.CurrentUser?.Email;
+            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
+
+
+
 
         }
 
@@ -63,16 +73,19 @@ namespace E_commerce.Presentation
             this.WindowState = FormWindowState.Maximized;
 
             this.SuspendLayout();
-
+            roundedPanel1.Visible = false;
             MakeRoundedPanel(pnl_sideBarClient, 30);
             //this.Paint += new PaintEventHandler(Dashboard_Paint);
             //this.BackColor = Color.FromArgb(245, 245, 245) // Very Light Gray
             this.BackColor =
             //Color.FromArgb(250, 250, 240) // FloralWhite (أبيض على لمسة أصفر)
-Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جداً
+            Color.FromArgb(240, 248, 255); // AliceBlue – أزرق سماوي فاتح جداً
 
+            MakeRoundedPanel(roundedPanel1, 30);
+            MakeRoundedPanel(INFOroundedPanel2, 30);
+            MakeRoundedPanel(PPProundedPanel3, 30);
+            MakeRoundedPanel(DDDroundedPanel2, 30);
 
-;
             ClientDashboardbtn.MouseEnter += (s, e) =>
             {
                 ClientDashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
@@ -94,7 +107,31 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
             {
                 ClientDashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // يرجع للهوفر
             };
+            MakeReadOnly(customTextBox21);
+            MakeReadOnly(customTextBox22);
+            MakeReadOnly(customTextBox23);
+            MakeReadOnly(customTextBox24);
+            MakeReadOnly(customTextBox25);
 
+
+            if (SessionManager.CurrentUser != null)
+            {
+                lbl_UserName.Text = "Welcome \n " + SessionManager.CurrentUser.FirstName;
+                customTextBox21.Text = SessionManager.CurrentUser.FirstName + " " + SessionManager.CurrentUser.LastName;
+                customTextBox22.Text = SessionManager.CurrentUser.UserName;
+                customTextBox23.Text = SessionManager.CurrentUser.Email;
+                customTextBox24.Text = SessionManager.CurrentUser.Role.ToString();
+                if (SessionManager.CurrentUser.IsActive == true)
+                    customTextBox25.Text = "Activated";
+                else
+                    customTextBox25.Text = "Deactivated";
+
+
+            }
+            else
+            {
+                lbl_UserName.Text = "Guest";
+            }
 
         }
 
@@ -147,23 +184,32 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
         {
             using (LinearGradientBrush brush = new LinearGradientBrush(pnl_sideBarClient.ClientRectangle,
                     Color.FromArgb(135, 206, 250),   // Sky Blue
-                    Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
+                    Color.FromArgb(255, 223, 102), // Light Yellow (Sunlight)
 
-//Color.FromArgb(63, 43, 150) , Color.FromArgb(42, 27, 161)
+                //Color.FromArgb(63, 43, 150) , Color.FromArgb(42, 27, 161)
 
+                // Color.FromArgb(255, 175, 189), // مشمشي وردي
+                //Color.FromArgb(255, 195, 160)  // مشمشي فاتح
 
-
-
-
-// Color.FromArgb(255, 175, 189), // مشمشي وردي
-//Color.FromArgb(255, 195, 160)  // مشمشي فاتح
-
-
-,
                 LinearGradientMode.Vertical))
             {
                 e.Graphics.FillRectangle(brush, pnl_sideBarClient.ClientRectangle);
             }
+        }
+
+        private void PPProundedPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Pinfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void roundedPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void usrpicture_Click(object sender, EventArgs e)
@@ -184,9 +230,183 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
             }
         }
 
+
+        private void roundedPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void INFOroundedPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void CDroundedPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void customTextBox23__TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customTextBox22__TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PPProundedPanel3_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void DDDroundedPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void roundedPanel1_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Profilebtn_Click(object sender, EventArgs e)
+        {
+            roundedPanel1.Visible = true;
+            // Change the button color
+            Profilebtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
+            Profilebtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
+            // Hide other panels
+
+        }
+
+        private async void button1_Click_1(object sender, EventArgs e) //update
+        {
+            var user = SessionManager.CurrentUser;
+            if (user != null)
+            {
+                var updateDto = new AddUserDTO
+                {
+                    UserName = customTextBox27.Text,
+                    Password = user.Password, // خليها نفس الباسورد الأصلي
+                    PasswordConfirmed = user.Password,
+                    Email = customTextBox26.Text,
+                    FirstName = customTextBox28.Text,
+                    LastName = customTextBox212.Text
+                };
+
+                var result = await _userServices.UpdateUser(updateDto);
+
+                if (!result.Succeeded)
+                {
+                    MessageBox.Show(string.Join("\n", result.Errors), "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                user.UserName = updateDto.UserName;
+                user.Email = updateDto.Email;
+                user.FirstName = updateDto.FirstName;
+                user.LastName = updateDto.LastName;
+
+                MessageBox.Show("User information updated successfully.");
+
+                customTextBox27.Text = string.Empty;
+                customTextBox26.Text = string.Empty;
+                customTextBox28.Text = string.Empty;
+                customTextBox212.Text = string.Empty;
+
+                this.Hide();
+                var dashboard = new Dashboard(_userServices, user);
+                dashboard.Show();
+            }
+            else
+            {
+                MessageBox.Show("User not found.");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e) //clear
+        {
+            customTextBox27.Text = string.Empty;
+            customTextBox26.Text = string.Empty;
+            customTextBox28.Text = string.Empty;
+            customTextBox212.Text = string.Empty;
+        }
+
+        private async void ChangePassword_Click(object sender, EventArgs e)
+        {
+            var user = SessionManager.CurrentUser;
+            if (user != null)
+            {
+                var updatepass = new ChangePasswordDTO
+                {
+                    OldPassword = customTextBox210.Text,
+                    NewPassword = customTextBox211.Text,
+                    ConfirmPassword = customTextBox29.Text
+                };
+
+                var isOldPasswordCorrect = PasswordHelper.VerifyPassword(user.Password, updatepass.OldPassword);
+                if (!isOldPasswordCorrect)
+                {
+                    MessageBox.Show("The old password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (updatepass.NewPassword != updatepass.ConfirmPassword)
+                {
+                    MessageBox.Show("New Password and Confirm Password do not match", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var isValidPassword = PasswordHelper.IsStrongPassword(updatepass.NewPassword);
+                if (!isValidPassword)
+                {
+                    MessageBox.Show("The password is invalid. It must contain an upper letter, a lowercase letter, and a number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var addu = new AddUserDTO
+                {
+                    UserName = user.UserName,
+                    Password = updatepass.NewPassword,
+                    PasswordConfirmed = updatepass.ConfirmPassword,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName
+                };
+
+                var result = await _userServices.UpdateUser(addu);
+                if (result.Succeeded)
+                {
+                    SessionManager.CurrentUser.Password = PasswordHelper.HashPassword(updatepass.NewPassword); 
+                    MessageBox.Show("Password updated successfully.");
+                    customTextBox210.Text = string.Empty;
+                    customTextBox211.Text = string.Empty;
+                    customTextBox29.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show(string.Join("\n", result.Errors), "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("User not found.");
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)// clear2
+        {
+            customTextBox210.Text = string.Empty;
+            customTextBox211.Text = string.Empty;
+            customTextBox29.Text = string.Empty;
+        }
+
         private void pnl_sideBarClient_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
     }
 }

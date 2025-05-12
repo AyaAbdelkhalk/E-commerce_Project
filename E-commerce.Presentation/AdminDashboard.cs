@@ -18,6 +18,7 @@ namespace E_commerce.Presentation
 {
     public partial class AdminDashboard : Form
     {
+        #region Ctor
         private readonly IProductServices _productServices;
         private readonly ICategoryServices _categoryServices;
         private readonly IUserServices _userServices;
@@ -75,7 +76,10 @@ namespace E_commerce.Presentation
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl_employeeName.Text += SessionManager.CurrentUser?.FirstName;
 
-        }
+        } 
+        #endregion
+
+
         private void AdminDashboard_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
@@ -112,6 +116,7 @@ namespace E_commerce.Presentation
 
         }
 
+        #region Sidebar
         private void logoutbutton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -124,6 +129,7 @@ namespace E_commerce.Presentation
                 loginForm.Show();
             }
 
-        }
+        } 
+        #endregion
     }
 }
