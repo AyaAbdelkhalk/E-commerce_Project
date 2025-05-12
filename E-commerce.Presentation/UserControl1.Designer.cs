@@ -55,10 +55,12 @@
             resources.ApplyResources(btnBuy1_1, "btnBuy1_1");
             btnBuy1_1.Name = "btnBuy1_1";
             btnBuy1_1.UseVisualStyleBackColor = false;
+            btnBuy1_1.Click += btnBuy1_1_Click;
             // 
             // ProductPrice
             // 
             resources.ApplyResources(ProductPrice, "ProductPrice");
+            ProductPrice.ForeColor = Color.Crimson;
             ProductPrice.Name = "ProductPrice";
             // 
             // txtTitle
@@ -80,7 +82,7 @@
             // 
             resources.ApplyResources(DescText, "DescText");
             DescText.BackColor = Color.Beige;
-            DescText.ForeColor = Color.Crimson;
+            DescText.ForeColor = Color.Black;
             DescText.Name = "DescText";
             // 
             // label1
@@ -124,7 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)ProductPicture).EndInit();
             ResumeLayout(false);
             PerformLayout();
-
         }
 
         #endregion

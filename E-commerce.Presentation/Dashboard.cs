@@ -230,6 +230,7 @@ namespace E_commerce.Presentation
             }
         }
 
+
         private void roundedPanel3_Paint(object sender, PaintEventArgs e)
         {
 
@@ -401,5 +402,11 @@ namespace E_commerce.Presentation
             customTextBox211.Text = string.Empty;
             customTextBox29.Text = string.Empty;
         }
+
+        private void pnl_sideBarClient_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
     }
 }

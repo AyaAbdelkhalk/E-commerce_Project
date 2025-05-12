@@ -1,6 +1,10 @@
-﻿namespace E_commerce.Presentation
+﻿using static Guna.UI2.WinForms.Suite.Descriptions;
+using static System.Net.Mime.MediaTypeNames;
+using Font = System.Drawing.Font;
+
+namespace E_commerce.Presentation
 {
-    partial class CartForm
+    partial class OrderForm
     {
         private System.ComponentModel.IContainer components = null;
         protected override void Dispose(bool disposing)
@@ -13,10 +17,8 @@
         }
         private void guna2CircleButtonClose_Click(object sender, EventArgs e)
         {
-            // Add your logic here for when the close button is clicked
-            this.Close(); // Example: Closes the form
+            this.Close();
         }
-
         private void InitializeComponent()
         {
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -39,8 +41,8 @@
             dataGridViewButtonColumn1 = new DataGridViewButtonColumn();
             guna2HtmlLabelTotal = new Guna.UI2.WinForms.Guna2HtmlLabel();
             textBoxTotal = new Guna.UI2.WinForms.Guna2TextBox();
-            btnUpdate = new Guna.UI2.WinForms.Guna2GradientButton();
-            btnCheckout = new Guna.UI2.WinForms.Guna2GradientButton();
+            btnOK = new Guna.UI2.WinForms.Guna2GradientButton();
+            btnCancel = new Guna.UI2.WinForms.Guna2GradientButton();
             guna2CustomGradientPanel = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
             guna2CircleButtonClose = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CircleButtonMinimize = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -127,45 +129,45 @@
             textBoxTotal.Size = new Size(150, 36);
             textBoxTotal.TabIndex = 2;
             // 
-            // btnUpdate
+            // btnOK
             // 
-            btnUpdate.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnUpdate.CustomizableEdges = customizableEdges3;
-            btnUpdate.DisabledState.BorderColor = Color.DarkGray;
-            btnUpdate.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnUpdate.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnUpdate.DisabledState.FillColor2 = Color.FromArgb(169, 169, 169);
-            btnUpdate.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnUpdate.FillColor2 = Color.Black;
-            btnUpdate.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
-            btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(293, 393);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.RightToLeft = RightToLeft.No;
-            btnUpdate.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnUpdate.Size = new Size(159, 43);
-            btnUpdate.TabIndex = 1;
-            btnUpdate.Text = "Update";
-            btnUpdate.Click += btnUpdate_Click;
+            btnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnOK.CustomizableEdges = customizableEdges3;
+            btnOK.DisabledState.BorderColor = Color.DarkGray;
+            btnOK.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnOK.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnOK.DisabledState.FillColor2 = Color.FromArgb(169, 169, 169);
+            btnOK.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnOK.FillColor2 = Color.Black;
+            btnOK.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
+            btnOK.ForeColor = Color.White;
+            btnOK.Location = new Point(293, 393);
+            btnOK.Name = "btnOK";
+            btnOK.RightToLeft = RightToLeft.No;
+            btnOK.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btnOK.Size = new Size(159, 43);
+            btnOK.TabIndex = 1;
+            btnOK.Text = "OK";
+            btnOK.Click += btnOK_Click;
             // 
-            // btnCheckout
+            // btnCancel
             // 
-            btnCheckout.CustomizableEdges = customizableEdges5;
-            btnCheckout.DisabledState.BorderColor = Color.DarkGray;
-            btnCheckout.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnCheckout.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnCheckout.DisabledState.FillColor2 = Color.FromArgb(169, 169, 169);
-            btnCheckout.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnCheckout.FillColor2 = Color.Black;
-            btnCheckout.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
-            btnCheckout.ForeColor = Color.White;
-            btnCheckout.Location = new Point(458, 393);
-            btnCheckout.Name = "btnCheckout";
-            btnCheckout.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnCheckout.Size = new Size(159, 43);
-            btnCheckout.TabIndex = 0;
-            btnCheckout.Text = "Checkout";
-            btnCheckout.Click += btnCheckout_Click;
+            btnCancel.CustomizableEdges = customizableEdges5;
+            btnCancel.DisabledState.BorderColor = Color.DarkGray;
+            btnCancel.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnCancel.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnCancel.DisabledState.FillColor2 = Color.FromArgb(169, 169, 169);
+            btnCancel.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnCancel.FillColor2 = Color.Black;
+            btnCancel.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
+            btnCancel.ForeColor = Color.White;
+            btnCancel.Location = new Point(458, 393);
+            btnCancel.Name = "btnCancel";
+            btnCancel.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            btnCancel.Size = new Size(159, 43);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Cancel";
+            btnCancel.Click += btnCancel_Click;
             // 
             // guna2CustomGradientPanel
             // 
@@ -175,8 +177,8 @@
             guna2CustomGradientPanel.Controls.Add(guna2CircleButtonMaximize);
             guna2CustomGradientPanel.Controls.Add(guna2HtmlLabelTotal);
             guna2CustomGradientPanel.Controls.Add(textBoxTotal);
-            guna2CustomGradientPanel.Controls.Add(btnUpdate);
-            guna2CustomGradientPanel.Controls.Add(btnCheckout);
+            guna2CustomGradientPanel.Controls.Add(btnOK);
+            guna2CustomGradientPanel.Controls.Add(btnCancel);
             guna2CustomGradientPanel.CustomizableEdges = customizableEdges9;
             guna2CustomGradientPanel.FillColor = SystemColors.InactiveCaption;
             guna2CustomGradientPanel.FillColor2 = SystemColors.MenuText;
@@ -243,28 +245,48 @@
             guna2CircleButtonMaximize.TabIndex = 8;
             guna2CircleButtonMaximize.Text = "□";
             // 
-            // CartForm
+            // OrderForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(993, 527);
             Controls.Add(guna2CustomGradientPanel);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "CartForm";
+            Name = "OrderForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Shopping Cart";
-            Load += CartForm_Load;
+            Text = "Order Details";
+            Load += OrderForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewCart).EndInit();
             guna2CustomGradientPanel.ResumeLayout(false);
             guna2CustomGradientPanel.PerformLayout();
             ResumeLayout(false);
         }
 
+        private void OrderForm_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void dataGridViewCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private System.Windows.Forms.DataGridView dataGridViewCart;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabelTotal;
         private Guna.UI2.WinForms.Guna2TextBox textBoxTotal;
-        private Guna.UI2.WinForms.Guna2GradientButton btnUpdate;
-        private Guna.UI2.WinForms.Guna2GradientButton btnCheckout;
+        private Guna.UI2.WinForms.Guna2GradientButton btnOK;
+        private Guna.UI2.WinForms.Guna2GradientButton btnCancel;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButtonClose;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButtonMinimize;
@@ -277,4 +299,5 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private DataGridViewButtonColumn dataGridViewButtonColumn1;
     }
+
 }
