@@ -183,5 +183,7 @@ namespace E_commerce.Presentation
         {
             return SessionManager.CurrentUser?.UserID ?? 1; // Replace with actual logic
         }
+
+
     }
 }

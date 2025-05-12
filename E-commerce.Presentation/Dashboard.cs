@@ -1,4 +1,6 @@
-﻿using E_commerce.Application.Interfaces;
+﻿using E_commerce.Application.Helper;
+using E_commerce.Application.Interfaces;
+using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -15,21 +17,44 @@ namespace E_commerce.Presentation
 {
     public partial class Dashboard : Form
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserServices _userServices;
+
+        public Dashboard(User user, IUserServices userServices)
+        {
+            InitializeComponent();
+            _userServices = userServices;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_UserName.Text += user.FirstName;
+
+        }
+        public Dashboard(IUserServices userServices)
+        {
+            InitializeComponent();
+            _userServices = userServices;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+        }
+
 
         public Dashboard()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+
         }
-        public Dashboard(IUserRepository userRepository)
+
+        public Dashboard(IUserServices userServices, User user)
         {
             InitializeComponent();
-            _userRepository = userRepository;
-        }
-        public Dashboard(User user)
-        {
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_UserName.Text += user.FirstName;
+            _userServices = userServices;
+
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
@@ -39,7 +64,7 @@ namespace E_commerce.Presentation
 
             this.SuspendLayout();
 
-            MakeRoundedPanel(pnl_sideBar, 30);
+            MakeRoundedPanel(pnl_sideBarClient, 30);
             //this.Paint += new PaintEventHandler(Dashboard_Paint);
             //this.BackColor = Color.FromArgb(245, 245, 245) // Very Light Gray
             this.BackColor =
@@ -48,26 +73,26 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
 
 
 ;
-            Dashboardbtn.MouseEnter += (s, e) =>
+            ClientDashboardbtn.MouseEnter += (s, e) =>
             {
-                Dashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
-                Dashboardbtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
+                ClientDashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
+                ClientDashboardbtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
             };
 
-            Dashboardbtn.MouseLeave += (s, e) =>
+            ClientDashboardbtn.MouseLeave += (s, e) =>
             {
-                Dashboardbtn.BackColor = Color.Transparent;            // يرجع شفاف
-                Dashboardbtn.ForeColor = Color.Black;           // يرجع لونه الأصلي
+                ClientDashboardbtn.BackColor = Color.Transparent;            // يرجع شفاف
+                ClientDashboardbtn.ForeColor = Color.Black;           // يرجع لونه الأصلي
             };
 
-            Dashboardbtn.MouseDown += (s, e) =>
+            ClientDashboardbtn.MouseDown += (s, e) =>
             {
-                Dashboardbtn.BackColor = Color.FromArgb(180, 210, 240); // لون أغمق عند الضغط
+                ClientDashboardbtn.BackColor = Color.FromArgb(180, 210, 240); // لون أغمق عند الضغط
             };
 
-            Dashboardbtn.MouseUp += (s, e) =>
+            ClientDashboardbtn.MouseUp += (s, e) =>
             {
-                Dashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // يرجع للهوفر
+                ClientDashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // يرجع للهوفر
             };
 
 
@@ -100,7 +125,8 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
             {
                 this.Hide();
                 // Show the login form again
-                var loginForm = new Login_Form();
+                SessionManager.Logout();
+                var loginForm = new Login_Form(_userServices);
                 loginForm.Show();
             }
 
@@ -119,9 +145,9 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
 
         private void pnl_sideBar_Paint(object sender, PaintEventArgs e)
         {
-            using (LinearGradientBrush brush = new LinearGradientBrush(pnl_sideBar.ClientRectangle,
-Color.FromArgb(135, 206, 250),   // Sky Blue
-Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
+            using (LinearGradientBrush brush = new LinearGradientBrush(pnl_sideBarClient.ClientRectangle,
+                    Color.FromArgb(135, 206, 250),   // Sky Blue
+                    Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
 
 //Color.FromArgb(63, 43, 150) , Color.FromArgb(42, 27, 161)
 
@@ -136,11 +162,29 @@ Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
 ,
                 LinearGradientMode.Vertical))
             {
-                e.Graphics.FillRectangle(brush, pnl_sideBar.ClientRectangle);
+                e.Graphics.FillRectangle(brush, pnl_sideBarClient.ClientRectangle);
             }
         }
 
         private void usrpicture_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logoutbutton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+                SessionManager.Logout();
+                _userServices.Logout();
+                var loginForm = new Login_Form(_userServices);
+                loginForm.Show();
+            }
+        }
+
+        private void pnl_sideBarClient_Paint(object sender, PaintEventArgs e)
         {
 
         }

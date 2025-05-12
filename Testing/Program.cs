@@ -43,24 +43,24 @@ namespace Testing
             #endregion
 
             #region Test Add Category
-            var categoryServices = container.Resolve<ICategoryServices>();
-            CreateCategoryDto createCategoryDto = new CreateCategoryDto
-            {
-                Name = "ashtota",
-                Description = "ashtota helwa thoghantota"
-            };
+            //var categoryServices = container.Resolve<ICategoryServices>();
+            //CreateCategoryDto createCategoryDto = new CreateCategoryDto
+            //{
+            //    Name = "ashtota",
+            //    Description = "ashtota helwa thoghantota"
+            //};
 
-            categoryServices.AddCategoryAsync(createCategoryDto).ContinueWith(task =>
-            {
-                if (task.Result.Succeeded)
-                {
-                    Console.WriteLine("Category added successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to add category: " + string.Join(", ", task.Result.Errors));
-                }
-            }).Wait();
+            //categoryServices.AddCategoryAsync(createCategoryDto).ContinueWith(task =>
+            //{
+            //    if (task.Result.Succeeded)
+            //    {
+            //        Console.WriteLine("Category added successfully.");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Failed to add category: " + string.Join(", ", task.Result.Errors));
+            //    }
+            //}).Wait();
 
             #endregion
 

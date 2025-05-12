@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_commerce.Application.Interfaces
+namespace E_commerce.Shared
 {
     public interface ISessionStorage
     {
         void SaveLastUserId(int userId);
         int GetLastUserId();
         void ClearLastUserId();
+
     }
 }

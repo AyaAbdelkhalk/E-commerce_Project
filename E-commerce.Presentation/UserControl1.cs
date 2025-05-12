@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using E_commerce.Application.Services.CartItemService;
 
 namespace Ecommerce
 {
@@ -18,7 +19,11 @@ namespace Ecommerce
         public string _price;
         public string _imagePath;
 
-
+        private readonly ICartItemService _cartItemService;
+        public UserControl1(ICartItemService cartItemService)
+        {
+            _cartItemService = cartItemService;
+        }
 
         public UserControl1(int id, string name)
         {
@@ -37,7 +42,7 @@ namespace Ecommerce
 
         }
 
-        public void SetData(string name, string price, string id, string imagePath , string desc)
+        public void SetData(string name, string price, string id, string imagePath, string desc)
         {
             txtTitle.Text = name;
             ProductPrice.Text = price;
@@ -141,6 +146,11 @@ namespace Ecommerce
         private void ProductPicture_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnBuy1_1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

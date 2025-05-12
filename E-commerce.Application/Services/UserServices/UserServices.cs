@@ -19,57 +19,64 @@ namespace E_commerce.Application.Services.UserServices
         {
             _userRepository = userRepository;
         }
-        public async Task<Response<UserDetails>> AddNewUser(AddUserDTO userdto)
+        public async Task<Response<User>> AddNewUser(AddUserDTO userdto)
         {
             var user = userdto.Adapt<User>();
             user.Password = PasswordHelper.HashPassword(userdto.Password);
             var response = await IsValidUser(userdto);
-            if (response.Succeeded)
+            if (!response.Succeeded)
             {
-                var newUser = await _userRepository.AddAsync(user);
-                var userDetails = newUser.Adapt<UserDetails>();
-                return new Response<UserDetails>
+
+                return new Response<User>
                 {
-                    Succeeded = true,
-                    Data = userDetails
+                    Succeeded = false,
+                    Errors = response.Errors
                 };
             }
-            else
+            var existingUser = await _userRepository.GetByUserNameAsync(userdto.UserName);
+            if (existingUser != null)
             {
-                return response;
+                return new Response<User>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "The UserName is already registered." }
+                };
             }
+            return new Response<User> { Data = await _userRepository.AddAsync(user), Succeeded = true };
         }
 
-        public async Task<Response<UserDetails>> Login(LoginDTO loginDto)
+        public async Task<Response<User>> Login(LoginDTO loginDto)
         {
             var user = await _userRepository.GetByUserNameAsync(loginDto.UserName);
             if (user == null)
             {
-                return new Response<UserDetails>
+                return new Response<User>
                 {
                     Succeeded = false,
-                    Errors = new List<string> { "Invalid UserName or Password." }
+                    Errors = new List<string> { "Invalid User Name or password." }
                 };
             }
-            if (!PasswordHelper.VerifyPassword(user.Password,loginDto.Password))
+            if (!PasswordHelper.VerifyPassword(user.Password, loginDto.Password))
             {
-                return new Response<UserDetails>
+                return new Response<User>
                 {
                     Succeeded = false,
-                    Errors = new List<string> { "Invalid UserName or Password." }
+                    Errors = new List<string> { "Invalid User Name or password." }
                 };
             }
-
-            var userDetails = user.Adapt<UserDetails>();
-            user.LastLoginDate = DateTime.UtcNow;
+            if (!user.IsActive)
+            {
+                return new Response<User>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "User is not active." }
+                };
+            }
             SessionManager.Login(user);
-            int id = SessionManager.CurrentUser.UserID;
-            await _userRepository.UpdateAsync(user);
-            return new Response<UserDetails>
+            return new Response<User>
             {
                 Succeeded = true,
-                Data = userDetails,
-                Errors = new List<string> { "Login successful........." }
+                Data = user
             };
         }
 
@@ -128,7 +135,17 @@ namespace E_commerce.Application.Services.UserServices
                 
             return new Response<UserDetails>{Succeeded = true};
         }
+        public User GetUserById(int id)
+        {
+            var user = _userRepository.GetByIdAsync(id);
+            if (user == null)
+            {
+                return null;
+            }
+            return user.Result;
 
-        
+        }
+
+
     }
 }
