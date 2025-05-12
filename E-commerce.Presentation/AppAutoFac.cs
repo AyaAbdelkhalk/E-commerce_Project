@@ -1,4 +1,5 @@
 using Autofac;
+using E_commerce.Application.Helper;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
 using E_commerce.Application.Services.CartItemService;
@@ -9,6 +10,7 @@ using E_commerce.Application.Services.UserServices;
 using E_commerce.Infrastructure;
 using E_commerce.Infrastructure.Repository;
 using E_commerce.Shared;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace E_commerce.Presentation
 {
@@ -23,6 +25,7 @@ namespace E_commerce.Presentation
 
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<UserServices>().As<IUserServices>();
+            builder.RegisterType<User>().AsSelf();
             builder.RegisterType<CartItemService>().As<ICartItemService>();
             builder.RegisterType<CartItemRepository>().As<ICartItemRepository>();
             builder.RegisterType<ProductRepository>().As<IProductRepository>();
@@ -32,6 +35,8 @@ namespace E_commerce.Presentation
             builder.RegisterType<OrderRepository>().As<IOrderRepository>();
             builder.RegisterType<OrderService>().As<IOrderService>();
             builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
+            
+
 
 
 
