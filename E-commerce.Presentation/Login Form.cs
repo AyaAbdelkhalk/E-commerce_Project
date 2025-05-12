@@ -1,6 +1,7 @@
 ﻿using E_commerce.Application.DTOs.User;
 using E_commerce.Application.Helper;
 using E_commerce.Application.Services.UserServices;
+using E_commerce.Core.Models;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -13,13 +14,21 @@ namespace E_commerce.Presentation
     {
         private readonly IUserServices _userServices;
 
-        public Login_Form()
-        {
-            InitializeComponent();
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            REGpanel.BringToFront();
-        }
+        //public Login_Form()
+        //{
+        //    InitializeComponent();
+        //    this.DoubleBuffered = true;
+        //    this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+        //    REGpanel.BringToFront();
+
+        //}
+        //public Login_Form(User user)
+        //{
+        //    InitializeComponent();
+        //    this.DoubleBuffered = true;
+        //    this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+        //    REGpanel.BringToFront();
+        //}
 
         public Login_Form(IUserServices userServices)
         {
@@ -70,12 +79,11 @@ namespace E_commerce.Presentation
                 if (result.Succeeded)
                 {
                     this.Hide();
-
                     SessionManager.Login(result.Data);
                     if (SessionManager.IsAdmin())
-                        new AdminDashboard().Show();
+                        new AdminDashboard(_userServices, result.Data).Show();
                     else
-                        new Dashboard().Show();
+                        new Dashboard(_userServices, result.Data).Show();
                 }
                 else
                 {
@@ -166,7 +174,10 @@ namespace E_commerce.Presentation
                     SessionManager.Login(result.Data);
                     MessageBox.Show("User Regitser sucessfully");
                     this.Hide();
-                    new Dashboard().Show();
+                    if (SessionManager.IsAdmin())
+                        new AdminDashboard(_userServices, result.Data).Show();
+                    else
+                        new Dashboard(_userServices, result.Data).Show();
                 }
                 else
                 {

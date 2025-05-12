@@ -1,5 +1,6 @@
 ﻿using E_commerce.Application.Helper;
 using E_commerce.Application.Interfaces;
+using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -16,33 +17,43 @@ namespace E_commerce.Presentation
 {
     public partial class Dashboard : Form
     {
-        private readonly IUserRepository _userRepository;
-        public Dashboard(User user, IUserRepository userRepository)
+        private readonly IUserServices _userServices;
+
+        public Dashboard(User user , IUserServices userServices)
         {
             InitializeComponent();
-            _userRepository = userRepository;
+            _userServices = userServices;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_employeeName.Text += user.FirstName;
+            lbl_UserName.Text += user.FirstName;
+
         }
+        public Dashboard(IUserServices userServices)
+        {
+            InitializeComponent();
+            _userServices = userServices;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+        }
+    
 
         public Dashboard()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+
         }
-        public Dashboard(IUserRepository userRepository)
-        {
-            InitializeComponent();
-            _userRepository = userRepository;
-        }
-        public Dashboard(User user)
+
+        public Dashboard(IUserServices userServices,User user)
         {
             InitializeComponent();
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_employeeName.Text += user.FirstName;
+            lbl_UserName.Text += user.FirstName;
+            _userServices = userServices;
 
         }
 
@@ -53,7 +64,7 @@ namespace E_commerce.Presentation
 
             this.SuspendLayout();
 
-            MakeRoundedPanel(pnl_sideBar, 30);
+            MakeRoundedPanel(pnl_sideBarClient, 30);
             //this.Paint += new PaintEventHandler(Dashboard_Paint);
             //this.BackColor = Color.FromArgb(245, 245, 245) // Very Light Gray
             this.BackColor =
@@ -62,26 +73,26 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
 
 
 ;
-            Dashboardbtn.MouseEnter += (s, e) =>
+            ClientDashboardbtn.MouseEnter += (s, e) =>
             {
-                Dashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
-                Dashboardbtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
+                ClientDashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
+                ClientDashboardbtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
             };
 
-            Dashboardbtn.MouseLeave += (s, e) =>
+            ClientDashboardbtn.MouseLeave += (s, e) =>
             {
-                Dashboardbtn.BackColor = Color.Transparent;            // يرجع شفاف
-                Dashboardbtn.ForeColor = Color.Black;           // يرجع لونه الأصلي
+                ClientDashboardbtn.BackColor = Color.Transparent;            // يرجع شفاف
+                ClientDashboardbtn.ForeColor = Color.Black;           // يرجع لونه الأصلي
             };
 
-            Dashboardbtn.MouseDown += (s, e) =>
+            ClientDashboardbtn.MouseDown += (s, e) =>
             {
-                Dashboardbtn.BackColor = Color.FromArgb(180, 210, 240); // لون أغمق عند الضغط
+                ClientDashboardbtn.BackColor = Color.FromArgb(180, 210, 240); // لون أغمق عند الضغط
             };
 
-            Dashboardbtn.MouseUp += (s, e) =>
+            ClientDashboardbtn.MouseUp += (s, e) =>
             {
-                Dashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // يرجع للهوفر
+                ClientDashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // يرجع للهوفر
             };
 
 
@@ -115,7 +126,7 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
                 this.Hide();
                 // Show the login form again
                 SessionManager.Logout();
-                var loginForm = new Login_Form();
+                var loginForm = new Login_Form(_userServices);
                 loginForm.Show();
             }
 
@@ -134,7 +145,7 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
 
         private void pnl_sideBar_Paint(object sender, PaintEventArgs e)
         {
-            using (LinearGradientBrush brush = new LinearGradientBrush(pnl_sideBar.ClientRectangle,
+            using (LinearGradientBrush brush = new LinearGradientBrush(pnl_sideBarClient.ClientRectangle,
                     Color.FromArgb(135, 206, 250),   // Sky Blue
                     Color.FromArgb(255, 223, 102)  // Light Yellow (Sunlight)
 
@@ -151,7 +162,7 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
 ,
                 LinearGradientMode.Vertical))
             {
-                e.Graphics.FillRectangle(brush, pnl_sideBar.ClientRectangle);
+                e.Graphics.FillRectangle(brush, pnl_sideBarClient.ClientRectangle);
             }
         }
 
@@ -165,9 +176,10 @@ Color.FromArgb(240, 248, 255) // AliceBlue – أزرق سماوي فاتح جد
             var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                SessionManager.Logout();
                 this.Hide();
-                var loginForm = new Login_Form();
+                SessionManager.Logout();
+                _userServices.Logout();
+                var loginForm = new Login_Form(_userServices);
                 loginForm.Show();
             }
         }

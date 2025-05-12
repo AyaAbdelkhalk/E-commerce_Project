@@ -33,7 +33,7 @@ namespace E_commerce.Application.Services.UserServices
                     Errors = response.Errors
                 };
             }
-            var existingUser = await _userRepository.GetByEmailAsync(userdto.UserName);
+            var existingUser = await _userRepository.GetByUserNameAsync(userdto.UserName);
             if (existingUser != null)
             {
                 return new Response<User>
@@ -47,21 +47,29 @@ namespace E_commerce.Application.Services.UserServices
 
         public async Task<Response<User>> Login(LoginDTO loginDto)
         {
-            var user = await _userRepository.GetByEmailAsync(loginDto.UserName);
+            var user = await _userRepository.GetByUserNameAsync(loginDto.UserName);
             if (user == null)
             {
                 return new Response<User>
                 {
                     Succeeded = false,
-                    Errors = new List<string> { "Invalid email or password." }
+                    Errors = new List<string> { "Invalid User Name or password." }
                 };
             }
-            if (!PasswordHelper.VerifyPassword(loginDto.Password, user.Password))
+            if (!PasswordHelper.VerifyPassword(user.Password, loginDto.Password))
             {
                 return new Response<User>
                 {
                     Succeeded = false,
-                    Errors = new List<string> { "Invalid email or password." }
+                    Errors = new List<string> { "Invalid User Name or password." }
+                };
+            }
+            if (!user.IsActive)
+            {
+                return new Response<User>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "User is not active." }
                 };
             }
             SessionManager.Login(user);

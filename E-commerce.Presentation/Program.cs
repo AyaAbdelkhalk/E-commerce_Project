@@ -3,6 +3,7 @@ using E_commerce.Application.Helper;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
 using E_commerce.Application.Services.CartItemService;
+using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
@@ -21,13 +22,16 @@ namespace E_commerce.Presentation
             
 
             var container = AppAutoFac.Inject();
-            var userServices = container.Resolve<IUserServices>(); // Corrected variable name
+            var userServices = container.Resolve<IUserServices>(); 
 
             var cartItemService = container.Resolve<ICartItemService>();
 
             var productServices = container.Resolve<IProductServices>();
             var categoryServices = container.Resolve<ICategoryServices>();
             var sessionStorage = container.Resolve<ISessionStorage>();
+            var orderService = container.Resolve<IOrderService>();
+
+
 
             // To customize application configuration such as set high DPI settings or default font,  
             // see https://aka.ms/applicationconfiguration.  
@@ -50,7 +54,7 @@ namespace E_commerce.Presentation
 
             if (SessionManager.IsLoggedIn)
             {
-                System.Windows.Forms.Application.Run(new Dashboard(SessionManager.CurrentUser));
+                System.Windows.Forms.Application.Run(new Dashboard(userServices,SessionManager.CurrentUser));
             }
             else
             {
