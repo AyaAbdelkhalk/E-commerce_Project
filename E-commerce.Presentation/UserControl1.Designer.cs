@@ -60,6 +60,7 @@
             // ProductPrice
             // 
             resources.ApplyResources(ProductPrice, "ProductPrice");
+            ProductPrice.ForeColor = Color.Crimson;
             ProductPrice.Name = "ProductPrice";
             // 
             // txtTitle
@@ -81,7 +82,7 @@
             // 
             resources.ApplyResources(DescText, "DescText");
             DescText.BackColor = Color.Beige;
-            DescText.ForeColor = Color.Crimson;
+            DescText.ForeColor = Color.Black;
             DescText.Name = "DescText";
             // 
             // label1

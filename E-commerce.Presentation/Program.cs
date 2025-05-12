@@ -40,6 +40,11 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new Dashboard());
             //System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
+
+            //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
+            System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
+            System.Windows.Forms.Application.Run(new Order());
+
             System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
 
@@ -51,6 +56,7 @@ namespace E_commerce.Presentation
             //SessionManager.LoadLastUser(userServices);
 
           //  ApplicationConfiguration.Initialize();
+
 
            // if (SessionManager.IsLoggedIn)
            // {
