@@ -54,7 +54,6 @@
             AddCategory = new Guna.UI2.WinForms.Guna2GradientButton();
             UpdateCategory = new Guna.UI2.WinForms.Guna2GradientButton();
             DeleteCategory = new Guna.UI2.WinForms.Guna2GradientButton();
-            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             dataGridView = new DataGridView();
             SearchCategory = new Guna.UI2.WinForms.Guna2TextBox();
             AddCatPanel = new Guna.UI2.WinForms.Guna2Panel();
@@ -69,6 +68,9 @@
             guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             AddCatPanel.SuspendLayout();
             guna2CustomGradientPanel1.SuspendLayout();
@@ -85,11 +87,10 @@
             ViewCategory.FillColor2 = SystemColors.ControlText;
             ViewCategory.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             ViewCategory.ForeColor = Color.White;
-            ViewCategory.Location = new Point(37, 301);
-            ViewCategory.Margin = new Padding(3, 4, 3, 4);
+            ViewCategory.Location = new Point(32, 226);
             ViewCategory.Name = "ViewCategory";
             ViewCategory.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            ViewCategory.Size = new Size(206, 60);
+            ViewCategory.Size = new Size(180, 45);
             ViewCategory.TabIndex = 0;
             ViewCategory.Text = "View Category";
             ViewCategory.Click += ViewCategory_Click;
@@ -105,11 +106,10 @@
             AddCategory.FillColor2 = SystemColors.ControlText;
             AddCategory.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             AddCategory.ForeColor = Color.White;
-            AddCategory.Location = new Point(37, 391);
-            AddCategory.Margin = new Padding(3, 4, 3, 4);
+            AddCategory.Location = new Point(32, 293);
             AddCategory.Name = "AddCategory";
             AddCategory.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            AddCategory.Size = new Size(206, 60);
+            AddCategory.Size = new Size(180, 45);
             AddCategory.TabIndex = 1;
             AddCategory.Text = "Add Category";
             AddCategory.Click += AddCategory_Click;
@@ -125,11 +125,10 @@
             UpdateCategory.FillColor2 = SystemColors.ControlText;
             UpdateCategory.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             UpdateCategory.ForeColor = Color.White;
-            UpdateCategory.Location = new Point(37, 481);
-            UpdateCategory.Margin = new Padding(3, 4, 3, 4);
+            UpdateCategory.Location = new Point(32, 361);
             UpdateCategory.Name = "UpdateCategory";
             UpdateCategory.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            UpdateCategory.Size = new Size(206, 60);
+            UpdateCategory.Size = new Size(180, 45);
             UpdateCategory.TabIndex = 2;
             UpdateCategory.Text = "Update Category";
             UpdateCategory.Click += UpdateCategory_Click;
@@ -145,34 +144,23 @@
             DeleteCategory.FillColor2 = SystemColors.ControlText;
             DeleteCategory.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             DeleteCategory.ForeColor = Color.White;
-            DeleteCategory.Location = new Point(37, 572);
-            DeleteCategory.Margin = new Padding(3, 4, 3, 4);
+            DeleteCategory.Location = new Point(32, 429);
             DeleteCategory.Name = "DeleteCategory";
             DeleteCategory.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            DeleteCategory.Size = new Size(206, 60);
+            DeleteCategory.Size = new Size(180, 45);
             DeleteCategory.TabIndex = 3;
             DeleteCategory.Text = "Delete Category";
             DeleteCategory.Click += DeleteCategory_Click;
             // 
-            // guna2HtmlLabel1
-            // 
-            guna2HtmlLabel1.BackColor = Color.Transparent;
-            guna2HtmlLabel1.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(59, 181);
-            guna2HtmlLabel1.Margin = new Padding(3, 4, 3, 4);
-            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(175, 56);
-            guna2HtmlLabel1.TabIndex = 4;
-            guna2HtmlLabel1.Text = "Category";
-            // 
             // dataGridView
             // 
+            dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView.BackgroundColor = SystemColors.ButtonFace;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new Point(297, 120);
-            dataGridView.Margin = new Padding(3, 4, 3, 4);
+            dataGridView.Location = new Point(260, 90);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(729, 541);
+            dataGridView.Size = new Size(638, 406);
             dataGridView.TabIndex = 5;
             dataGridView.CellContentClick += dataGridView_CellContentClick;
             // 
@@ -187,18 +175,19 @@
             SearchCategory.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             SearchCategory.Font = new Font("Segoe UI", 9F);
             SearchCategory.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            SearchCategory.Location = new Point(319, 39);
-            SearchCategory.Margin = new Padding(3, 5, 3, 5);
+            SearchCategory.Location = new Point(279, 29);
+            SearchCategory.Margin = new Padding(3, 4, 3, 4);
             SearchCategory.Name = "SearchCategory";
             SearchCategory.PlaceholderText = "Search For Category";
             SearchCategory.SelectedText = "";
             SearchCategory.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            SearchCategory.Size = new Size(477, 48);
+            SearchCategory.Size = new Size(417, 36);
             SearchCategory.TabIndex = 6;
             SearchCategory.TextChanged += guna2TextBox1_TextChanged;
             // 
             // AddCatPanel
             // 
+            AddCatPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             AddCatPanel.Controls.Add(UpdateButton);
             AddCatPanel.Controls.Add(guna2CircleButton1);
             AddCatPanel.Controls.Add(SaveButton);
@@ -207,11 +196,10 @@
             AddCatPanel.Controls.Add(guna2HtmlLabel3);
             AddCatPanel.Controls.Add(guna2HtmlLabel2);
             AddCatPanel.CustomizableEdges = customizableEdges16;
-            AddCatPanel.Location = new Point(297, 156);
-            AddCatPanel.Margin = new Padding(3, 4, 3, 4);
+            AddCatPanel.Location = new Point(260, 117);
             AddCatPanel.Name = "AddCatPanel";
             AddCatPanel.ShadowDecoration.CustomizableEdges = customizableEdges17;
-            AddCatPanel.Size = new Size(757, 451);
+            AddCatPanel.Size = new Size(662, 338);
             AddCatPanel.TabIndex = 8;
             // 
             // UpdateButton
@@ -219,10 +207,10 @@
             UpdateButton.BackColor = Color.LightBlue;
             UpdateButton.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             UpdateButton.ImeMode = ImeMode.NoControl;
-            UpdateButton.Location = new Point(254, 225);
-            UpdateButton.Margin = new Padding(5, 4, 5, 4);
+            UpdateButton.Location = new Point(222, 169);
+            UpdateButton.Margin = new Padding(4, 3, 4, 3);
             UpdateButton.Name = "UpdateButton";
-            UpdateButton.Size = new Size(191, 49);
+            UpdateButton.Size = new Size(167, 37);
             UpdateButton.TabIndex = 218;
             UpdateButton.Text = "Update";
             UpdateButton.UseVisualStyleBackColor = false;
@@ -236,12 +224,11 @@
             guna2CircleButton1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2CircleButton1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             guna2CircleButton1.ForeColor = Color.White;
-            guna2CircleButton1.Location = new Point(703, 11);
-            guna2CircleButton1.Margin = new Padding(3, 4, 3, 4);
+            guna2CircleButton1.Location = new Point(615, 8);
             guna2CircleButton1.Name = "guna2CircleButton1";
             guna2CircleButton1.ShadowDecoration.CustomizableEdges = customizableEdges11;
             guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton1.Size = new Size(46, 44);
+            guna2CircleButton1.Size = new Size(40, 33);
             guna2CircleButton1.TabIndex = 7;
             guna2CircleButton1.Text = "X";
             guna2CircleButton1.Click += guna2CircleButton1_Click;
@@ -251,10 +238,10 @@
             SaveButton.BackColor = Color.LightBlue;
             SaveButton.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             SaveButton.ImeMode = ImeMode.NoControl;
-            SaveButton.Location = new Point(254, 225);
-            SaveButton.Margin = new Padding(5, 4, 5, 4);
+            SaveButton.Location = new Point(222, 169);
+            SaveButton.Margin = new Padding(4, 3, 4, 3);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(191, 49);
+            SaveButton.Size = new Size(167, 37);
             SaveButton.TabIndex = 217;
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = false;
@@ -271,13 +258,13 @@
             DescTextBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             DescTextBox.Font = new Font("Segoe UI", 9F);
             DescTextBox.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            DescTextBox.Location = new Point(377, 111);
-            DescTextBox.Margin = new Padding(3, 5, 3, 5);
+            DescTextBox.Location = new Point(330, 83);
+            DescTextBox.Margin = new Padding(3, 4, 3, 4);
             DescTextBox.Name = "DescTextBox";
             DescTextBox.PlaceholderText = "";
             DescTextBox.SelectedText = "";
             DescTextBox.ShadowDecoration.CustomizableEdges = customizableEdges13;
-            DescTextBox.Size = new Size(245, 48);
+            DescTextBox.Size = new Size(214, 36);
             DescTextBox.TabIndex = 7;
             // 
             // NameText
@@ -291,23 +278,22 @@
             NameText.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             NameText.Font = new Font("Segoe UI", 9F);
             NameText.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            NameText.Location = new Point(75, 111);
-            NameText.Margin = new Padding(3, 5, 3, 5);
+            NameText.Location = new Point(66, 83);
+            NameText.Margin = new Padding(3, 4, 3, 4);
             NameText.Name = "NameText";
             NameText.PlaceholderText = "";
             NameText.SelectedText = "";
             NameText.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            NameText.Size = new Size(245, 48);
+            NameText.Size = new Size(214, 36);
             NameText.TabIndex = 6;
             // 
             // guna2HtmlLabel3
             // 
             guna2HtmlLabel3.BackColor = Color.Transparent;
             guna2HtmlLabel3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            guna2HtmlLabel3.Location = new Point(377, 77);
-            guna2HtmlLabel3.Margin = new Padding(3, 4, 3, 4);
+            guna2HtmlLabel3.Location = new Point(330, 58);
             guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            guna2HtmlLabel3.Size = new Size(91, 23);
+            guna2HtmlLabel3.Size = new Size(74, 19);
             guna2HtmlLabel3.TabIndex = 1;
             guna2HtmlLabel3.Text = "Description";
             // 
@@ -315,15 +301,15 @@
             // 
             guna2HtmlLabel2.BackColor = Color.Transparent;
             guna2HtmlLabel2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            guna2HtmlLabel2.Location = new Point(75, 77);
-            guna2HtmlLabel2.Margin = new Padding(3, 4, 3, 4);
+            guna2HtmlLabel2.Location = new Point(66, 58);
             guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            guna2HtmlLabel2.Size = new Size(49, 23);
+            guna2HtmlLabel2.Size = new Size(39, 19);
             guna2HtmlLabel2.TabIndex = 0;
             guna2HtmlLabel2.Text = "Name";
             // 
             // guna2CircleButton4
             // 
+            guna2CircleButton4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButton4.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButton4.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2CircleButton4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -331,18 +317,18 @@
             guna2CircleButton4.FillColor = Color.Orange;
             guna2CircleButton4.Font = new Font("Segoe UI", 9F);
             guna2CircleButton4.ForeColor = Color.White;
-            guna2CircleButton4.Location = new Point(1050, 16);
-            guna2CircleButton4.Margin = new Padding(3, 4, 3, 4);
+            guna2CircleButton4.Location = new Point(919, 12);
             guna2CircleButton4.Name = "guna2CircleButton4";
             guna2CircleButton4.ShadowDecoration.CustomizableEdges = customizableEdges18;
             guna2CircleButton4.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton4.Size = new Size(18, 23);
+            guna2CircleButton4.Size = new Size(16, 17);
             guna2CircleButton4.TabIndex = 15;
             guna2CircleButton4.Text = "guna2CircleButton4";
             guna2CircleButton4.Click += guna2CircleButton4_Click_1;
             // 
             // guna2CircleButton3
             // 
+            guna2CircleButton3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButton3.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButton3.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2CircleButton3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -350,18 +336,18 @@
             guna2CircleButton3.FillColor = Color.ForestGreen;
             guna2CircleButton3.Font = new Font("Segoe UI", 9F);
             guna2CircleButton3.ForeColor = Color.White;
-            guna2CircleButton3.Location = new Point(1029, 16);
-            guna2CircleButton3.Margin = new Padding(3, 4, 3, 4);
+            guna2CircleButton3.Location = new Point(900, 12);
             guna2CircleButton3.Name = "guna2CircleButton3";
             guna2CircleButton3.ShadowDecoration.CustomizableEdges = customizableEdges19;
             guna2CircleButton3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton3.Size = new Size(18, 23);
+            guna2CircleButton3.Size = new Size(16, 17);
             guna2CircleButton3.TabIndex = 14;
             guna2CircleButton3.Text = "guna2CircleButton3";
             guna2CircleButton3.Click += guna2CircleButton3_Click;
             // 
             // guna2CircleButton2
             // 
+            guna2CircleButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButton2.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButton2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2CircleButton2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -369,12 +355,11 @@
             guna2CircleButton2.FillColor = Color.IndianRed;
             guna2CircleButton2.Font = new Font("Segoe UI", 9F);
             guna2CircleButton2.ForeColor = Color.White;
-            guna2CircleButton2.Location = new Point(1072, 16);
-            guna2CircleButton2.Margin = new Padding(3, 4, 3, 4);
+            guna2CircleButton2.Location = new Point(938, 12);
             guna2CircleButton2.Name = "guna2CircleButton2";
             guna2CircleButton2.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButton2.Size = new Size(18, 23);
+            guna2CircleButton2.Size = new Size(16, 17);
             guna2CircleButton2.TabIndex = 13;
             guna2CircleButton2.Text = "guna2CircleButton2";
             guna2CircleButton2.Click += guna2CircleButton2_Click_1;
@@ -382,28 +367,65 @@
             // guna2CustomGradientPanel1
             // 
             guna2CustomGradientPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            guna2CustomGradientPanel1.Controls.Add(button1);
+            guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel8);
+            guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel1);
             guna2CustomGradientPanel1.Controls.Add(ViewCategory);
             guna2CustomGradientPanel1.Controls.Add(AddCategory);
             guna2CustomGradientPanel1.Controls.Add(UpdateCategory);
             guna2CustomGradientPanel1.Controls.Add(DeleteCategory);
-            guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel1);
             guna2CustomGradientPanel1.CustomizableEdges = customizableEdges21;
             guna2CustomGradientPanel1.FillColor = SystemColors.InactiveCaption;
             guna2CustomGradientPanel1.FillColor2 = SystemColors.MenuText;
             guna2CustomGradientPanel1.FillColor3 = Color.DarkSlateGray;
             guna2CustomGradientPanel1.Location = new Point(0, 0);
-            guna2CustomGradientPanel1.Margin = new Padding(3, 4, 3, 4);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            guna2CustomGradientPanel1.Size = new Size(290, 709);
+            guna2CustomGradientPanel1.Size = new Size(254, 532);
             guna2CustomGradientPanel1.TabIndex = 16;
             guna2CustomGradientPanel1.Paint += guna2CustomGradientPanel1_Paint;
             // 
+            // guna2HtmlLabel8
+            // 
+            guna2HtmlLabel8.AvoidGeometryAntialias = true;
+            guna2HtmlLabel8.BackColor = Color.Transparent;
+            guna2HtmlLabel8.Font = new Font("Showcard Gothic", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel8.Location = new Point(3, 162);
+            guna2HtmlLabel8.Name = "guna2HtmlLabel8";
+            guna2HtmlLabel8.Size = new Size(234, 38);
+            guna2HtmlLabel8.TabIndex = 11;
+            guna2HtmlLabel8.Text = "Our Category";
+            // 
+            // guna2HtmlLabel1
+            // 
+            guna2HtmlLabel1.AvoidGeometryAntialias = true;
+            guna2HtmlLabel1.BackColor = Color.Transparent;
+            guna2HtmlLabel1.Font = new Font("Showcard Gothic", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel1.Location = new Point(12, 119);
+            guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            guna2HtmlLabel1.Size = new Size(217, 42);
+            guna2HtmlLabel1.TabIndex = 10;
+            guna2HtmlLabel1.Text = "Welcome To";
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Linen;
+            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ImeMode = ImeMode.NoControl;
+            button1.Location = new Point(32, 54);
+            button1.Margin = new Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(167, 37);
+            button1.TabIndex = 219;
+            button1.Text = "Go To Products -->";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // Category
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1098, 707);
+            ClientSize = new Size(961, 530);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(guna2CircleButton4);
             Controls.Add(guna2CircleButton3);
@@ -412,7 +434,6 @@
             Controls.Add(SearchCategory);
             Controls.Add(dataGridView);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Category";
             Text = "Category";
             Load += Category_Load;
@@ -430,7 +451,6 @@
         private Guna.UI2.WinForms.Guna2GradientButton AddCategory;
         private Guna.UI2.WinForms.Guna2GradientButton UpdateCategory;
         private Guna.UI2.WinForms.Guna2GradientButton DeleteCategory;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private DataGridView dataGridView;
         private Guna.UI2.WinForms.Guna2TextBox SearchCategory;
         private Guna.UI2.WinForms.Guna2Panel AddCatPanel;
@@ -445,6 +465,8 @@
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton3;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
-
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Button button1;
     }
 }

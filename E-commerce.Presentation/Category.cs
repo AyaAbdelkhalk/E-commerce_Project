@@ -23,10 +23,15 @@ namespace E_commerce.Presentation
             _productServices = productServices;
             _categoryServices = categoryServices;
         }
+        private DataGridViewRow selectedRow;
+
 
         private async void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridView.Rows.Count)
+            {
+                selectedRow = dataGridView.Rows[e.RowIndex];
+            }
         }
 
         private void Exit_Click(object sender, EventArgs e)
@@ -87,6 +92,7 @@ namespace E_commerce.Presentation
         {
             dataGridView.Visible = false;
             AddCatPanel.Visible = true;
+            UpdateButton.Visible = false;
 
         }
 
@@ -181,6 +187,12 @@ namespace E_commerce.Presentation
             UpdateButton.Visible = false;
             try
             {
+                if (selectedRow == null)
+                {
+                    MessageBox.Show("Please select a row first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (dataGridView.SelectedRows.Count > 0)
                 {
                     var selectedRow = dataGridView.SelectedRows[0];
@@ -191,6 +203,7 @@ namespace E_commerce.Presentation
                     {
                         MessageBox.Show("Category deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         await RefreshCategories();
+                        selectedRow = null;
                     }
                     else
                     {
@@ -212,37 +225,80 @@ namespace E_commerce.Presentation
         {
             try
             {
-                dataGridView.EndEdit(); // <<< ده اللي بيعمل حفظ مؤقت للتعديل في الجدول
+                dataGridView.EndEdit(); // حفظ التعديلات المؤقتة
 
-                var selectedRow = dataGridView.SelectedRows[0];
-                var categoryId = (int)selectedRow.Cells["CategoryID"].Value;
-                var categoryName = selectedRow.Cells["Name"].Value.ToString();
-                var categoryDescription = selectedRow.Cells["Description"].Value.ToString();
-
-                var CategoryDTO = new Application.DTOs.Category.UpdateCategoryDto
+                if (dataGridView.SelectedRows.Count == 0)
                 {
-                    CategoryID = categoryId,
-                    Name = categoryName,
-                    Description = categoryDescription
-                };
+                    MessageBox.Show("Please select at least one category to update.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                var category = await _categoryServices.UpdateCategoryAsync(CategoryDTO);
-                if (category.Succeeded)
+                SaveButton.Visible = true;
+                UpdateButton.Visible = false;
+
+                // تأكد من الأعمدة المطلوبة
+                if (!dataGridView.Columns.Contains("CategoryID") ||
+                    !dataGridView.Columns.Contains("Name") ||
+                    !dataGridView.Columns.Contains("Description"))
                 {
-                    MessageBox.Show("Category updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Some required columns are missing from the DataGridView.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int successCount = 0;
+                List<string> errorMessages = new();
+
+                foreach (DataGridViewRow selectedRow in dataGridView.SelectedRows)
+                {
+                    if (selectedRow.IsNewRow) continue;
+
+                    try
+                    {
+                        var categoryId = Convert.ToInt32(selectedRow.Cells["CategoryID"].Value);
+                        var categoryName = selectedRow.Cells["Name"].Value?.ToString();
+                        var categoryDescription = selectedRow.Cells["Description"].Value?.ToString();
+
+                        var CategoryDTO = new Application.DTOs.Category.UpdateCategoryDto
+                        {
+                            CategoryID = categoryId,
+                            Name = categoryName,
+                            Description = categoryDescription
+                        };
+
+                        var result = await _categoryServices.UpdateCategoryAsync(CategoryDTO);
+
+                        if (result.Succeeded)
+                        {
+                            successCount++;
+                        }
+                        else
+                        {
+                            var error = result.Errors != null && result.Errors.Any()
+                                ? string.Join(" - ", result.Errors)
+                                : $"Failed to update category with ID {categoryId}";
+                            errorMessages.Add(error);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        errorMessages.Add($"Error with category ID {selectedRow.Cells["CategoryID"].Value}: {ex.Message}");
+                    }
+                }
+
+                if (successCount > 0)
+                {
+                    MessageBox.Show($"{successCount} categories updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await RefreshCategories();
                 }
-                else
+
+                if (errorMessages.Any())
                 {
-                    var errorMessage = category.Errors != null && category.Errors.Any()
-                        ? string.Join("\n", category.Errors)
-                        : "Failed to update category";
-                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Join("\n", errorMessages), "Update Errors", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -250,6 +306,9 @@ namespace E_commerce.Presentation
                 UpdateButton.Visible = true;
             }
         }
+
+
+
 
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
@@ -267,13 +326,19 @@ namespace E_commerce.Presentation
                 if (dataGridView.CurrentCell == null ||
                     dataGridView.CurrentCell.RowIndex < 0 ||
                     dataGridView.Rows[dataGridView.CurrentCell.RowIndex].IsNewRow)
+
                 {
                     MessageBox.Show("Please select a valid row to update.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                int rowIndex = dataGridView.CurrentCell.RowIndex;
-                var row = dataGridView.Rows[rowIndex];
+                if (selectedRow == null || dataGridView.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please select a row first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var row = selectedRow;
 
                 // قراءة القيم من الصف
                 int categoryId = Convert.ToInt32(row.Cells["CategoryID"].Value);
@@ -318,26 +383,26 @@ namespace E_commerce.Presentation
             this.Close();
         }
 
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        private async void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
             var text = SearchCategory.Text.ToLower();
+
             if (string.IsNullOrEmpty(text))
             {
                 RefreshCategories();
+                return;
+            }
+
+            var result = await _categoryServices.SearchCategoriesAsync(text);
+            if (result != null && result.Succeeded)
+            {
+                dataGridView.DataSource = result.Data;
             }
             else
             {
-                var result = _categoryServices.SearchCategoriesAsync(text);
-                if (result != null && result.Result.Succeeded)
-                {
-                    dataGridView.DataSource = result.Result.Data;
-                }
-                else
-                {
-                    MessageBox.Show("No categories found.");
-                }
+                dataGridView.DataSource = null; // Clear old results
+                MessageBox.Show("No categories found.");
             }
-
         }
 
         private void guna2CircleButton4_Click_1(object sender, EventArgs e)
@@ -353,6 +418,13 @@ namespace E_commerce.Presentation
         private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            products products = new products(_productServices, _categoryServices);
+            products.Show();
+            this.Hide();
         }
     }
 }
