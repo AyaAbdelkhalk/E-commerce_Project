@@ -84,6 +84,8 @@
             guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CircleButton4 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            button1 = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImagePath).BeginInit();
             guna2CustomGradientPanel1.SuspendLayout();
@@ -100,7 +102,7 @@
             AddProductButton.FillColor2 = Color.Black;
             AddProductButton.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             AddProductButton.ForeColor = Color.White;
-            AddProductButton.Location = new Point(41, 246);
+            AddProductButton.Location = new Point(43, 286);
             AddProductButton.Name = "AddProductButton";
             AddProductButton.ShadowDecoration.CustomizableEdges = customizableEdges2;
             AddProductButton.Size = new Size(159, 43);
@@ -119,7 +121,7 @@
             UpdateProductButton.FillColor2 = Color.Black;
             UpdateProductButton.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             UpdateProductButton.ForeColor = Color.White;
-            UpdateProductButton.Location = new Point(41, 309);
+            UpdateProductButton.Location = new Point(43, 349);
             UpdateProductButton.Name = "UpdateProductButton";
             UpdateProductButton.ShadowDecoration.CustomizableEdges = customizableEdges4;
             UpdateProductButton.Size = new Size(159, 43);
@@ -138,7 +140,7 @@
             DeleteProductButton.FillColor2 = Color.Black;
             DeleteProductButton.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             DeleteProductButton.ForeColor = Color.White;
-            DeleteProductButton.Location = new Point(41, 369);
+            DeleteProductButton.Location = new Point(43, 409);
             DeleteProductButton.Name = "DeleteProductButton";
             DeleteProductButton.ShadowDecoration.CustomizableEdges = customizableEdges6;
             DeleteProductButton.Size = new Size(159, 43);
@@ -148,13 +150,14 @@
             // 
             // guna2HtmlLabel1
             // 
+            guna2HtmlLabel1.AvoidGeometryAntialias = true;
             guna2HtmlLabel1.BackColor = Color.Transparent;
-            guna2HtmlLabel1.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guna2HtmlLabel1.Location = new Point(41, 83);
+            guna2HtmlLabel1.Font = new Font("Showcard Gothic", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel1.Location = new Point(15, 115);
             guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            guna2HtmlLabel1.Size = new Size(157, 52);
+            guna2HtmlLabel1.Size = new Size(217, 42);
             guna2HtmlLabel1.TabIndex = 3;
-            guna2HtmlLabel1.Text = "Products";
+            guna2HtmlLabel1.Text = "Welcome To";
             // 
             // SearchTextBox
             // 
@@ -406,7 +409,7 @@
             guna2GradientButton1.FillColor2 = SystemColors.ControlText;
             guna2GradientButton1.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             guna2GradientButton1.ForeColor = Color.White;
-            guna2GradientButton1.Location = new Point(41, 184);
+            guna2GradientButton1.Location = new Point(43, 224);
             guna2GradientButton1.Name = "guna2GradientButton1";
             guna2GradientButton1.PressedColor = Color.BlueViolet;
             guna2GradientButton1.ShadowDecoration.CustomizableEdges = customizableEdges25;
@@ -417,15 +420,18 @@
             // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Location = new Point(266, 80);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(715, 435);
             flowLayoutPanel1.TabIndex = 9;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
+            flowLayoutPanel1.MouseClick += flowLayoutPanel1_MouseClick;
             // 
             // guna2CircleButton2
             // 
+            guna2CircleButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButton2.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButton2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2CircleButton2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -444,6 +450,7 @@
             // 
             // guna2CircleButton3
             // 
+            guna2CircleButton3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButton3.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButton3.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2CircleButton3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -462,6 +469,7 @@
             // 
             // guna2CircleButton4
             // 
+            guna2CircleButton4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButton4.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButton4.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2CircleButton4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -482,6 +490,8 @@
             // 
             guna2CustomGradientPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             guna2CustomGradientPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            guna2CustomGradientPanel1.Controls.Add(button1);
+            guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel8);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel1);
             guna2CustomGradientPanel1.Controls.Add(AddProductButton);
             guna2CustomGradientPanel1.Controls.Add(UpdateProductButton);
@@ -494,9 +504,34 @@
             guna2CustomGradientPanel1.Location = new Point(0, 0);
             guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             guna2CustomGradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges30;
-            guna2CustomGradientPanel1.Size = new Size(244, 527);
+            guna2CustomGradientPanel1.Size = new Size(250, 527);
             guna2CustomGradientPanel1.TabIndex = 13;
             guna2CustomGradientPanel1.Paint += guna2CustomGradientPanel1_Paint;
+            // 
+            // guna2HtmlLabel8
+            // 
+            guna2HtmlLabel8.AvoidGeometryAntialias = true;
+            guna2HtmlLabel8.BackColor = Color.Transparent;
+            guna2HtmlLabel8.Font = new Font("Showcard Gothic", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            guna2HtmlLabel8.Location = new Point(6, 161);
+            guna2HtmlLabel8.Name = "guna2HtmlLabel8";
+            guna2HtmlLabel8.Size = new Size(235, 38);
+            guna2HtmlLabel8.TabIndex = 9;
+            guna2HtmlLabel8.Text = "Our Products";
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.Linen;
+            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ImeMode = ImeMode.NoControl;
+            button1.Location = new Point(24, 52);
+            button1.Margin = new Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(182, 37);
+            button1.TabIndex = 220;
+            button1.Text = "<-- Return To Category";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // products
             // 
@@ -551,5 +586,7 @@
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton3;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton4;
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
+        private Button button1;
     }
 }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ecommerce;
 using Guna.UI2.WinForms;
+using E_commerce.Core.Models;
 
 namespace E_commerce.Presentation
 {
@@ -27,8 +28,10 @@ namespace E_commerce.Presentation
             _productServices = productServices;
             _categoryServices = categoryServices;
 
+
             LoadCategories();
             SetupForm();
+
         }
 
         private void ResetForm()
@@ -398,7 +401,23 @@ namespace E_commerce.Presentation
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-           
+
+        }
+
+        private void flowLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (UserControl1.existProductControl != null)
+            {
+                UserControl1.existProductControl.Deselect();
+                UserControl1.existProductControl = null;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Category category = new Category(_productServices, _categoryServices);
+            category.Show();
+            this.Hide();
         }
     }
 }

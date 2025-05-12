@@ -37,6 +37,10 @@
             txtTitle = new Label();
             ProductPicture = new Guna.UI2.WinForms.Guna2PictureBox();
             DescText = new Label();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)ProductPicture).BeginInit();
             SuspendLayout();
             // 
@@ -75,13 +79,39 @@
             // DescText
             // 
             resources.ApplyResources(DescText, "DescText");
+            DescText.BackColor = Color.Beige;
+            DescText.ForeColor = Color.Crimson;
             DescText.Name = "DescText";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(label1, "label1");
+            label1.Name = "label1";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(label2, "label2");
+            label2.Name = "label2";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(label3, "label3");
+            label3.Name = "label3";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(label4, "label4");
+            label4.Name = "label4";
             // 
             // UserControl1
             // 
             AllowDrop = true;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Dpi;
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(DescText);
             Controls.Add(ProductPicture);
             Controls.Add(idProduct);
@@ -105,5 +135,9 @@
         private System.Windows.Forms.Label txtTitle;
         private Guna.UI2.WinForms.Guna2PictureBox ProductPicture;
         private Label DescText;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
     }
 }

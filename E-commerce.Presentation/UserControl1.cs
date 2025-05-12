@@ -64,10 +64,23 @@ namespace Ecommerce
         }
 
         private bool isSelected = false;
-
+        public void Deselect()
+        {
+            isSelected = false;
+            UpdateSelectionAppearance();
+        }
         private void UserControl1_Click(object sender, EventArgs e)
         {
-            ToggleSelection();
+            if (existProductControl != null && existProductControl != this)
+            {
+                existProductControl.Deselect();
+            }
+
+            // حدد العنصر الحالي
+            isSelected = true;
+            UpdateSelectionAppearance();
+
+            // خليه العنصر الحالي المحدد
             existProductControl = this;
         }
 
