@@ -47,6 +47,7 @@
             logoutpicture = new PictureBox();
             usrpicture = new PictureBox();
             lbl_employeeName = new Label();
+            profilepanel = new Panel();
             pnl_sideBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)adminpictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -308,11 +309,19 @@
             lbl_employeeName.TabIndex = 9;
             lbl_employeeName.Text = "Welcome  \r\n  ";
             // 
+            // profilepanel
+            // 
+            profilepanel.Location = new Point(361, 38);
+            profilepanel.Name = "profilepanel";
+            profilepanel.Size = new Size(936, 647);
+            profilepanel.TabIndex = 2;
+            // 
             // AdminDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1323, 724);
+            Controls.Add(profilepanel);
             Controls.Add(pnl_sideBar);
             Name = "AdminDashboard";
             Text = "AdminDashboard";
@@ -350,5 +359,6 @@
         private Label lbl_employeeName;
         private Button AdminMangementbtn;
         private PictureBox adminpictureBox6;
+        private Panel profilepanel;
     }
 }

@@ -31,6 +31,7 @@ namespace E_commerce.Presentation
             var sessionStorage = container.Resolve<ISessionStorage>();
             var orderService = container.Resolve<IOrderService>();
 
+            ApplicationConfiguration.Initialize();
 
 
             // To customize application configuration such as set high DPI settings or default font,  
@@ -44,9 +45,9 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
 
 
-            ApplicationConfiguration.Initialize();
 
-           
+
+            #region for final run
             SessionManager.Initialize(sessionStorage);
             SessionManager.LoadLastUser(userServices);
 
@@ -54,12 +55,13 @@ namespace E_commerce.Presentation
 
             if (SessionManager.IsLoggedIn)
             {
-                System.Windows.Forms.Application.Run(new Dashboard(userServices,SessionManager.CurrentUser));
+                System.Windows.Forms.Application.Run(new Dashboard(userServices, SessionManager.CurrentUser));
             }
             else
             {
                 System.Windows.Forms.Application.Run(new Login_Form(userServices));
             }
+            #endregion
         }
     }
 }
