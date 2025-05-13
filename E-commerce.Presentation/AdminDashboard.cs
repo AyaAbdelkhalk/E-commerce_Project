@@ -170,13 +170,14 @@ namespace E_commerce.Presentation
             Form CategoryForm = new Category(_userServices, _productServices, _categoryServices);
             CategoryForm.Show();
             this.Hide();
+        }
 //=======
         #endregion
 
-        private void categorybtn_Click(object sender, EventArgs e)
-        {
+        //private void categorybtn_Click(object sender, EventArgs e)
+        //{
 
-        }
+        //}
 
         private void pnl_sideBar_Paint(object sender, PaintEventArgs e)
         {

@@ -19,10 +19,10 @@ namespace E_commerce.Presentation
         [STAThread]
         static void Main()
         {
-            
+
 
             var container = AppAutoFac.Inject();
-            var userServices = container.Resolve<IUserServices>(); 
+            var userServices = container.Resolve<IUserServices>();
 
             var cartItemService = container.Resolve<ICartItemService>();
 
@@ -43,18 +43,18 @@ namespace E_commerce.Presentation
 
 
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
-//<<<<<<< updd
+            //<<<<<<< updd
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Order());
 
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
-//=======
-//>>>>>>> master
+            //=======
+            //>>>>>>> master
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Order());
 
-//<<<<<<< updd
-  //          System.Windows.Forms.Application.Run(new users(userServices , productServices , categoryServices));
+            //<<<<<<< updd
+            //          System.Windows.Forms.Application.Run(new users(userServices , productServices , categoryServices));
 
             ApplicationConfiguration.Initialize();
 
@@ -63,33 +63,34 @@ namespace E_commerce.Presentation
             SessionManager.LoadLastUser(userServices);
 
             ApplicationConfiguration.Initialize();
-//=======
+            //=======
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
 
-//>>>>>>> master
+            //>>>>>>> master
 
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
 
-            //if (SessionManager.IsLoggedIn)
-            //{
-            //    if (SessionManager.IsAdmin())
-            //    {
-            //        System.Windows.Forms.Application.Run(new AdminDashboard(userServices));
-            //    }
-            //    else
-            //    {
-            //        System.Windows.Forms.Application.Run(new users(userServices));
+            if (SessionManager.IsLoggedIn)
+            {
+                if (SessionManager.IsAdmin())
+                {
+                    System.Windows.Forms.Application.Run(new AdminDashboard(userServices));
+                }
+                else
+                {
+                    //System.Windows.Forms.Application.Run(new users(userServices));
 
-            //        //System.Windows.Forms.Application.Run(new Dashboard(userServices));
-            //    }
-            //}
-            //else
-            //{
-            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            //}
+                    System.Windows.Forms.Application.Run(new Dashboard(userServices));
+                }
+            }
+            else
+            {
+                System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
+
+            }
         }
     }
 }
