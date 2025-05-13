@@ -24,25 +24,37 @@ namespace E_commerce.Presentation
         public Dashboard(User user, IUserServices userServices)
         {
             InitializeComponent();
-            _userServices = userServices;
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_UserName.Text += user.FirstName;
-
-        }
-        public Dashboard(IUserServices userServices)
-        {
-            InitializeComponent();
+            roundedPanel1.Visible = false;
             _userServices = userServices;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
+            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
+            customTextBox23.Text += SessionManager.CurrentUser?.Email;
+            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
+        }
+        public Dashboard(IUserServices userServices)
+        {
+            InitializeComponent();
+            roundedPanel1.Visible = false;
+            _userServices = userServices;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
+            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
+            customTextBox23.Text += SessionManager.CurrentUser?.Email;
+            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
         }
 
 
         public Dashboard()
         {
             InitializeComponent();
+            roundedPanel1.Visible = false;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
@@ -60,10 +72,15 @@ namespace E_commerce.Presentation
         public Dashboard(IUserServices userServices, User user)
         {
             InitializeComponent();
+            roundedPanel1.Visible = false;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_UserName.Text += user.FirstName;
-            _userServices = userServices;
+            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
+            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
+            customTextBox23.Text += SessionManager.CurrentUser?.Email;
+            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString(); _userServices = userServices;
 
         }
 
@@ -75,7 +92,6 @@ namespace E_commerce.Presentation
             this.SuspendLayout();
             roundedPanel1.Visible = false;
             MakeRoundedPanel(pnl_sideBarClient, 30);
-            //this.Paint += new PaintEventHandler(Dashboard_Paint);
             //this.BackColor = Color.FromArgb(245, 245, 245) // Very Light Gray
             this.BackColor =
             //Color.FromArgb(250, 250, 240) // FloralWhite (أبيض على لمسة أصفر)
@@ -85,6 +101,12 @@ namespace E_commerce.Presentation
             MakeRoundedPanel(INFOroundedPanel2, 30);
             MakeRoundedPanel(PPProundedPanel3, 30);
             MakeRoundedPanel(DDDroundedPanel2, 30);
+            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
+            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
+            customTextBox23.Text += SessionManager.CurrentUser?.Email;
+            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
 
             ClientDashboardbtn.MouseEnter += (s, e) =>
             {
@@ -379,7 +401,7 @@ namespace E_commerce.Presentation
                 var result = await _userServices.UpdateUser(addu);
                 if (result.Succeeded)
                 {
-                    SessionManager.CurrentUser.Password = PasswordHelper.HashPassword(updatepass.NewPassword); 
+                    SessionManager.CurrentUser.Password = PasswordHelper.HashPassword(updatepass.NewPassword);
                     MessageBox.Show("Password updated successfully.");
                     customTextBox210.Text = string.Empty;
                     customTextBox211.Text = string.Empty;
@@ -408,5 +430,13 @@ namespace E_commerce.Presentation
 
         }
 
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            roundedPanel1.Visible = true;
+            // Change the button color
+            Profilebtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
+            Profilebtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
+            // Hide other panels
+        }
     }
 }
