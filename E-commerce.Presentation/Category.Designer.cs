@@ -68,9 +68,9 @@
             guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            button1 = new Button();
             guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             AddCatPanel.SuspendLayout();
             guna2CustomGradientPanel1.SuspendLayout();
@@ -160,7 +160,7 @@
             dataGridView.Location = new Point(260, 90);
             dataGridView.Name = "dataGridView";
             dataGridView.RowHeadersWidth = 51;
-            dataGridView.Size = new Size(638, 406);
+            dataGridView.Size = new Size(675, 397);
             dataGridView.TabIndex = 5;
             dataGridView.CellContentClick += dataGridView_CellContentClick;
             // 
@@ -385,6 +385,20 @@
             guna2CustomGradientPanel1.TabIndex = 16;
             guna2CustomGradientPanel1.Paint += guna2CustomGradientPanel1_Paint;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Linen;
+            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ImeMode = ImeMode.NoControl;
+            button1.Location = new Point(32, 54);
+            button1.Margin = new Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(197, 37);
+            button1.TabIndex = 219;
+            button1.Text = "<--- Return To Dashboard";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // guna2HtmlLabel8
             // 
             guna2HtmlLabel8.AvoidGeometryAntialias = true;
@@ -406,20 +420,6 @@
             guna2HtmlLabel1.Size = new Size(217, 42);
             guna2HtmlLabel1.TabIndex = 10;
             guna2HtmlLabel1.Text = "Welcome To";
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.Linen;
-            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ImeMode = ImeMode.NoControl;
-            button1.Location = new Point(32, 54);
-            button1.Margin = new Padding(4, 3, 4, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(167, 37);
-            button1.TabIndex = 219;
-            button1.Text = "Go To Products -->";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
             // 
             // Category
             // 

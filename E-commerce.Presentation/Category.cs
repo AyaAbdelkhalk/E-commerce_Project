@@ -1,5 +1,6 @@
 ﻿using E_commerce.Application.Services;
 using E_commerce.Application.Services.ProductServices;
+using E_commerce.Application.Services.UserServices;
 using Ecommerce;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ namespace E_commerce.Presentation
     {
         private readonly IProductServices _productServices;
         private readonly ICategoryServices _categoryServices;
-        public Category(IProductServices productServices, ICategoryServices categoryServices)
+        private readonly IUserServices _userServices;
+        public Category(IUserServices userServices , IProductServices productServices, ICategoryServices categoryServices)
         {
             InitializeComponent();
             _productServices = productServices;
             _categoryServices = categoryServices;
+            _userServices = userServices;
         }
         private DataGridViewRow selectedRow;
 
@@ -422,8 +425,8 @@ namespace E_commerce.Presentation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            products products = new products(_productServices, _categoryServices);
-            products.Show();
+            users category = new users(_userServices, _productServices, _categoryServices);
+            category.Show();
             this.Hide();
         }
     }

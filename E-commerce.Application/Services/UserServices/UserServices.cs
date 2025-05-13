@@ -124,7 +124,7 @@ namespace E_commerce.Application.Services.UserServices
             {
                 errors.Add("Password and Confirmed Password do not match");
             }
-            if(errors.Count > 0)
+            if (errors.Count > 0)
             {
                 return new Response<UserDetails>
                 {
@@ -132,8 +132,8 @@ namespace E_commerce.Application.Services.UserServices
                     Errors = errors
                 };
             }
-                
-            return new Response<UserDetails>{Succeeded = true};
+
+            return new Response<UserDetails> { Succeeded = true };
         }
         public User GetUserById(int id)
         {
@@ -146,6 +146,57 @@ namespace E_commerce.Application.Services.UserServices
 
         }
 
+        //get all users
+
+
+        public async Task<Response<List<userD>>> GetAllUsers()
+        {
+            // التأكد من وجود اليوزر الحالي قبل أي حاجة
+            var currentUser = SessionManager.CurrentUser;
+            //var currentUser = _userRepository.GetByIdAsync(2);
+            if (currentUser == null)
+            {
+                return new Response<List<userD>>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "Current user not found in session." }
+                };
+            }
+
+            var users = await _userRepository.GetAllAsync();
+
+            if (users == null || !users.Any())
+            {
+                return new Response<List<userD>>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "No users found." }
+                };
+            }
+
+            var filteredUsers = users
+                .Where(u => u.UserID != currentUser.UserID)
+                .ToList(); // مهم تحط ToList() هنا عشان تفصل ال LINQ عن EF
+
+            // التحويل إلى DTO
+            var userDetails = filteredUsers.Select(u => new userD
+            {
+                Id = u.UserID,
+                UserName = u.UserName,
+                Email = u.Email,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                IsActive = u.IsActive ? "Active" : "Inactive",
+                Role = u.Role.ToString()
+            }).ToList();
+
+            return new Response<List<userD>>
+            {
+                Succeeded = true,
+                Data = userDetails
+            };
+        }
 
     }
+
 }

@@ -15,5 +15,7 @@ namespace E_commerce.Application.Services.UserServices
         Task<Response<User>> Login(LoginDTO loginDto);
         Response<string> Logout();
         User GetUserById(int id);
+
+        Task<Response<List<userD>>> GetAllUsers();
     }
 }

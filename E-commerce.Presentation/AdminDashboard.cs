@@ -98,13 +98,15 @@ namespace E_commerce.Presentation
         private void btn_products_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new products(_productServices, _categoryServices).Show();
+            new products(_userServices,_productServices, _categoryServices).Show();
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Form users = new users(_userServices , _productServices , _categoryServices);
+            users.Show();
+            this.Hide();
         }
 
         private void AdminDashboard_Load_1(object sender, EventArgs e)
@@ -124,6 +126,21 @@ namespace E_commerce.Presentation
                 loginForm.Show();
             }
 
+        }
+
+        private void productbtn_Click(object sender, EventArgs e)
+        {
+
+            Form productForm = new products(_userServices,_productServices, _categoryServices);
+            productForm.Show();
+            this.Hide();
+        }
+
+        private void categorybtn_Click(object sender, EventArgs e)
+        {
+            Form CategoryForm = new Category(_userServices, _productServices, _categoryServices);
+            CategoryForm.Show();
+            this.Hide();
         }
     }
 }

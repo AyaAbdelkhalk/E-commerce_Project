@@ -42,30 +42,40 @@ namespace E_commerce.Presentation
 
 
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
-            System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
-            System.Windows.Forms.Application.Run(new Order());
+            //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
+            //System.Windows.Forms.Application.Run(new Order());
 
-            System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
+            //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
 
+            System.Windows.Forms.Application.Run(new users(userServices , productServices , categoryServices));
 
             ApplicationConfiguration.Initialize();
 
-           
-            //SessionManager.Initialize(sessionStorage);
-            //SessionManager.LoadLastUser(userServices);
 
-          //  ApplicationConfiguration.Initialize();
+            SessionManager.Initialize(sessionStorage);
+            SessionManager.LoadLastUser(userServices);
+
+            ApplicationConfiguration.Initialize();
 
 
-           // if (SessionManager.IsLoggedIn)
-           // {
-            //    System.Windows.Forms.Application.Run(new Dashboard(userServices,SessionManager.CurrentUser));
-          //  }
-          //  else
-           // {
+            //if (SessionManager.IsLoggedIn)
+            //{
+            //    if (SessionManager.IsAdmin())
+            //    {
+            //        System.Windows.Forms.Application.Run(new AdminDashboard(userServices));
+            //    }
+            //    else
+            //    {
+            //        System.Windows.Forms.Application.Run(new users(userServices));
+
+            //        //System.Windows.Forms.Application.Run(new Dashboard(userServices));
+            //    }
+            //}
+            //else
+            //{
             //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
-           // }
+            //}
         }
     }
 }

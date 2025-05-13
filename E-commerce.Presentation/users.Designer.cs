@@ -1,6 +1,6 @@
 ﻿namespace E_commerce.Presentation
 {
-    partial class AdminDashboard
+    partial class users
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminDashboard));
-            pnl_sideBar = new Panel();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(users));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            guna2CircleButton4 = new Guna.UI2.WinForms.Guna2CircleButton();
+            guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
+            Close = new Guna.UI2.WinForms.Guna2CircleButton();
             AdminMangementbtn = new Button();
             adminpictureBox6 = new PictureBox();
             productbtn = new Button();
@@ -47,7 +54,11 @@
             logoutpicture = new PictureBox();
             usrpicture = new PictureBox();
             lbl_employeeName = new Label();
-            pnl_sideBar.SuspendLayout();
+            pnl_sideBar = new Panel();
+            SearchCategory = new Guna.UI2.WinForms.Guna2TextBox();
+            dataGridView = new DataGridView();
+            ViewAdminsBtn = new Button();
+            ViewUsersBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)adminpictureBox6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -56,34 +67,66 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)logoutpicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)usrpicture).BeginInit();
+            pnl_sideBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
-            // pnl_sideBar
+            // guna2CircleButton4
             // 
-            pnl_sideBar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            pnl_sideBar.BackColor = Color.FromArgb(80, 110, 160);
-            pnl_sideBar.Controls.Add(AdminMangementbtn);
-            pnl_sideBar.Controls.Add(adminpictureBox6);
-            pnl_sideBar.Controls.Add(productbtn);
-            pnl_sideBar.Controls.Add(pictureBox3);
-            pnl_sideBar.Controls.Add(customerbtn);
-            pnl_sideBar.Controls.Add(pictureBox5);
-            pnl_sideBar.Controls.Add(categorybtn);
-            pnl_sideBar.Controls.Add(pictureBox4);
-            pnl_sideBar.Controls.Add(Orderbtn);
-            pnl_sideBar.Controls.Add(pictureBox2);
-            pnl_sideBar.Controls.Add(Dashboardbtn);
-            pnl_sideBar.Controls.Add(pictureBox1);
-            pnl_sideBar.Controls.Add(flowLayoutPanel8);
-            pnl_sideBar.Controls.Add(logoutbutton);
-            pnl_sideBar.Controls.Add(logoutpicture);
-            pnl_sideBar.Controls.Add(usrpicture);
-            pnl_sideBar.Controls.Add(lbl_employeeName);
-            pnl_sideBar.Location = new Point(15, 26);
-            pnl_sideBar.Margin = new Padding(7, 6, 7, 6);
-            pnl_sideBar.Name = "pnl_sideBar";
-            pnl_sideBar.Size = new Size(283, 488);
-            pnl_sideBar.TabIndex = 1;
+            guna2CircleButton4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2CircleButton4.DisabledState.BorderColor = Color.DarkGray;
+            guna2CircleButton4.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2CircleButton4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2CircleButton4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2CircleButton4.FillColor = Color.Orange;
+            guna2CircleButton4.Font = new Font("Segoe UI", 9F);
+            guna2CircleButton4.ForeColor = Color.White;
+            guna2CircleButton4.Location = new Point(1101, 12);
+            guna2CircleButton4.Name = "guna2CircleButton4";
+            guna2CircleButton4.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            guna2CircleButton4.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            guna2CircleButton4.Size = new Size(16, 17);
+            guna2CircleButton4.TabIndex = 15;
+            guna2CircleButton4.Text = "guna2CircleButton4";
+            guna2CircleButton4.Click += guna2CircleButton4_Click;
+            // 
+            // guna2CircleButton3
+            // 
+            guna2CircleButton3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2CircleButton3.DisabledState.BorderColor = Color.DarkGray;
+            guna2CircleButton3.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2CircleButton3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2CircleButton3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2CircleButton3.FillColor = Color.ForestGreen;
+            guna2CircleButton3.Font = new Font("Segoe UI", 9F);
+            guna2CircleButton3.ForeColor = Color.White;
+            guna2CircleButton3.Location = new Point(1082, 12);
+            guna2CircleButton3.Name = "guna2CircleButton3";
+            guna2CircleButton3.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2CircleButton3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            guna2CircleButton3.Size = new Size(16, 17);
+            guna2CircleButton3.TabIndex = 14;
+            guna2CircleButton3.Text = "guna2CircleButton3";
+            guna2CircleButton3.Click += guna2CircleButton3_Click;
+            // 
+            // Close
+            // 
+            Close.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            Close.DisabledState.BorderColor = Color.DarkGray;
+            Close.DisabledState.CustomBorderColor = Color.DarkGray;
+            Close.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            Close.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            Close.FillColor = Color.IndianRed;
+            Close.Font = new Font("Segoe UI", 9F);
+            Close.ForeColor = Color.White;
+            Close.Location = new Point(1120, 12);
+            Close.Name = "Close";
+            Close.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            Close.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            Close.Size = new Size(16, 17);
+            Close.TabIndex = 13;
+            Close.Text = "guna2CircleButton2";
+            Close.Click += Close_Click;
             // 
             // AdminMangementbtn
             // 
@@ -101,7 +144,7 @@
             AdminMangementbtn.Text = "Admin Mangement   ";
             AdminMangementbtn.TextAlign = ContentAlignment.MiddleLeft;
             AdminMangementbtn.UseVisualStyleBackColor = false;
-            AdminMangementbtn.Click += button1_Click;
+            AdminMangementbtn.Click += AdminMangementbtn_Click;
             // 
             // adminpictureBox6
             // 
@@ -287,7 +330,6 @@
             logoutbutton.Text = "Log Out      ";
             logoutbutton.TextAlign = ContentAlignment.MiddleLeft;
             logoutbutton.UseVisualStyleBackColor = false;
-            logoutbutton.Click += logoutbutton_Click;
             // 
             // logoutpicture
             // 
@@ -326,18 +368,109 @@
             lbl_employeeName.TabIndex = 9;
             lbl_employeeName.Text = "Welcome  \r\n  ";
             // 
-            // AdminDashboard
+            // pnl_sideBar
+            // 
+            pnl_sideBar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            pnl_sideBar.BackColor = Color.FromArgb(80, 110, 160);
+            pnl_sideBar.Controls.Add(AdminMangementbtn);
+            pnl_sideBar.Controls.Add(adminpictureBox6);
+            pnl_sideBar.Controls.Add(productbtn);
+            pnl_sideBar.Controls.Add(pictureBox3);
+            pnl_sideBar.Controls.Add(customerbtn);
+            pnl_sideBar.Controls.Add(pictureBox5);
+            pnl_sideBar.Controls.Add(categorybtn);
+            pnl_sideBar.Controls.Add(pictureBox4);
+            pnl_sideBar.Controls.Add(Orderbtn);
+            pnl_sideBar.Controls.Add(pictureBox2);
+            pnl_sideBar.Controls.Add(Dashboardbtn);
+            pnl_sideBar.Controls.Add(pictureBox1);
+            pnl_sideBar.Controls.Add(flowLayoutPanel8);
+            pnl_sideBar.Controls.Add(logoutbutton);
+            pnl_sideBar.Controls.Add(logoutpicture);
+            pnl_sideBar.Controls.Add(usrpicture);
+            pnl_sideBar.Controls.Add(lbl_employeeName);
+            pnl_sideBar.Location = new Point(16, 12);
+            pnl_sideBar.Margin = new Padding(7, 6, 7, 6);
+            pnl_sideBar.Name = "pnl_sideBar";
+            pnl_sideBar.Size = new Size(283, 544);
+            pnl_sideBar.TabIndex = 16;
+            // 
+            // SearchCategory
+            // 
+            SearchCategory.CustomizableEdges = customizableEdges4;
+            SearchCategory.DefaultText = "";
+            SearchCategory.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            SearchCategory.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            SearchCategory.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            SearchCategory.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            SearchCategory.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            SearchCategory.Font = new Font("Segoe UI", 9F);
+            SearchCategory.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            SearchCategory.Location = new Point(331, 49);
+            SearchCategory.Margin = new Padding(3, 4, 3, 4);
+            SearchCategory.Name = "SearchCategory";
+            SearchCategory.PlaceholderText = "Search For Users";
+            SearchCategory.SelectedText = "";
+            SearchCategory.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            SearchCategory.Size = new Size(417, 36);
+            SearchCategory.TabIndex = 18;
+            // 
+            // dataGridView
+            // 
+            dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView.BackgroundColor = SystemColors.ButtonFace;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Location = new Point(330, 148);
+            dataGridView.Name = "dataGridView";
+            dataGridView.RowHeadersWidth = 51;
+            dataGridView.Size = new Size(675, 397);
+            dataGridView.TabIndex = 17;
+            // 
+            // ViewAdminsBtn
+            // 
+            ViewAdminsBtn.BackColor = Color.Linen;
+            ViewAdminsBtn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ViewAdminsBtn.ImeMode = ImeMode.NoControl;
+            ViewAdminsBtn.Location = new Point(759, 105);
+            ViewAdminsBtn.Margin = new Padding(4, 3, 4, 3);
+            ViewAdminsBtn.Name = "ViewAdminsBtn";
+            ViewAdminsBtn.Size = new Size(182, 37);
+            ViewAdminsBtn.TabIndex = 221;
+            ViewAdminsBtn.Text = "View Admins";
+            ViewAdminsBtn.UseVisualStyleBackColor = false;
+            ViewAdminsBtn.Click += ViewAdminsBtn_Click;
+            // 
+            // ViewUsersBtn
+            // 
+            ViewUsersBtn.BackColor = Color.Linen;
+            ViewUsersBtn.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ViewUsersBtn.ImeMode = ImeMode.NoControl;
+            ViewUsersBtn.Location = new Point(387, 105);
+            ViewUsersBtn.Margin = new Padding(4, 3, 4, 3);
+            ViewUsersBtn.Name = "ViewUsersBtn";
+            ViewUsersBtn.Size = new Size(182, 37);
+            ViewUsersBtn.TabIndex = 222;
+            ViewUsersBtn.Text = "View Users";
+            ViewUsersBtn.UseVisualStyleBackColor = false;
+            ViewUsersBtn.Click += ViewUsersBtn_Click;
+            // 
+            // users
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1158, 543);
+            ClientSize = new Size(1148, 574);
+            Controls.Add(ViewUsersBtn);
+            Controls.Add(ViewAdminsBtn);
+            Controls.Add(SearchCategory);
+            Controls.Add(dataGridView);
             Controls.Add(pnl_sideBar);
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "AdminDashboard";
-            Text = "AdminDashboard";
-            Load += AdminDashboard_Load_1;
-            pnl_sideBar.ResumeLayout(false);
-            pnl_sideBar.PerformLayout();
+            Controls.Add(guna2CircleButton4);
+            Controls.Add(guna2CircleButton3);
+            Controls.Add(Close);
+            FormBorderStyle = FormBorderStyle.None;
+            Name = "users";
+            Text = "users";
+            Load += users_Load;
             ((System.ComponentModel.ISupportInitialize)adminpictureBox6).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
@@ -346,12 +479,19 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)logoutpicture).EndInit();
             ((System.ComponentModel.ISupportInitialize)usrpicture).EndInit();
+            pnl_sideBar.ResumeLayout(false);
+            pnl_sideBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel pnl_sideBar;
+        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton4;
+        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton3;
+        private Guna.UI2.WinForms.Guna2CircleButton Close;
+        private Button AdminMangementbtn;
+        private PictureBox adminpictureBox6;
         private Button productbtn;
         private PictureBox pictureBox3;
         private Button customerbtn;
@@ -367,7 +507,10 @@
         private PictureBox logoutpicture;
         private PictureBox usrpicture;
         private Label lbl_employeeName;
-        private Button AdminMangementbtn;
-        private PictureBox adminpictureBox6;
+        private Panel pnl_sideBar;
+        private Guna.UI2.WinForms.Guna2TextBox SearchCategory;
+        private DataGridView dataGridView;
+        private Button ViewAdminsBtn;
+        private Button ViewUsersBtn;
     }
 }
