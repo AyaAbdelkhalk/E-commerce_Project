@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using Ecommerce;
 using Guna.UI2.WinForms;
 using E_commerce.Core.Models;
+using E_commerce.Application.Services.UserServices;
 
 namespace E_commerce.Presentation
 {
@@ -19,15 +20,16 @@ namespace E_commerce.Presentation
     {
         private readonly IProductServices _productServices;
         private readonly ICategoryServices _categoryServices;
+        private readonly IUserServices _userServices;
         private bool isUpdateMode = false;
         private int currentProductId = 0;
 
-        public products(IProductServices productServices, ICategoryServices categoryServices)
+        public products(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices)
         {
             InitializeComponent();
             _productServices = productServices;
             _categoryServices = categoryServices;
-
+            _userServices = userServices;
 
             LoadCategories();
             SetupForm();
@@ -66,6 +68,9 @@ namespace E_commerce.Presentation
                     CategoryComboBox.DataSource = categories.Data;
                     CategoryComboBox.DisplayMember = "Name";
                     CategoryComboBox.ValueMember = "CategoryID";
+                    FilterCatCombo.DataSource = categories.Data;
+                    FilterCatCombo.DisplayMember = "Name";
+                    FilterCatCombo.ValueMember = "CategoryID";
                 }
                 else
                 {
@@ -385,7 +390,16 @@ namespace E_commerce.Presentation
 
         private void guna2CircleButton4_Click(object sender, EventArgs e)
         {
-
+            if (this.MaximizeBox == true)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.MaximizeBox = false;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.MaximizeBox = true;
+            }
             //this.WindowState = FormWindowState.Maximized;
         }
 
@@ -415,9 +429,22 @@ namespace E_commerce.Presentation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Category category = new Category(_productServices, _categoryServices);
+            users category = new users(_userServices ,_productServices, _categoryServices);
             category.Show();
             this.Hide();
+        }
+
+        private void FilterCatCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (FilterCatCombo.SelectedItem == null)
+                return;
+
+            string selectedCategory = FilterCatCombo.SelectedItem.ToString();
+            foreach (UserControl1 control in flowLayoutPanel1.Controls)
+            {
+                control.Visible = control._name != null &&
+                          control._name.ToLower().Contains(selectedCategory.ToLower());
+            }
         }
     }
 }

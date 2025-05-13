@@ -58,6 +58,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             AddProductButton = new Guna.UI2.WinForms.Guna2GradientButton();
             UpdateProductButton = new Guna.UI2.WinForms.Guna2GradientButton();
             DeleteProductButton = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -84,8 +86,9 @@
             guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CircleButton4 = new Guna.UI2.WinForms.Guna2CircleButton();
             guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             button1 = new Button();
+            guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            FilterCatCombo = new Guna.UI2.WinForms.Guna2ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImagePath).BeginInit();
             guna2CustomGradientPanel1.SuspendLayout();
@@ -422,7 +425,7 @@
             // 
             flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(266, 80);
+            flowLayoutPanel1.Location = new Point(270, 80);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(715, 435);
             flowLayoutPanel1.TabIndex = 9;
@@ -508,6 +511,20 @@
             guna2CustomGradientPanel1.TabIndex = 13;
             guna2CustomGradientPanel1.Paint += guna2CustomGradientPanel1_Paint;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Linen;
+            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ImeMode = ImeMode.NoControl;
+            button1.Location = new Point(24, 52);
+            button1.Margin = new Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(192, 37);
+            button1.TabIndex = 220;
+            button1.Text = "<-- Return To Dashboard";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // guna2HtmlLabel8
             // 
             guna2HtmlLabel8.AvoidGeometryAntialias = true;
@@ -519,19 +536,23 @@
             guna2HtmlLabel8.TabIndex = 9;
             guna2HtmlLabel8.Text = "Our Products";
             // 
-            // button1
+            // FilterCatCombo
             // 
-            button1.BackColor = Color.Linen;
-            button1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ImeMode = ImeMode.NoControl;
-            button1.Location = new Point(24, 52);
-            button1.Margin = new Padding(4, 3, 4, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(182, 37);
-            button1.TabIndex = 220;
-            button1.Text = "<-- Return To Category";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            FilterCatCombo.BackColor = Color.Transparent;
+            FilterCatCombo.CustomizableEdges = customizableEdges31;
+            FilterCatCombo.DrawMode = DrawMode.OwnerDrawFixed;
+            FilterCatCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            FilterCatCombo.FocusedColor = Color.FromArgb(94, 148, 255);
+            FilterCatCombo.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            FilterCatCombo.Font = new Font("Segoe UI", 10F);
+            FilterCatCombo.ForeColor = Color.FromArgb(68, 88, 112);
+            FilterCatCombo.ItemHeight = 30;
+            FilterCatCombo.Location = new Point(684, 24);
+            FilterCatCombo.Name = "FilterCatCombo";
+            FilterCatCombo.ShadowDecoration.CustomizableEdges = customizableEdges32;
+            FilterCatCombo.Size = new Size(203, 36);
+            FilterCatCombo.TabIndex = 218;
+            FilterCatCombo.SelectedIndexChanged += FilterCatCombo_SelectedIndexChanged;
             // 
             // products
             // 
@@ -539,11 +560,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             ClientSize = new Size(993, 527);
+            Controls.Add(FilterCatCombo);
             Controls.Add(guna2CustomGradientPanel1);
             Controls.Add(guna2CircleButton4);
             Controls.Add(guna2CircleButton3);
-            Controls.Add(guna2CircleButton2);
             Controls.Add(flowLayoutPanel1);
+            Controls.Add(guna2CircleButton2);
             Controls.Add(panel1);
             Controls.Add(SearchTextBox);
             FormBorderStyle = FormBorderStyle.None;
@@ -588,5 +610,6 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Button button1;
+        private Guna.UI2.WinForms.Guna2ComboBox FilterCatCombo;
     }
 }

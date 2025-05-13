@@ -43,34 +43,52 @@ namespace E_commerce.Presentation
 
 
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
+//<<<<<<< updd
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Order());
 
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
+//=======
+//>>>>>>> master
+            //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
+            //System.Windows.Forms.Application.Run(new Order());
+
+//<<<<<<< updd
+  //          System.Windows.Forms.Application.Run(new users(userServices , productServices , categoryServices));
+
+            ApplicationConfiguration.Initialize();
+
+
+            SessionManager.Initialize(sessionStorage);
+            SessionManager.LoadLastUser(userServices);
+
+            ApplicationConfiguration.Initialize();
+//=======
+            //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
 
+//>>>>>>> master
 
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
-            #region for final run
-            SessionManager.Initialize(sessionStorage);
-            SessionManager.LoadLastUser(userServices);
-            if (SessionManager.IsLoggedIn)
-            {
-                if (SessionManager.IsAdmin())
-                {
-                    System.Windows.Forms.Application.Run(new AdminDashboard());
-                }
-                else
-                {
-                    System.Windows.Forms.Application.Run(new Dashboard());
-                }
-            }
-            else
-            {
-                System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            }
-            #endregion
+
+            //if (SessionManager.IsLoggedIn)
+            //{
+            //    if (SessionManager.IsAdmin())
+            //    {
+            //        System.Windows.Forms.Application.Run(new AdminDashboard(userServices));
+            //    }
+            //    else
+            //    {
+            //        System.Windows.Forms.Application.Run(new users(userServices));
+
+            //        //System.Windows.Forms.Application.Run(new Dashboard(userServices));
+            //    }
+            //}
+            //else
+            //{
+            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            //}
 
         }
     }

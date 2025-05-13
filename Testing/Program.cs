@@ -18,9 +18,22 @@ namespace Testing
 
             var userservices = container.Resolve<IUserServices>();
 
+            //view all users
+            var allUsersResponse = userservices.GetAllUsers().Result;
 
+            if (allUsersResponse.Succeeded && allUsersResponse.Data != null)
+            {
+                foreach (var user in allUsersResponse.Data)
+                {
+                    Console.WriteLine($"ID: {user.Id}, Name: {user.FirstName} {user.LastName}, Email: {user.Email}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Failed to retrieve users: " + string.Join(", ", allUsersResponse.Errors ?? new List<string>()));
+            }
 
-            #region Test Add
+            //#region Test Add
             //AddUserDTO addUserDTO = new AddUserDTO();
             //addUserDTO.FirstName = "John";
             //addUserDTO.LastName = "Doe";
@@ -40,7 +53,7 @@ namespace Testing
             //        Console.WriteLine("Failed to add user: " + string.Join(", ", task.Result.Errors));
             //    }
             //}).Wait();
-            #endregion
+            //#endregion
 
             #region Test Add Category
             //var categoryServices = container.Resolve<ICategoryServices>();
@@ -65,34 +78,34 @@ namespace Testing
             #endregion
 
 
-            #region Test Add Product
+            //#region Test Add Product
 
-            var productServices = container.Resolve<IProductServices>();
+            //var productServices = container.Resolve<IProductServices>();
 
 
 
-            CreateProductDto createProductDto = new CreateProductDto
-            {
-                Name = "New Product",
-                Description = "This is a test product",
-                Price = 99.99m,
-                CategoryID = 3
-            };
+            //CreateProductDto createProductDto = new CreateProductDto
+            //{
+            //    Name = "New Product",
+            //    Description = "This is a test product",
+            //    Price = 99.99m,
+            //    CategoryID = 3
+            //};
 
-            string imagePath = @"D:\github\Testing\ImagesTest\camera.jpeg";
+            //string imagePath = @"D:\github\Testing\ImagesTest\camera.jpeg";
 
-            productServices.AddProductAsync(createProductDto, imagePath).ContinueWith(task =>
-            {
-                if (task.Result.Succeeded)
-                {
-                    Console.WriteLine("Product added successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to add product: " + string.Join(", ", task.Result.Errors));
-                }
-            }).Wait();
-            #endregion
+            //productServices.AddProductAsync(createProductDto, imagePath).ContinueWith(task =>
+            //{
+            //    if (task.Result.Succeeded)
+            //    {
+            //        Console.WriteLine("Product added successfully.");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Failed to add product: " + string.Join(", ", task.Result.Errors));
+            //    }
+            //}).Wait();
+            //#endregion
 
 
             #region Test Login
