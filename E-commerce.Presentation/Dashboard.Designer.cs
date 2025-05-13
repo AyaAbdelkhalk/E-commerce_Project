@@ -181,6 +181,7 @@ namespace E_commerce.Presentation
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 19;
             pictureBox5.TabStop = false;
+            pictureBox5.Click += pictureBox5_Click;
             // 
             // MyOrderbtn
             // 
@@ -909,7 +910,7 @@ namespace E_commerce.Presentation
         private Button button5;
         private PictureBox pictureBox4;
 
-        private void MakeReadOnly(CustomControls.CustomTextBox2 customTextBox)
+        public void MakeReadOnly(CustomControls.CustomTextBox2 customTextBox)
         {
             customTextBox.Enabled = false;
             customTextBox.BorderColor = Color.Transparent;

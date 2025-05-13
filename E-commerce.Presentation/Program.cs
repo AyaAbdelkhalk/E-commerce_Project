@@ -50,15 +50,21 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
 
 
-
+            //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
             #region for final run
             SessionManager.Initialize(sessionStorage);
             SessionManager.LoadLastUser(userServices);
-
             if (SessionManager.IsLoggedIn)
             {
-                System.Windows.Forms.Application.Run(new Dashboard(userServices, SessionManager.CurrentUser));
+                if (SessionManager.IsAdmin())
+                {
+                    System.Windows.Forms.Application.Run(new AdminDashboard());
+                }
+                else
+                {
+                    System.Windows.Forms.Application.Run(new Dashboard());
+                }
             }
             else
             {
