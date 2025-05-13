@@ -101,19 +101,92 @@ namespace E_commerce.Application.Services.UserServices
             }
         }
 
+        public async Task<Response<User>> UpdateUser(AddUserDTO userdto)
+        {
+            var response = await IsValidUser(userdto);
+            if (!response.Succeeded)
+            {
+                return new Response<User>
+                {
+                    Succeeded = false,
+                    Errors = response.Errors
+                };
+            }
+
+            var existingUser = SessionManager.CurrentUser;
+            if (existingUser == null)
+            {
+                return new Response<User>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "The User does not exist." }
+                };
+            }
+
+            var usr = await _userRepository.GetByIdAsync(existingUser.UserID);
+            if (usr == null)
+            {
+                return new Response<User>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "User not found in the database." }
+                };
+            }
+
+            usr.FirstName = userdto.FirstName;
+            usr.LastName = userdto.LastName;
+            usr.UserName = userdto.UserName;
+            usr.Email = userdto.Email;
+
+            // اختياري: لو عايز تسمح بتغيير الباسورد
+            if (!string.IsNullOrWhiteSpace(userdto.Password))
+            {
+                usr.Password = PasswordHelper.HashPassword(userdto.Password);
+            }
+
+            var updated = await _userRepository.UpdateAsync(usr);
+
+            return new Response<User>
+            {
+                Data = updated,
+                Succeeded = true
+            };
+        }
+
+
         private async Task<Response<UserDetails>> IsValidUser(AddUserDTO userDTO)
         {
             List<string> errors = new List<string>();
+            var currentUser = SessionManager.CurrentUser;
+
             var existingUserName = await _userRepository.GetByUserNameAsync(userDTO.UserName);
-            if (existingUserName != null)
+            if (string.IsNullOrEmpty(userDTO.UserName) || userDTO.UserName.Length < 3)
+            {
+                errors.Add("The UserName is invalid. It must be at least 3 characters long.");
+            }
+            
+            if (string.IsNullOrEmpty(userDTO.FirstName) || userDTO.FirstName.Length < 3)
+            {
+                errors.Add("The First Name is invalid. It must be at least 3 characters long.");
+            }
+            if (string.IsNullOrEmpty(userDTO.LastName) || userDTO.LastName.Length < 3)
+            {
+                errors.Add("The Last Name is invalid. It must be at least 3 characters long.");
+            }
+
+            if (existingUserName != null && existingUserName.UserID != currentUser.UserID)
             {
                 errors.Add("The UserName is already registered.");
             }
             var existingUser = await _userRepository.GetByEmailAsync(userDTO.Email);
-            if (existingUser != null)
+            if (existingUser != null && existingUser.Email != currentUser.Email)
             {
                 errors.Add("The Email address is already registered.");
 
+            }
+            if (string.IsNullOrEmpty(userDTO.Email) || !userDTO.Email.Contains("@"))
+            {
+                errors.Add("The Email address is invalid.");
             }
             var isvalidPassword = PasswordHelper.IsStrongPassword(userDTO.Password);
             if (!isvalidPassword)
