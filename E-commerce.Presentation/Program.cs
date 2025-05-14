@@ -2,7 +2,6 @@ using Autofac;
 using E_commerce.Application.Helper;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
-using E_commerce.Application.Services.CartItemService;
 using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
@@ -37,7 +36,7 @@ namespace E_commerce.Presentation
             // To customize application configuration such as set high DPI settings or default font,  
             // see https://aka.ms/applicationconfiguration.  
             //System.Windows.Forms.Application.Run(new Form1());
-            //System.Windows.Forms.Application.Run(new CartForm(cartItemService));
+            //System.Windows.Forms.Application.Run(new CartItemForm(cartItemService, productServices));
             //System.Windows.Forms.Application.Run(new Dashboard());
             //System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
@@ -47,7 +46,7 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Order());
 
-            //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
+            System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService));
             //=======
             //>>>>>>> master
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
@@ -56,13 +55,11 @@ namespace E_commerce.Presentation
             //<<<<<<< updd
             //          System.Windows.Forms.Application.Run(new users(userServices , productServices , categoryServices));
 
-            ApplicationConfiguration.Initialize();
 
 
             SessionManager.Initialize(sessionStorage);
             SessionManager.LoadLastUser(userServices);
 
-            ApplicationConfiguration.Initialize();
             //=======
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
@@ -72,25 +69,25 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
 
-            if (SessionManager.IsLoggedIn)
-            {
-                if (SessionManager.IsAdmin())
-                {
-                    System.Windows.Forms.Application.Run(new AdminDashboard(userServices));
-                }
-                else
-                {
-                    //System.Windows.Forms.Application.Run(new users(userServices));
+            //if (SessionManager.IsLoggedIn)
+            //{
+            //    if (SessionManager.IsAdmin())
+            //    {
+            //        System.Windows.Forms.Application.Run(new AdminDashboard(userServices));
+            //    }
+            //    else
+            //    {
+            //        //System.Windows.Forms.Application.Run(new users(userServices));
 
-                    System.Windows.Forms.Application.Run(new Dashboard(userServices));
-                }
-            }
-            else
-            {
-                System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            //        System.Windows.Forms.Application.Run(new Dashboard(userServices));
+            //    }
+            //}
+            //else
+            //{
+            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
 
-            }
+            //}
         }
     }
 }

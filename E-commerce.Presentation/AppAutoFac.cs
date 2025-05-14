@@ -2,11 +2,10 @@ using Autofac;
 using E_commerce.Application.Helper;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
-using E_commerce.Application.Services.CartItemService;
 using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
-
+using E_commerce.Core.Models;
 using E_commerce.Infrastructure;
 using E_commerce.Infrastructure.Repository;
 using E_commerce.Shared;
@@ -16,16 +15,16 @@ namespace E_commerce.Presentation
 {
     public class AppAutoFac
     {
-        public static Autofac.IContainer Inject()
+        public static IContainer Container { get; private set; }
+
+        public static IContainer Inject()
         {
             var builder = new ContainerBuilder();
-            // Register your services here
-            // Example: builder.RegisterType<MyService>().As<IMyService>();
             builder.RegisterType<AppDbContext>().AsSelf();
 
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<UserServices>().As<IUserServices>();
-            builder.RegisterType<User>().AsSelf();
+            builder.RegisterType<Core.Models.User>().AsSelf();
             builder.RegisterType<CartItemService>().As<ICartItemService>();
             builder.RegisterType<CartItemRepository>().As<ICartItemRepository>();
             builder.RegisterType<ProductRepository>().As<IProductRepository>();
@@ -34,15 +33,14 @@ namespace E_commerce.Presentation
             builder.RegisterType<CategoryServices>().As<ICategoryServices>();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>();
             builder.RegisterType<OrderService>().As<IOrderService>();
+
+            // Register IGenericRepository<Product>
+            builder.RegisterType<GenericRepository<Product>>().As<IGenericRepository<Product>>();
+
             builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
-            
 
-
-
-
-
-            var container = builder.Build();
-            return container;
+            Container = builder.Build();
+            return Container;
         }
     }
 }

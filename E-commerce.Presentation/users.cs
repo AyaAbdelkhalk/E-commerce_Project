@@ -18,6 +18,7 @@ namespace E_commerce.Presentation
         private readonly IUserServices _userServices;
         private readonly IProductServices _productServices;
         private readonly ICategoryServices _categoryServices;
+        private readonly ICartItemService _cartItemService;
         public users(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices)
         {
             InitializeComponent();
@@ -154,7 +155,7 @@ namespace E_commerce.Presentation
 
         private void productbtn_Click(object sender, EventArgs e)
         {
-            Form productForm = new products(_userServices, _productServices, _categoryServices);
+            Form productForm = new products(_userServices, _productServices, _categoryServices,_cartItemService);
             productForm.Show();
             this.Hide();
         }

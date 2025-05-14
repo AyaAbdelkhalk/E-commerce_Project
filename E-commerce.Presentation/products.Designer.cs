@@ -1,4 +1,7 @@
-﻿namespace E_commerce.Presentation
+﻿
+using E_commerce.Application.Helper;
+
+namespace E_commerce.Presentation
 {
     partial class products
     {
@@ -60,6 +63,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+
             AddProductButton = new Guna.UI2.WinForms.Guna2GradientButton();
             UpdateProductButton = new Guna.UI2.WinForms.Guna2GradientButton();
             DeleteProductButton = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -89,10 +95,13 @@
             button1 = new Button();
             guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             FilterCatCombo = new Guna.UI2.WinForms.Guna2ComboBox();
+            viewCartButton = new Guna.UI2.WinForms.Guna2GradientButton();
+
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImagePath).BeginInit();
             guna2CustomGradientPanel1.SuspendLayout();
             SuspendLayout();
+
             // 
             // AddProductButton
             // 
@@ -112,6 +121,7 @@
             AddProductButton.TabIndex = 0;
             AddProductButton.Text = "Add Product";
             AddProductButton.Click += AddProductButton_Click;
+
             // 
             // UpdateProductButton
             // 
@@ -131,6 +141,7 @@
             UpdateProductButton.TabIndex = 1;
             UpdateProductButton.Text = "Update Product";
             UpdateProductButton.Click += UpdateProductButton_Click;
+
             // 
             // DeleteProductButton
             // 
@@ -150,6 +161,7 @@
             DeleteProductButton.TabIndex = 2;
             DeleteProductButton.Text = "Delete Product";
             DeleteProductButton.Click += DeleteProductButton_Click;
+
             // 
             // guna2HtmlLabel1
             // 
@@ -161,6 +173,7 @@
             guna2HtmlLabel1.Size = new Size(217, 42);
             guna2HtmlLabel1.TabIndex = 3;
             guna2HtmlLabel1.Text = "Welcome To";
+
             // 
             // SearchTextBox
             // 
@@ -181,6 +194,7 @@
             SearchTextBox.Size = new Size(337, 36);
             SearchTextBox.TabIndex = 4;
             SearchTextBox.TextChanged += SearchTextBox_TextChanged;
+
             // 
             // panel1
             // 
@@ -204,6 +218,7 @@
             panel1.ShadowDecoration.CustomizableEdges = customizableEdges23;
             panel1.Size = new Size(666, 428);
             panel1.TabIndex = 5;
+
             // 
             // guna2CircleButton1
             // 
@@ -221,6 +236,7 @@
             guna2CircleButton1.TabIndex = 7;
             guna2CircleButton1.Text = "X";
             guna2CircleButton1.Click += guna2CircleButton1_Click;
+
             // 
             // SaveButton
             // 
@@ -235,6 +251,7 @@
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = false;
             SaveButton.Click += SaveButton_Click;
+
             // 
             // ImagePath
             // 
@@ -247,6 +264,7 @@
             ImagePath.TabIndex = 11;
             ImagePath.TabStop = false;
             ImagePath.Click += ImagePath_Click_1;
+
             // 
             // CategoryComboBox
             // 
@@ -264,6 +282,7 @@
             CategoryComboBox.ShadowDecoration.CustomizableEdges = customizableEdges13;
             CategoryComboBox.Size = new Size(203, 36);
             CategoryComboBox.TabIndex = 10;
+
             // 
             // UnitsInStockTextBox
             // 
@@ -283,6 +302,7 @@
             UnitsInStockTextBox.ShadowDecoration.CustomizableEdges = customizableEdges15;
             UnitsInStockTextBox.Size = new Size(214, 36);
             UnitsInStockTextBox.TabIndex = 9;
+
             // 
             // PriceTextBox
             // 
@@ -302,6 +322,7 @@
             PriceTextBox.ShadowDecoration.CustomizableEdges = customizableEdges17;
             PriceTextBox.Size = new Size(214, 36);
             PriceTextBox.TabIndex = 8;
+
             // 
             // DescTextBox
             // 
@@ -321,6 +342,7 @@
             DescTextBox.ShadowDecoration.CustomizableEdges = customizableEdges19;
             DescTextBox.Size = new Size(214, 36);
             DescTextBox.TabIndex = 7;
+
             // 
             // NameText
             // 
@@ -340,6 +362,7 @@
             NameText.ShadowDecoration.CustomizableEdges = customizableEdges21;
             NameText.Size = new Size(214, 36);
             NameText.TabIndex = 6;
+
             // 
             // guna2HtmlLabel7
             // 
@@ -350,6 +373,7 @@
             guna2HtmlLabel7.Size = new Size(41, 19);
             guna2HtmlLabel7.TabIndex = 5;
             guna2HtmlLabel7.Text = "Image";
+
             // 
             // guna2HtmlLabel6
             // 
@@ -360,6 +384,7 @@
             guna2HtmlLabel6.Size = new Size(58, 19);
             guna2HtmlLabel6.TabIndex = 4;
             guna2HtmlLabel6.Text = "Category";
+
             // 
             // guna2HtmlLabel5
             // 
@@ -370,6 +395,7 @@
             guna2HtmlLabel5.Size = new Size(80, 19);
             guna2HtmlLabel5.TabIndex = 3;
             guna2HtmlLabel5.Text = "UnitsInStock";
+
             // 
             // guna2HtmlLabel4
             // 
@@ -380,6 +406,7 @@
             guna2HtmlLabel4.Size = new Size(33, 19);
             guna2HtmlLabel4.TabIndex = 2;
             guna2HtmlLabel4.Text = "Price";
+
             // 
             // guna2HtmlLabel3
             // 
@@ -390,6 +417,7 @@
             guna2HtmlLabel3.Size = new Size(74, 19);
             guna2HtmlLabel3.TabIndex = 1;
             guna2HtmlLabel3.Text = "Description";
+
             // 
             // guna2HtmlLabel2
             // 
@@ -400,6 +428,7 @@
             guna2HtmlLabel2.Size = new Size(39, 19);
             guna2HtmlLabel2.TabIndex = 0;
             guna2HtmlLabel2.Text = "Name";
+
             // 
             // guna2GradientButton1
             // 
@@ -420,6 +449,7 @@
             guna2GradientButton1.TabIndex = 8;
             guna2GradientButton1.Text = "View Products";
             guna2GradientButton1.Click += guna2GradientButton1_Click;
+
             // 
             // flowLayoutPanel1
             // 
@@ -431,6 +461,7 @@
             flowLayoutPanel1.TabIndex = 9;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             flowLayoutPanel1.MouseClick += flowLayoutPanel1_MouseClick;
+
             // 
             // guna2CircleButton2
             // 
@@ -450,6 +481,7 @@
             guna2CircleButton2.TabIndex = 10;
             guna2CircleButton2.Text = "guna2CircleButton2";
             guna2CircleButton2.Click += guna2CircleButton2_Click;
+
             // 
             // guna2CircleButton3
             // 
@@ -469,6 +501,7 @@
             guna2CircleButton3.TabIndex = 11;
             guna2CircleButton3.Text = "guna2CircleButton3";
             guna2CircleButton3.Click += guna2CircleButton3_Click;
+
             // 
             // guna2CircleButton4
             // 
@@ -488,11 +521,13 @@
             guna2CircleButton4.TabIndex = 12;
             guna2CircleButton4.Text = "guna2CircleButton4";
             guna2CircleButton4.Click += guna2CircleButton4_Click;
+
             // 
             // guna2CustomGradientPanel1
             // 
             guna2CustomGradientPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             guna2CustomGradientPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            guna2CustomGradientPanel1.Controls.Add(viewCartButton);
             guna2CustomGradientPanel1.Controls.Add(button1);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel8);
             guna2CustomGradientPanel1.Controls.Add(guna2HtmlLabel1);
@@ -510,6 +545,7 @@
             guna2CustomGradientPanel1.Size = new Size(250, 527);
             guna2CustomGradientPanel1.TabIndex = 13;
             guna2CustomGradientPanel1.Paint += guna2CustomGradientPanel1_Paint;
+
             // 
             // button1
             // 
@@ -524,6 +560,7 @@
             button1.Text = "<-- Return To Dashboard";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+
             // 
             // guna2HtmlLabel8
             // 
@@ -535,6 +572,7 @@
             guna2HtmlLabel8.Size = new Size(235, 38);
             guna2HtmlLabel8.TabIndex = 9;
             guna2HtmlLabel8.Text = "Our Products";
+
             // 
             // FilterCatCombo
             // 
@@ -553,6 +591,27 @@
             FilterCatCombo.Size = new Size(203, 36);
             FilterCatCombo.TabIndex = 218;
             FilterCatCombo.SelectedIndexChanged += FilterCatCombo_SelectedIndexChanged;
+
+            // 
+            // viewCartButton
+            // 
+            viewCartButton.CustomizableEdges = customizableEdges33;
+            viewCartButton.DisabledState.BorderColor = Color.DarkGray;
+            viewCartButton.DisabledState.CustomBorderColor = Color.DarkGray;
+            viewCartButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            viewCartButton.DisabledState.FillColor2 = Color.FromArgb(169, 169, 169);
+            viewCartButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            viewCartButton.FillColor2 = Color.Black;
+            viewCartButton.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
+            viewCartButton.ForeColor = Color.White;
+            viewCartButton.Location = new Point(43, 469);
+            viewCartButton.Name = "viewCartButton";
+            viewCartButton.ShadowDecoration.CustomizableEdges = customizableEdges34;
+            viewCartButton.Size = new Size(159, 43);
+            viewCartButton.TabIndex = 221;
+            viewCartButton.Text = "View Cart";
+            viewCartButton.Click += ViewCartButton_Click;
+
             // 
             // products
             // 
@@ -578,6 +637,15 @@
             guna2CustomGradientPanel1.ResumeLayout(false);
             guna2CustomGradientPanel1.PerformLayout();
             ResumeLayout(false);
+        }
+
+        private void ViewCartButton_Click(object sender, EventArgs e)
+        {
+            
+
+            var cartForm = new CartItemForm(_cartItemService, _productServices);
+            cartForm.Show();
+            this.Hide();
         }
 
         #endregion
@@ -611,5 +679,6 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Button button1;
         private Guna.UI2.WinForms.Guna2ComboBox FilterCatCombo;
+        private Guna.UI2.WinForms.Guna2GradientButton viewCartButton;
     }
 }

@@ -1,189 +1,215 @@
-﻿using System;
+﻿using E_commerce.Application.Services;
+using E_commerce.Application.DTOs.CartItem;
+using E_commerce.Application.Helper;
+using System;
+using System.Linq;
 using System.Windows.Forms;
 using E_commerce.Application.DTOs;
-using E_commerce.Application.Services.CartItemService;
-using System.Threading.Tasks;
-using System.Linq;
-using E_commerce.Application.Helper;
+using E_commerce.Application.Services.ProductServices;
 
 namespace E_commerce.Presentation
 {
-    public partial class CartForm : Form
+    public partial class CartItemForm : Form
     {
         private readonly ICartItemService _cartItemService;
-        private int _userId;
+        private readonly IProductServices _productService;
 
-        public CartForm(ICartItemService cartItemService)
+        public CartItemForm(ICartItemService cartItemService, IProductServices productServices)
         {
-            _cartItemService = cartItemService ?? throw new ArgumentNullException(nameof(cartItemService));
-            _userId = GetCurrentUserId();
             InitializeComponent();
+            _cartItemService = cartItemService;
+            _productService = productServices;
+
+            this.WindowState = FormWindowState.Maximized;
+            this.Size = Screen.PrimaryScreen.Bounds.Size;
+            this.MaximizeBox = true;
+            this.MinimizeBox = true;
         }
 
-        private void CartForm_Load(object sender, EventArgs e)
+        private async void CartItemForm_Load(object sender, EventArgs e)
         {
-            LoadCartItems();
+            await LoadCartItems();
         }
 
-        private async void LoadCartItems()
+        private async Task LoadCartItems()
         {
-            try
-            {
-                var response = await _cartItemService.GetCartItemsByUserIdAsync(_userId);
-                if (response.Succeeded && response.Data != null)
-                {
-                    dataGridViewCart.DataSource = null;
-                    dataGridViewCart.DataSource = response.Data.ToList();
-                    UpdateTotal();
-                }
-                else
-                {
-                    string errorMessage = response.Errors != null && response.Errors.Any()
-                        ? string.Join(Environment.NewLine, response.Errors)
-                        : "Failed to load cart items";
-                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to load cart items: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
-        private void UpdateTotal()
-        {
-            if (dataGridViewCart.DataSource == null) return;
-
-            decimal total = 0;
-            foreach (DataGridViewRow row in dataGridViewCart.Rows)
+            var userId = SessionManager.CurrentUser?.UserID ?? 3;
+            var response = await _cartItemService.GetCartItemsByUserIdAsync(userId);
+            if (response.Succeeded)
             {
-                if (row.DataBoundItem is CartItemDTO item)
-                {
-                    total += item.TotalPrice;
-                }
-            }
-            textBoxTotal.Text = total.ToString("C");
-        }
+                // Clear existing columns to redefine them
+                cartDataGridView.Columns.Clear();
+                cartDataGridView.AutoGenerateColumns = false;
 
-        private async void dataGridViewCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
-
-                if (dataGridViewCart.Columns[e.ColumnIndex].Name == "Remove" && e.RowIndex >= 0)
+                // Define columns manually
+             
+               
+                
+                cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
                 {
-                    if (dataGridViewCart.Rows[e.RowIndex].Cells["CartItemID"].Value != null &&
-                        int.TryParse(dataGridViewCart.Rows[e.RowIndex].Cells["CartItemID"].Value.ToString(), out int cartItemId))
+                    DataPropertyName = "Name",
+                    HeaderText = "Product Name",
+                    Name = "Name",
+                    ReadOnly = true
+                });
+                cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "Price",
+                    HeaderText = "Price",
+                    Name = "Price",
+                    ReadOnly = true
+                });
+                cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "Quantity",
+                    HeaderText = "Quantity",
+                    Name = "Quantity",
+                    ReadOnly = false
+                });
+                cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "DateAdded",
+                    HeaderText = "Date Added",
+                    Name = "DateAdded",
+                    Visible = true
+                });
+                cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "TotalPrice",
+                    HeaderText = "Total Price",
+                    Name = "TotalPrice",
+                    Visible = false
+                });
+
+                // Add Remove button column
+                if (!cartDataGridView.Columns.Contains("Remove"))
+                {
+                    var removeColumn = new DataGridViewButtonColumn
                     {
-                        var response = await _cartItemService.RemoveFromCartAsync(cartItemId);
-                        if (response.Succeeded)
-                        {
-                            LoadCartItems();
-                            MessageBox.Show("Item removed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            string errorMessage = response.Errors != null && response.Errors.Any()
-                                ? string.Join(Environment.NewLine, response.Errors)
-                                : "Failed to remove item";
-                            MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        Name = "Remove",
+                        HeaderText = "Action",
+                        Text = "Remove",
+                        UseColumnTextForButtonValue = true
+                    };
+                    cartDataGridView.Columns.Add(removeColumn);
+                }
+
+                // Enrich cart items with product details
+                var enrichedItems = await Task.WhenAll(response.Data.Select(async item =>
+                {
+
+                    var productResponse = await _productService.GetProducByIdAsync(item.ProductID);
+                    if (productResponse.Succeeded)
+                    {
+                        item.Name = productResponse.Data?.Name ?? "Unknown Product";
+                        item.Price = productResponse.Data?.Price ?? 0m;
+                    }
+                    return item;
+                }));
+
+                // Debug: Inspect the raw data before binding
+                Console.WriteLine($"Number of cart items retrieved: {enrichedItems.Count()}");
+                foreach (var item in enrichedItems)
+                {
+                    Console.WriteLine($"CartItemID: {item.CartItemID}, ProductID: {item.ProductID}, Name: {item.Name ?? "NULL"}, Price: {item.Price}, Quantity: {item.Quantity}, TotalPrice: {item.TotalPrice}");
+                }
+
+                // Set the data source
+                cartDataGridView.DataSource = enrichedItems.ToList();
+
+                // Debug: Verify column headers
+                foreach (DataGridViewColumn column in cartDataGridView.Columns)
+                {
+                    Console.WriteLine($"Column: {column.Name}, HeaderText: {column.HeaderText}, Visible: {column.Visible}");
+                }
+
+                // Calculate and display total
+                decimal total = enrichedItems.Sum(item => item.TotalPrice);
+                totalTextBox.Text = total.ToString("F2");
+            }
+            else
+            {
+                MessageBox.Show("Failed to load cart items: " + string.Join(", ", response.Errors), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void UpdateButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in cartDataGridView.Rows)
+            {
+                var cartItem = row.DataBoundItem as CartItemDTO;
+                if (cartItem != null)
+                {
+                    if (int.TryParse(row.Cells["Quantity"].Value?.ToString(), out int newQuantity))
+                    {
+                        cartItem.Quantity = newQuantity;
+                    }
+
+                    var updateDto = new UpdateCartItemDTO
+                    {
+                        CartItemID = cartItem.CartItemID,
+                        Quantity = cartItem.Quantity
+                    };
+                    var response = await _cartItemService.UpdateCartItemAsync(updateDto);
+                    if (!response.Succeeded)
+                    {
+                        MessageBox.Show($"Failed to update item {cartItem.Name}: " + string.Join(", ", response.Errors), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            await LoadCartItems();
+        }
+
+        private async void cartDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
+
+            if (cartDataGridView.Columns[e.ColumnIndex].Name == "Remove")
+            {
+                var cartItem = cartDataGridView.Rows[e.RowIndex].DataBoundItem as CartItemDTO;
+                if (cartItem != null)
+                {
+                    var response = await _cartItemService.RemoveCartItemAsync(cartItem.CartItemID);
+                    if (response.Succeeded)
+                    {
+                        await LoadCartItems();
                     }
                     else
                     {
-                        MessageBox.Show("Invalid cart item ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Failed to remove item: " + string.Join(", ", response.Errors), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to remove item: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
-        private async void btnUpdate_Click(object sender, EventArgs e)
+        private void CheckoutButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridViewCart.SelectedRows.Count == 0)
-                {
-                    MessageBox.Show("Please select a cart item to update.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                var selectedRow = dataGridViewCart.SelectedRows[0];
-                if (selectedRow.Cells["CartItemID"].Value == null ||
-                    !int.TryParse(selectedRow.Cells["CartItemID"].Value.ToString(), out int cartItemId))
-                {
-                    MessageBox.Show("Invalid cart item ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (selectedRow.Cells["Quantity"].Value == null ||
-                    !int.TryParse(selectedRow.Cells["Quantity"].Value.ToString(), out int newQuantity) || newQuantity <= 0)
-                {
-                    MessageBox.Show("Please enter a valid positive quantity.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                var response = await _cartItemService.UpdateCartItemQuantityAsync(cartItemId, newQuantity);
-                if (response.Succeeded)
-                {
-                    LoadCartItems();
-                    MessageBox.Show("Quantity updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    string errorMessage = response.Errors != null && response.Errors.Any()
-                        ? string.Join(Environment.NewLine, response.Errors)
-                        : "Failed to update quantity";
-                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to update quantity: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show("Checkout functionality to be implemented.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private async void btnCheckout_Click(object sender, EventArgs e)
+        private void ReturnButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var cartItemsResponse = await _cartItemService.GetCartItemsByUserIdAsync(_userId);
-                if (!cartItemsResponse.Succeeded || cartItemsResponse.Data == null || !cartItemsResponse.Data.Any())
-                {
-                    MessageBox.Show("Your cart is empty or could not be loaded.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                var clearResponse = await _cartItemService.ClearCartAsync(_userId);
-                if (clearResponse.Succeeded)
-                {
-                    LoadCartItems();
-                    MessageBox.Show("Cart cleared. Order creation to be implemented.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    string errorMessage = clearResponse.Errors != null && clearResponse.Errors.Any()
-                        ? string.Join(Environment.NewLine, clearResponse.Errors)
-                        : "Failed to clear cart";
-                    MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                // TODO: Implement order creation logic when IOrderService or equivalent is available
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to place order: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            // Assuming products form needs to be resolved differently without IContainer
+            // You may need to adjust this based on your DI setup
+            var productsForm = new products(); // Direct instantiation as a fallback
+            productsForm.Show();
+            this.Close();
         }
 
-        private int GetCurrentUserId()
+        private void CloseButton_Click(object sender, EventArgs e)
         {
-            return SessionManager.CurrentUser?.UserID ?? 1; // Replace with actual logic
+            this.Close();
         }
 
+        private void MinimizeButton_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
 
+        private void MaximizeButton_Click(object sender, EventArgs e)
+        {
+            this.WindowState = this.WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
+        }
     }
 }

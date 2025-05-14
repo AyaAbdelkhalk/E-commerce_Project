@@ -27,7 +27,7 @@ namespace E_commerce.Application.Services.OrderService
 
         public async Task<Response<OrderDisDto>> CheckoutAsync(int userId)
         {
-            var cartItems = await _cartItemRepository.GetCartItemByUserIdAsync(userId);
+            var cartItems = await _cartItemRepository.GetCartItemsByUserIdAsync(userId);
             if (cartItems == null || !cartItems.Any())
                 return new Response<OrderDisDto>() { Data = null, Succeeded = false, Errors = new List<string> { "Cart is empty." } };
 

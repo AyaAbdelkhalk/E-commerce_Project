@@ -16,7 +16,7 @@ namespace E_commerce.Application.Helper
 
         public static User? CurrentUser { get; private set; }
         public static bool IsLoggedIn => CurrentUser != null;
-        private const int SessionTimeoutMinutes = 300;
+        private const int SessionTimeoutMinutes = 3000;
         private static DateTime LastActivityTime;
 
         public static bool IsSessionActive()

@@ -7,14 +7,14 @@ namespace E_commerce.Core.Models
         public int CartItemID { get; set; }
         public int UserID { get; set; } // Foreign Key referencing User
         public int ProductID { get; set; } // Foreign Key referencing Product
+        [Range(1, int.MaxValue, ErrorMessage = "Quantity must be a positive integer")]
+        public int Quantity { get; set; }
+        public DateTime DateAdded { get; set; }
 
         // Navigation property
         public virtual User User { get; set; } // Relation to User
         public virtual Product Product { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "Quantity must be a positive integer")]
-        public int Quantity { get; set; }
-        public DateTime DateAdded { get; set; }
 
     }
 }
