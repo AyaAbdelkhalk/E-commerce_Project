@@ -1,37 +1,40 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using E_commerce.Application.Helper;
-using E_commerce.Application.Interfaces;
+﻿using E_commerce.Application.Interfaces;
 using E_commerce.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace E_commerce.Infrastructure.Repository
 {
     public class CartItemRepository : GenericRepository<CartItem>, ICartItemRepository
     {
+        private readonly AppDbContext _context;
 
-        public CartItemRepository(AppDbContext context) : base(context) { }
-
-        public async Task<IReadOnlyList<CartItem>> GetCartItemByUserIdAsync(int userId)
+        public CartItemRepository(AppDbContext context) : base(context)
         {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<CartItem>> GetCartItemsByUserIdAsync(int userId)
+        {
+            // Eagerly load Product to avoid lazy loading multiple queries
             return await _dbSet
-                .Where(ci => ci.UserID == SessionManager.CurrentUser.UserID)
+                .Include(ci => ci.Product)
+                .Where(ci => ci.UserID == userId)
                 .ToListAsync();
         }
-        public async Task<CartItem?> GetCartItemByUserIdAndProductIdAsync(int userId, int productId)
-        {
-            if(_dbSet != null)
-            {
-                return await _dbSet
-                    .Where(ci => ci.UserID == SessionManager.CurrentUser.UserID && ci.ProductID == productId)
-                    .FirstOrDefaultAsync();
-            }
-            return null;
 
+        public async Task DeleteCartItemsByUserIdAsync(int userId)
+        {
+            var cartItems = await _dbSet
+                .Where(ci => ci.UserID == userId)
+                .ToListAsync();
+            if (cartItems.Any())
+            {
+                _dbSet.RemoveRange(cartItems);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

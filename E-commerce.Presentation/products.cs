@@ -21,19 +21,24 @@ namespace E_commerce.Presentation
         private readonly IProductServices _productServices;
         private readonly ICategoryServices _categoryServices;
         private readonly IUserServices _userServices;
+        private readonly ICartItemService _cartItemService;
         private bool isUpdateMode = false;
         private int currentProductId = 0;
 
-        public products(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices)
+        public products(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices, ICartItemService cartItemService)
         {
             InitializeComponent();
             _productServices = productServices;
             _categoryServices = categoryServices;
             _userServices = userServices;
+            _cartItemService = cartItemService;
 
             LoadCategories();
             SetupForm();
+        }
 
+        public products()
+        {
         }
 
         private void ResetForm()
@@ -95,7 +100,7 @@ namespace E_commerce.Presentation
                 {
                     foreach (var product in products.Data)
                     {
-                        UserControl1 userControl = new UserControl1(product.ProductID, product.Name);
+                        UserControl1 userControl = new UserControl1(_cartItemService, product.ProductID, product.Name);
                         userControl.SetData(product.Name, product.Price.ToString(),
                                           product.ProductID.ToString(), product.ImagePath, product.Description);
 
@@ -119,7 +124,7 @@ namespace E_commerce.Presentation
 
         private void ShowErrorMessage(string message)
         {
-            MessageBox.Show(this, message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ShowSuccessMessage(string message)
@@ -173,11 +178,6 @@ namespace E_commerce.Presentation
             ResetForm();
             isUpdateMode = false;
             SaveButton.Text = "Save";
-        }
-
-        private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
@@ -302,7 +302,7 @@ namespace E_commerce.Presentation
                 var result = await _productServices.DeleteProductAsync(productId);
                 if (result.Succeeded)
                 {
-                    ShowSuccessMessage("Product Deleted SuccessFully!");
+                    ShowSuccessMessage("Product Deleted Successfully!");
                     LoadProducts();
                 }
                 else
@@ -390,7 +390,7 @@ namespace E_commerce.Presentation
 
         private void guna2CircleButton4_Click(object sender, EventArgs e)
         {
-            if (this.MaximizeBox == true)
+            if (this.MaximizeBox)
             {
                 this.WindowState = FormWindowState.Maximized;
                 this.MaximizeBox = false;
@@ -400,22 +400,19 @@ namespace E_commerce.Presentation
                 this.WindowState = FormWindowState.Normal;
                 this.MaximizeBox = true;
             }
-            //this.WindowState = FormWindowState.Maximized;
         }
 
         private void guna2CircleButton3_Click(object sender, EventArgs e)
         {
-            //this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void flowLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
@@ -429,7 +426,7 @@ namespace E_commerce.Presentation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            users category = new users(_userServices ,_productServices, _categoryServices);
+            users category = new users(_userServices, _productServices, _categoryServices);
             category.Show();
             this.Hide();
         }

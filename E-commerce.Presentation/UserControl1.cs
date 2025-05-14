@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using E_commerce.Application.Services.CartItemService;
+﻿using System.ComponentModel;
+using E_commerce.Application.DTOs.CartItem;
+using E_commerce.Application.Helper;
+using E_commerce.Application.Services;
 
 namespace Ecommerce
 {
@@ -25,10 +19,12 @@ namespace Ecommerce
             _cartItemService = cartItemService;
         }
 
-        public UserControl1(int id, string name)
+
+        public UserControl1(ICartItemService cartItemService, int id, string name)
         {
             InitializeComponent();
             this.Dock = DockStyle.Top;
+            _cartItemService = cartItemService;
             _id = id;
             _name = name;
         }
@@ -148,9 +144,40 @@ namespace Ecommerce
 
         }
 
-        private void btnBuy1_1_Click(object sender, EventArgs e)
+        private async void btnBuy1_1_Click(object sender, EventArgs e)
         {
             
+
+            try
+            {
+                var cartItemDto = new CreateCartItemDTO
+                {
+                    UserID = SessionManager.CurrentUser?.UserID??3,
+                    ProductID = _id,
+                    Quantity = 1 // Default quantity; can be modified to allow user input
+                };
+
+                var response = await _cartItemService.AddCartItemAsync(cartItemDto);
+                if (response.Succeeded)
+                {
+                    var toast = new Guna.UI2.WinForms.Guna2MessageDialog
+                    {
+                        Caption = "Success",
+                        Text = "Product added to cart successfully!",
+                        Icon = Guna.UI2.WinForms.MessageDialogIcon.Information,
+                        Style = Guna.UI2.WinForms.MessageDialogStyle.Light
+                    };
+                    toast.Show();
+                }
+                else
+                {
+                    MessageBox.Show($"Failed to add product to cart: {string.Join(", ", response.Errors)}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -24,6 +24,7 @@ namespace E_commerce.Presentation
         private readonly IProductServices _productServices;
         private readonly ICategoryServices _categoryServices;
         private readonly IUserServices _userServices;
+        private readonly ICartItemService _cartItemService;
 
 
 
@@ -125,7 +126,7 @@ namespace E_commerce.Presentation
         private void btn_products_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new products(_userServices,_productServices, _categoryServices).Show();
+            new products(_userServices, _productServices, _categoryServices, _cartItemService).Show();
         }
 
 
@@ -160,7 +161,7 @@ namespace E_commerce.Presentation
         private void productbtn_Click(object sender, EventArgs e)
         {
 
-            Form productForm = new products(_userServices,_productServices, _categoryServices);
+            Form productForm = new products(_userServices,_productServices, _categoryServices,_cartItemService);
             productForm.Show();
             this.Hide();
         }

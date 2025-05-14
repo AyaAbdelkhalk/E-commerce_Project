@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using E_commerce.Application.DTOs;
+﻿using E_commerce.Application.DTOs;
+using E_commerce.Application.DTOs.CartItem;
 using E_commerce.Application.Hepler;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace E_commerce.Application.Services.CartItemService
+namespace E_commerce.Application.Services
 {
     public interface ICartItemService
     {
-        Task<Response<string>> AddToCartAsync(int userId, int productId, int quantity);
-        Task<Response<string>> UpdateCartItemQuantityAsync(int cartItemId, int quantity);
-        Task<Response<string>> RemoveFromCartAsync(int cartItemId);
-        Task<Response<IReadOnlyList<CartItemDTO>>> GetCartItemsByUserIdAsync(int userId);
-        Task<Response<string>> ClearCartAsync(int userId);
+        Task<Response<IEnumerable<CartItemDTO>>> GetCartItemsByUserIdAsync(int userId);
+        Task<Response<CartItemDTO>> AddCartItemAsync(CreateCartItemDTO cartItemDto);
+        Task<Response<CartItemDTO>> UpdateCartItemAsync(UpdateCartItemDTO cartItemDto);
+        Task<Response<bool>> RemoveCartItemAsync(int cartItemId);
+        Task<Response<bool>> ClearCartAsync(int userId);
     }
 }
