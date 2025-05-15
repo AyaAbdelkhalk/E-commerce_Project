@@ -16,20 +16,26 @@ namespace E_commerce.Application.Helper
 
         public static User? CurrentUser { get; private set; }
         public static bool IsLoggedIn => CurrentUser != null;
-        private const int SessionTimeoutMinutes = 3000;
         private static DateTime LastActivityTime;
+        private static readonly TimeSpan SessionTimeout = TimeSpan.FromDays(5); 
+
 
         public static bool IsSessionActive()
         {
             if (CurrentUser == null)
                 return false;
 
-            var timeSinceLastActivity = DateTime.UtcNow - LastActivityTime;
-            if (timeSinceLastActivity.TotalMinutes > SessionTimeoutMinutes)
+            if (LastActivityTime == DateTime.MinValue)
+                return false;
+
+            if (DateTime.UtcNow - LastActivityTime > SessionTimeout)
             {
                 Logout();
                 return false;
             }
+
+
+
 
             LastActivityTime = DateTime.UtcNow;
             return true;
@@ -59,14 +65,15 @@ namespace E_commerce.Application.Helper
         public static bool IsAdmin() =>
             IsLoggedIn && CurrentUser.Role == Core.Enum.Role.Admin;
 
-        public static void LoadLastUser(IUserServices userServices)
+        
+        public static async Task LoadLastUser(IUserServices userServices)
         {
             if (_sessionStorage == null) return;
 
             int lastUserId = _sessionStorage.GetLastUserId();
             if (lastUserId != 0)
             {
-                var user = userServices.GetUserById(lastUserId);
+                var user = await userServices.GetUserById(lastUserId);
                 if (user != null)
                 {
                     Login(user);
