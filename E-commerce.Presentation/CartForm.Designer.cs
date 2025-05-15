@@ -68,14 +68,14 @@
             cartDataGridView.BorderStyle = BorderStyle.FixedSingle;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             cartDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            cartDataGridView.ColumnHeadersHeight = 4;
-            cartDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            cartDataGridView.ColumnHeadersHeight = 30;
+            cartDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -91,6 +91,10 @@
             cartDataGridView.RowTemplate.Height = 30;
             cartDataGridView.Size = new Size(715, 435);
             cartDataGridView.TabIndex = 0;
+            cartDataGridView.ColumnHeadersVisible = true;
+            cartDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Update the theme style settings
             cartDataGridView.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             cartDataGridView.ThemeStyle.AlternatingRowsStyle.Font = null;
             cartDataGridView.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
@@ -100,10 +104,9 @@
             cartDataGridView.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
             cartDataGridView.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
             cartDataGridView.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            cartDataGridView.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            cartDataGridView.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             cartDataGridView.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            cartDataGridView.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            cartDataGridView.ThemeStyle.HeaderStyle.Height = 4;
+            cartDataGridView.ThemeStyle.HeaderStyle.Height = 30;
             cartDataGridView.ThemeStyle.ReadOnly = false;
             cartDataGridView.ThemeStyle.RowsStyle.BackColor = Color.White;
             cartDataGridView.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
@@ -112,7 +115,6 @@
             cartDataGridView.ThemeStyle.RowsStyle.Height = 30;
             cartDataGridView.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             cartDataGridView.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            cartDataGridView.CellContentClick += cartDataGridView_CellContentClick;
             // 
             // totalLabel
             // 

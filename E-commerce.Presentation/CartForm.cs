@@ -19,7 +19,7 @@ namespace E_commerce.Presentation
             InitializeComponent();
             _cartItemService = cartItemService;
             _productService = productServices;
-
+            cartDataGridView.CellContentClick += cartDataGridView_CellContentClick;
             this.WindowState = FormWindowState.Maximized;
             this.Size = Screen.PrimaryScreen.Bounds.Size;
             this.MaximizeBox = true;
@@ -33,39 +33,48 @@ namespace E_commerce.Presentation
 
         private async Task LoadCartItems()
         {
-
             var userId = SessionManager.CurrentUser?.UserID ?? 3;
             var response = await _cartItemService.GetCartItemsByUserIdAsync(userId);
+
             if (response.Succeeded)
             {
-                // Clear existing columns to redefine them
+                // Clear existing columns
                 cartDataGridView.Columns.Clear();
                 cartDataGridView.AutoGenerateColumns = false;
 
-                // Define columns manually
-             
-               
-                
+                // Create columns with proper formatting
                 cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
                 {
                     DataPropertyName = "Name",
                     HeaderText = "Product Name",
                     Name = "Name",
-                    ReadOnly = true
+                    ReadOnly = true,
+                    Width = 200
                 });
+
                 cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
                 {
                     DataPropertyName = "Price",
                     HeaderText = "Price",
                     Name = "Price",
-                    ReadOnly = true
+                    ReadOnly = true,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Format = "C2",
+                        Alignment = DataGridViewContentAlignment.MiddleRight
+                    }
                 });
+
                 cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
                 {
                     DataPropertyName = "Quantity",
                     HeaderText = "Quantity",
                     Name = "Quantity",
-                    ReadOnly = false
+                    Width = 60,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleCenter
+                    }
                 });
                 cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
                 {
@@ -74,31 +83,21 @@ namespace E_commerce.Presentation
                     Name = "DateAdded",
                     Visible = true
                 });
-                cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = "TotalPrice",
-                    HeaderText = "Total Price",
-                    Name = "TotalPrice",
-                    Visible = false
-                });
 
                 // Add Remove button column
-                if (!cartDataGridView.Columns.Contains("Remove"))
+                var removeColumn = new DataGridViewButtonColumn
                 {
-                    var removeColumn = new DataGridViewButtonColumn
-                    {
-                        Name = "Remove",
-                        HeaderText = "Action",
-                        Text = "Remove",
-                        UseColumnTextForButtonValue = true
-                    };
-                    cartDataGridView.Columns.Add(removeColumn);
-                }
+                    Name = "Remove",
+                    HeaderText = "Action",
+                    Text = "Remove",
+                    UseColumnTextForButtonValue = true,
+                    Width = 80
+                };
+                cartDataGridView.Columns.Add(removeColumn);
 
                 // Enrich cart items with product details
                 var enrichedItems = await Task.WhenAll(response.Data.Select(async item =>
                 {
-
                     var productResponse = await _productService.GetProducByIdAsync(item.ProductID);
                     if (productResponse.Succeeded)
                     {
@@ -108,29 +107,17 @@ namespace E_commerce.Presentation
                     return item;
                 }));
 
-                // Debug: Inspect the raw data before binding
-                Console.WriteLine($"Number of cart items retrieved: {enrichedItems.Count()}");
-                foreach (var item in enrichedItems)
-                {
-                    Console.WriteLine($"CartItemID: {item.CartItemID}, ProductID: {item.ProductID}, Name: {item.Name ?? "NULL"}, Price: {item.Price}, Quantity: {item.Quantity}, TotalPrice: {item.TotalPrice}");
-                }
-
-                // Set the data source
+                // Set data source
                 cartDataGridView.DataSource = enrichedItems.ToList();
 
-                // Debug: Verify column headers
-                foreach (DataGridViewColumn column in cartDataGridView.Columns)
-                {
-                    Console.WriteLine($"Column: {column.Name}, HeaderText: {column.HeaderText}, Visible: {column.Visible}");
-                }
-
                 // Calculate and display total
-                decimal total = enrichedItems.Sum(item => item.TotalPrice);
-                totalTextBox.Text = total.ToString("F2");
+                decimal total = enrichedItems.Sum(item => item.Price * item.Quantity);
+                totalTextBox.Text = total.ToString("C2");
             }
             else
             {
-                MessageBox.Show("Failed to load cart items: " + string.Join(", ", response.Errors), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to load cart items: " + string.Join(", ", response.Errors),
+                               "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

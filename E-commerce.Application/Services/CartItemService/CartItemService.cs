@@ -17,6 +17,7 @@ namespace E_commerce.Application.Services
 
         public CartItemService(ICartItemRepository cartItemRepository, IGenericRepository<Product> productRepository)
         {
+
             _cartItemRepository = cartItemRepository;
             _productRepository = productRepository;
         }
