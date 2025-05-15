@@ -123,18 +123,11 @@ namespace E_commerce.Presentation
             pnl_sideBar.Controls.Add(logoutpicture);
             pnl_sideBar.Controls.Add(usrpicture);
             pnl_sideBar.Controls.Add(lbl_employeeName);
-
-            pnl_sideBar.Location = new Point(15, 26);
-            pnl_sideBar.Margin = new Padding(7, 6, 7, 6);
+            pnl_sideBar.CornerRadius = 30;
+            pnl_sideBar.Location = new Point(17, 35);
+            pnl_sideBar.Margin = new Padding(8);
             pnl_sideBar.Name = "pnl_sideBar";
-            pnl_sideBar.Size = new Size(283, 488);
-//=======
-          //  pnl_sideBar.CornerRadius = 30;
-        //    pnl_sideBar.Location = new Point(27, 29);
-      //      pnl_sideBar.Margin = new Padding(8);
-    //        pnl_sideBar.Name = "pnl_sideBar";
-  //          pnl_sideBar.Size = new Size(323, 705);
-//>>>>>>> master
+            pnl_sideBar.Size = new Size(323, 651);
             pnl_sideBar.TabIndex = 1;
             pnl_sideBar.Paint += pnl_sideBar_Paint;
             // 
@@ -146,14 +139,9 @@ namespace E_commerce.Presentation
             AdminMangementbtn.FlatStyle = FlatStyle.Flat;
             AdminMangementbtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
             AdminMangementbtn.ForeColor = Color.White;
-//<<<<<<< updd
-            AdminMangementbtn.Location = new Point(47, 373);
-            AdminMangementbtn.Margin = new Padding(3, 2, 3, 2);
-//=======
-  //          AdminMangementbtn.Location = new Point(54, 499);
-//>>>>>>> master
+            AdminMangementbtn.Location = new Point(54, 497);
             AdminMangementbtn.Name = "AdminMangementbtn";
-            AdminMangementbtn.Size = new Size(195, 30);
+            AdminMangementbtn.Size = new Size(223, 40);
             AdminMangementbtn.TabIndex = 22;
             AdminMangementbtn.Text = "Admin Mangement   ";
             AdminMangementbtn.TextAlign = ContentAlignment.MiddleLeft;
@@ -164,14 +152,9 @@ namespace E_commerce.Presentation
             // 
             adminpictureBox6.BackColor = Color.Transparent;
             adminpictureBox6.Image = (Image)resources.GetObject("adminpictureBox6.Image");
-//<<<<<<< updd
-    //        adminpictureBox6.Location = new Point(7, 376);
-  //          adminpictureBox6.Margin = new Padding(3, 2, 3, 2);
-//=======
-  //          adminpictureBox6.Location = new Point(8, 499);
-//>>>>>>> master
+            adminpictureBox6.Location = new Point(8, 501);
             adminpictureBox6.Name = "adminpictureBox6";
-            adminpictureBox6.Size = new Size(35, 26);
+            adminpictureBox6.Size = new Size(40, 35);
             adminpictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
             adminpictureBox6.TabIndex = 23;
             adminpictureBox6.TabStop = false;
@@ -184,32 +167,21 @@ namespace E_commerce.Presentation
             productbtn.FlatStyle = FlatStyle.Flat;
             productbtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
             productbtn.ForeColor = Color.White;
-//<<<<<<< updd
-            productbtn.Location = new Point(47, 250);
-            productbtn.Margin = new Padding(3, 2, 3, 2);
-//=======
-  //          productbtn.Location = new Point(54, 322);
-//>>>>>>> master
+            productbtn.Location = new Point(54, 333);
             productbtn.Name = "productbtn";
-            productbtn.Size = new Size(195, 30);
+            productbtn.Size = new Size(223, 40);
             productbtn.TabIndex = 20;
             productbtn.Text = "Product Mangement    ";
             productbtn.TextAlign = ContentAlignment.MiddleLeft;
             productbtn.UseVisualStyleBackColor = false;
-            productbtn.Click += productbtn_Click;
             // 
             // pictureBox3
             // 
             pictureBox3.BackColor = Color.Transparent;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-//<<<<<<< updd
-            pictureBox3.Location = new Point(7, 250);
-            pictureBox3.Margin = new Padding(3, 2, 3, 2);
-//=======
-  //          pictureBox3.Location = new Point(8, 327);
-//>>>>>>> master
+            pictureBox3.Location = new Point(8, 333);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(35, 26);
+            pictureBox3.Size = new Size(40, 35);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 21;
             pictureBox3.TabStop = false;
@@ -251,14 +223,9 @@ namespace E_commerce.Presentation
             customerbtn.FlatStyle = FlatStyle.Flat;
             customerbtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
             customerbtn.ForeColor = Color.White;
-//<<<<<<< updd
-            customerbtn.Location = new Point(47, 335);
-            customerbtn.Margin = new Padding(3, 2, 3, 2);
-//=======
-   //         customerbtn.Location = new Point(54, 449);
-//>>>>>> master
+            customerbtn.Location = new Point(54, 447);
             customerbtn.Name = "customerbtn";
-            customerbtn.Size = new Size(195, 30);
+            customerbtn.Size = new Size(223, 40);
             customerbtn.TabIndex = 18;
             customerbtn.Text = "Customer Mangement   ";
             customerbtn.TextAlign = ContentAlignment.MiddleLeft;
@@ -268,14 +235,9 @@ namespace E_commerce.Presentation
             // 
             pictureBox5.BackColor = Color.Transparent;
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-//<<<<<<< updd
-            pictureBox5.Location = new Point(7, 335);
-            pictureBox5.Margin = new Padding(3, 2, 3, 2);
-//=======
-  //          pictureBox5.Location = new Point(8, 449);
-//>>>>>>> master
+            pictureBox5.Location = new Point(8, 447);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(35, 26);
+            pictureBox5.Size = new Size(40, 35);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox5.TabIndex = 19;
             pictureBox5.TabStop = false;
@@ -288,14 +250,9 @@ namespace E_commerce.Presentation
             categorybtn.FlatStyle = FlatStyle.Flat;
             categorybtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
             categorybtn.ForeColor = Color.White;
-//<<<<<<< updd
-            categorybtn.Location = new Point(47, 295);
-            categorybtn.Margin = new Padding(3, 2, 3, 2);
-//=======
- //           categorybtn.Location = new Point(54, 387);
-//>>>>>>> master
+            categorybtn.Location = new Point(54, 393);
             categorybtn.Name = "categorybtn";
-            categorybtn.Size = new Size(195, 30);
+            categorybtn.Size = new Size(223, 40);
             categorybtn.TabIndex = 16;
             categorybtn.Text = "Category Mangement     ";
             categorybtn.TextAlign = ContentAlignment.MiddleLeft;
@@ -306,14 +263,9 @@ namespace E_commerce.Presentation
             // 
             pictureBox4.BackColor = Color.Transparent;
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-//<<<<<<< updd
-            pictureBox4.Location = new Point(7, 295);
-            pictureBox4.Margin = new Padding(3, 2, 3, 2);
-//=======
-  //          pictureBox4.Location = new Point(8, 387);
-//>>>>>>> master
+            pictureBox4.Location = new Point(8, 393);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(35, 26);
+            pictureBox4.Size = new Size(40, 35);
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.TabIndex = 17;
             pictureBox4.TabStop = false;
@@ -326,14 +278,9 @@ namespace E_commerce.Presentation
             Orderbtn.FlatStyle = FlatStyle.Flat;
             Orderbtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
             Orderbtn.ForeColor = Color.White;
-//<<<<<<< updd
-            Orderbtn.Location = new Point(47, 204);
-            Orderbtn.Margin = new Padding(3, 2, 3, 2);
-//=======
-  //          Orderbtn.Location = new Point(54, 266);
-//>>>>>>> master
+            Orderbtn.Location = new Point(54, 272);
             Orderbtn.Name = "Orderbtn";
-            Orderbtn.Size = new Size(206, 30);
+            Orderbtn.Size = new Size(235, 40);
             Orderbtn.TabIndex = 12;
             Orderbtn.Text = "Order Mangement   ";
             Orderbtn.TextAlign = ContentAlignment.MiddleLeft;
@@ -343,14 +290,9 @@ namespace E_commerce.Presentation
             // 
             pictureBox2.BackColor = Color.Transparent;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-//<<<<<<< updd
-            pictureBox2.Location = new Point(7, 204);
-            pictureBox2.Margin = new Padding(3, 2, 3, 2);
-//=======
-//            pictureBox2.Location = new Point(8, 266);
-//>>>>>>> master
+            pictureBox2.Location = new Point(8, 272);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(35, 26);
+            pictureBox2.Size = new Size(40, 35);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 13;
             pictureBox2.TabStop = false;
@@ -363,10 +305,9 @@ namespace E_commerce.Presentation
             Dashboardbtn.FlatStyle = FlatStyle.Flat;
             Dashboardbtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
             Dashboardbtn.ForeColor = Color.White;
-            Dashboardbtn.Location = new Point(47, 157);
-            Dashboardbtn.Margin = new Padding(3, 2, 3, 2);
+            Dashboardbtn.Location = new Point(54, 209);
             Dashboardbtn.Name = "Dashboardbtn";
-            Dashboardbtn.Size = new Size(185, 30);
+            Dashboardbtn.Size = new Size(211, 40);
             Dashboardbtn.TabIndex = 10;
             Dashboardbtn.Text = "Dashboard ";
             Dashboardbtn.TextAlign = ContentAlignment.MiddleLeft;
@@ -376,10 +317,9 @@ namespace E_commerce.Presentation
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(7, 157);
-            pictureBox1.Margin = new Padding(3, 2, 3, 2);
+            pictureBox1.Location = new Point(8, 209);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(35, 26);
+            pictureBox1.Size = new Size(40, 35);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 11;
             pictureBox1.TabStop = false;
@@ -387,10 +327,9 @@ namespace E_commerce.Presentation
             // flowLayoutPanel8
             // 
             flowLayoutPanel8.BackColor = Color.WhiteSmoke;
-            flowLayoutPanel8.Location = new Point(0, 130);
-            flowLayoutPanel8.Margin = new Padding(3, 2, 3, 2);
+            flowLayoutPanel8.Location = new Point(0, 173);
             flowLayoutPanel8.Name = "flowLayoutPanel8";
-            flowLayoutPanel8.Size = new Size(288, 8);
+            flowLayoutPanel8.Size = new Size(329, 11);
             flowLayoutPanel8.TabIndex = 7;
             // 
             // logoutbutton
@@ -401,14 +340,9 @@ namespace E_commerce.Presentation
             logoutbutton.FlatStyle = FlatStyle.Flat;
             logoutbutton.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
             logoutbutton.ForeColor = Color.White;
-//<<<<<<< updd
-            logoutbutton.Location = new Point(47, 407);
-            logoutbutton.Margin = new Padding(3, 2, 3, 2);
-//=======
-//            logoutbutton.Location = new Point(54, 592);
-//>>>>>>> master
+            logoutbutton.Location = new Point(54, 592);
             logoutbutton.Name = "logoutbutton";
-            logoutbutton.Size = new Size(195, 30);
+            logoutbutton.Size = new Size(223, 40);
             logoutbutton.TabIndex = 0;
             logoutbutton.Text = "Log Out      ";
             logoutbutton.TextAlign = ContentAlignment.MiddleLeft;
@@ -420,14 +354,9 @@ namespace E_commerce.Presentation
             logoutpicture.BackColor = Color.Transparent;
             logoutpicture.ErrorImage = (Image)resources.GetObject("logoutpicture.ErrorImage");
             logoutpicture.Image = (Image)resources.GetObject("logoutpicture.Image");
-//<<<<<<< updd
-            logoutpicture.Location = new Point(7, 407);
-            logoutpicture.Margin = new Padding(3, 2, 3, 2);
-//=======
-//            logoutpicture.Location = new Point(8, 592);
-//>>>>>>> master
+            logoutpicture.Location = new Point(8, 592);
             logoutpicture.Name = "logoutpicture";
-            logoutpicture.Size = new Size(35, 26);
+            logoutpicture.Size = new Size(40, 35);
             logoutpicture.SizeMode = PictureBoxSizeMode.StretchImage;
             logoutpicture.TabIndex = 1;
             logoutpicture.TabStop = false;
@@ -437,10 +366,9 @@ namespace E_commerce.Presentation
             // 
             usrpicture.BackColor = Color.Transparent;
             usrpicture.Image = (Image)resources.GetObject("usrpicture.Image");
-            usrpicture.Location = new Point(24, 37);
-            usrpicture.Margin = new Padding(3, 2, 3, 2);
+            usrpicture.Location = new Point(27, 49);
             usrpicture.Name = "usrpicture";
-            usrpicture.Size = new Size(64, 54);
+            usrpicture.Size = new Size(73, 72);
             usrpicture.SizeMode = PictureBoxSizeMode.StretchImage;
             usrpicture.TabIndex = 2;
             usrpicture.TabStop = false;
@@ -451,9 +379,9 @@ namespace E_commerce.Presentation
             lbl_employeeName.BackColor = Color.Transparent;
             lbl_employeeName.Font = new Font("Comic Sans MS", 18F, FontStyle.Bold | FontStyle.Italic);
             lbl_employeeName.ForeColor = Color.White;
-            lbl_employeeName.Location = new Point(93, 37);
+            lbl_employeeName.Location = new Point(106, 49);
             lbl_employeeName.Name = "lbl_employeeName";
-            lbl_employeeName.Size = new Size(137, 68);
+            lbl_employeeName.Size = new Size(171, 84);
             lbl_employeeName.TabIndex = 9;
             lbl_employeeName.Text = "Welcome  \r\n  ";
             // 
@@ -952,18 +880,10 @@ namespace E_commerce.Presentation
             // 
             // AdminDashboard
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-//<<<<<<< updd
-            ClientSize = new Size(1158, 543);
+            ClientSize = new Size(1323, 724);
             Controls.Add(pnl_sideBar);
-            Margin = new Padding(3, 2, 3, 2);
-//=======
- //           BackColor = SystemColors.GradientInactiveCaption;
-   //         ClientSize = new Size(1726, 758);
-//            Controls.Add(pnl_sideBar);
-//            Controls.Add(roundedPanel1);
-//>>>>>>> master
             Name = "AdminDashboard";
             Text = "AdminDashboard";
             Load += AdminDashboard_Load_1;
@@ -1059,6 +979,23 @@ namespace E_commerce.Presentation
         private Label Pinfo;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1206,13 +1143,13 @@ namespace E_commerce.Presentation
 //            pnl_sideBar.Controls.Add(logoutpicture);
 //            pnl_sideBar.Controls.Add(usrpicture);
 //            pnl_sideBar.Controls.Add(lbl_employeeName);
-//            pnl_sideBar.CornerRadius = 30;
-//            pnl_sideBar.Location = new Point(27, 29);
-//            pnl_sideBar.Margin = new Padding(8);
+////////            pnl_sideBar.CornerRadius = 30;
+////////            pnl_sideBar.Location = new Point(27, 29);
+////////            pnl_sideBar.Margin = new Padding(8);
 //            pnl_sideBar.Name = "pnl_sideBar";
-//            pnl_sideBar.Size = new Size(323, 705);
+////////            pnl_sideBar.Size = new Size(323, 705);
 //            pnl_sideBar.TabIndex = 1;
-//            pnl_sideBar.Paint += pnl_sideBar_Paint;
+//           pnl_sideBar.Paint += pnl_sideBar_Paint;
 //            // 
 //            // AdminMangementbtn
 //            // 

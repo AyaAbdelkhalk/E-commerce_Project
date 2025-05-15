@@ -33,16 +33,18 @@ namespace E_commerce.Application.Services.UserServices
                     Errors = response.Errors
                 };
             }
-            var existingUser = await _userRepository.GetByUserNameAsync(userdto.UserName);
-            if (existingUser != null)
-            {
-                return new Response<User>
-                {
-                    Succeeded = false,
-                    Errors = new List<string> { "The UserName is already registered." }
-                };
-            }
-            return new Response<User> { Data = await _userRepository.AddAsync(user), Succeeded = true };
+            //var existingUser = await _userRepository.GetByUserNameAsync(userdto.UserName);
+            //if (existingUser != null)
+            //{
+            //    return new Response<User>
+            //    {
+            //        Succeeded = false,
+            //        Errors = new List<string> { "The UserName is already registered." }
+            //    };
+            //}
+            var x=await _userRepository.AddAsync(user);
+            SessionManager.Login(x);
+            return new Response<User> { Data = x, Succeeded = true };
         }
 
         public async Task<Response<User>> Login(LoginDTO loginDto)
@@ -72,7 +74,10 @@ namespace E_commerce.Application.Services.UserServices
                     Errors = new List<string> { "User is not active." }
                 };
             }
+            user.LastLoginDate = DateTime.UtcNow;
+            await _userRepository.UpdateAsync(user);
             SessionManager.Login(user);
+
             return new Response<User>
             {
                 Succeeded = true,
@@ -138,7 +143,6 @@ namespace E_commerce.Application.Services.UserServices
             usr.UserName = userdto.UserName;
             usr.Email = userdto.Email;
 
-            // اختياري: لو عايز تسمح بتغيير الباسورد
             if (!string.IsNullOrWhiteSpace(userdto.Password))
             {
                 usr.Password = PasswordHelper.HashPassword(userdto.Password);
@@ -157,14 +161,18 @@ namespace E_commerce.Application.Services.UserServices
         private async Task<Response<UserDetails>> IsValidUser(AddUserDTO userDTO)
         {
             List<string> errors = new List<string>();
-            var currentUser = SessionManager.CurrentUser;
+            //var currentUser = SessionManager.CurrentUser;
 
             var existingUserName = await _userRepository.GetByUserNameAsync(userDTO.UserName);
-            if (string.IsNullOrEmpty(userDTO.UserName) || userDTO.UserName.Length < 3)
+            if (userDTO.UserName.Length < 3)
             {
-                errors.Add("The UserName is invalid. It must be at least 3 characters long.");
+                errors.Add("The UserName must be at least 3 characters long.");
             }
-            
+            if (string.IsNullOrEmpty(userDTO.UserName) )
+            {
+                errors.Add("The UserName is invalid");
+            }
+
             if (string.IsNullOrEmpty(userDTO.FirstName) || userDTO.FirstName.Length < 3)
             {
                 errors.Add("The First Name is invalid. It must be at least 3 characters long.");
@@ -173,13 +181,16 @@ namespace E_commerce.Application.Services.UserServices
             {
                 errors.Add("The Last Name is invalid. It must be at least 3 characters long.");
             }
-
-            if (existingUserName != null && existingUserName.UserID != currentUser.UserID)
+            //if (currentUser == null)
+            //{
+            //    errors.Add("Current user session is invalid.");
+            //}
+            if (existingUserName != null )
             {
                 errors.Add("The UserName is already registered.");
             }
             var existingUser = await _userRepository.GetByEmailAsync(userDTO.Email);
-            if (existingUser != null && existingUser.Email != currentUser.Email)
+            if (existingUser != null /*&& existingUser.Email != currentUser.Email*/)
             {
                 errors.Add("The Email address is already registered.");
 
@@ -191,7 +202,7 @@ namespace E_commerce.Application.Services.UserServices
             var isvalidPassword = PasswordHelper.IsStrongPassword(userDTO.Password);
             if (!isvalidPassword)
             {
-                errors.Add("The password is invalid. It must contain a Upper letter, a lowercase letter, and a number.");
+                errors.Add("The password must contain at least one uppercase letter, one lowercase letter, and one number.");
             }
             if (userDTO.Password != userDTO.PasswordConfirmed)
             {
@@ -208,15 +219,9 @@ namespace E_commerce.Application.Services.UserServices
 
             return new Response<UserDetails> { Succeeded = true };
         }
-        public User GetUserById(int id)
+        public async Task<User?> GetUserById(int id)
         {
-            var user = _userRepository.GetByIdAsync(id);
-            if (user == null)
-            {
-                return null;
-            }
-            return user.Result;
-
+            return await _userRepository.GetByIdAsync(id);
         }
 
         //get all users
@@ -224,9 +229,7 @@ namespace E_commerce.Application.Services.UserServices
 
         public async Task<Response<List<userD>>> GetAllUsers()
         {
-            // التأكد من وجود اليوزر الحالي قبل أي حاجة
             var currentUser = SessionManager.CurrentUser;
-            //var currentUser = _userRepository.GetByIdAsync(2);
             if (currentUser == null)
             {
                 return new Response<List<userD>>

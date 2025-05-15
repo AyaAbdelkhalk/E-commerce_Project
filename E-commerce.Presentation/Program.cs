@@ -7,6 +7,7 @@ using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
 using E_commerce.Shared;
+using System.Threading.Tasks;
 
 namespace E_commerce.Presentation
 {
@@ -16,7 +17,7 @@ namespace E_commerce.Presentation
         ///  The main entry point for the application.  
         /// </summary>  
         [STAThread]
-        static void Main()
+        static async Task Main()
         {
 
 
@@ -46,7 +47,7 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Order());
 
-            System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService));
+            //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService));
             //=======
             //>>>>>>> master
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
@@ -57,8 +58,7 @@ namespace E_commerce.Presentation
 
 
 
-            SessionManager.Initialize(sessionStorage);
-            SessionManager.LoadLastUser(userServices);
+
 
             //=======
             //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
@@ -68,26 +68,26 @@ namespace E_commerce.Presentation
 
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
+            SessionManager.Initialize(sessionStorage);
+            await SessionManager.LoadLastUser(userServices);
+            if (SessionManager.IsLoggedIn)
+            {
+                if (SessionManager.IsAdmin())
+                {
+                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices ,cartItemService));
+                }
+                else
+                {
 
-            //if (SessionManager.IsLoggedIn)
-            //{
-            //    if (SessionManager.IsAdmin())
-            //    {
-            //        System.Windows.Forms.Application.Run(new AdminDashboard(userServices));
-            //    }
-            //    else
-            //    {
-            //        //System.Windows.Forms.Application.Run(new users(userServices));
-
-            //        System.Windows.Forms.Application.Run(new Dashboard(userServices));
-            //    }
-            //}
-            //else
-            //{
-            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
+                    System.Windows.Forms.Application.Run(new Dashboard(userServices));
+                }
+            }
+            else
+            {
+                System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            }
 
 
-            //}
         }
     }
 }

@@ -48,7 +48,7 @@ namespace E_commerce.Presentation
 
             try
             {
-                string imagePath = "C:\\Users\\Elnour Tech\\source\\repos\\E-commerce\\E-commerce.Presentation\\Images\\Untitled design.png";
+                string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "background.png");
                 if (System.IO.File.Exists(imagePath))
                 {
                     this.BackgroundImage = Image.FromFile(imagePath);
