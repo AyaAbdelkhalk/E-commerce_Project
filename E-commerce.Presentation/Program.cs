@@ -87,9 +87,9 @@ namespace E_commerce.Presentation
             //} 
             #endregion
 
-            System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService));
-
-
+            //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService));
+            //System.Windows.Forms.Application.Run(new Dashboard(userServices , productServices , cartItemService));
+            System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
             //SessionManager.Initialize(sessionStorage);
 
             //var loadUserTask = SessionManager.LoadLastUser(userServices);
@@ -103,7 +103,9 @@ namespace E_commerce.Presentation
             //    }
             //    else
             //    {
-            //        System.Windows.Forms.Application.Run(new Dashboard(userServices));
+            //        //System.Windows.Forms.Application.Run(new Dashboard(userServices));
+            //        System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService));
+
             //    }
             //}
             //else
