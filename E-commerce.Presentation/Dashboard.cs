@@ -517,5 +517,10 @@ namespace E_commerce.Presentation
             LoadProducts();
             flowLayoutPanel1.Visible = true;
         }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

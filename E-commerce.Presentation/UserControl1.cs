@@ -12,11 +12,14 @@ namespace Ecommerce
         public string _name;
         public string _price;
         public string _imagePath;
+        public static UserControl1 existProductControl;
 
         private readonly ICartItemService _cartItemService;
         public UserControl1(ICartItemService cartItemService)
         {
+            InitializeComponent();
             _cartItemService = cartItemService;
+
         }
 
 
@@ -31,8 +34,6 @@ namespace Ecommerce
 
 
 
-
-        public static UserControl1 existProductControl;
         private void UserControl1_Load(object sender, EventArgs e)
         {
 
@@ -150,6 +151,11 @@ namespace Ecommerce
 
             try
             {
+                if(_cartItemService == null)
+                {
+                    MessageBox.Show("CartItemService is not initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 var cartItemDto = new CreateCartItemDTO
                 {
                     UserID = SessionManager.CurrentUser?.UserID??3,

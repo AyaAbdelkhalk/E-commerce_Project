@@ -6,13 +6,16 @@ using System.Linq;
 using System.Windows.Forms;
 using E_commerce.Application.DTOs;
 using E_commerce.Application.Services.ProductServices;
+using E_commerce.Application.Services.UserServices;
 
 namespace E_commerce.Presentation
 {
     public partial class CartItemForm : Form
     {
+        private readonly IUserServices _userServices;
         private readonly ICartItemService _cartItemService;
         private readonly IProductServices _productService;
+        private readonly ICategoryServices _categoryService;
 
         public CartItemForm(ICartItemService cartItemService, IProductServices productServices)
         {
@@ -26,6 +29,19 @@ namespace E_commerce.Presentation
             this.MinimizeBox = true;
         }
 
+        public CartItemForm(IUserServices userServices,ICartItemService cartItemService,ICategoryServices categoryServices, IProductServices productServices)
+        {
+            InitializeComponent();
+            _cartItemService = cartItemService;
+            _productService = productServices;
+            _userServices = userServices;
+            _cartItemService = cartItemService;
+            cartDataGridView.CellContentClick += cartDataGridView_CellContentClick;
+            this.WindowState = FormWindowState.Maximized;
+            this.Size = Screen.PrimaryScreen.Bounds.Size;
+            this.MaximizeBox = true;
+            this.MinimizeBox = true;
+        }
         private async void CartItemForm_Load(object sender, EventArgs e)
         {
             await LoadCartItems();
@@ -34,6 +50,12 @@ namespace E_commerce.Presentation
         private async Task LoadCartItems()
         {
             var userId = SessionManager.CurrentUser?.UserID ?? 3;
+
+            if (_cartItemService == null || _productService == null)
+            {
+                MessageBox.Show("Services not initialized214.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var response = await _cartItemService.GetCartItemsByUserIdAsync(userId);
 
             if (response.Succeeded)
@@ -179,7 +201,7 @@ namespace E_commerce.Presentation
         {
             // Assuming products form needs to be resolved differently without IContainer
             // You may need to adjust this based on your DI setup
-            var productsForm = new products(); // Direct instantiation as a fallback
+            var productsForm = new products(_userServices,_productService,_categoryService,_cartItemService); // Direct instantiation as a fallback
             productsForm.Show();
             this.Close();
         }
@@ -197,6 +219,11 @@ namespace E_commerce.Presentation
         private void MaximizeButton_Click(object sender, EventArgs e)
         {
             this.WindowState = this.WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
+        }
+
+        private void cartDataGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -37,9 +37,6 @@ namespace E_commerce.Presentation
             SetupForm();
         }
 
-        public products()
-        {
-        }
 
         private void ResetForm()
         {

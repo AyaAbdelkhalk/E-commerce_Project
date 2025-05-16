@@ -81,6 +81,7 @@ namespace E_commerce.Application.Services
             cartItem.DateAdded= DateTime.Now;
             var addedCartItem = await _cartItemRepository.AddAsync(cartItem);
             var addedCartItemDto = addedCartItem.Adapt<CartItemDTO>();
+            addedCartItemDto.Name = product.Name;
             return new Response<CartItemDTO>(addedCartItemDto);
         }
 
