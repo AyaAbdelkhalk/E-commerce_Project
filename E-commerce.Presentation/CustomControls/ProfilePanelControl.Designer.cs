@@ -84,7 +84,7 @@ namespace E_commerce.Presentation.CustomControls
             roundedPanel1.CornerRadius = 30;
             roundedPanel1.Location = new Point(45, 3);
             roundedPanel1.Name = "roundedPanel1";
-            roundedPanel1.Size = new Size(1386, 907);
+            roundedPanel1.Size = new Size(1386, 920);
             roundedPanel1.TabIndex = 0;
             roundedPanel1.Paint += roundedPanel1_Paint;
             // 
@@ -267,6 +267,7 @@ namespace E_commerce.Presentation.CustomControls
             INFOroundedPanel2.Name = "INFOroundedPanel2";
             INFOroundedPanel2.Size = new Size(1247, 356);
             INFOroundedPanel2.TabIndex = 1;
+            INFOroundedPanel2.Paint += INFOroundedPanel2_Paint;
             // 
             // Pinfo
             // 
@@ -570,7 +571,7 @@ namespace E_commerce.Presentation.CustomControls
             Controls.Add(roundedPanel1);
             Location = new Point(383, 40);
             Name = "ProfilePanelControl";
-            Size = new Size(1582, 925);
+            Size = new Size(1582, 938);
             Load += ProfilePanelControl_Load;
             roundedPanel1.ResumeLayout(false);
             DDDroundedPanel2.ResumeLayout(false);

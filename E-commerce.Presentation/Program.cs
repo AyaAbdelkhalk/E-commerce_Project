@@ -30,6 +30,11 @@ namespace E_commerce.Presentation
             var sessionStorage = container.Resolve<ISessionStorage>();
             var orderService = container.Resolve<IOrderService>();
             ApplicationConfiguration.Initialize();
+            SessionManager.Initialize(sessionStorage);
+            var loadUserTask = SessionManager.LoadLastUser(userServices);
+            loadUserTask.Wait();
+
+           
 
 
             #region Form Region
@@ -56,15 +61,6 @@ namespace E_commerce.Presentation
             //          System.Windows.Forms.Application.Run(new users(userServices , productServices , categoryServices));
 
 
-
-
-
-            //=======
-            //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
-            //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
-
-            //>>>>>>> master
-
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
             //SessionManager.Initialize(sessionStorage);
@@ -88,30 +84,29 @@ namespace E_commerce.Presentation
             #endregion
 
             //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService));
-            //System.Windows.Forms.Application.Run(new Dashboard(userServices , productServices , cartItemService));
-            System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
-            //SessionManager.Initialize(sessionStorage);
 
-            //var loadUserTask = SessionManager.LoadLastUser(userServices);
-            //loadUserTask.Wait();
 
-            //if (SessionManager.IsLoggedIn)
-            //{
-            //    if (SessionManager.IsAdmin())
-            //    {
-            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
-            //    }
-            //    else
-            //    {
-            //        //System.Windows.Forms.Application.Run(new Dashboard(userServices));
-            //        System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService));
 
-            //    }
-            //}
-            //else
-            //{
-            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            //}
+
+            if (SessionManager.IsLoggedIn)
+            {
+                if (SessionManager.IsAdmin())
+                {
+                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
+                }
+                else
+                {
+                    System.Windows.Forms.Application.Run(new Dashboard(userServices));
+                }
+            }
+            else
+            {
+                System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            }
+
+            //System.Windows.Forms.Application.Run(new RegisterForm(userServices));
+
+
         }
     }
     
