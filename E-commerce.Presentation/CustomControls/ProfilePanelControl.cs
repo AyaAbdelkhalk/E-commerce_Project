@@ -307,6 +307,11 @@ namespace E_commerce.Presentation.CustomControls
                 MessageBox.Show("User not found.");
             }
         }
+
+        private void INFOroundedPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 

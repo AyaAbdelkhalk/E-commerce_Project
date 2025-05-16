@@ -1,4 +1,5 @@
 ﻿using E_commerce.Application.Services.UserServices;
+using E_commerce.Presentation.CustomControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,12 @@ namespace E_commerce.Presentation
         public RegisterForm(IUserServices userServices)
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
             _userServices = userServices;
+            SidebarControl sidebarControl = new SidebarControl(_userServices);
+            sidebarControl.Visible = true;
+            this.Controls.Add(sidebarControl);
+
         }
         public RegisterForm()
         {
