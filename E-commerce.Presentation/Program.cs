@@ -34,7 +34,7 @@ namespace E_commerce.Presentation
             var loadUserTask = SessionManager.LoadLastUser(userServices);
             loadUserTask.Wait();
 
-           
+
 
 
             #region Form Region
@@ -84,25 +84,26 @@ namespace E_commerce.Presentation
             #endregion
 
             //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService));
+            System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
 
 
 
 
-            if (SessionManager.IsLoggedIn)
-            {
-                if (SessionManager.IsAdmin())
-                {
-                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
-                }
-                else
-                {
-                    System.Windows.Forms.Application.Run(new Dashboard(userServices));
-                }
-            }
-            else
-            {
-                System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            }
+            //if (SessionManager.IsLoggedIn)
+            //{
+            //    if (SessionManager.IsAdmin())
+            //    {
+            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
+            //    }
+            //    else
+            //    {
+            //        System.Windows.Forms.Application.Run(new Dashboard(userServices , productServices , cartItemService));
+            //    }
+            //}
+            //else
+            //{
+            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            //}
 
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices));
 

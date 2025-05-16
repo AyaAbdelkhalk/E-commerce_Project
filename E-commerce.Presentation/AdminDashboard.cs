@@ -160,7 +160,7 @@ namespace E_commerce.Presentation
 
         private void categorybtn_Click(object sender, EventArgs e)
         {
-            Form CategoryForm = new Category(_userServices, _productServices, _categoryServices);
+            Form CategoryForm = new Category(_userServices, _productServices, _categoryServices , _cartItemService);
             CategoryForm.Show();
             this.Hide();
         }
