@@ -61,15 +61,6 @@ namespace E_commerce.Presentation
             //          System.Windows.Forms.Application.Run(new users(userServices , productServices , categoryServices));
 
 
-
-
-
-            //=======
-            //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
-            //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
-
-            //>>>>>>> master
-
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
             //SessionManager.Initialize(sessionStorage);
@@ -114,6 +105,7 @@ namespace E_commerce.Presentation
             }
 
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices));
+
 
         }
     }

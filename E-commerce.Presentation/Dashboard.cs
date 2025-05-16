@@ -2,6 +2,8 @@
 using E_commerce.Application.Helper;
 using E_commerce.Application.Hepler;
 using E_commerce.Application.Interfaces;
+using E_commerce.Application.Services.ProductServices;
+using E_commerce.Application.Services;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
 using System;
@@ -14,12 +16,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ecommerce;
 
 namespace E_commerce.Presentation
 {
     public partial class Dashboard : Form
     {
         private readonly IUserServices _userServices;
+        private readonly IProductServices _productServices;
+        private readonly ICartItemService _cartItemService;
 
         public Dashboard(User user, IUserServices userServices)
         {
@@ -35,11 +40,15 @@ namespace E_commerce.Presentation
             customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
             customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
         }
-        public Dashboard(IUserServices userServices)
+        public Dashboard(IUserServices userServices, IProductServices productServices, ICartItemService cartItemService)
         {
             InitializeComponent();
             roundedPanel1.Visible = false;
             _userServices = userServices;
+            _productServices = productServices;
+            _cartItemService = cartItemService;
+
+
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
@@ -155,6 +164,48 @@ namespace E_commerce.Presentation
                 lbl_UserName.Text = "Guest";
             }
 
+            LoadProducts();
+
+
+        }
+
+        private async void LoadProducts()
+        {
+            try
+            {
+                flowLayoutPanel1.Controls.Clear();
+                flowLayoutPanel1.AutoScroll = true;
+
+                var products = await _productServices.GetAllProductsAvailableAsync();
+                if (products.Succeeded && products.Data != null)
+                {
+                    foreach (var product in products.Data)
+                    {
+                        UserControl1 userControl = new UserControl1(_cartItemService, product.ProductID, product.Name);
+                        userControl.SetData(product.Name, product.Price.ToString(),
+                                          product.ProductID.ToString(), product.ImagePath, product.Description);
+
+                        userControl.Width = flowLayoutPanel1.Width - 25;
+                        userControl.Height = 150;
+                        userControl.Margin = new Padding(5);
+
+                        flowLayoutPanel1.Controls.Add(userControl);
+                    }
+                }
+                else
+                {
+                    ShowErrorMessage("No products available or failed to load.");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage($"Error loading products: {ex.Message}");
+            }
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -437,6 +488,34 @@ namespace E_commerce.Presentation
             Profilebtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
             Profilebtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
             // Hide other panels
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            var text = SearchTextBox.Text.ToLower();
+
+            foreach (UserControl1 control in flowLayoutPanel1.Controls)
+            {
+                if (control._name.ToLower().Contains(text))
+                {
+                    control.Visible = true;
+                }
+                else
+                {
+                    control.Visible = false;
+                }
+            }
+        }
+
+        private void Dashboard_Click(object sender, EventArgs e)
+        {
+            LoadProducts();
+            flowLayoutPanel1.Visible = true;
         }
     }
 }
