@@ -610,7 +610,7 @@ namespace E_commerce.Presentation
         {
             
 
-            var cartForm = new CartItemForm(_cartItemService, _productServices);
+            var cartForm = new CartItemForm(_cartItemService, _productServices,_userServices);
             cartForm.Show();
             this.Hide();
         }

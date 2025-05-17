@@ -1,15 +1,13 @@
-﻿using Guna.UI2.WinForms.Suite;
-
-namespace E_commerce.Presentation
+﻿namespace E_commerce.Presentation.CustomControls
 {
-    partial class CartItemForm
+    partial class CartControl
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -22,10 +20,10 @@ namespace E_commerce.Presentation
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -33,23 +31,17 @@ namespace E_commerce.Presentation
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            CustomizableEdges customizableEdges1 = new CustomizableEdges();
-            CustomizableEdges customizableEdges2 = new CustomizableEdges();
-            CustomizableEdges customizableEdges3 = new CustomizableEdges();
-            CustomizableEdges customizableEdges4 = new CustomizableEdges();
-            CustomizableEdges customizableEdges5 = new CustomizableEdges();
-            CustomizableEdges customizableEdges6 = new CustomizableEdges();
-            CustomizableEdges customizableEdges7 = new CustomizableEdges();
-            CustomizableEdges customizableEdges8 = new CustomizableEdges();
-            CustomizableEdges customizableEdges9 = new CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             cartDataGridView = new Guna.UI2.WinForms.Guna2DataGridView();
             totalLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
             totalTextBox = new Guna.UI2.WinForms.Guna2TextBox();
             updateButton = new Guna.UI2.WinForms.Guna2GradientButton();
             checkoutButton = new Guna.UI2.WinForms.Guna2GradientButton();
-            closeButton = new Guna.UI2.WinForms.Guna2CircleButton();
-            minimizeButton = new Guna.UI2.WinForms.Guna2CircleButton();
-            maximizeButton = new Guna.UI2.WinForms.Guna2CircleButton();
             titleLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)cartDataGridView).BeginInit();
             SuspendLayout();
@@ -176,63 +168,6 @@ namespace E_commerce.Presentation
             checkoutButton.Text = "Checkout";
             checkoutButton.Click += CheckoutButton_Click;
             // 
-            // closeButton
-            // 
-            closeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            closeButton.DisabledState.BorderColor = Color.DarkGray;
-            closeButton.DisabledState.CustomBorderColor = Color.DarkGray;
-            closeButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            closeButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            closeButton.FillColor = Color.IndianRed;
-            closeButton.Font = new Font("Segoe UI", 9F);
-            closeButton.ForeColor = Color.White;
-            closeButton.Location = new Point(839, 12);
-            closeButton.Name = "closeButton";
-            closeButton.ShadowDecoration.CustomizableEdges = customizableEdges7;
-            closeButton.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            closeButton.Size = new Size(16, 17);
-            closeButton.TabIndex = 9;
-            closeButton.Text = "closeButton";
-            closeButton.Click += CloseButton_Click;
-            // 
-            // minimizeButton
-            // 
-            minimizeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            minimizeButton.DisabledState.BorderColor = Color.DarkGray;
-            minimizeButton.DisabledState.CustomBorderColor = Color.DarkGray;
-            minimizeButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            minimizeButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            minimizeButton.FillColor = Color.ForestGreen;
-            minimizeButton.Font = new Font("Segoe UI", 9F);
-            minimizeButton.ForeColor = Color.White;
-            minimizeButton.Location = new Point(801, 12);
-            minimizeButton.Name = "minimizeButton";
-            minimizeButton.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            minimizeButton.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            minimizeButton.Size = new Size(16, 17);
-            minimizeButton.TabIndex = 10;
-            minimizeButton.Text = "minimizeButton";
-            minimizeButton.Click += MinimizeButton_Click;
-            // 
-            // maximizeButton
-            // 
-            maximizeButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            maximizeButton.DisabledState.BorderColor = Color.DarkGray;
-            maximizeButton.DisabledState.CustomBorderColor = Color.DarkGray;
-            maximizeButton.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            maximizeButton.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            maximizeButton.FillColor = Color.Orange;
-            maximizeButton.Font = new Font("Segoe UI", 9F);
-            maximizeButton.ForeColor = Color.White;
-            maximizeButton.Location = new Point(820, 12);
-            maximizeButton.Name = "maximizeButton";
-            maximizeButton.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            maximizeButton.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            maximizeButton.Size = new Size(16, 17);
-            maximizeButton.TabIndex = 11;
-            maximizeButton.Text = "maximizeButton";
-            maximizeButton.Click += MaximizeButton_Click;
-            // 
             // titleLabel
             // 
             titleLabel.BackColor = Color.Transparent;
@@ -243,26 +178,18 @@ namespace E_commerce.Presentation
             titleLabel.TabIndex = 13;
             titleLabel.Text = "Your Cart";
             // 
-            // CartItemForm
+            // CartControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
-            ClientSize = new Size(1386, 920); 
             Controls.Add(titleLabel);
-            Controls.Add(maximizeButton);
-            Controls.Add(minimizeButton);
-            Controls.Add(closeButton);
             Controls.Add(checkoutButton);
             Controls.Add(updateButton);
             Controls.Add(totalTextBox);
             Controls.Add(totalLabel);
             Controls.Add(cartDataGridView);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "CartItemForm";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "CartItemForm";
-            Load += CartItemForm_Load;
+            Name = "CartControl";
+            Size = new Size(1386, 920);
             ((System.ComponentModel.ISupportInitialize)cartDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -275,12 +202,6 @@ namespace E_commerce.Presentation
         private Guna.UI2.WinForms.Guna2TextBox totalTextBox;
         private Guna.UI2.WinForms.Guna2GradientButton updateButton;
         private Guna.UI2.WinForms.Guna2GradientButton checkoutButton;
-        private Guna.UI2.WinForms.Guna2CircleButton closeButton;
-        private Guna.UI2.WinForms.Guna2CircleButton minimizeButton;
-        private Guna.UI2.WinForms.Guna2CircleButton maximizeButton;
         private Guna.UI2.WinForms.Guna2HtmlLabel titleLabel;
-        private CustomizableEdges customizableEdges9;
-        private CustomizableEdges customizableEdges10;
-        private CustomizableEdges customizableEdges11;
     }
 }

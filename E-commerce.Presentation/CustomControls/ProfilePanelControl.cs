@@ -21,6 +21,7 @@ namespace E_commerce.Presentation.CustomControls
         public ProfilePanelControl(IUserServices userServices)
         {
             InitializeComponent();
+
             _userServices = userServices;
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -173,10 +174,7 @@ namespace E_commerce.Presentation.CustomControls
 
         }
 
-        private void roundedPanel1_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
 
         private async void button1_Click(object sender, EventArgs e)
         {

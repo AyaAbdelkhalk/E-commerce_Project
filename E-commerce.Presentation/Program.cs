@@ -43,7 +43,7 @@ namespace E_commerce.Presentation
             // To customize application configuration such as set high DPI settings or default font,  
             // see https://aka.ms/applicationconfiguration.  
             //System.Windows.Forms.Application.Run(new Form1());
-            //System.Windows.Forms.Application.Run(new CartItemForm(cartItemService, productServices));
+            System.Windows.Forms.Application.Run(new RegisterForm(userServices,productServices, cartItemService));
             //System.Windows.Forms.Application.Run(new Dashboard());
             //System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
@@ -107,7 +107,11 @@ namespace E_commerce.Presentation
             //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
             //}
 
+
             System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, orderService, categoryServices, cartItemService));
+
+            ////System.Windows.Forms.Application.Run(new RegisterForm(userServices));
+
 
 
         }
