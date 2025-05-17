@@ -26,7 +26,5 @@ namespace E_commerce.Application.Services.ProductServices
         public Task<Response<string>> UpdateProductAsync(int id, CreateProductDto dto, string? localImageFullPath = null);
 
         public Task<Response<string>> DeleteProductAsync(int id);
-        public Task<int> GetTotalProductsAsync();
-        public Task<Dictionary<string, int>> GetProductsByCategory();
     }
 }

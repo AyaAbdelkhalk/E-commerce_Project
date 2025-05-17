@@ -141,18 +141,6 @@ namespace E_commerce.Application.Services.ProductServices
             }
         }
 
-        public async Task<int> GetTotalProductsAsync()
-        {
-            var products = await _productRepository.GetAllProductsAsync();
-            return products.Count;
-        }
-
-        public async Task<Dictionary<string, int>> GetProductsByCategory()
-        {
-            var products = await _productRepository.GetProductsByCategoryAsync();
-            return products;
-        }
-
 
     }
 }

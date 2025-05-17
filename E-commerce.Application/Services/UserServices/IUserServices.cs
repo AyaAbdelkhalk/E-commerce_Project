@@ -18,7 +18,5 @@ namespace E_commerce.Application.Services.UserServices
         Task<User?> GetUserById(int id);
 
         Task<Response<List<userD>>> GetAllUsers();
-        Task<int> GetTotalUsersAsync();
-
     }
 }
