@@ -273,12 +273,6 @@ namespace E_commerce.Application.Services.UserServices
             };
         }
 
-        public async Task<int> GetTotalUsersAsync()
-        {
-            var users = await _userRepository.GetAllAsync();
-            return users.Count();
-        }
-
     }
 
 }

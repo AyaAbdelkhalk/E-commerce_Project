@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace E_commerce.Application.Services.OrderService
 {
-    public interface IOrderService 
+    public interface IOrderService
     {
         Task<Response<OrderDisDto>> CheckoutAsync(int userId);
         Task ProcessOrderAsync(int orderId);
@@ -22,17 +22,6 @@ namespace E_commerce.Application.Services.OrderService
         //Admin  
         Task<List<OrderDisDto>> GetOrdersByStatusAsync(Status? status = null);
         Task<List<OrderDisDto>> GetOrderHistoryByUserIdAsync(int userId);
-        //for dashboard
-        Task<int> GetTotalOrders();
-
-        Task<Dictionary<string, int>> GetMonthlyOrders(int months);
-        Task<List<OrderDto>> GetRecentOrders(int count);
-
-        Task<Dictionary<string, int>> GetOrdersByCategory();
-
-        public Task<int> GetAllOrdersAsync();
-
-        public Task<Dictionary<string, decimal>> GetMonthlyOrderAmountAsync();
 
     }
 }

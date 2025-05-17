@@ -4,7 +4,6 @@ using E_commerce.Application.Hepler;
 using E_commerce.Application.Interfaces;
 using E_commerce.Core.Enum;
 using E_commerce.Core.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -196,56 +195,6 @@ namespace E_commerce.Application.Services.OrderService
                 }).ToList()
             }).ToList();
         }
-
-        public async Task<int> GetTotalOrders()
-        {
-            var ords= await _orderRepository.GetAllAsync();
-            return ords.Count();
-        }
-
-        public async Task<Dictionary<string, int>> GetOrdersByCategory()
-        {
-            var orders = await _orderRepository.GetOrdersByCategoryAsync();
-
-            return orders ?? new Dictionary<string, int>();
-        }
-
-        public async Task<Dictionary<string, int>> GetMonthlyOrders(int months)
-        {
-            var orders = await _orderRepository.GetMonthlyOrdersAsync(months);
-            return orders ?? new Dictionary<string, int>();
-        }
-        public async Task<List<OrderDto>> GetRecentOrders(int count)
-        {
-            var orders = await _orderRepository.GetRecentOrdersAsync(count);
-            var o = orders.Select(order => new OrderDto
-            {
-                OrderID = order.OrderID,
-                OrderDate = order.OrderDate,
-                TotalAmount = order.TotalAmount,
-                User = order.User != null ? order.User.FirstName + " " + order.User.LastName : "Unknown User",
-                Status = order.Status.ToString(),
-
-            }).ToList();
-            return o;
-
-
-        }
-        public async Task<int> GetAllOrdersAsync()
-        {
-            var orders = await _orderRepository.GetAllOrdersAsync();
-            return orders.Count;
-            
-        }
-
-        public async Task<Dictionary<string, decimal>> GetMonthlyOrderAmountAsync()
-        {
-            var orders = await _orderRepository.GetMonthlyOrderAmount();
-            return orders ?? new Dictionary<string, decimal>();
-        }
-
-
-
 
 
     }

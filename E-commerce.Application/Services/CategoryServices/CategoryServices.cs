@@ -165,11 +165,5 @@ namespace E_commerce.Application.Services
             }
         }
 
-        public async Task<int> GetTotalCategoriesAsync()
-        {
-            var c= await _categoryRepository.GetAllAsync();
-            return c.Count();
-        }
-
     }
 }
