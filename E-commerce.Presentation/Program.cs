@@ -2,6 +2,7 @@ using Autofac;
 using E_commerce.Application.Helper;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
+using E_commerce.Application.Services.AdminDashboardServices;
 using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
@@ -29,6 +30,7 @@ namespace E_commerce.Presentation
             var categoryServices = container.Resolve<ICategoryServices>();
             var sessionStorage = container.Resolve<ISessionStorage>();
             var orderService = container.Resolve<IOrderService>();
+            var adminDashboardService = container.Resolve<IAdminDashboardService>();
             ApplicationConfiguration.Initialize();
             SessionManager.Initialize(sessionStorage);
             var loadUserTask = SessionManager.LoadLastUser(userServices);
@@ -89,23 +91,23 @@ namespace E_commerce.Presentation
 
 
 
-            if (SessionManager.IsLoggedIn)
-            {
-                if (SessionManager.IsAdmin())
-                {
-                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
-                }
-                else
-                {
-                    System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService));
-                }
-            }
-            else
-            {
-                System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            }
+            //if (SessionManager.IsLoggedIn)
+            //{
+            //    if (SessionManager.IsAdmin())
+            //    {
+            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
+            //    }
+            //    else
+            //    {
+            //        System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService));
+            //    }
+            //}
+            //else
+            //{
+            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            //}
 
-            //System.Windows.Forms.Application.Run(new RegisterForm(userServices));
+            System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, orderService, categoryServices, cartItemService));
 
 
         }

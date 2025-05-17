@@ -24,5 +24,7 @@ namespace E_commerce.Application.Services
         public Task<Response<string>> UpdateCategoryAsync(UpdateCategoryDto dto);
 
         public Task<Response<string>> DeleteCategoryAsync(int id);
+
+        public Task<int> GetTotalCategoriesAsync();
     }
 }

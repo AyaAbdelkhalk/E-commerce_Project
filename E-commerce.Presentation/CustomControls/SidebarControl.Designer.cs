@@ -80,6 +80,7 @@
             pnl_sideBarClient.Name = "pnl_sideBarClient";
             pnl_sideBarClient.Size = new Size(323, 839);
             pnl_sideBarClient.TabIndex = 1;
+            pnl_sideBarClient.Paint += pnl_sideBarClient_Paint;
             // 
             // button5
             // 

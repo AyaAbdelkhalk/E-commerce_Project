@@ -2,6 +2,7 @@ using Autofac;
 using E_commerce.Application.Helper;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services;
+using E_commerce.Application.Services.AdminDashboardServices;
 using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
@@ -33,6 +34,7 @@ namespace E_commerce.Presentation
             builder.RegisterType<CategoryServices>().As<ICategoryServices>();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>();
             builder.RegisterType<OrderService>().As<IOrderService>();
+            builder.RegisterType<AdminDashboardService>().As<IAdminDashboardService>();
 
 
             // Register IGenericRepository<Product>
