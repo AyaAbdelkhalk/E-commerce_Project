@@ -20,7 +20,7 @@ namespace E_commerce.Presentation
         public static IContainer Inject()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<AppDbContext>().AsSelf();
+            builder.RegisterType<AppDbContext>().AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<UserRepository>().As<IUserRepository>();
             builder.RegisterType<UserServices>().As<IUserServices>();
