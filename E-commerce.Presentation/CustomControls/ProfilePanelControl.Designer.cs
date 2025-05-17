@@ -86,7 +86,6 @@ namespace E_commerce.Presentation.CustomControls
             roundedPanel1.Name = "roundedPanel1";
             roundedPanel1.Size = new Size(1386, 920);
             roundedPanel1.TabIndex = 0;
-            roundedPanel1.Paint += roundedPanel1_Paint;
             // 
             // DDDroundedPanel2
             // 

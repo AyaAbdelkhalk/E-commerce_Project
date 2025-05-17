@@ -2,58 +2,55 @@
 using E_commerce.Application.DTOs.CartItem;
 using E_commerce.Application.Helper;
 using System;
+using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using E_commerce.Application.DTOs;
 using E_commerce.Application.Services.ProductServices;
-using E_commerce.Presentation.CustomControls;
-using E_commerce.Application.Services.UserServices;
+using Guna.UI2.WinForms;
 
-namespace E_commerce.Presentation
+namespace E_commerce.Presentation.CustomControls
 {
-    public partial class CartItemForm : Form
+    public partial class CartControl : UserControl
     {
         private readonly ICartItemService _cartItemService;
         private readonly IProductServices _productService;
-        private readonly IUserServices _userServices;
 
-        public CartItemForm()
+        public CartControl(ICartItemService cartItemService, IProductServices productServices)
         {
             InitializeComponent();
-            // Remove the window controls since we're embedding
-            closeButton.Visible = false;
-            minimizeButton.Visible = false;
-            maximizeButton.Visible = false;
-
-            // Adjust layout for embedding
-            this.Padding = new Padding(20);
-            cartDataGridView.Location = new Point(20, 60);
-            cartDataGridView.Size = new Size(this.ClientSize.Width - 40, this.ClientSize.Height - 180);
-
-            totalLabel.Location = new Point(this.ClientSize.Width - 200, this.ClientSize.Height - 100);
-            totalTextBox.Location = new Point(this.ClientSize.Width - 120, this.ClientSize.Height - 100);
-
-            updateButton.Location = new Point(this.ClientSize.Width - 300, this.ClientSize.Height - 60);
-            checkoutButton.Location = new Point(this.ClientSize.Width - 160, this.ClientSize.Height - 60);
-
-            titleLabel.Location = new Point(20, 20);
-        }
-
-        public CartItemForm(ICartItemService cartItemService, IProductServices productServices, IUserServices userServices)
-        : this() // Call the default constructor first
-        {
             _cartItemService = cartItemService;
             _productService = productServices;
-            _userServices = userServices;
-            cartDataGridView.CellContentClick += cartDataGridView_CellContentClick;
 
-            SidebarControl sidebarControl = new SidebarControl(_userServices);
-            sidebarControl.Visible = true;
-            this.Controls.Add(sidebarControl);
+
+            SetupControl();
+            cartDataGridView.CellContentClick += cartDataGridView_CellContentClick;
         }
 
-        private async void CartItemForm_Load(object sender, EventArgs e)
+        private void SetupControl()
         {
+            // Initialize and layout controls
+            this.Size = new Size(800, 650); // Reduced width to fit better
+            this.BackColor = Color.White;
+
+            // Position controls with relative positioning
+            int margin = 20;
+            cartDataGridView.Location = new Point(margin, 60);
+            cartDataGridView.Size = new Size(this.Width - (2 * margin), this.Height - 180);
+
+            totalLabel.Location = new Point(this.Width - 200, this.Height - 100);
+            totalTextBox.Location = new Point(this.Width - 120, this.Height - 100);
+
+            updateButton.Location = new Point(this.Width - 300, this.Height - 60);
+            checkoutButton.Location = new Point(this.Width - 160, this.Height - 60);
+
+            titleLabel.Location = new Point(margin, 20);
+        }
+
+        protected override async void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
             await LoadCartItems();
         }
 
@@ -102,6 +99,7 @@ namespace E_commerce.Presentation
                         Alignment = DataGridViewContentAlignment.MiddleCenter
                     }
                 });
+
                 cartDataGridView.Columns.Add(new DataGridViewTextBoxColumn
                 {
                     DataPropertyName = "DateAdded",
@@ -202,20 +200,6 @@ namespace E_commerce.Presentation
         }
 
 
-
-        private void CloseButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void MinimizeButton_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void MaximizeButton_Click(object sender, EventArgs e)
-        {
-            this.WindowState = this.WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
-        }
     }
 }
+

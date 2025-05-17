@@ -1,4 +1,6 @@
 ﻿using E_commerce.Application.Helper;
+using E_commerce.Application.Services;
+using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,8 @@ namespace E_commerce.Presentation.CustomControls
     public partial class SidebarControl : UserControl
     {
         private readonly IUserServices _userServices; //1
+        private readonly ICartItemService _cartItemService; //2
+        private readonly IProductServices _productService; //3
 
         public SidebarControl(IUserServices _userServices)
         {
@@ -23,15 +27,19 @@ namespace E_commerce.Presentation.CustomControls
 
 
         }
+        public SidebarControl(IUserServices userServices,IProductServices productServices, ICartItemService cartItemService)
+        {
+            InitializeComponent();
+            _userServices = userServices;//2
+            _productService = productServices; //3
+            _cartItemService = cartItemService; //4
+        }
 
         private void SidebarControl_Load(object sender, EventArgs e)
         {
             this.SuspendLayout();
             // Set the user name label text
             lbl_UserName.Text += SessionManager.CurrentUser != null ? SessionManager.CurrentUser.FirstName : "Guest";
-
-            
-
 
         }
 
@@ -74,16 +82,35 @@ namespace E_commerce.Presentation.CustomControls
         #endregion
 
 
-
         #region My Cart
         private void MyCartbtn_Click(object sender, EventArgs e)
         {
+
+            // Remove existing CartControl if any
+            var existingCart = this.Parent.Controls.OfType<CartControl>().FirstOrDefault();
+            if (existingCart != null)
+            {
+                this.Parent.Controls.Remove(existingCart);
+            }
+
+            CartControl cart = new CartControl(_cartItemService, _productService);
+            cart.Visible = true;
+            cart.Dock = DockStyle.Right;
+            this.Parent.Controls.Add(cart);
+            cart.BringToFront();
+
+            // Adjust ProfilePanelControl position if it exists
+            var profile = this.Parent.Controls.OfType<ProfilePanelControl>().FirstOrDefault();
+            if (profile != null)
+            {
+                profile.Location = new Point(0, cart.Height);
+            }
 
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-
+            MyCartbtn_Click(sender, e);
         }
         #endregion
 
@@ -91,12 +118,28 @@ namespace E_commerce.Presentation.CustomControls
         #region Profile
         private void Profilebtn_Click(object sender, EventArgs e)
         {
+
+            // Remove existing ProfilePanelControl if any
+            var existingProfile = this.Parent.Controls.OfType<ProfilePanelControl>().FirstOrDefault();
+            if (existingProfile != null)
+            {
+                this.Parent.Controls.Remove(existingProfile);
+            }
+
             ProfilePanelControl profilePanelControl = new ProfilePanelControl(_userServices);
             profilePanelControl.Visible = true;
-            this.Controls.Add(profilePanelControl);
+
+            // Position below CartControl if it exists, otherwise at a default location
+            var cart = this.Parent.Controls.OfType<CartControl>().FirstOrDefault();
+            if (cart != null)
+            {
+                cart.Visible = false;
+            }
+ 
+
+            this.Parent.Controls.Add(profilePanelControl);
             profilePanelControl.BringToFront();
             profilePanelControl.ShowProfileSection();
-
         }
 
         private void pictureBox5_Click(object sender, EventArgs e)
