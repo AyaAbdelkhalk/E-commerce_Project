@@ -1,4 +1,7 @@
 ﻿using E_commerce.Application.Interfaces;
+using E_commerce.Application.Services.OrderService;
+using E_commerce.Application.Services.ProductServices;
+using E_commerce.Application.Services.UserServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,48 +12,35 @@ namespace E_commerce.Application.Services.AdminDashboardServices
 {
     public class AdminDashboardService : IAdminDashboardService
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IProductRepository _productRepository;
-        private readonly IOrderRepository _orderRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IUserServices _userServices;
+        private readonly IProductServices _productServices;
+        private readonly IOrderService _orderServices;
+        private readonly ICategoryServices _categoryServices;
 
-        public AdminDashboardService(IUserRepository userRepository, IProductRepository productRepository, IOrderRepository orderRepository, ICategoryRepository categoryRepository)
+        public AdminDashboardService(IUserServices userServices, IProductServices productRepository, IOrderService orderRepository, ICategoryServices categoryRepository)
         {
-            _userRepository = userRepository;
-            _productRepository = productRepository;
-            _orderRepository = orderRepository;
-            _categoryRepository = categoryRepository;
+            _userServices = userServices;
+            _productServices = productRepository;
+            _orderServices = orderRepository;
+            _categoryServices = categoryRepository;
         }
+
         public async Task<int> GetTotalUsersAsync()
         {
-            var users = await _userRepository.GetAllAsync();
-            return users.Count();
+            var users = await _userServices.GetAllUsers();
+            return users.Data.Count();
         }
         public async Task<int> GetTotalProductsAsync()
         {
-            var products = await _productRepository.GetAllAsync();
-            return products.Count();
-        }
-        public async Task<int> GetTotalOrdersAsync()
-        {
-            var orders = await _orderRepository.GetAllAsync();
-            return orders.Count();
+            var prds = await _productServices.GetAllProductsAvailableAsync();
+            return prds.Data.Count();
         }
         public async Task<int> GetTotalCategoriesAsync()
         {
-            var categories = await _categoryRepository.GetAllAsync();
-            return categories.Count();
+            var categories = await _categoryServices.GetAllCategoriesWithProductsAsync();
+            return categories.Data.Count();
         }
-        public async Task<decimal> GetTotalSalesAsync()
-        {
-            var orders = await _orderRepository.GetAllAsync();
-            decimal totalSales = 0;
-            foreach (var order in orders)
-            {
-                totalSales += order.TotalAmount;
-            }
-            return totalSales;
-        }
+        
 
     }
 }
