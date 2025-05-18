@@ -82,6 +82,7 @@ namespace E_commerce.Presentation
             _adminDashboardControl = new AdminDashboardControl(_userServices, _productServices, _orderService, _categoryServices, _cartItemService);
             this.Controls.Add(_adminDashboardControl);
             _adminDashboardControl.Visible = false;
+            SearchTextBox.Visible = false;
 
         }
 
@@ -126,6 +127,8 @@ namespace E_commerce.Presentation
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.BackColor = Color.FromArgb(200, 230, 250);
+            button1.ForeColor = Color.DarkBlue;
             _adminDashboardControl.Visible = false;
             var users = new users(_userServices, _productServices, _categoryServices, _cartItemService, _orderService);
             users.Show();
@@ -432,12 +435,15 @@ namespace E_commerce.Presentation
         {
             await LoadProducts();
             await LoadCategories();
+            SearchTextBox.Visible = true;
             _adminDashboardControl.Visible = false;
             flowLayoutPanel1.Visible = true;
             AddProductButton.Visible = true;
             gamedPanel.Visible = true;
             UpdateProductButton.Visible = true;
             DeleteProductButton.Visible = true;
+            productbtn.BackColor = Color.FromArgb(200, 230, 250);
+            productbtn.ForeColor = Color.DarkBlue;
 
 
 
@@ -784,6 +790,8 @@ namespace E_commerce.Presentation
         private void customerbtn_Click(object sender, EventArgs e)
         {
             _adminDashboardControl.Visible = false;
+            customerbtn.BackColor = Color.FromArgb(200, 230, 250);
+            customerbtn.ForeColor = Color.DarkBlue;
 
         }
 
