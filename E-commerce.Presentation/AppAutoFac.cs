@@ -22,24 +22,24 @@ namespace E_commerce.Presentation
             var builder = new ContainerBuilder();
             builder.RegisterType<AppDbContext>().AsSelf().InstancePerLifetimeScope();
 
-            builder.RegisterType<UserRepository>().As<IUserRepository>();
-            builder.RegisterType<UserServices>().As<IUserServices>();
-            builder.RegisterType<Core.Models.User>().AsSelf();
-            builder.RegisterType<CartItemService>().As<ICartItemService>();
-            builder.RegisterType<CartItemRepository>().As<ICartItemRepository>();
-            builder.RegisterType<ProductRepository>().As<IProductRepository>();
-            builder.RegisterType<ProductServices>().As<IProductServices>();
-            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>();
-            builder.RegisterType<CategoryServices>().As<ICategoryServices>();
-            builder.RegisterType<OrderRepository>().As<IOrderRepository>();
-            builder.RegisterType<OrderService>().As<IOrderService>();
+            builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<UserServices>().As<IUserServices>().InstancePerLifetimeScope();
+            builder.RegisterType<Core.Models.User>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<CartItemService>().As<ICartItemService>().InstancePerLifetimeScope();
+            builder.RegisterType<CartItemRepository>().As<ICartItemRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductServices>().As<IProductServices>().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryServices>().As<ICategoryServices>().InstancePerLifetimeScope();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<OrderService>().As<IOrderService>().InstancePerLifetimeScope();
 
 
             // Register IGenericRepository<Product>
-            builder.RegisterType<GenericRepository<Product>>().As<IGenericRepository<Product>>();
+            builder.RegisterType<GenericRepository<Product>>().As<IGenericRepository<Product>>().InstancePerLifetimeScope();
 
             builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
-            builder.RegisterType<products>().AsSelf();
+            builder.RegisterType<products>().AsSelf().InstancePerLifetimeScope();
 
             Container = builder.Build();
             return Container;

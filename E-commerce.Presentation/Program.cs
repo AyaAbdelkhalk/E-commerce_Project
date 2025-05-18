@@ -88,25 +88,30 @@ namespace E_commerce.Presentation
 
 
 
-            if (SessionManager.IsLoggedIn)
-            {
-                if (SessionManager.IsAdmin())
-                {
-                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
-                }
-                else
-                {
-                    System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService));
-                }
-            }
-            else
-            {
-                System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            }
+            //if (SessionManager.IsLoggedIn)
+            //{
+            //    if (SessionManager.IsAdmin())
+            //    {
+            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
+            //    }
+            //    else
+            //    {
+            //        System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService));
+            //    }
+            //}
+            //else
+            //{
+            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            //}
 
             ////System.Windows.Forms.Application.Run(new RegisterForm(userServices));
 
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, cartItemService));
+            //System.Windows.Forms.Application.Run(new RegisterForm(userServices,  cartItemService, productServices, orderService, categoryServices));
+
+            //aya
+            System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, orderService, categoryServices, cartItemService));
+
 
         }
     }
