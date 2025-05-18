@@ -23,6 +23,7 @@ namespace E_commerce.Presentation.CustomControls
         private readonly IOrderService _orderService; //4
         private readonly ICategoryServices _categoryService; //5
         private readonly ProfilePanelControl profilePanelControl;
+        private readonly CartControl cartControl;
 
 
         public SidebarControl(IUserServices userServices, ICartItemService cartItemService, IProductServices productService, IOrderService orderService, ICategoryServices categoryService)
@@ -37,7 +38,17 @@ namespace E_commerce.Presentation.CustomControls
 
 
         }
-   
+        public SidebarControl(IUserServices userServices, ICartItemService cartItemService, IProductServices productService, IOrderService orderService)
+        {
+            InitializeComponent();
+            _userServices = userServices;
+            _cartItemService = cartItemService;
+            _productService = productService;
+            _orderService = orderService;
+            cartControl = new CartControl(_cartItemService,_productService);
+
+
+        }
         private void SidebarControl_Load(object sender, EventArgs e)
         {
             this.SuspendLayout();

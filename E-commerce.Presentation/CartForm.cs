@@ -17,12 +17,7 @@ namespace E_commerce.Presentation
         private readonly ICartItemService _cartItemService;
         private readonly IProductServices _productService;
         private readonly IUserServices _userServices;
-<<<<<<< HEAD
-=======
-        private readonly ICategoryServices _categoryService;
->>>>>>> c206191a8a89647096f6e29e2638dc4513ba2201
         private readonly IOrderService _orderService;
-
         public CartItemForm()
         {
             InitializeComponent();
@@ -45,24 +40,16 @@ namespace E_commerce.Presentation
             titleLabel.Location = new Point(20, 20);
         }
 
-<<<<<<< HEAD
         public CartItemForm(ICartItemService cartItemService, IProductServices productServices, IUserServices userServices,IOrderService orderService)
-=======
-        public CartItemForm(ICartItemService cartItemService, IProductServices productServices, IUserServices userServices,IOrderService orderService,ICategoryServices categoryServices)
->>>>>>> c206191a8a89647096f6e29e2638dc4513ba2201
         : this() // Call the default constructor first
         {
             _cartItemService = cartItemService;
             _productService = productServices;
             _userServices = userServices;
-<<<<<<< HEAD
-=======
-            _categoryService = categoryServices;
->>>>>>> c206191a8a89647096f6e29e2638dc4513ba2201
             _orderService = orderService;
             cartDataGridView.CellContentClick += cartDataGridView_CellContentClick;
 
-            SidebarControl sidebarControl = new SidebarControl(_userServices, _cartItemService, _productService, _orderService, _categoryService);
+            SidebarControl sidebarControl = new SidebarControl(_userServices, _cartItemService, _productService, _orderService);
             sidebarControl.Visible = true;
             this.Controls.Add(sidebarControl);
         }
@@ -219,7 +206,7 @@ namespace E_commerce.Presentation
                 MessageBox.Show("Your cart is empty.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            var orderForm = new OrderForm(cartItems, this, _orderService, _cartItemService);
+            var orderForm = new OrderForm(cartItems, this, _orderService, _cartItemService,_productService);
             orderForm.Show();
             this.Hide();
         }
