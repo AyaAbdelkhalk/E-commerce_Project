@@ -10,6 +10,7 @@ using E_commerce.Application.Services;
 using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Helper;
 using E_commerce.Application.DTOs;
+using E_commerce.Application.Services.ProductServices;
 
 namespace E_commerce.Presentation
 {
@@ -19,6 +20,7 @@ namespace E_commerce.Presentation
         private readonly CartItemForm _cartForm;
         private readonly IOrderService _orderService;
         private readonly ICartItemService _cartItemService;
+        private readonly IProductServices _productService;
 
         public OrderForm()
         {
@@ -42,12 +44,13 @@ namespace E_commerce.Presentation
             titleLabel.Location = new Point(20, 20);
         }
 
-        public OrderForm(List<CartItemDTO> cartItems, CartItemForm cartForm, IOrderService orderService, ICartItemService cartItemService) : this()
+        public OrderForm(List<CartItemDTO> cartItems, CartItemForm cartForm, IOrderService orderService, ICartItemService cartItemService,IProductServices productServices) : this()
         {
             _cartItems = cartItems ?? new List<CartItemDTO>();
             _cartForm = cartForm ?? throw new ArgumentNullException(nameof(cartForm));
             _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
             _cartItemService = cartItemService ?? throw new ArgumentNullException(nameof(cartItemService));
+            _productService = productServices ?? throw new ArgumentNullException(nameof(productServices));
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
@@ -141,7 +144,7 @@ namespace E_commerce.Presentation
                 }
 
                 // Navigate to MyOrdersForm
-                var myOrdersForm = new MyOrdersForm(_orderService);
+                var myOrdersForm = new MyOrdersForm(_orderService,_productService);
                 myOrdersForm.Show();
                 this.Close();
             }

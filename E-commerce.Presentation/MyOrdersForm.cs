@@ -9,6 +9,7 @@ using E_commerce.Application.DTOs.Order;
 using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Helper;
 using Microsoft.Extensions.Logging;
+using E_commerce.Application.Services.ProductServices;
 
 namespace E_commerce.Presentation
 {
@@ -16,6 +17,7 @@ namespace E_commerce.Presentation
     {
         private readonly IOrderService _orderService;
         private readonly ILogger<MyOrdersForm> _logger;
+        private readonly IProductServices _productServices;
 
         public MyOrdersForm()
         {
@@ -33,9 +35,10 @@ namespace E_commerce.Presentation
             titleLabel.Location = new Point(20, 20);
         }
 
-        public MyOrdersForm(IOrderService orderService, ILogger<MyOrdersForm> logger = null) : this()
+        public MyOrdersForm(IOrderService orderService, IProductServices productService, ILogger<MyOrdersForm> logger = null) : this()
         {
             _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
+            _productServices = productService ?? throw new ArgumentNullException(nameof(productService));
             _logger = logger;
         }
 
@@ -63,6 +66,8 @@ namespace E_commerce.Presentation
 
                 dataGridViewOrders.Columns.Clear();
                 dataGridViewOrders.AutoGenerateColumns = false;
+
+
 
                 dataGridViewOrders.Columns.Add(new DataGridViewTextBoxColumn
                 {
@@ -138,7 +143,7 @@ namespace E_commerce.Presentation
             }
         }
 
-        private void ShowOrderDetails(OrderDisDto order)
+        private async void ShowOrderDetails(OrderDisDto order)
         {
             var detailsForm = new Form
             {
@@ -162,43 +167,36 @@ namespace E_commerce.Presentation
             // Clear any existing columns first
             dataGridView.Columns.Clear();
 
-            // Add Product Name column
+            // Add columns
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "ProductName",
                 HeaderText = "Product Name",
-                Name = "colProductName",
-                Width = 200,
-                ReadOnly = true
+                Name = "Name",
+                ReadOnly = true,
+                Width = 200
             });
 
-            // Add Price column with proper formatting
-            var priceColumn = new DataGridViewTextBoxColumn
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Price",
                 HeaderText = "Price",
-                Name = "colPrice",
-                Width = 100,
-                ReadOnly = true
-            };
+                Name = "Price",
+                ReadOnly = true,
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Format = "C2",
+                    Alignment = DataGridViewContentAlignment.MiddleRight
+                }
+            });
 
-            // Fix the currency formatting issue
-            priceColumn.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                Format = "C2",
-                FormatProvider = System.Globalization.CultureInfo.CurrentCulture,
-                Alignment = DataGridViewContentAlignment.MiddleRight
-            };
-            dataGridView.Columns.Add(priceColumn);
-
-            // Add Quantity column
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Quantity",
                 HeaderText = "Qty",
-                Name = "colQuantity",
-                Width = 60,
+                Name = "Quantity",
                 ReadOnly = true,
+                Width = 60,
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
                     Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -208,19 +206,53 @@ namespace E_commerce.Presentation
             // Verify and set the data source
             if (order.OrderDetails != null && order.OrderDetails.Any())
             {
-                // Debug output to verify data
-                _logger?.LogInformation($"Displaying {order.OrderDetails.Count} order details for order {order.OrderID}");
-                foreach (var detail in order.OrderDetails)
+                try
                 {
-                    _logger?.LogInformation($"Product: {detail.ProductName}, Price: {detail.Price}, Qty: {detail.Quantity}");
-                }
+                    // Enrich order details with product information
+                    var enrichedItems = new List<OrderDetailDto>();
 
-                dataGridView.DataSource = order.OrderDetails.ToList();
+                    foreach (var item in order.OrderDetails)
+                    {
+                        // Fetch product details for each order item
+                        var productResponse = await _productServices.GetProducByIdAsync(item.ProductID);
+                        if (productResponse.Succeeded)
+                        {
+                            // Create a new object with the enriched data
+                            enrichedItems.Add(new OrderDetailDto
+                            {
+                               
+                                ProductName = productResponse.Data?.Name ?? "Unknown Product",
+                                Price = productResponse.Data?.Price ?? 0m,
+                                Quantity = item.Quantity
+                                // Add other properties if needed
+                            });
+                        }
+                        else
+                        {
+                            // Fallback if product fetch fails
+                            enrichedItems.Add(new OrderDetailDto
+                            {
+                                
+                                ProductName = "Product not found",
+                                Price = 0m,
+                                Quantity = item.Quantity
+                            });
+                        }
+                    }
+
+                    dataGridView.DataSource = enrichedItems;
+                }
+                catch (Exception ex)
+                {
+                    _logger?.LogError(ex, "Error enriching order details");
+                    MessageBox.Show("Error loading product details", "Error",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dataGridView.DataSource = order.OrderDetails.ToList();
+                }
             }
             else
             {
-                _logger?.LogWarning($"No order details found for order {order.OrderID}");
-                dataGridView.DataSource = new List<OrderDetailDto>(); // Empty list
+                dataGridView.DataSource = new List<OrderDetailDto>();
             }
 
             var closeButton = new Guna2GradientButton

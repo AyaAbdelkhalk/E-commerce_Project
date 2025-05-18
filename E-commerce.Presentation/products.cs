@@ -46,9 +46,8 @@ namespace E_commerce.Presentation
             _userServices = userServices;
             _cartItemService = cartItemService;
             _orderService = orderService;
+        }
 
-<<<<<<< HEAD
-=======
         public products(IProductServices productServices, ICategoryServices categoryServices, IUserServices userServices, ICartItemService cartItemService, IOrderService orderService)
         {
             InitializeComponent();
@@ -57,7 +56,6 @@ namespace E_commerce.Presentation
             _userServices = userServices;
             _cartItemService = cartItemService;
             _orderService = orderService;
->>>>>>> c206191a8a89647096f6e29e2638dc4513ba2201
             LoadCategories();
             SetupForm();
         }
