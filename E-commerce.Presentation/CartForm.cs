@@ -8,6 +8,7 @@ using E_commerce.Application.DTOs;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Presentation.CustomControls;
 using E_commerce.Application.Services.UserServices;
+using E_commerce.Application.Services.OrderService;
 
 namespace E_commerce.Presentation
 {
@@ -16,6 +17,7 @@ namespace E_commerce.Presentation
         private readonly ICartItemService _cartItemService;
         private readonly IProductServices _productService;
         private readonly IUserServices _userServices;
+        private readonly IOrderService _orderService;
 
         public CartItemForm()
         {
@@ -39,12 +41,13 @@ namespace E_commerce.Presentation
             titleLabel.Location = new Point(20, 20);
         }
 
-        public CartItemForm(ICartItemService cartItemService, IProductServices productServices, IUserServices userServices)
+        public CartItemForm(ICartItemService cartItemService, IProductServices productServices, IUserServices userServices,IOrderService orderService)
         : this() // Call the default constructor first
         {
             _cartItemService = cartItemService;
             _productService = productServices;
             _userServices = userServices;
+            _orderService = orderService;
             cartDataGridView.CellContentClick += cartDataGridView_CellContentClick;
 
             SidebarControl sidebarControl = new SidebarControl(_userServices);
@@ -198,7 +201,15 @@ namespace E_commerce.Presentation
 
         private void CheckoutButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Checkout functionality to be implemented.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var cartItems = (cartDataGridView.DataSource as List<CartItemDTO>)?.ToList() ?? new List<CartItemDTO>();
+            if (cartItems.Count == 0)
+            {
+                MessageBox.Show("Your cart is empty.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            var orderForm = new OrderForm(cartItems, this, _orderService, _cartItemService);
+            orderForm.Show();
+            this.Hide();
         }
 
 

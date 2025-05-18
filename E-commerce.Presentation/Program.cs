@@ -29,6 +29,7 @@ namespace E_commerce.Presentation
             var categoryServices = container.Resolve<ICategoryServices>();
             var sessionStorage = container.Resolve<ISessionStorage>();
             var orderService = container.Resolve<IOrderService>();
+
             ApplicationConfiguration.Initialize();
             SessionManager.Initialize(sessionStorage);
             var loadUserTask = SessionManager.LoadLastUser(userServices);
@@ -41,12 +42,12 @@ namespace E_commerce.Presentation
             // To customize application configuration such as set high DPI settings or default font,  
             // see https://aka.ms/applicationconfiguration.  
             //System.Windows.Forms.Application.Run(new Form1());
-            System.Windows.Forms.Application.Run(new RegisterForm(userServices,productServices, cartItemService));
+            //System.Windows.Forms.Application.Run(new CartItemForm(cartItemService,productServices,userServices,orderService));
             //System.Windows.Forms.Application.Run(new Dashboard());
             //System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
 
-            //System.Windows.Forms.Application.Run(new products(productServices, categoryServices));
+            System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices,cartItemService,orderService));
             //<<<<<<< updd
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Order());
@@ -63,23 +64,23 @@ namespace E_commerce.Presentation
 
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
-            //SessionManager.Initialize(sessionStorage);
-            ////await SessionManager.LoadLastUser(userServices);
-            //if (SessionManager.IsLoggedIn)
+            //sessionmanager.initialize(sessionstorage);
+            ////await sessionmanager.loadlastuser(userservices);
+            //if (sessionmanager.isloggedin)
             //{
-            //    if (SessionManager.IsAdmin())
+            //    if (sessionmanager.isadmin())
             //    {
-            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
+            //        system.windows.forms.application.run(new admindashboard(productservices, categoryservices, userservices, cartitemservice));
             //    }
             //    else
             //    {
 
-            //        System.Windows.Forms.Application.Run(new Dashboard(userServices));
+            //        system.windows.forms.application.run(new dashboard(userservices));
             //    }
             //}
             //else
             //{
-            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            //    system.windows.forms.application.run(new login_form(userservices));
             //} 
             #endregion
 

@@ -1,12 +1,12 @@
-﻿using static Guna.UI2.WinForms.Suite.Descriptions;
-using static System.Net.Mime.MediaTypeNames;
-using Font = System.Drawing.Font;
+﻿using Guna.UI2.WinForms.Suite;
+using Guna.UI2.WinForms;
 
 namespace E_commerce.Presentation
 {
     partial class OrderForm
     {
         private System.ComponentModel.IContainer components = null;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -15,104 +15,101 @@ namespace E_commerce.Presentation
             }
             base.Dispose(disposing);
         }
-        private void guna2CircleButtonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            dataGridViewCart = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
-            dataGridViewButtonColumn1 = new DataGridViewButtonColumn();
-            guna2HtmlLabelTotal = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            textBoxTotal = new Guna.UI2.WinForms.Guna2TextBox();
-            btnOK = new Guna.UI2.WinForms.Guna2GradientButton();
-            btnCancel = new Guna.UI2.WinForms.Guna2GradientButton();
-            guna2CustomGradientPanel = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
-            guna2CircleButtonClose = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButtonMinimize = new Guna.UI2.WinForms.Guna2CircleButton();
-            guna2CircleButtonMaximize = new Guna.UI2.WinForms.Guna2CircleButton();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            CustomizableEdges customizableEdges1 = new CustomizableEdges();
+            CustomizableEdges customizableEdges2 = new CustomizableEdges();
+            CustomizableEdges customizableEdges3 = new CustomizableEdges();
+            CustomizableEdges customizableEdges4 = new CustomizableEdges();
+            CustomizableEdges customizableEdges5 = new CustomizableEdges();
+            CustomizableEdges customizableEdges6 = new CustomizableEdges();
+            CustomizableEdges customizableEdges7 = new CustomizableEdges();
+            CustomizableEdges customizableEdges8 = new CustomizableEdges();
+            CustomizableEdges customizableEdges9 = new CustomizableEdges();
+
+            dataGridViewCart = new Guna2DataGridView();
+            guna2HtmlLabelTotal = new Guna2HtmlLabel();
+            textBoxTotal = new Guna2TextBox();
+            btnOK = new Guna2GradientButton();
+            btnCancel = new Guna2GradientButton();
+            guna2CircleButtonClose = new Guna2CircleButton();
+            guna2CircleButtonMinimize = new Guna2CircleButton();
+            guna2CircleButtonMaximize = new Guna2CircleButton();
+            titleLabel = new Guna2HtmlLabel();
+
             ((System.ComponentModel.ISupportInitialize)dataGridViewCart).BeginInit();
-            guna2CustomGradientPanel.SuspendLayout();
             SuspendLayout();
-            // 
+
             // dataGridViewCart
-            // 
             dataGridViewCart.AllowUserToAddRows = false;
-            dataGridViewCart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCart.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCart.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewButtonColumn1 });
-            dataGridViewCart.Location = new Point(20, 20);
+            dataGridViewCart.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridViewCart.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCart.BackgroundColor = SystemColors.ControlDark;
+            dataGridViewCart.BorderStyle = BorderStyle.FixedSingle;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridViewCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCart.ColumnHeadersHeight = 30;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridViewCart.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCart.GridColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCart.Location = new Point(140, 80);
             dataGridViewCart.Name = "dataGridViewCart";
-            dataGridViewCart.RowHeadersWidth = 51;
-            dataGridViewCart.Size = new Size(951, 300);
-            dataGridViewCart.TabIndex = 4;
+            dataGridViewCart.RowHeadersVisible = false;
+            dataGridViewCart.RowTemplate.Height = 30;
+            dataGridViewCart.Size = new Size(715, 435);
+            dataGridViewCart.TabIndex = 0;
+            dataGridViewCart.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dataGridViewCart.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dataGridViewCart.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dataGridViewCart.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dataGridViewCart.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dataGridViewCart.ThemeStyle.BackColor = SystemColors.ControlDark;
+            dataGridViewCart.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCart.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCart.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCart.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCart.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dataGridViewCart.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCart.ThemeStyle.HeaderStyle.Height = 30;
+            dataGridViewCart.ThemeStyle.ReadOnly = false;
+            dataGridViewCart.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dataGridViewCart.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCart.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            dataGridViewCart.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCart.ThemeStyle.RowsStyle.Height = 30;
+            dataGridViewCart.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCart.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCart.CellContentClick += dataGridViewCart_CellContentClick;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewButtonColumn1
-            // 
-            dataGridViewButtonColumn1.MinimumWidth = 6;
-            dataGridViewButtonColumn1.Name = "dataGridViewButtonColumn1";
-            // 
+
             // guna2HtmlLabelTotal
-            // 
             guna2HtmlLabelTotal.BackColor = Color.Transparent;
             guna2HtmlLabelTotal.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            guna2HtmlLabelTotal.Location = new Point(367, 340);
+            guna2HtmlLabelTotal.Location = new Point(407, 527);
             guna2HtmlLabelTotal.Name = "guna2HtmlLabelTotal";
-            guna2HtmlLabelTotal.Size = new Size(39, 19);
-            guna2HtmlLabelTotal.TabIndex = 3;
-            guna2HtmlLabelTotal.Text = "Total:";
-            // 
+            guna2HtmlLabelTotal.Size = new Size(49, 19);
+            guna2HtmlLabelTotal.TabIndex = 1;
+            guna2HtmlLabelTotal.Text = "TOTAL:";
+
             // textBoxTotal
-            // 
             textBoxTotal.CustomizableEdges = customizableEdges1;
-            textBoxTotal.DefaultText = "";
+            textBoxTotal.DefaultText = "0.00";
             textBoxTotal.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             textBoxTotal.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             textBoxTotal.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
@@ -121,17 +118,15 @@ namespace E_commerce.Presentation
             textBoxTotal.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             textBoxTotal.Font = new Font("Segoe UI", 9F);
             textBoxTotal.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxTotal.Location = new Point(467, 340);
+            textBoxTotal.Location = new Point(525, 521);
             textBoxTotal.Name = "textBoxTotal";
             textBoxTotal.PlaceholderText = "";
             textBoxTotal.SelectedText = "";
             textBoxTotal.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            textBoxTotal.Size = new Size(150, 36);
+            textBoxTotal.Size = new Size(75, 36);
             textBoxTotal.TabIndex = 2;
-            // 
+
             // btnOK
-            // 
-            btnOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnOK.CustomizableEdges = customizableEdges3;
             btnOK.DisabledState.BorderColor = Color.DarkGray;
             btnOK.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -141,17 +136,15 @@ namespace E_commerce.Presentation
             btnOK.FillColor2 = Color.Black;
             btnOK.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             btnOK.ForeColor = Color.White;
-            btnOK.Location = new Point(293, 393);
+            btnOK.Location = new Point(365, 563);
             btnOK.Name = "btnOK";
-            btnOK.RightToLeft = RightToLeft.No;
             btnOK.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            btnOK.Size = new Size(159, 43);
-            btnOK.TabIndex = 1;
+            btnOK.Size = new Size(120, 45);
+            btnOK.TabIndex = 3;
             btnOK.Text = "OK";
             btnOK.Click += btnOK_Click;
-            // 
+
             // btnCancel
-            // 
             btnCancel.CustomizableEdges = customizableEdges5;
             btnCancel.DisabledState.BorderColor = Color.DarkGray;
             btnCancel.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -161,37 +154,15 @@ namespace E_commerce.Presentation
             btnCancel.FillColor2 = Color.Black;
             btnCancel.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold);
             btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(458, 393);
+            btnCancel.Location = new Point(505, 563);
             btnCancel.Name = "btnCancel";
             btnCancel.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            btnCancel.Size = new Size(159, 43);
-            btnCancel.TabIndex = 0;
+            btnCancel.Size = new Size(120, 45);
+            btnCancel.TabIndex = 4;
             btnCancel.Text = "Cancel";
             btnCancel.Click += btnCancel_Click;
-            // 
-            // guna2CustomGradientPanel
-            // 
-            guna2CustomGradientPanel.Controls.Add(guna2CircleButtonClose);
-            guna2CustomGradientPanel.Controls.Add(guna2CircleButtonMinimize);
-            guna2CustomGradientPanel.Controls.Add(dataGridViewCart);
-            guna2CustomGradientPanel.Controls.Add(guna2CircleButtonMaximize);
-            guna2CustomGradientPanel.Controls.Add(guna2HtmlLabelTotal);
-            guna2CustomGradientPanel.Controls.Add(textBoxTotal);
-            guna2CustomGradientPanel.Controls.Add(btnOK);
-            guna2CustomGradientPanel.Controls.Add(btnCancel);
-            guna2CustomGradientPanel.CustomizableEdges = customizableEdges9;
-            guna2CustomGradientPanel.FillColor = SystemColors.InactiveCaption;
-            guna2CustomGradientPanel.FillColor2 = SystemColors.MenuText;
-            guna2CustomGradientPanel.FillColor3 = Color.DarkSlateGray;
-            guna2CustomGradientPanel.Location = new Point(0, 0);
-            guna2CustomGradientPanel.Name = "guna2CustomGradientPanel";
-            guna2CustomGradientPanel.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2CustomGradientPanel.Size = new Size(1132, 535);
-            guna2CustomGradientPanel.TabIndex = 5;
-            guna2CustomGradientPanel.Paint += guna2CircleButtonClose_Click;
-            // 
+
             // guna2CircleButtonClose
-            // 
             guna2CircleButtonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButtonClose.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButtonClose.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -200,104 +171,92 @@ namespace E_commerce.Presentation
             guna2CircleButtonClose.FillColor = Color.IndianRed;
             guna2CircleButtonClose.Font = new Font("Segoe UI", 9F);
             guna2CircleButtonClose.ForeColor = Color.White;
-            guna2CircleButtonClose.Location = new Point(955, 3);
+            guna2CircleButtonClose.Location = new Point(839, 12);
             guna2CircleButtonClose.Name = "guna2CircleButtonClose";
             guna2CircleButtonClose.ShadowDecoration.CustomizableEdges = customizableEdges7;
             guna2CircleButtonClose.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CircleButtonClose.Size = new Size(16, 17);
-            guna2CircleButtonClose.TabIndex = 6;
+            guna2CircleButtonClose.TabIndex = 9;
             guna2CircleButtonClose.Text = "X";
             guna2CircleButtonClose.Click += guna2CircleButtonClose_Click;
-            // 
+
             // guna2CircleButtonMinimize
-            // 
             guna2CircleButtonMinimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButtonMinimize.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButtonMinimize.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2CircleButtonMinimize.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             guna2CircleButtonMinimize.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButtonMinimize.FillColor = Color.Orange;
+            guna2CircleButtonMinimize.FillColor = Color.ForestGreen;
             guna2CircleButtonMinimize.Font = new Font("Segoe UI", 9F);
             guna2CircleButtonMinimize.ForeColor = Color.White;
-            guna2CircleButtonMinimize.Location = new Point(917, 3);
+            guna2CircleButtonMinimize.Location = new Point(801, 12);
             guna2CircleButtonMinimize.Name = "guna2CircleButtonMinimize";
             guna2CircleButtonMinimize.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2CircleButtonMinimize.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CircleButtonMinimize.Size = new Size(16, 17);
-            guna2CircleButtonMinimize.TabIndex = 7;
+            guna2CircleButtonMinimize.TabIndex = 10;
             guna2CircleButtonMinimize.Text = "-";
-            // 
+            guna2CircleButtonMinimize.Click += guna2CircleButtonMinimize_Click;
+
             // guna2CircleButtonMaximize
-            // 
             guna2CircleButtonMaximize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2CircleButtonMaximize.DisabledState.BorderColor = Color.DarkGray;
             guna2CircleButtonMaximize.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2CircleButtonMaximize.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             guna2CircleButtonMaximize.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButtonMaximize.FillColor = Color.ForestGreen;
+            guna2CircleButtonMaximize.FillColor = Color.Orange;
             guna2CircleButtonMaximize.Font = new Font("Segoe UI", 9F);
             guna2CircleButtonMaximize.ForeColor = Color.White;
-            guna2CircleButtonMaximize.Location = new Point(936, 3);
+            guna2CircleButtonMaximize.Location = new Point(820, 12);
             guna2CircleButtonMaximize.Name = "guna2CircleButtonMaximize";
-            guna2CircleButtonMaximize.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2CircleButtonMaximize.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2CircleButtonMaximize.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CircleButtonMaximize.Size = new Size(16, 17);
-            guna2CircleButtonMaximize.TabIndex = 8;
+            guna2CircleButtonMaximize.TabIndex = 11;
             guna2CircleButtonMaximize.Text = "□";
-            // 
+            guna2CircleButtonMaximize.Click += guna2CircleButtonMaximize_Click;
+
+            // titleLabel
+            titleLabel.BackColor = Color.Transparent;
+            titleLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            titleLabel.Location = new Point(140, 40);
+            titleLabel.Name = "titleLabel";
+            titleLabel.Size = new Size(150, 34);
+            titleLabel.TabIndex = 13;
+            titleLabel.Text = "Your Order";
+
             // OrderForm
-            // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(993, 527);
-            Controls.Add(guna2CustomGradientPanel);
+            AutoScroll = true;
+            ClientSize = new Size(1386, 920);
+            Controls.Add(titleLabel);
+            Controls.Add(guna2CircleButtonMaximize);
+            Controls.Add(guna2CircleButtonMinimize);
+            Controls.Add(guna2CircleButtonClose);
+            Controls.Add(btnCancel);
+            Controls.Add(btnOK);
+            Controls.Add(textBoxTotal);
+            Controls.Add(guna2HtmlLabelTotal);
+            Controls.Add(dataGridViewCart);
             FormBorderStyle = FormBorderStyle.None;
             Name = "OrderForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Order Details";
             Load += OrderForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewCart).EndInit();
-            guna2CustomGradientPanel.ResumeLayout(false);
-            guna2CustomGradientPanel.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
-        private void OrderForm_Load(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void dataGridViewCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private System.Windows.Forms.DataGridView dataGridViewCart;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabelTotal;
-        private Guna.UI2.WinForms.Guna2TextBox textBoxTotal;
-        private Guna.UI2.WinForms.Guna2GradientButton btnOK;
-        private Guna.UI2.WinForms.Guna2GradientButton btnCancel;
-        private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButtonClose;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButtonMinimize;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButtonMaximize;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewButtonColumn dataGridViewButtonColumn1;
+        private Guna2DataGridView dataGridViewCart;
+        private Guna2HtmlLabel guna2HtmlLabelTotal;
+        private Guna2TextBox textBoxTotal;
+        private Guna2GradientButton btnOK;
+        private Guna2GradientButton btnCancel;
+        private Guna2CircleButton guna2CircleButtonClose;
+        private Guna2CircleButton guna2CircleButtonMinimize;
+        private Guna2CircleButton guna2CircleButtonMaximize;
+        private Guna2HtmlLabel titleLabel;
     }
-
 }

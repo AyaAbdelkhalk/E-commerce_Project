@@ -30,6 +30,21 @@ namespace E_commerce.Infrastructure
             modelBuilder.Entity<Category>()
                .HasIndex(c => c.Name)
                .IsUnique();
+            // Configure relationships
+            modelBuilder.Entity<OrderDetail>()
+                .HasOne(od => od.Order)
+                .WithMany(o => o.OrderDetails)
+                .HasForeignKey(od => od.OrderID);
+
+            modelBuilder.Entity<OrderDetail>()
+                .HasOne(od => od.Product)
+                .WithMany()
+                .HasForeignKey(od => od.ProductID);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserID);
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }

@@ -13,6 +13,7 @@ using Ecommerce;
 using Guna.UI2.WinForms;
 using E_commerce.Core.Models;
 using E_commerce.Application.Services.UserServices;
+using E_commerce.Application.Services.OrderService;
 
 namespace E_commerce.Presentation
 {
@@ -22,6 +23,7 @@ namespace E_commerce.Presentation
         private readonly ICategoryServices _categoryServices;
         private readonly IUserServices _userServices;
         private readonly ICartItemService _cartItemService;
+        private readonly IOrderService _orderService;
         private bool isUpdateMode = false;
         private int currentProductId = 0;
 
@@ -36,7 +38,18 @@ namespace E_commerce.Presentation
             LoadCategories();
             SetupForm();
         }
+        public products(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices, ICartItemService cartItemService, IOrderService orderService)
+        {
+            InitializeComponent();
+            _productServices = productServices;
+            _categoryServices = categoryServices;
+            _userServices = userServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
 
+            LoadCategories();
+            SetupForm();
+        }
 
         private void ResetForm()
         {
