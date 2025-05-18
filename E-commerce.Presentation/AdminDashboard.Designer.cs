@@ -174,7 +174,7 @@ namespace E_commerce.Presentation
             pnl_sideBar.Controls.Add(lbl_employeeName);
             pnl_sideBar.CornerRadius = 30;
             pnl_sideBar.Location = new Point(17, 35);
-            pnl_sideBar.Margin = new Padding(8, 8, 8, 8);
+            pnl_sideBar.Margin = new Padding(8);
             pnl_sideBar.Name = "pnl_sideBar";
             pnl_sideBar.Size = new Size(323, 651);
             pnl_sideBar.TabIndex = 1;
@@ -336,6 +336,7 @@ namespace E_commerce.Presentation
             Orderbtn.Text = "Order Mangement   ";
             Orderbtn.TextAlign = ContentAlignment.MiddleLeft;
             Orderbtn.UseVisualStyleBackColor = false;
+            Orderbtn.Click += Orderbtn_Click;
             // 
             // pictureBox2
             // 
@@ -363,6 +364,7 @@ namespace E_commerce.Presentation
             Dashboardbtn.Text = "Dashboard ";
             Dashboardbtn.TextAlign = ContentAlignment.MiddleLeft;
             Dashboardbtn.UseVisualStyleBackColor = false;
+            Dashboardbtn.Click += Dashboardbtn_Click;
             // 
             // pictureBox1
             // 
@@ -1243,7 +1245,7 @@ namespace E_commerce.Presentation
             SearchTextBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             SearchTextBox.Font = new Font("Segoe UI", 9F);
             SearchTextBox.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            SearchTextBox.Location = new Point(622, 19);
+            SearchTextBox.Location = new Point(622, 43);
             SearchTextBox.Margin = new Padding(3, 5, 3, 5);
             SearchTextBox.Name = "SearchTextBox";
             SearchTextBox.PlaceholderText = "Search For Products";

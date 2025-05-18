@@ -39,8 +39,7 @@ namespace E_commerce.Infrastructure.Repository
 
         public async Task<T> GetByIdAsync(int id)
         {
-            var entity = await _dbSet.FindAsync(id);
-            return entity;
+            return _dbSet.FindAsync(id).Result;
         }
 
         public async Task<T> UpdateAsync(T entity)

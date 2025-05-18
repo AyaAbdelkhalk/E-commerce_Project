@@ -29,6 +29,7 @@ namespace E_commerce.Presentation
             var categoryServices = container.Resolve<ICategoryServices>();
             var sessionStorage = container.Resolve<ISessionStorage>();
             var orderService = container.Resolve<IOrderService>();
+            
             ApplicationConfiguration.Initialize();
             SessionManager.Initialize(sessionStorage);
             var loadUserTask = SessionManager.LoadLastUser(userServices);
@@ -88,29 +89,31 @@ namespace E_commerce.Presentation
 
 
 
-            //if (SessionManager.IsLoggedIn)
-            //{
-            //    if (SessionManager.IsAdmin())
-            //    {
-            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
-            //    }
-            //    else
-            //    {
-            //        System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService));
-            //    }
-            //}
-            //else
-            //{
-            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            //}
+            if (SessionManager.IsLoggedIn)
+            {
+                if (SessionManager.IsAdmin())
+                {
+                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
+                }
+                else
+                {
+                    System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService,orderService, categoryServices));
+                }
+            }
+            else
+            {
+                System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            }
 
             ////System.Windows.Forms.Application.Run(new RegisterForm(userServices));
 
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, cartItemService));
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices,  cartItemService, productServices, orderService, categoryServices));
 
-            //aya
-            System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, orderService, categoryServices, cartItemService));
+            //for test cart item but 
+            //System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, orderService, categoryServices, cartItemService));
+
+            //System.Windows.Forms.Application.Run(new ClientDashboard(userServices, productServices, orderService, categoryServices, cartItemService));
 
 
         }

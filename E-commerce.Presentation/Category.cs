@@ -1,4 +1,5 @@
 ﻿using E_commerce.Application.Services;
+using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
 using Ecommerce;
@@ -20,14 +21,19 @@ namespace E_commerce.Presentation
         private readonly ICategoryServices _categoryServices;
         private readonly IUserServices _userServices;
         private readonly ICartItemService _cartItemService;
-        public Category(IUserServices userServices , IProductServices productServices, ICategoryServices categoryServices , ICartItemService cartItemService)
+        private readonly IOrderService _orderService;
+        
+
+        public Category(IProductServices productServices, ICategoryServices categoryServices, IUserServices userServices, ICartItemService cartItemService, IOrderService orderService)
         {
             InitializeComponent();
             _productServices = productServices;
             _categoryServices = categoryServices;
             _userServices = userServices;
             _cartItemService = cartItemService;
+            _orderService = orderService;
         }
+
         private DataGridViewRow selectedRow;
 
 
@@ -427,7 +433,7 @@ namespace E_commerce.Presentation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var admin = new AdminDashboard(_productServices, _categoryServices, _userServices, _cartItemService);
+            var admin = new AdminDashboard(_productServices, _categoryServices, _userServices, _cartItemService,_orderService);
             admin.Show();
             this.Hide();
         }

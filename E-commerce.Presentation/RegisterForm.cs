@@ -25,18 +25,18 @@ namespace E_commerce.Presentation
         private readonly ICategoryServices _categoryService;
 
 
-        public RegisterForm(IUserServices userServices)
-        {
-            InitializeComponent();
+        //public RegisterForm(IUserServices userServices)
+        //{
+        //    InitializeComponent();
 
-            this.WindowState = FormWindowState.Maximized;
-            _userServices = userServices;
-            SidebarControl sidebarControl = new SidebarControl(_userServices);
-            sidebarControl.Visible = true;
-            this.Controls.Add(sidebarControl);
+        //    this.WindowState = FormWindowState.Maximized;
+        //    _userServices = userServices;
+        //    SidebarControl sidebarControl = new SidebarControl(_userServices);
+        //    sidebarControl.Visible = true;
+        //    this.Controls.Add(sidebarControl);
 
 
-        }
+        //}
         //aya
         public RegisterForm(IUserServices userServices, IProductServices productServices, IOrderService orderService, ICategoryServices categoryServices, ICartItemService cartItemService)
         {
@@ -49,7 +49,7 @@ namespace E_commerce.Presentation
             _cartItemService = cartItemService;
 
 
-            SidebarControl sidebarControl = new SidebarControl(_userServices, _productService, _cartItemService);
+            SidebarControl sidebarControl = new SidebarControl(_userServices, _cartItemService, _productService,_orderService,_categoryService);
             sidebarControl.Visible = true;
             this.Controls.Add(sidebarControl);
 
@@ -58,9 +58,9 @@ namespace E_commerce.Presentation
             //this.Controls.Add(sidebarControl);
 
             //only for testing but correctly it should be in AdminDashboard form
-            //AdminDashboardControl adminDashboardControl = new AdminDashboardControl(_userServices, _productService, _orderService, _categoryService, _cartItemService);
-            //adminDashboardControl.Visible = false;
-            //this.Controls.Add(adminDashboardControl);
+            AdminDashboardControl adminDashboardControl = new AdminDashboardControl(_userServices, _productService, _orderService, _categoryService, _cartItemService);
+            adminDashboardControl.Visible = false;
+            this.Controls.Add(adminDashboardControl);
 
             ////Correct
             //ClientMainDashboardControl clientMainDashboardControl = new ClientMainDashboardControl(_userServices, _productService, _orderService, _categoryService ,_cartItemService);

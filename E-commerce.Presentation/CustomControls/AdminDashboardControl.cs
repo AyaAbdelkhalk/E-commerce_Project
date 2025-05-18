@@ -47,6 +47,9 @@ namespace E_commerce.Presentation.CustomControls
 
             InitializeComponent();
             InitializeDashboardComponents();
+
+            // Fix for CS4014: Await the asynchronous method call
+            this.Load += async (sender, e) => await AdminDashboardControl_Load(sender, e);
         }
 
         private void InitializeDashboardComponents()
@@ -272,7 +275,7 @@ namespace E_commerce.Presentation.CustomControls
             gridPanel.Controls.Add(searchBox);
         }
 
-        private async void AdminDashboardControl_Load(object sender, EventArgs e)
+        private async Task AdminDashboardControl_Load(object sender, EventArgs e)
         {
             await LoadDashboardDataAsync();
         }
@@ -307,6 +310,7 @@ namespace E_commerce.Presentation.CustomControls
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show($"Error loading dashboard data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally

@@ -1,4 +1,5 @@
 ﻿using Guna.UI2.WinForms;
+using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace E_commerce.Presentation.CustomControls
@@ -29,7 +30,7 @@ namespace E_commerce.Presentation.CustomControls
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private async Task InitializeComponent()
         {
             roundedPanel1 = new RoundedPanel();
             SuspendLayout();
@@ -57,7 +58,9 @@ namespace E_commerce.Presentation.CustomControls
             Margin = new Padding(4, 5, 4, 5);
             Name = "AdminDashboardControl";
             Size = new Size(1582, 938);
-            Load += AdminDashboardControl_Load;
+            //Load += AdminDashboardControl_Load;
+
+
             ResumeLayout(false);
         }
 

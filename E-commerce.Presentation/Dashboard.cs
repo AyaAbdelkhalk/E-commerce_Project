@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ecommerce;
+using E_commerce.Application.Services.OrderService;
 
 namespace E_commerce.Presentation
 {
@@ -25,6 +26,8 @@ namespace E_commerce.Presentation
         private readonly IUserServices _userServices;
         private readonly IProductServices _productServices;
         private readonly ICartItemService _cartItemService;
+        private readonly IOrderService _orderService;
+        private readonly ICategoryServices _categoryServices;
 
         public Dashboard(User user, IUserServices userServices)
         {
@@ -91,6 +94,25 @@ namespace E_commerce.Presentation
             customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
             customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString(); _userServices = userServices;
 
+        }
+
+        public Dashboard(IUserServices userServices, IProductServices productServices, ICartItemService cartItemService, IOrderService orderService ,ICategoryServices categoryServices)
+        {
+            InitializeComponent();
+            roundedPanel1.Visible = false;
+            _userServices = userServices;
+            _productServices = productServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
+            _categoryServices = categoryServices;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
+            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
+            customTextBox23.Text += SessionManager.CurrentUser?.Email;
+            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
         }
 
         private void Dashboard_Load(object sender, EventArgs e)

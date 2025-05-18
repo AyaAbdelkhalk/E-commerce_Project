@@ -23,37 +23,8 @@ namespace E_commerce.Presentation.CustomControls
         private readonly IOrderService _orderService; //4
         private readonly ICategoryServices _categoryService; //5
         private readonly ProfilePanelControl profilePanelControl;
-        private readonly AdminDashboardControl adminDashboardControl;
 
 
-
-        public SidebarControl(IUserServices _userServices)
-        {
-            InitializeComponent();
-            this._userServices = _userServices;//2
-
-
-        }
-        public SidebarControl(IUserServices userServices,IProductServices productServices, ICartItemService cartItemService)
-        {
-            InitializeComponent();
-            _userServices = userServices;//2
-            _productService = productServices; //3
-            _cartItemService = cartItemService; //4
-        }
-
-        ////aya
-        //public SidebarControl(IUserServices userServices, IProductServices productServices, IOrderService orderServices, ICategoryServices categoryServices, ICartItemService cartItemService)
-        //{
-        //    _userServices = userServices;
-        //    _productService = productServices;
-        //    _orderService = orderServices;
-        //    _categoryService = categoryServices;
-        //    InitializeComponent();
-        //    profilePanelControl = new ProfilePanelControl(_userServices);
-        //    _cartItemService = cartItemService;
-        //}
-        //hassan
         public SidebarControl(IUserServices userServices, ICartItemService cartItemService, IProductServices productService, IOrderService orderService, ICategoryServices categoryService)
         {
             InitializeComponent();
@@ -66,7 +37,7 @@ namespace E_commerce.Presentation.CustomControls
 
 
         }
-
+   
         private void SidebarControl_Load(object sender, EventArgs e)
         {
             this.SuspendLayout();
@@ -79,33 +50,23 @@ namespace E_commerce.Presentation.CustomControls
         #region Dashboard
         private void ClientDashboardbtn_Click(object sender, EventArgs e)
         {
-            // Remove existing CartControl if any
-            //var existingCart = this.Parent.Controls.OfType<CartControl>().FirstOrDefault();
-            //if (existingCart != null)
-            //{
-            //    this.Parent.Controls.Remove(existingCart);
-            //}
-            //// Remove existing ProfilePanelControl if any
-            //var existingProfile = this.Parent.Controls.OfType<ProfilePanelControl>().FirstOrDefault();
-            //if (existingProfile != null)
-            //{
-            //    this.Parent.Controls.Remove(existingProfile);
-            //}
-
-            //مؤقتا اما دا مكانه ف الادمن بس
-
-            //profilePanelControl.Visible = false;
-            //AdminDashboardControl adminDashboardControl = new AdminDashboardControl(_userServices, _productService, _orderService, _categoryService
-            //    , _cartItemService);
-            //adminDashboardControl.Visible = true;
-            //this.Controls.Add(adminDashboardControl);
-            //adminDashboardControl.BringToFront();
-            //adminDashboardControl.Show();
-            //ClientDashboardbtn.BackColor = Color.LightBlue;
-            //this.Visible = true;
-            //this.BringToFront();
-            //Profilebtn.BackColor = Color.Transparent;
-            //logoutbutton.BackColor = Color.Transparent;
+            //// Remove existing CartControl if any
+            var existingCart = this.Parent.Controls.OfType<CartControl>().FirstOrDefault();
+            if (existingCart != null)
+            {
+                this.Parent.Controls.Remove(existingCart);
+            }
+            // Remove existing ProfilePanelControl if any
+            var existingProfile = this.Parent.Controls.OfType<ProfilePanelControl>().FirstOrDefault();
+            if (existingProfile != null)
+            {
+                this.Parent.Controls.Remove(existingProfile);
+            }
+            //add products here 
+            
+            ClientDashboardbtn.BackColor = Color.LightBlue;
+            Profilebtn.BackColor = Color.Transparent;
+            logoutbutton.BackColor = Color.Transparent;
 
         }
 
@@ -157,6 +118,8 @@ namespace E_commerce.Presentation.CustomControls
             {
                 this.Parent.Controls.Remove(existingAdminDashboard);
             }
+            
+
             CartControl cart = new CartControl(_cartItemService, _productService);
             cart.Visible = true;
             cart.Dock = DockStyle.Right;

@@ -608,9 +608,15 @@ namespace E_commerce.Presentation
 
         private void ViewCartButton_Click(object sender, EventArgs e)
         {
-            
+            var cartForm = new CartItemForm(
+                _cartItemService,
+                _productServices,
+                _userServices,
+                _orderService,
+                _categoryServices
+            );
 
-            var cartForm = new CartItemForm(_cartItemService, _productServices,_userServices);
+
             cartForm.Show();
             this.Hide();
         }
