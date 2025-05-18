@@ -173,8 +173,10 @@ namespace E_commerce.Presentation
             this.Hide();
         }
 
-        private void categorybtn_Click(object sender, EventArgs e)
+        private async void categorybtn_Click(object sender, EventArgs e)
         {
+            await LoadProducts();
+            await LoadCategories();
             _adminDashboardControl.Visible = false;
             Form CategoryForm = new Category(_productServices, _categoryServices, _userServices, _cartItemService, _orderService);
             CategoryForm.Show();
@@ -426,8 +428,10 @@ namespace E_commerce.Presentation
             Profilebtn_Click(sender, e);
         }
 
-        private void productbtn_Click_1(object sender, EventArgs e)
+        private async void productbtn_Click_1(object sender, EventArgs e)
         {
+            await LoadProducts();
+            await LoadCategories();
             _adminDashboardControl.Visible = false;
             flowLayoutPanel1.Visible = true;
             AddProductButton.Visible = true;
