@@ -57,6 +57,14 @@ namespace E_commerce.Infrastructure.Repository
                 .ToListAsync();
         }
 
+        public async Task<Dictionary<string, int>> GetProductsByCategoryAsync()
+        {
+            return await _dbSet
+                .GroupBy(p => p.Category.Name)
+                .Select(g => new { CategoryName = g.Key, ProductCount = g.Count() })
+                .ToDictionaryAsync(g => g.CategoryName, g => g.ProductCount);
+        }
+
 
 
     }

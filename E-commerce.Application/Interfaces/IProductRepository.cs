@@ -18,5 +18,8 @@ namespace E_commerce.Application.Interfaces
 
         public Task<List<Product>> GetProductsByNameAsync(string name);
         public Task<IReadOnlyList<Product>> GetByIdsAsync(IEnumerable<int> productIds);
+
+        public Task<Dictionary<string, int>> GetProductsByCategoryAsync();
+
     }
 }

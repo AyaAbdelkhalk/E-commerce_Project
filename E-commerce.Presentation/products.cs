@@ -47,6 +47,17 @@ namespace E_commerce.Presentation
             _cartItemService = cartItemService;
             _orderService = orderService;
 
+<<<<<<< HEAD
+=======
+        public products(IProductServices productServices, ICategoryServices categoryServices, IUserServices userServices, ICartItemService cartItemService, IOrderService orderService)
+        {
+            InitializeComponent();
+            _productServices = productServices;
+            _categoryServices = categoryServices;
+            _userServices = userServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
+>>>>>>> c206191a8a89647096f6e29e2638dc4513ba2201
             LoadCategories();
             SetupForm();
         }
@@ -436,7 +447,7 @@ namespace E_commerce.Presentation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            users category = new users(_userServices, _productServices, _categoryServices);
+            users category = new users(_userServices, _productServices, _categoryServices,_cartItemService,_orderService);
             category.Show();
             this.Hide();
         }

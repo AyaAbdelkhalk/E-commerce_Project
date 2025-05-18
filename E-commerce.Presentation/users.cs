@@ -1,6 +1,9 @@
-﻿using E_commerce.Application.Services;
+﻿using E_commerce.Application.Helper;
+using E_commerce.Application.Services;
+using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
+using E_commerce.Presentation.CustomControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,16 +22,30 @@ namespace E_commerce.Presentation
         private readonly IProductServices _productServices;
         private readonly ICategoryServices _categoryServices;
         private readonly ICartItemService _cartItemService;
-        public users(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices)
+        private readonly IOrderService _orderService;
+        private readonly ProfilePanelControl _profilePanelControl;
+        private readonly AdminDashboardControl adminDashboardControl;
+
+
+
+        public users(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices, ICartItemService cartItemService, IOrderService orderService)
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
             _userServices = userServices;
-            _categoryServices = categoryServices;
             _productServices = productServices;
+            _categoryServices = categoryServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
+            _profilePanelControl = new ProfilePanelControl(_userServices);
+            this.Controls.Add(_profilePanelControl);
+            _profilePanelControl.Visible = false;
+            lbl_employeeName.Text += SessionManager.CurrentUser.FirstName;
+            adminDashboardControl = new AdminDashboardControl(_userServices, _productServices, _orderService, _categoryServices, _cartItemService);
+            adminDashboardControl.Visible = false;
+            this.Controls.Add(adminDashboardControl);
 
         }
-
-
 
         private void Close_Click(object sender, EventArgs e)
         {
@@ -93,13 +110,17 @@ namespace E_commerce.Presentation
         private async void ViewAdminsBtn_Click(object sender, EventArgs e)
         {
 
-            
+
         }
 
         private async void AdminMangementbtn_Click(object sender, EventArgs e)
         {
             try
             {
+                AdminMangementbtn.BackColor = Color.FromArgb(200, 230, 250);
+                AdminMangementbtn.ForeColor = Color.DarkBlue;
+                _profilePanelControl.Visible = false;
+                adminDashboardControl.Visible = false;
                 ViewUsersBtn.Visible = true;
                 ViewAdminsBtn.Visible = true;
                 dataGridView.Visible = true;
@@ -155,16 +176,73 @@ namespace E_commerce.Presentation
 
         private void productbtn_Click(object sender, EventArgs e)
         {
-            Form productForm = new products(_userServices, _productServices, _categoryServices,_cartItemService);
+            Form productForm = new products(_productServices, _categoryServices, _userServices, _cartItemService, _orderService);
             productForm.Show();
+            productbtn.BackColor = Color.FromArgb(200, 230, 250);
+            productbtn.ForeColor = Color.DarkBlue;
+            AdminMangementbtn.BackColor = Color.Transparent;
+            AdminMangementbtn.ForeColor = Color.White;
             this.Hide();
         }
 
         private void categorybtn_Click(object sender, EventArgs e)
         {
-            Form CategoryForm = new Category(_userServices, _productServices, _categoryServices , _cartItemService);
+            Form CategoryForm = new Category(_productServices, _categoryServices, _userServices, _cartItemService, _orderService);
             CategoryForm.Show();
             this.Hide();
+        }
+
+        private void Profilebtn_Click(object sender, EventArgs e)
+        {
+            adminDashboardControl.Visible = false;
+            _profilePanelControl.Visible = true;
+            _profilePanelControl.ShowProfileSection();
+            Profilebtn.BackColor = Color.FromArgb(200, 230, 250);
+            Profilebtn.ForeColor = Color.DarkBlue;
+
+            dataGridView.Visible = false;
+            ViewUsersBtn.Visible = false;
+            ViewAdminsBtn.Visible = false;
+            SearchCategory.Visible = false;
+
+        }
+
+        private void lbl_employeeName_Click(object sender, EventArgs e)
+        {
+            productbtn_Click(sender, e);
+        }
+
+        private void Dashboardbtn_Click(object sender, EventArgs e)
+        {
+            adminDashboardControl.Visible = true;
+            this.Controls.Add(adminDashboardControl);
+            adminDashboardControl.BringToFront();
+            Dashboardbtn.BackColor = Color.FromArgb(200, 230, 250);
+            Dashboardbtn.ForeColor = Color.DarkBlue;
+
+            dataGridView.Visible = false;
+            ViewUsersBtn.Visible = false;
+            ViewAdminsBtn.Visible = false;
+            SearchCategory.Visible = false;
+            _profilePanelControl.Visible = false;
+
+
+            //make the other buttons default color
+            productbtn.BackColor = Color.Transparent;
+            productbtn.ForeColor = Color.White;
+            categorybtn.BackColor = Color.Transparent;
+            categorybtn.ForeColor = Color.White;
+            Profilebtn.BackColor = Color.Transparent;
+            Profilebtn.ForeColor = Color.White;
+            AdminMangementbtn.BackColor = Color.Transparent;
+            AdminMangementbtn.ForeColor = Color.White;
+
+        }
+
+        private void customerbtn_Click(object sender, EventArgs e)
+        {
+            customerbtn.BackColor= Color.FromArgb(200, 230, 250);
+            customerbtn.ForeColor = Color.DarkBlue;
         }
     }
 }
