@@ -120,7 +120,7 @@ namespace E_commerce.Presentation
             this.Hide();
         }
 
-        private void AdminDashboard_Load_1(object sender, EventArgs e)
+        private async void AdminDashboard_Load_1(object sender, EventArgs e)
         {
             flowLayoutPanel1.Visible = false;
             AddProductButton.Visible = false;
@@ -129,8 +129,8 @@ namespace E_commerce.Presentation
             gamedPanel.Visible = false;
             panel1.Visible = false;
 
-            LoadProducts();
-            LoadCategories();
+            await LoadProducts();
+            await LoadCategories();
 
         }
 
@@ -160,7 +160,7 @@ namespace E_commerce.Presentation
 
         private void categorybtn_Click(object sender, EventArgs e)
         {
-            Form CategoryForm = new Category(_userServices, _productServices, _categoryServices , _cartItemService);
+            Form CategoryForm = new Category(_userServices, _productServices, _categoryServices, _cartItemService);
             CategoryForm.Show();
             this.Hide();
         }
@@ -412,7 +412,7 @@ namespace E_commerce.Presentation
 
         }
 
-        private async void LoadProducts()
+        private async Task LoadProducts()
         {
             try
             {
@@ -447,7 +447,7 @@ namespace E_commerce.Presentation
         }
 
 
-        private async void LoadCategories()
+        private async Task LoadCategories()
         {
             try
             {
@@ -746,6 +746,11 @@ namespace E_commerce.Presentation
         }
 
         private void gamedPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void customerbtn_Click(object sender, EventArgs e)
         {
 
         }

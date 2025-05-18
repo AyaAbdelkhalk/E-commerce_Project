@@ -22,6 +22,7 @@ namespace E_commerce.Presentation
         public users(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices)
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
             _userServices = userServices;
             _categoryServices = categoryServices;
             _productServices = productServices;

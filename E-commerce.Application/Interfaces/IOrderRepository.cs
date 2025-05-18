@@ -13,5 +13,15 @@ namespace E_commerce.Application.Interfaces
         public Task<IQueryable<Order>> GetOrdersByUserIdAsync(int userId);
         public Task<IQueryable<Order>> GetOrdersByStatusAsync(Status? status = null);
 
+        //By Aya for Admin Dashboard
+        public Task<Dictionary<string, int>> GetMonthlyOrdersAsync(int months);//44444
+        public Task<List<Order>> GetRecentOrdersAsync(int count);
+        public Task<Dictionary<string, int>> GetOrdersByCategoryAsync();
+
+        public Task<List<Order>> GetAllOrdersAsync();
+
+        public Task<Dictionary<string, decimal>> GetMonthlyOrderAmount();
+
+
     }
 }

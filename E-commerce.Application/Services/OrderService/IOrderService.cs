@@ -23,5 +23,17 @@ namespace E_commerce.Application.Services.OrderService
         Task<List<OrderDisDto>> GetOrdersByStatusAsync(Status? status = null);
         Task<List<OrderDisDto>> GetOrderHistoryByUserIdAsync(int userId);
 
+        //for  admin dashboard
+        Task<int> GetTotalOrders();
+
+        Task<List<OrderDto>> GetRecentOrders(int count);
+
+        Task<Dictionary<string, int>> GetOrdersByCategory();
+
+        public Task<int> GetAllOrdersAsync();
+
+        public Task<Dictionary<string, decimal>> GetMonthlyOrderAmountAsync();
+
+
     }
 }
