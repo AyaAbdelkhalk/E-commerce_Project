@@ -170,7 +170,7 @@
             Controls.Add(cartDataGridView);
             Name = "CartControl";
             Size = new Size(1386, 920);
-            Load += CartControl_Load;
+            //Load += CartControl_Load;
             ((System.ComponentModel.ISupportInitialize)cartDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
