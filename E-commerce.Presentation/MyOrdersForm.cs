@@ -211,7 +211,7 @@ namespace E_commerce.Presentation
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Quantity",
-                HeaderText = "Qty",
+                HeaderText = "Quantity",
                 Name = "Quantity",
                 ReadOnly = true,
                 Width = 60,

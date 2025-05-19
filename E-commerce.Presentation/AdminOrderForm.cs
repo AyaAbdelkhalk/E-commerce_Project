@@ -163,6 +163,20 @@ namespace E_commerce.Presentation
                     Width = 100
                 });
 
+                dataGridViewOrders.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "DateProcessed",
+                    HeaderText = "Date Processed",
+                    Name = "DateProcessed",
+                    ReadOnly = true,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Format = "MM/dd/yyyy HH:mm:ss",
+                        Alignment = DataGridViewContentAlignment.MiddleLeft
+                    },
+                    Width = 150
+                });
+
                 var detailsColumn = new DataGridViewButtonColumn
                 {
                     Name = "Details",
@@ -290,9 +304,9 @@ namespace E_commerce.Presentation
                                     await _orderService.ProcessOrderAsync(selectedOrder.OrderID);
                                     response = new Response<string> { Succeeded = true, Data = "Order status updated to Shipped." };
                                     break;
-                                case Status.Pending:
-                                    response = new Response<string> { Succeeded = true, Data = "Order status updated to Pending." };
-                                    break;
+
+                                 // response = await _orderService.SetPendingAsync(selectedOrder.OrderID); // New method for Pending
+                                    
                             }
 
                             if (response != null && response.Succeeded)
@@ -387,7 +401,7 @@ namespace E_commerce.Presentation
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Quantity",
-                HeaderText = "Qty",
+                HeaderText = "Quantity",
                 Name = "Quantity",
                 ReadOnly = true,
                 Width = 60,
@@ -471,4 +485,3 @@ namespace E_commerce.Presentation
         }
     }
 }
-
