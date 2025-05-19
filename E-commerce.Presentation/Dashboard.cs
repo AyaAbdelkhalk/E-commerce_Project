@@ -25,39 +25,8 @@ namespace E_commerce.Presentation
         private readonly ICategoryServices _categoryServices;
         private readonly SidebarControl _sidebarControl;
 
-        public Dashboard(User user, IUserServices userServices)
-        {
-            InitializeComponent();
-            roundedPanel1.Visible = false;
-            _userServices = userServices;
-            _sidebarControl = new SidebarControl(userServices, null, null, null, null);
-            this.Controls.Add(_sidebarControl);
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
-            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
-            customTextBox23.Text += SessionManager.CurrentUser?.Email;
-            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
-            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
-        }
+   
 
-        public Dashboard(IUserServices userServices, IProductServices productServices, ICartItemService cartItemService)
-        {
-            InitializeComponent();
-            roundedPanel1.Visible = false;
-            _userServices = userServices;
-            _productServices = productServices;
-            _cartItemService = cartItemService;
-            _sidebarControl = new SidebarControl(userServices, cartItemService, productServices, null, null);
-            this.Controls.Add(_sidebarControl);
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
-            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
-            customTextBox23.Text += SessionManager.CurrentUser?.Email;
-            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
-            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
-        }
 
         public Dashboard()
         {
@@ -89,8 +58,26 @@ namespace E_commerce.Presentation
             _sidebarControl = new SidebarControl(userServices, null, null, null, null);
             this.Controls.Add(_sidebarControl);
         }
-
         public Dashboard(IUserServices userServices, IProductServices productServices, ICartItemService cartItemService, IOrderService orderService, ICategoryServices categoryServices)
+        {
+            InitializeComponent();
+            roundedPanel1.Visible = false;
+            _userServices = userServices;
+            _productServices = productServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
+            _categoryServices = categoryServices;
+            _sidebarControl = new SidebarControl(userServices, cartItemService, productServices, orderService, categoryServices);
+            this.Controls.Add(_sidebarControl);
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
+            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
+            customTextBox23.Text += SessionManager.CurrentUser?.Email;
+            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
+        }
+        public Dashboard(IUserServices userServices, User user, IProductServices productServices, ICartItemService cartItemService, IOrderService orderService, ICategoryServices categoryServices)
         {
             InitializeComponent();
             roundedPanel1.Visible = false;
@@ -115,8 +102,8 @@ namespace E_commerce.Presentation
             this.WindowState = FormWindowState.Maximized;
             this.SuspendLayout();
             roundedPanel1.Visible = false;
-            _sidebarControl.Location = new Point(12, 30);
-            _sidebarControl.Size = new Size(283, 571);
+            //_sidebarControl.Location = new Point(12, 30);
+            //_sidebarControl.Size = new Size(283, 571);
             this.BackColor = Color.FromArgb(240, 248, 255); // AliceBlue
             MakeRoundedPanel(roundedPanel1, 30);
             MakeRoundedPanel(INFOroundedPanel2, 30);
@@ -228,7 +215,7 @@ namespace E_commerce.Presentation
                 customTextBox212.Text = string.Empty;
 
                 this.Hide();
-                var dashboard = new Dashboard(_userServices, user);
+                var dashboard = new Dashboard(_userServices, user,_productServices,_cartItemService,_orderService,_categoryServices);
                 dashboard.Show();
             }
             else
@@ -364,6 +351,11 @@ namespace E_commerce.Presentation
             customTextBox.Font = new Font(customTextBox.Font, FontStyle.Bold);
             customTextBox.TabStop = false;
             customTextBox.Padding = new Padding(10, 5, 5, 6);
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

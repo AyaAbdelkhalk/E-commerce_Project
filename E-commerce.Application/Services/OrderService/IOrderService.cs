@@ -11,6 +11,7 @@ namespace E_commerce.Application.Services.OrderService
 {
     public interface IOrderService
     {
+        Task<List<OrderDisDto>> GetAllOrdersAsync2();
         Task<Response<OrderDisDto>> CheckoutAsync(int userId);
         Task ProcessOrderAsync(int orderId);
         Task<Response<string>> CancelOrderAsync(int orderId);

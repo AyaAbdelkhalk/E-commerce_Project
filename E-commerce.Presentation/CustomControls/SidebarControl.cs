@@ -140,6 +140,7 @@ namespace E_commerce.Presentation.CustomControls
         #region Products
         private void button5_Click(object sender, EventArgs e)
         {
+
             // Implement product functionality if needed
         }
 
@@ -317,5 +318,10 @@ namespace E_commerce.Presentation.CustomControls
             logoutbutton_Click(sender, e);
         }
         #endregion
+
+        private void pnl_sideBarClient_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

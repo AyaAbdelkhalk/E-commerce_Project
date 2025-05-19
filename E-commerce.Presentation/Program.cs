@@ -38,6 +38,7 @@ namespace E_commerce.Presentation
 
 
 
+
             #region Form Region
             // To customize application configuration such as set high DPI settings or default font,  
             // see https://aka.ms/applicationconfiguration.  
@@ -114,6 +115,7 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, orderService, categoryServices, cartItemService));
 
             //System.Windows.Forms.Application.Run(new ClientDashboard(userServices, productServices, orderService, categoryServices, cartItemService));
+            //System.Windows.Forms.Application.Run(new AdminOrderForm(orderService, productServices));
 
 
         }

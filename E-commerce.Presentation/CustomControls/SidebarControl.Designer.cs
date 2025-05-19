@@ -58,6 +58,7 @@
             // pnl_sideBarClient
             // 
             pnl_sideBarClient.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            pnl_sideBarClient.AutoSize = true;
             pnl_sideBarClient.BackColor = Color.FromArgb(80, 110, 160);
             pnl_sideBarClient.Controls.Add(button5);
             pnl_sideBarClient.Controls.Add(pictureBox4);
@@ -78,8 +79,9 @@
             pnl_sideBarClient.Location = new Point(14, 44);
             pnl_sideBarClient.Margin = new Padding(8);
             pnl_sideBarClient.Name = "pnl_sideBarClient";
-            pnl_sideBarClient.Size = new Size(323, 839);
+            pnl_sideBarClient.Size = new Size(332, 839);
             pnl_sideBarClient.TabIndex = 1;
+            pnl_sideBarClient.Paint += pnl_sideBarClient_Paint;
             // 
             // button5
             // 
@@ -305,6 +307,7 @@
             ((System.ComponentModel.ISupportInitialize)logoutpicture).EndInit();
             ((System.ComponentModel.ISupportInitialize)usrpicture).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

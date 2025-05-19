@@ -73,6 +73,10 @@ namespace E_commerce.Presentation.CustomControls
                 HeaderText = "Product Name",
                 Name = "Name",
                 ReadOnly = true,
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Alignment = DataGridViewContentAlignment.MiddleLeft
+                },
                 Width = 200
             });
 
@@ -85,7 +89,7 @@ namespace E_commerce.Presentation.CustomControls
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
                     Format = "C2",
-                    Alignment = DataGridViewContentAlignment.MiddleRight
+                    Alignment = DataGridViewContentAlignment.MiddleLeft
                 }
             });
 
@@ -98,7 +102,7 @@ namespace E_commerce.Presentation.CustomControls
                 Width = 60,
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
-                    Alignment = DataGridViewContentAlignment.MiddleCenter
+                    Alignment = DataGridViewContentAlignment.MiddleLeft
                 }
             });
 
@@ -107,6 +111,10 @@ namespace E_commerce.Presentation.CustomControls
                 DataPropertyName = "DateAdded",
                 HeaderText = "Date Added",
                 Name = "DateAdded",
+                DefaultCellStyle = new DataGridViewCellStyle
+                {
+                    Alignment = DataGridViewContentAlignment.MiddleLeft
+                },
                 ReadOnly = true
             });
 

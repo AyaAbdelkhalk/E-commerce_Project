@@ -24,7 +24,7 @@ namespace E_commerce.Presentation
 {
     public partial class AdminDashboard : Form
     {
-        #region Ctor
+        #region Fields
         private readonly IProductServices _productServices;
         private readonly ICategoryServices _categoryServices;
         private readonly IUserServices _userServices;
@@ -33,11 +33,49 @@ namespace E_commerce.Presentation
         private readonly ProfilePanelControl profilePanelControl1;
         private readonly AdminDashboardControl _adminDashboardControl;
         private readonly CategoryControl categoryControl;
-
+        private readonly AdminOrderControl adminOrderControl;
         private bool isUpdateMode = false;
         private int currentProductId = 0;
+        #endregion
 
+        #region Constructors
+        public AdminDashboard(IUserServices userServices, User user, IProductServices productServices, ICategoryServices categoryServices, ICartItemService cartItemService, IOrderService orderService)
+        {
+            InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
+            roundedPanel1.Visible = false;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            lbl_employeeName.Text += SessionManager.CurrentUser?.FirstName;
+            _userServices = userServices;
+            // Initialize ProfilePanelControl
+            profilePanelControl1 = new ProfilePanelControl(userServices);
+            this.Controls.Add(profilePanelControl1);
+            profilePanelControl1.Visible = false;
+            _productServices = productServices;
+            _categoryServices = categoryServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
 
+            // Initialize AdminDashboardControl
+            _adminDashboardControl = new AdminDashboardControl(_userServices, _productServices, _orderService, _categoryServices, _cartItemService);
+            this.Controls.Add(_adminDashboardControl);
+            _adminDashboardControl.Visible = false;
+
+            // Initialize CategoryControl
+            categoryControl = new CategoryControl(_categoryServices);
+            this.Controls.Add(categoryControl);
+            categoryControl.Visible = false;
+            categoryControl.BringToFront();
+
+            // Initialize AdminOrderControl
+            adminOrderControl = new AdminOrderControl(_orderService, _productServices, _userServices, _cartItemService);
+            this.Controls.Add(adminOrderControl);
+            adminOrderControl.Visible = false;
+            adminOrderControl.AdjustSizeToParent(this);
+
+            SearchTextBox.Visible = false;
+        }
         public AdminDashboard(IUserServices userServices, User user)
         {
             InitializeComponent();
@@ -47,17 +85,13 @@ namespace E_commerce.Presentation
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl_employeeName.Text += SessionManager.CurrentUser?.FirstName;
             _userServices = userServices;
-            // إضافة ProfilePanelControl
+            // Initialize ProfilePanelControl
             profilePanelControl1 = new ProfilePanelControl(userServices);
-            //profilePanelControl1.Location = new Point(20, 80);
-            //profilePanelControl1.Size = new Size(1500, 800);
             this.Controls.Add(profilePanelControl1);
             profilePanelControl1.Visible = false;
 
 
-
         }
-      
 
         public AdminDashboard(IProductServices productServices, ICategoryServices categoryServices, IUserServices userServices, ICartItemService cartItemService, IOrderService orderService)
         {
@@ -73,32 +107,36 @@ namespace E_commerce.Presentation
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             lbl_employeeName.Text += SessionManager.CurrentUser?.FirstName;
-            // إضافة ProfilePanelControl
+
+            // Initialize ProfilePanelControl
             profilePanelControl1 = new ProfilePanelControl(userServices);
-            //profilePanelControl1.Location = new Point(200, 50);
-            //profilePanelControl1.Size = new Size(1353, 728);
             this.Controls.Add(profilePanelControl1);
             profilePanelControl1.Visible = false;
 
+            // Initialize AdminDashboardControl
             _adminDashboardControl = new AdminDashboardControl(_userServices, _productServices, _orderService, _categoryServices, _cartItemService);
             this.Controls.Add(_adminDashboardControl);
             _adminDashboardControl.Visible = false;
-            SearchTextBox.Visible = false;
 
+            // Initialize CategoryControl
             categoryControl = new CategoryControl(_categoryServices);
             this.Controls.Add(categoryControl);
             categoryControl.Visible = false;
             categoryControl.BringToFront();
 
+            // Initialize AdminOrderControl
+            adminOrderControl = new AdminOrderControl(_orderService, _productServices, _userServices, _cartItemService);
+            this.Controls.Add(adminOrderControl);
+            adminOrderControl.Visible = false;
+            adminOrderControl.AdjustSizeToParent(this);
 
+            SearchTextBox.Visible = false;
         }
-
         #endregion
 
-
+        #region Form Load
         private void AdminDashboard_Load(object sender, EventArgs e)
         {
-
             this.WindowState = FormWindowState.Maximized;
             roundedPanel1.Visible = false;
             this.DoubleBuffered = true;
@@ -109,37 +147,6 @@ namespace E_commerce.Presentation
             INFOroundedPanel2.Visible = false;
             DDDroundedPanel2.Visible = false;
             PPProundedPanel3.Visible = false;
-
-
-
-        }
-        private void btn_logout_Click(object sender, EventArgs e)
-        {
-            SessionManager.Logout();
-            var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                this.Hide();
-                new Login_Form(_userServices).Show();
-            }
-            this.Hide();
-
-        }
-        private void btn_products_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new products(_productServices, _categoryServices, _userServices, _cartItemService, _orderService).Show();
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            button1.BackColor = Color.FromArgb(200, 230, 250);
-            button1.ForeColor = Color.DarkBlue;
-            _adminDashboardControl.Visible = false;
-            var users = new users(_userServices, _productServices, _categoryServices, _cartItemService, _orderService);
-            users.Show();
-            this.Hide();
         }
 
         private async void AdminDashboard_Load_1(object sender, EventArgs e)
@@ -152,14 +159,11 @@ namespace E_commerce.Presentation
             panel1.Visible = false;
 
             _adminDashboardControl.Visible = true;
-
-
-            //await LoadProducts();
-            //await LoadCategories();
-
+            _adminDashboardControl.BringToFront();
         }
+        #endregion
 
-        #region Sidebar
+        #region Sidebar Button Handlers
         private void logoutbutton_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -171,95 +175,232 @@ namespace E_commerce.Presentation
                 var loginForm = new Login_Form(_userServices);
                 loginForm.Show();
             }
-
-        }
-        //<<<<<<< updd
-
-        private void productbtn_Click(object sender, EventArgs e)
-        {
-
-            Form productForm = new products(_userServices, _productServices, _categoryServices, _cartItemService);
-            productForm.Show();
-            this.Hide();
-        }
-
-        private async void categorybtn_Click(object sender, EventArgs e)
-        {
-         
-            _adminDashboardControl.Visible = false;
-            categoryControl.Visible = true;
-            categoryControl.BringToFront();
-            categoryControl.Location = new Point(300, 20);
-            categoryControl.Size = new Size(1500, 800);
-
-
-
-
-
-        }
-        //=======
-        #endregion
-
-        //private void categorybtn_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        private void pnl_sideBar_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        //private void Profilebtn_Click(object sender, EventArgs e)
-        //{
-        //    roundedPanel1.Visible = true;
-        //    // Change the button color
-        //    Profilebtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
-        //    Profilebtn.ForeColor = Color.DarkBlue;
-        //    // Reset the other buttons
-        //    if (SessionManager.CurrentUser != null)
-        //    {
-        //        lbl_employeeName.Text = "Welcome \n " + SessionManager.CurrentUser.FirstName;
-        //        customTextBox21.Text = SessionManager.CurrentUser.FirstName + " " + SessionManager.CurrentUser.LastName;
-        //        customTextBox22.Text = SessionManager.CurrentUser.UserName;
-        //        customTextBox23.Text = SessionManager.CurrentUser.Email;
-        //        customTextBox24.Text = SessionManager.CurrentUser.Role.ToString();
-        //        if (SessionManager.CurrentUser.IsActive == true)
-        //            customTextBox25.Text = "Activated";
-        //        else
-        //            customTextBox25.Text = "Deactivated";
-
-        //    }
-        //    else
-        //    {
-        //        lbl_employeeName.Text = "Guest";
-        //    }
-        //    MakeReadOnly(customTextBox21);
-        //    MakeReadOnly(customTextBox22);
-        //    MakeReadOnly(customTextBox23);
-        //    MakeReadOnly(customTextBox24);
-        //    MakeReadOnly(customTextBox25);
-
-
-
-        //}
-
-        private void INFOroundedPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void logoutpicture_Click(object sender, EventArgs e)
         {
+            logoutbutton_Click(sender, e);
+        }
+
+        private void Dashboardbtn_Click(object sender, EventArgs e)
+        {
+            _adminDashboardControl.Visible = true;
+            _adminDashboardControl.BringToFront();
+            profilePanelControl1.Visible = false;
+            categoryControl.Visible = false;
+            adminOrderControl.Visible = false;
+            flowLayoutPanel1.Visible = false;
+            AddProductButton.Visible = false;
+            UpdateProductButton.Visible = false;
+            DeleteProductButton.Visible = false;
+            gamedPanel.Visible = false;
+            panel1.Visible = false;
+            SearchTextBox.Visible = false;
+
+            Dashboardbtn.BackColor = Color.FromArgb(200, 230, 250);
+            Dashboardbtn.ForeColor = Color.DarkBlue;
+            Profilebtn.BackColor = Color.Transparent;
+            Profilebtn.ForeColor = Color.White;
+            productbtn.BackColor = Color.Transparent;
+            productbtn.ForeColor = Color.White;
+            categorybtn.BackColor = Color.Transparent;
+            categorybtn.ForeColor = Color.White;
+            customerbtn.BackColor = Color.Transparent;
+            customerbtn.ForeColor = Color.White;
+            Orderbtn.BackColor = Color.Transparent;
+            Orderbtn.ForeColor = Color.White;
+        }
+
+        private async void Profilebtn_Click(object sender, EventArgs e)
+        {
+            _adminDashboardControl.Visible = false;
+            profilePanelControl1.Visible = true;
+            profilePanelControl1.BringToFront();
+            profilePanelControl1.ShowProfileSection();
+            categoryControl.Visible = false;
+            adminOrderControl.Visible = false;
+            flowLayoutPanel1.Visible = false;
+            AddProductButton.Visible = false;
+            UpdateProductButton.Visible = false;
+            DeleteProductButton.Visible = false;
+            gamedPanel.Visible = false;
+            panel1.Visible = false;
+            SearchTextBox.Visible = false;
+
+            Profilebtn.BackColor = Color.FromArgb(200, 230, 250);
+            Profilebtn.ForeColor = Color.DarkBlue;
+            Dashboardbtn.BackColor = Color.Transparent;
+            Dashboardbtn.ForeColor = Color.White;
+            productbtn.BackColor = Color.Transparent;
+            productbtn.ForeColor = Color.White;
+            categorybtn.BackColor = Color.Transparent;
+            categorybtn.ForeColor = Color.White;
+            customerbtn.BackColor = Color.Transparent;
+            customerbtn.ForeColor = Color.White;
+            Orderbtn.BackColor = Color.Transparent;
+            Orderbtn.ForeColor = Color.White;
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            Profilebtn_Click(sender, e);
+        }
+
+        private async void productbtn_Click_1(object sender, EventArgs e)
+        {
+            await LoadProducts();
+            await LoadCategories();
+            SearchTextBox.Visible = true;
+            _adminDashboardControl.Visible = false;
+            profilePanelControl1.Visible = false;
+            categoryControl.Visible = false;
+            adminOrderControl.Visible = false;
+            flowLayoutPanel1.Visible = true;
+            AddProductButton.Visible = true;
+            gamedPanel.Visible = true;
+            UpdateProductButton.Visible = true;
+            DeleteProductButton.Visible = true;
+
+            productbtn.BackColor = Color.FromArgb(200, 230, 250);
+            productbtn.ForeColor = Color.DarkBlue;
+            Dashboardbtn.BackColor = Color.Transparent;
+            Dashboardbtn.ForeColor = Color.White;
+            Profilebtn.BackColor = Color.Transparent;
+            Profilebtn.ForeColor = Color.White;
+            categorybtn.BackColor = Color.Transparent;
+            categorybtn.ForeColor = Color.White;
+            customerbtn.BackColor = Color.Transparent;
+            customerbtn.ForeColor = Color.White;
+            Orderbtn.BackColor = Color.Transparent;
+            Orderbtn.ForeColor = Color.White;
+        }
+
+        private async void categorybtn_Click(object sender, EventArgs e)
+        {
+            _adminDashboardControl.Visible = false;
+            profilePanelControl1.Visible = false;
+            categoryControl.Visible = true;
+            categoryControl.BringToFront();
+            categoryControl.Location = new Point(300, 20);
+            categoryControl.Size = new Size(1500, 800);
+            adminOrderControl.Visible = false;
+            flowLayoutPanel1.Visible = false;
+            AddProductButton.Visible = false;
+            UpdateProductButton.Visible = false;
+            DeleteProductButton.Visible = false;
+            gamedPanel.Visible = false;
+            panel1.Visible = false;
+            SearchTextBox.Visible = false;
+
+            categorybtn.BackColor = Color.FromArgb(200, 230, 250);
+            categorybtn.ForeColor = Color.DarkBlue;
+            Dashboardbtn.BackColor = Color.Transparent;
+            Dashboardbtn.ForeColor = Color.White;
+            Profilebtn.BackColor = Color.Transparent;
+            Profilebtn.ForeColor = Color.White;
+            productbtn.BackColor = Color.Transparent;
+            productbtn.ForeColor = Color.White;
+            customerbtn.BackColor = Color.Transparent;
+            customerbtn.ForeColor = Color.White;
+            Orderbtn.BackColor = Color.Transparent;
+            Orderbtn.ForeColor = Color.White;
+        }
+
+        private void customerbtn_Click(object sender, EventArgs e)
+        {
+            _adminDashboardControl.Visible = false;
+            profilePanelControl1.Visible = false;
+            categoryControl.Visible = false;
+            adminOrderControl.Visible = false;
+            flowLayoutPanel1.Visible = false;
+            AddProductButton.Visible = false;
+            UpdateProductButton.Visible = false;
+            DeleteProductButton.Visible = false;
+            gamedPanel.Visible = false;
+            panel1.Visible = false;
+            SearchTextBox.Visible = false;
+
+            customerbtn.BackColor = Color.FromArgb(200, 230, 250);
+            customerbtn.ForeColor = Color.DarkBlue;
+            Dashboardbtn.BackColor = Color.Transparent;
+            Dashboardbtn.ForeColor = Color.White;
+            Profilebtn.BackColor = Color.Transparent;
+            Profilebtn.ForeColor = Color.White;
+            productbtn.BackColor = Color.Transparent;
+            productbtn.ForeColor = Color.White;
+            categorybtn.BackColor = Color.Transparent;
+            categorybtn.ForeColor = Color.White;
+            Orderbtn.BackColor = Color.Transparent;
+            Orderbtn.ForeColor = Color.White;
+
+            // Note: Customer management functionality seems incomplete. You may need to add a CustomerControl.
+        }
+
+        private void Orderbtn_Click(object sender, EventArgs e)
+        {
+            _adminDashboardControl.Visible = false;
+            profilePanelControl1.Visible = false;
+            categoryControl.Visible = false;
+            adminOrderControl.Visible = true;
+            adminOrderControl.BringToFront();
+            adminOrderControl.Location = new Point(300, 20);
+            adminOrderControl.AdjustSizeToParent(this);
+            flowLayoutPanel1.Visible = false;
+            AddProductButton.Visible = false;
+            UpdateProductButton.Visible = false;
+            DeleteProductButton.Visible = false;
+            gamedPanel.Visible = false;
+            panel1.Visible = false;
+            SearchTextBox.Visible = false;
+
+            Orderbtn.BackColor = Color.FromArgb(200, 230, 250);
+            Orderbtn.ForeColor = Color.DarkBlue;
+            Dashboardbtn.BackColor = Color.Transparent;
+            Dashboardbtn.ForeColor = Color.White;
+            Profilebtn.BackColor = Color.Transparent;
+            Profilebtn.ForeColor = Color.White;
+            productbtn.BackColor = Color.Transparent;
+            productbtn.ForeColor = Color.White;
+            categorybtn.BackColor = Color.Transparent;
+            categorybtn.ForeColor = Color.White;
+            customerbtn.BackColor = Color.Transparent;
+            customerbtn.ForeColor = Color.White;
+        }
+        #endregion
+
+        #region Other Button Handlers
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            SessionManager.Logout();
             var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 this.Hide();
-                SessionManager.Logout();
-                _userServices.Logout();
-                var loginForm = new Login_Form(_userServices);
-                loginForm.Show();
+                new Login_Form(_userServices).Show();
             }
+        }
+
+        private void btn_products_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new products(_productServices, _categoryServices, _userServices, _cartItemService, _orderService).Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(200, 230, 250);
+            button1.ForeColor = Color.DarkBlue;
+            _adminDashboardControl.Visible = false;
+            var users = new users(_userServices, _productServices, _categoryServices, _cartItemService, _orderService);
+            users.Show();
+            this.Hide();
+        }
+
+        private void productbtn_Click(object sender, EventArgs e)
+        {
+            Form productForm = new products(_userServices, _productServices, _categoryServices, _cartItemService,_orderService);
+            productForm.Show();
+            this.Hide();
         }
 
         private async void button1_Click_1(object sender, EventArgs e)
@@ -270,7 +411,7 @@ namespace E_commerce.Presentation
                 var updateDto = new AddUserDTO
                 {
                     UserName = customTextBox27.Text,
-                    Password = user.Password, // خليها نفس الباسورد الأصلي
+                    Password = user.Password,
                     PasswordConfirmed = user.Password,
                     Email = customTextBox26.Text,
                     FirstName = customTextBox28.Text,
@@ -298,7 +439,7 @@ namespace E_commerce.Presentation
                 customTextBox212.Text = string.Empty;
 
                 this.Hide();
-                var dashboard = new Dashboard(_userServices, user);
+                var dashboard = new Dashboard(_userServices, user, _productServices, _cartItemService, _orderService, _categoryServices);
                 dashboard.Show();
             }
             else
@@ -384,83 +525,15 @@ namespace E_commerce.Presentation
             customTextBox29.Text = string.Empty;
         }
 
-        //private void pictureBox6_Click(object sender, EventArgs e)
-        //{
-        //roundedPanel1.Visible = true;
-        //// Change the button color
-        //Profilebtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
-        //Profilebtn.ForeColor = Color.DarkBlue;
-        //// Reset the other buttons
-        //if (SessionManager.CurrentUser != null)
-        //{
-        //    lbl_employeeName.Text = "Welcome \n " + SessionManager.CurrentUser.FirstName;
-        //    customTextBox21.Text = SessionManager.CurrentUser.FirstName + " " + SessionManager.CurrentUser.LastName;
-        //    customTextBox22.Text = SessionManager.CurrentUser.UserName;
-        //    customTextBox23.Text = SessionManager.CurrentUser.Email;
-        //    customTextBox24.Text = SessionManager.CurrentUser.Role.ToString();
-        //    if (SessionManager.CurrentUser.IsActive == true)
-        //        customTextBox25.Text = "Activated";
-        //    else
-        //        customTextBox25.Text = "Deactivated";
-
-
-        //}
-        //else
-        //{
-        //    lbl_employeeName.Text = "Guest";
-        //}
-        //MakeReadOnly(customTextBox21);
-        //MakeReadOnly(customTextBox22);
-        //MakeReadOnly(customTextBox23);
-        //MakeReadOnly(customTextBox24);
-        //MakeReadOnly(customTextBox25);
-
-
-        ////>>>>>>> master
-        //}
-        private async void Profilebtn_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            _adminDashboardControl.Visible = false;
-            profilePanelControl1.Visible = true;
-            profilePanelControl1.BringToFront();
-            profilePanelControl1.ShowProfileSection();
-            Profilebtn.BackColor = Color.FromArgb(200, 230, 250);
-            Profilebtn.ForeColor = Color.DarkBlue;
-            Dashboardbtn.BackColor = Color.Transparent;
-            Dashboardbtn.ForeColor = Color.White;
-            productbtn.BackColor = Color.Transparent;
-            productbtn.ForeColor = Color.White;
-            categorybtn.BackColor = Color.Transparent;
-            categorybtn.ForeColor = Color.White;
-            customerbtn.BackColor = Color.Transparent;
-            customerbtn.ForeColor = Color.White;
-
-
+            Dashboard dashboard = new Dashboard(_userServices, _productServices, _cartItemService, _orderService, _categoryServices);
+            dashboard.Show();
+            this.Hide();
         }
+        #endregion
 
-        private void pictureBox6_Click(object sender, EventArgs e)
-        {
-            Profilebtn_Click(sender, e);
-        }
-
-        private async void productbtn_Click_1(object sender, EventArgs e)
-        {
-            await LoadProducts();
-            await LoadCategories();
-            SearchTextBox.Visible = true;
-            _adminDashboardControl.Visible = false;
-            flowLayoutPanel1.Visible = true;
-            AddProductButton.Visible = true;
-            gamedPanel.Visible = true;
-            UpdateProductButton.Visible = true;
-            DeleteProductButton.Visible = true;
-            productbtn.BackColor = Color.FromArgb(200, 230, 250);
-            productbtn.ForeColor = Color.DarkBlue;
-
-
-
-        }
-
+        #region Product Management
         private async Task LoadProducts()
         {
             try
@@ -495,7 +568,6 @@ namespace E_commerce.Presentation
             }
         }
 
-
         private async Task LoadCategories()
         {
             try
@@ -506,9 +578,6 @@ namespace E_commerce.Presentation
                     CategoryComboBox.DataSource = categories.Data;
                     CategoryComboBox.DisplayMember = "Name";
                     CategoryComboBox.ValueMember = "CategoryID";
-                    //FilterCatCombo.DataSource = categories.Data;
-                    //FilterCatCombo.DisplayMember = "Name";
-                    //FilterCatCombo.ValueMember = "CategoryID";
                 }
                 else
                 {
@@ -524,6 +593,16 @@ namespace E_commerce.Presentation
         private void ShowErrorMessage(string message)
         {
             MessageBox.Show(this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void ShowSuccessMessage(string message)
+        {
+            Guna.UI2.WinForms.Guna2MessageDialog toast = new Guna.UI2.WinForms.Guna2MessageDialog();
+            toast.Caption = "Success";
+            toast.Text = message;
+            toast.Icon = MessageDialogIcon.Information;
+            toast.Style = MessageDialogStyle.Light;
+            toast.Show();
         }
 
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
@@ -560,16 +639,6 @@ namespace E_commerce.Presentation
             SaveButton.Text = "Save";
         }
 
-        private void AddProductButton_Click(object sender, EventArgs e)
-        {
-            panel1.Visible = true;
-            flowLayoutPanel1.Visible = false;
-            ResetForm();
-            isUpdateMode = false;
-            SaveButton.Text = "Save";
-        }
-
-
         private bool ValidateInputs()
         {
             if (string.IsNullOrWhiteSpace(NameText.Text))
@@ -604,16 +673,6 @@ namespace E_commerce.Presentation
             return true;
         }
 
-        private void ShowSuccessMessage(string message)
-        {
-            Guna.UI2.WinForms.Guna2MessageDialog toast = new Guna.UI2.WinForms.Guna2MessageDialog();
-            toast.Caption = "Success";
-            toast.Text = message;
-            toast.Icon = MessageDialogIcon.Information;
-            toast.Style = MessageDialogStyle.Light;
-            toast.Show();
-        }
-
         private async void SaveButton_Click(object sender, EventArgs e)
         {
             if (!ValidateInputs())
@@ -638,10 +697,9 @@ namespace E_commerce.Presentation
                     if (result.Succeeded)
                     {
                         ShowSuccessMessage("Product Updated Successfully!");
-                        LoadProducts();
+                        await LoadProducts();
                         ResetForm();
                         panel1.Visible = false;
-
                         flowLayoutPanel1.Visible = true;
                     }
                     else
@@ -667,7 +725,7 @@ namespace E_commerce.Presentation
                     if (result.Succeeded)
                     {
                         ShowSuccessMessage("Product Added Successfully!");
-                        LoadProducts();
+                        await LoadProducts();
                         ResetForm();
                         panel1.Visible = false;
                         flowLayoutPanel1.Visible = true;
@@ -682,6 +740,15 @@ namespace E_commerce.Presentation
             {
                 ShowErrorMessage($"An error occurred: {ex.Message}");
             }
+        }
+
+        private async void AddProductButton_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = true;
+            flowLayoutPanel1.Visible = false;
+            ResetForm();
+            isUpdateMode = false;
+            SaveButton.Text = "Save";
         }
 
         private async void UpdateProductButton_Click(object sender, EventArgs e)
@@ -709,7 +776,6 @@ namespace E_commerce.Presentation
                     DescTextBox.Text = productData.Description;
                     PriceTextBox.Text = productData.Price.ToString();
                     UnitsInStockTextBox.Text = productData.UnitsInStock.ToString();
-
                     CategoryComboBox.SelectedValue = productData.CategoryID;
 
                     if (!string.IsNullOrEmpty(productData.ImagePath) && File.Exists(productData.ImagePath))
@@ -745,7 +811,7 @@ namespace E_commerce.Presentation
                 if (result.Succeeded)
                 {
                     ShowSuccessMessage("Product Deleted Successfully!");
-                    LoadProducts();
+                    await LoadProducts();
                 }
                 else
                 {
@@ -761,6 +827,7 @@ namespace E_commerce.Presentation
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
             panel1.Visible = false;
+            flowLayoutPanel1.Visible = true;
         }
 
         private void ImagePath_Click(object sender, EventArgs e)
@@ -786,49 +853,18 @@ namespace E_commerce.Presentation
                 }
             }
         }
+        #endregion
 
-        private void button4_Click(object sender, EventArgs e)
+        private void pnl_sideBar_Paint(object sender, PaintEventArgs e)
         {
-            Dashboard dashboard = new Dashboard(_userServices, _productServices, _cartItemService,_orderService, _categoryServices);
-            dashboard.Show();
-            this.Hide();
+        }
+
+        private void INFOroundedPanel2_Paint(object sender, PaintEventArgs e)
+        {
         }
 
         private void gamedPanel_Paint(object sender, PaintEventArgs e)
         {
-
-        }
-
-        private void customerbtn_Click(object sender, EventArgs e)
-        {
-            _adminDashboardControl.Visible = false;
-            customerbtn.BackColor = Color.FromArgb(200, 230, 250);
-            customerbtn.ForeColor = Color.DarkBlue;
-
-        }
-
-        private void Dashboardbtn_Click(object sender, EventArgs e)
-        {
-            _adminDashboardControl.Visible = true;
-            _adminDashboardControl.BringToFront();
-            Dashboardbtn.BackColor = Color.FromArgb(200, 230, 250);
-            Dashboardbtn.ForeColor = Color.DarkBlue;
-            Profilebtn.BackColor = Color.Transparent;
-            Profilebtn.ForeColor = Color.White;
-            productbtn.BackColor = Color.Transparent;
-            productbtn.ForeColor = Color.White;
-            categorybtn.BackColor = Color.Transparent;
-            categorybtn.ForeColor = Color.White;
-            customerbtn.BackColor = Color.Transparent;
-            customerbtn.ForeColor = Color.White;
-
-        }
-
-        private void Orderbtn_Click(object sender, EventArgs e)
-        {
-            _adminDashboardControl.Visible = false;
-
         }
     }
 }
-
