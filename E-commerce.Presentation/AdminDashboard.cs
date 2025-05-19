@@ -33,7 +33,12 @@ namespace E_commerce.Presentation
         private readonly ProfilePanelControl profilePanelControl1;
         private readonly AdminDashboardControl _adminDashboardControl;
         private readonly CategoryControl categoryControl;
+
+        private readonly userControl userControl1;
+
+
         private readonly AdminOrderControl adminOrderControl;
+
         private bool isUpdateMode = false;
         private int currentProductId = 0;
         #endregion
@@ -124,11 +129,18 @@ namespace E_commerce.Presentation
             categoryControl.Visible = false;
             categoryControl.BringToFront();
 
+
+            userControl1 = new userControl(userServices);
+            this.Controls.Add(userControl1);
+            userControl1.Visible = false;
+            userControl1.BringToFront();
+
             // Initialize AdminOrderControl
             adminOrderControl = new AdminOrderControl(_orderService, _productServices, _userServices, _cartItemService);
             this.Controls.Add(adminOrderControl);
             adminOrderControl.Visible = false;
             adminOrderControl.AdjustSizeToParent(this);
+
 
             SearchTextBox.Visible = false;
         }
@@ -147,6 +159,42 @@ namespace E_commerce.Presentation
             INFOroundedPanel2.Visible = false;
             DDDroundedPanel2.Visible = false;
             PPProundedPanel3.Visible = false;
+
+
+
+
+        }
+        
+        private void logoutbutton_Click(object sender, EventArgs e)
+{
+    var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+    if (result == DialogResult.Yes)
+    {
+        this.Hide();
+        SessionManager.Logout();
+        _userServices.Logout();
+        var loginForm = new Login_Form(_userServices);
+        loginForm.Show();
+    }
+
+}
+        
+        private void btn_products_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new products(_productServices, _categoryServices, _userServices, _cartItemService, _orderService).Show();
+        }
+
+///////////////////////////////////bhjghdsa
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            _adminDashboardControl.Visible = false;
+            userControl1.Visible = true;
+            userControl1.BringToFront();
+            userControl1.Location = new Point(300, 20);
+            userControl1.Size = new Size(1500, 800);
+
         }
 
         private async void AdminDashboard_Load_1(object sender, EventArgs e)

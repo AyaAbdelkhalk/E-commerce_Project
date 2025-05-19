@@ -241,8 +241,13 @@ namespace E_commerce.Presentation
 
         private void customerbtn_Click(object sender, EventArgs e)
         {
-            customerbtn.BackColor= Color.FromArgb(200, 230, 250);
+            customerbtn.BackColor = Color.FromArgb(200, 230, 250);
             customerbtn.ForeColor = Color.DarkBlue;
+        }
+
+        private void SearchCategory_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
