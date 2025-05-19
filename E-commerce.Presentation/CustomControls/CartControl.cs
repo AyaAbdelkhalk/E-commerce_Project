@@ -195,36 +195,36 @@ namespace E_commerce.Presentation.CustomControls
             }
         }
 
-        private void CheckoutButton_Click(object sender, EventArgs e)
+   private void CheckoutButton_Click(object sender, EventArgs e)
+    {
+        var cartItems = (cartDataGridView.DataSource as List<CartItemDTO>)?.ToList() ?? new List<CartItemDTO>();
+        if (cartItems.Count == 0)
         {
-            var cartItems = (cartDataGridView.DataSource as List<CartItemDTO>)?.ToList() ?? new List<CartItemDTO>();
-            if (cartItems.Count == 0)
+            MessageBox.Show("Your cart is empty.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        // Navigate to OrderControl
+        var parentForm = this.FindForm();
+        if (parentForm != null)
+        {
+            // Remove existing controls (except SidebarControl)
+            var existingControls = parentForm.Controls.OfType<UserControl>().Where(c => c != this && c.GetType() != typeof(SidebarControl)).ToList();
+            foreach (var control in existingControls)
             {
-                MessageBox.Show("Your cart is empty.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                parentForm.Controls.Remove(control);
             }
 
-            // Navigate to OrderControl
-            var parentForm = this.FindForm();
-            if (parentForm != null)
-            {
-                // Remove existing controls (except SidebarControl)
-                var existingControls = parentForm.Controls.OfType<UserControl>().Where(c => c != this && c.GetType() != typeof(SidebarControl)).ToList();
-                foreach (var control in existingControls)
-                {
-                    parentForm.Controls.Remove(control);
-                }
+            // Add OrderControl
+            var orderControl = new OrderControl(cartItems, _orderService, _cartItemService, _productService);
+            orderControl.Visible = true;
+            orderControl.Dock = DockStyle.Right;
+            parentForm.Controls.Add(orderControl);
+            orderControl.BringToFront();
 
-                // Add OrderControl
-                var orderControl = new OrderControl(cartItems, _orderService, _cartItemService, _productService);
-                orderControl.Visible = true;
-                orderControl.Dock = DockStyle.Right;
-                parentForm.Controls.Add(orderControl);
-                orderControl.BringToFront();
-
-                // Remove this CartControl
-                parentForm.Controls.Remove(this);
-            }
+            // Remove this CartControl
+            parentForm.Controls.Remove(this);
         }
     }
+  }
 }

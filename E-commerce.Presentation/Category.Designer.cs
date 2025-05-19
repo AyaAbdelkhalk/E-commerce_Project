@@ -207,7 +207,7 @@
             UpdateButton.BackColor = Color.LightBlue;
             UpdateButton.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             UpdateButton.ImeMode = ImeMode.NoControl;
-            UpdateButton.Location = new Point(222, 169);
+            UpdateButton.Location = new Point(222, 212);
             UpdateButton.Margin = new Padding(4, 3, 4, 3);
             UpdateButton.Name = "UpdateButton";
             UpdateButton.Size = new Size(167, 37);
