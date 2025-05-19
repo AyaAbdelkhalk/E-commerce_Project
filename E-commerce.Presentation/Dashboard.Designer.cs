@@ -1,33 +1,13 @@
 ﻿using E_commerce.Presentation.CustomControls;
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Printing;
-using System.Windows.Forms;
 
 namespace E_commerce.Presentation
 {
-    public partial class Dashboard : Form
+    partial class Dashboard
     {
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            pnl_sideBarClient = new Panel();
-            MyCartbtn = new Button();
-            pictureBox3 = new PictureBox();
-            Profilebtn = new Button();
-            pictureBox5 = new PictureBox();
-            MyOrderbtn = new Button();
-            pictureBox2 = new PictureBox();
-            ClientDashboardbtn = new Button();
-            pictureBox1 = new PictureBox();
-            flowLayoutPanel8 = new FlowLayoutPanel();
-            logoutbutton = new Button();
-            logoutpicture = new PictureBox();
-            usrpicture = new PictureBox();
-            lbl_UserName = new Label();
             roundedPanel1 = new RoundedPanel();
             PPProundedPanel3 = new RoundedPanel();
             button2 = new Button();
@@ -63,226 +43,11 @@ namespace E_commerce.Presentation
             Pinfo = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             SearchTextBox = new Guna.UI2.WinForms.Guna2TextBox();
-            pnl_sideBarClient.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)logoutpicture).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)usrpicture).BeginInit();
             roundedPanel1.SuspendLayout();
             PPProundedPanel3.SuspendLayout();
             DDDroundedPanel2.SuspendLayout();
             INFOroundedPanel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // pnl_sideBarClient
-            // 
-            pnl_sideBarClient.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            pnl_sideBarClient.BackColor = Color.FromArgb(80, 110, 160);
-            pnl_sideBarClient.Controls.Add(MyCartbtn);
-            pnl_sideBarClient.Controls.Add(pictureBox3);
-            pnl_sideBarClient.Controls.Add(Profilebtn);
-            pnl_sideBarClient.Controls.Add(pictureBox5);
-            pnl_sideBarClient.Controls.Add(MyOrderbtn);
-            pnl_sideBarClient.Controls.Add(pictureBox2);
-            pnl_sideBarClient.Controls.Add(ClientDashboardbtn);
-            pnl_sideBarClient.Controls.Add(pictureBox1);
-            pnl_sideBarClient.Controls.Add(flowLayoutPanel8);
-            pnl_sideBarClient.Controls.Add(logoutbutton);
-            pnl_sideBarClient.Controls.Add(logoutpicture);
-            pnl_sideBarClient.Controls.Add(usrpicture);
-            pnl_sideBarClient.Controls.Add(lbl_UserName);
-            pnl_sideBarClient.Location = new Point(12, 30);
-            pnl_sideBarClient.Margin = new Padding(7, 6, 7, 6);
-            pnl_sideBarClient.Name = "pnl_sideBarClient";
-            pnl_sideBarClient.Size = new Size(283, 571);
-            pnl_sideBarClient.TabIndex = 0;
-            // 
-            // MyCartbtn
-            // 
-            MyCartbtn.BackColor = Color.Transparent;
-            MyCartbtn.Cursor = Cursors.Hand;
-            MyCartbtn.FlatAppearance.BorderSize = 0;
-            MyCartbtn.FlatStyle = FlatStyle.Flat;
-            MyCartbtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
-            MyCartbtn.ForeColor = Color.White;
-            MyCartbtn.Location = new Point(47, 242);
-            MyCartbtn.Margin = new Padding(3, 2, 3, 2);
-            MyCartbtn.Name = "MyCartbtn";
-            MyCartbtn.Size = new Size(195, 30);
-            MyCartbtn.TabIndex = 20;
-            MyCartbtn.Text = "My Cart  ";
-            MyCartbtn.TextAlign = ContentAlignment.MiddleLeft;
-            MyCartbtn.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.BackColor = Color.Transparent;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(7, 242);
-            pictureBox3.Margin = new Padding(3, 2, 3, 2);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(35, 26);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 21;
-            pictureBox3.TabStop = false;
-            // 
-            // Profilebtn
-            // 
-            Profilebtn.BackColor = Color.Transparent;
-            Profilebtn.Cursor = Cursors.Hand;
-            Profilebtn.FlatAppearance.BorderSize = 0;
-            Profilebtn.FlatStyle = FlatStyle.Flat;
-            Profilebtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
-            Profilebtn.ForeColor = Color.White;
-            Profilebtn.Location = new Point(47, 287);
-            Profilebtn.Margin = new Padding(3, 2, 3, 2);
-            Profilebtn.Name = "Profilebtn";
-            Profilebtn.Size = new Size(195, 30);
-            Profilebtn.TabIndex = 18;
-            Profilebtn.Text = "Profile   ";
-            Profilebtn.TextAlign = ContentAlignment.MiddleLeft;
-            Profilebtn.UseVisualStyleBackColor = false;
-            Profilebtn.Click += Profilebtn_Click;
-            // 
-            // pictureBox5
-            // 
-            pictureBox5.BackColor = Color.Transparent;
-            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(7, 287);
-            pictureBox5.Margin = new Padding(3, 2, 3, 2);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(35, 26);
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox5.TabIndex = 19;
-            pictureBox5.TabStop = false;
-            pictureBox5.Click += pictureBox5_Click;
-            // 
-            // MyOrderbtn
-            // 
-            MyOrderbtn.BackColor = Color.Transparent;
-            MyOrderbtn.Cursor = Cursors.Hand;
-            MyOrderbtn.FlatAppearance.BorderSize = 0;
-            MyOrderbtn.FlatStyle = FlatStyle.Flat;
-            MyOrderbtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
-            MyOrderbtn.ForeColor = Color.White;
-            MyOrderbtn.Location = new Point(47, 197);
-            MyOrderbtn.Margin = new Padding(3, 2, 3, 2);
-            MyOrderbtn.Name = "MyOrderbtn";
-            MyOrderbtn.Size = new Size(206, 30);
-            MyOrderbtn.TabIndex = 12;
-            MyOrderbtn.Text = "My Orders ";
-            MyOrderbtn.TextAlign = ContentAlignment.MiddleLeft;
-            MyOrderbtn.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(7, 197);
-            pictureBox2.Margin = new Padding(3, 2, 3, 2);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(35, 26);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 13;
-            pictureBox2.TabStop = false;
-            // 
-            // ClientDashboardbtn
-            // 
-            ClientDashboardbtn.BackColor = Color.Transparent;
-            ClientDashboardbtn.Cursor = Cursors.Hand;
-            ClientDashboardbtn.FlatAppearance.BorderSize = 0;
-            ClientDashboardbtn.FlatStyle = FlatStyle.Flat;
-            ClientDashboardbtn.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
-            ClientDashboardbtn.ForeColor = Color.White;
-            ClientDashboardbtn.Location = new Point(47, 157);
-            ClientDashboardbtn.Margin = new Padding(3, 2, 3, 2);
-            ClientDashboardbtn.Name = "ClientDashboardbtn";
-            ClientDashboardbtn.Size = new Size(185, 30);
-            ClientDashboardbtn.TabIndex = 10;
-            ClientDashboardbtn.Text = "Dashboard ";
-            ClientDashboardbtn.TextAlign = ContentAlignment.MiddleLeft;
-            ClientDashboardbtn.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(7, 157);
-            pictureBox1.Margin = new Padding(3, 2, 3, 2);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(35, 26);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 11;
-            pictureBox1.TabStop = false;
-            // 
-            // flowLayoutPanel8
-            // 
-            flowLayoutPanel8.BackColor = Color.WhiteSmoke;
-            flowLayoutPanel8.Location = new Point(0, 130);
-            flowLayoutPanel8.Margin = new Padding(3, 2, 3, 2);
-            flowLayoutPanel8.Name = "flowLayoutPanel8";
-            flowLayoutPanel8.Size = new Size(288, 8);
-            flowLayoutPanel8.TabIndex = 7;
-            // 
-            // logoutbutton
-            // 
-            logoutbutton.BackColor = Color.Transparent;
-            logoutbutton.Cursor = Cursors.Hand;
-            logoutbutton.FlatAppearance.BorderSize = 0;
-            logoutbutton.FlatStyle = FlatStyle.Flat;
-            logoutbutton.Font = new Font("Arial Rounded MT Bold", 11F, FontStyle.Italic);
-            logoutbutton.ForeColor = Color.White;
-            logoutbutton.Location = new Point(47, 326);
-            logoutbutton.Margin = new Padding(3, 2, 3, 2);
-            logoutbutton.Name = "logoutbutton";
-            logoutbutton.Size = new Size(195, 30);
-            logoutbutton.TabIndex = 0;
-            logoutbutton.Text = "Log Out      ";
-            logoutbutton.TextAlign = ContentAlignment.MiddleLeft;
-            logoutbutton.UseVisualStyleBackColor = false;
-            logoutbutton.Click += logoutbutton_Click;
-            // 
-            // logoutpicture
-            // 
-            logoutpicture.BackColor = Color.Transparent;
-            logoutpicture.ErrorImage = (Image)resources.GetObject("logoutpicture.ErrorImage");
-            logoutpicture.Image = (Image)resources.GetObject("logoutpicture.Image");
-            logoutpicture.Location = new Point(7, 326);
-            logoutpicture.Margin = new Padding(3, 2, 3, 2);
-            logoutpicture.Name = "logoutpicture";
-            logoutpicture.Size = new Size(35, 26);
-            logoutpicture.SizeMode = PictureBoxSizeMode.StretchImage;
-            logoutpicture.TabIndex = 1;
-            logoutpicture.TabStop = false;
-            logoutpicture.Click += logoutpicture_Click;
-            // 
-            // usrpicture
-            // 
-            usrpicture.BackColor = Color.Transparent;
-            usrpicture.Image = (Image)resources.GetObject("usrpicture.Image");
-            usrpicture.Location = new Point(24, 37);
-            usrpicture.Margin = new Padding(3, 2, 3, 2);
-            usrpicture.Name = "usrpicture";
-            usrpicture.Size = new Size(64, 54);
-            usrpicture.SizeMode = PictureBoxSizeMode.StretchImage;
-            usrpicture.TabIndex = 2;
-            usrpicture.TabStop = false;
-            usrpicture.Click += usrpicture_Click;
-            // 
-            // lbl_UserName
-            // 
-            lbl_UserName.AutoSize = true;
-            lbl_UserName.BackColor = Color.Transparent;
-            lbl_UserName.Font = new Font("Comic Sans MS", 18F, FontStyle.Bold | FontStyle.Italic);
-            lbl_UserName.ForeColor = Color.White;
-            lbl_UserName.Location = new Point(93, 37);
-            lbl_UserName.Name = "lbl_UserName";
-            lbl_UserName.Size = new Size(137, 68);
-            lbl_UserName.TabIndex = 9;
-            lbl_UserName.Text = "Welcome  \r\n  ";
-            lbl_UserName.Click += lbl_employeeName_Click;
             // 
             // roundedPanel1
             // 
@@ -295,7 +60,7 @@ namespace E_commerce.Presentation
             roundedPanel1.Location = new Point(332, 67);
             roundedPanel1.Margin = new Padding(3, 2, 3, 2);
             roundedPanel1.Name = "roundedPanel1";
-            roundedPanel1.Size = new Size(1191, 571);
+            roundedPanel1.Size = new Size(1386, 920);
             roundedPanel1.TabIndex = 1;
             roundedPanel1.Paint += roundedPanel1_Paint_1;
             // 
@@ -802,10 +567,9 @@ namespace E_commerce.Presentation
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1550, 622);
+            ClientSize = new Size(1370, 622);
             Controls.Add(SearchTextBox);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(pnl_sideBarClient);
             Controls.Add(roundedPanel1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "Dashboard";
@@ -813,14 +577,6 @@ namespace E_commerce.Presentation
             Text = "Dashboard";
             Load += Dashboard_Load;
             Click += Dashboard_Click;
-            pnl_sideBarClient.ResumeLayout(false);
-            pnl_sideBarClient.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)logoutpicture).EndInit();
-            ((System.ComponentModel.ISupportInitialize)usrpicture).EndInit();
             roundedPanel1.ResumeLayout(false);
             PPProundedPanel3.ResumeLayout(false);
             PPProundedPanel3.PerformLayout();
@@ -831,61 +587,6 @@ namespace E_commerce.Presentation
             ResumeLayout(false);
         }
 
-        private void MakeRoundedPanel(Panel panel, int radius)
-        {
-            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            path.AddArc(panel.Width - radius, 0, radius, radius, 270, 90);
-            path.AddArc(panel.Width - radius, panel.Height - radius, radius, radius, 0, 90);
-            path.AddArc(0, panel.Height - radius, radius, radius, 90, 90);
-            path.CloseAllFigures();
-            panel.Region = new Region(path);
-        }
-
-        private void MakeRoundedButton(Button button, int radius)
-        {
-            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
-            path.StartFigure();
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            path.AddArc(button.Width - radius, 0, radius, radius, 270, 90);
-            path.AddArc(button.Width - radius, button.Height - radius, radius, radius, 0, 90);
-            path.AddArc(0, button.Height - radius, radius, radius, 90, 90);
-            path.CloseFigure();
-            button.Region = new Region(path);
-        }
-
-        //private void Dashboard_Resize(object sender, EventArgs e)
-        //{
-        //    roundedPanel1.Location = new Point(pnl_sideBarClient.Width + 20, 35);
-        //    roundedPanel1.Size = new Size(this.ClientSize.Width - pnl_sideBarClient.Width - 40, 650);
-        //    INFOroundedPanel2.Size = new Size(roundedPanel1.Width - 40, roundedPanel1.Height / 2 - 20);
-        //    INFOroundedPanel2.Location = new Point(20, 20);
-        //    CProundedPanel4.Size = new Size((roundedPanel1.Width - 60) / 2, roundedPanel1.Height / 2 - 40);
-        //    CProundedPanel4.Location = new Point(20, roundedPanel1.Height / 2 + 20);
-        //    CDroundedPanel3.Size = new Size((roundedPanel1.Width - 60) / 2, roundedPanel1.Height / 2 - 40);
-        //    CDroundedPanel3.Location = new Point((roundedPanel1.Width - 60) / 2 + 40, roundedPanel1.Height / 2 + 20);
-        //}
-
-
-
-        private void btn_productManagement_Click(object sender, EventArgs e) { }
-        private void btn_orderManagement_Click(object sender, EventArgs e) { }
-        private void btn_customersManagement_Click(object sender, EventArgs e) { }
-        private void btn_categoryManagement_Click(object sender, EventArgs e) { }
-        private Panel pnl_sideBarClient;
-        private Button MyCartbtn;
-        private PictureBox pictureBox3;
-        private Button Profilebtn;
-        private PictureBox pictureBox5;
-        private Button MyOrderbtn;
-        private PictureBox pictureBox2;
-        private Button ClientDashboardbtn;
-        private PictureBox pictureBox1;
-        private FlowLayoutPanel flowLayoutPanel8;
-        private Button logoutbutton;
-        private PictureBox logoutpicture;
-        private PictureBox usrpicture;
-        private Label lbl_UserName;
         private RoundedPanel roundedPanel1;
         private RoundedPanel INFOroundedPanel2;
         private Label label1;
@@ -896,41 +597,29 @@ namespace E_commerce.Presentation
         private Label label2;
         private RoundedPanel PPProundedPanel3;
         private RoundedPanel DDDroundedPanel2;
-        private CustomControls.CustomTextBox2 customTextBox21;
-        private CustomControls.CustomTextBox2 customTextBox23;
-        private CustomControls.CustomTextBox2 customTextBox22;
-        private CustomControls.CustomTextBox2 customTextBox26;
-        private CustomControls.CustomTextBox2 customTextBox28;
-        private CustomControls.CustomTextBox2 customTextBox27;
+        private CustomTextBox2 customTextBox21;
+        private CustomTextBox2 customTextBox23;
+        private CustomTextBox2 customTextBox22;
+        private CustomTextBox2 customTextBox26;
+        private CustomTextBox2 customTextBox28;
+        private CustomTextBox2 customTextBox27;
         private Label label8;
         private Label label7;
         private Label label6;
-        private CustomControls.CustomTextBox2 customTextBox25;
-        private CustomControls.CustomTextBox2 customTextBox24;
-        private CustomControls.CustomTextBox2 customTextBox29;
-        private CustomControls.CustomTextBox2 customTextBox210;
+        private CustomTextBox2 customTextBox25;
+        private CustomTextBox2 customTextBox24;
+        private CustomTextBox2 customTextBox29;
+        private CustomTextBox2 customTextBox210;
         private Label label11;
-        private CustomControls.CustomTextBox2 customTextBox211;
+        private CustomTextBox2 customTextBox211;
         private Label label10;
         private Label label9;
         private Button button2;
         private Button ChangePassword;
         private Button button3;
         private Button button1;
-        private CustomControls.CustomTextBox2 customTextBox212;
+        private CustomTextBox2 customTextBox212;
         private Label label12;
-
-        public void MakeReadOnly(CustomControls.CustomTextBox2 customTextBox)
-        {
-            customTextBox.Enabled = false;
-            customTextBox.BorderColor = Color.Transparent;
-            customTextBox.BackColor = Color.LightGoldenrodYellow;
-            customTextBox.ForeColor = Color.Black;
-            customTextBox.Font = new Font(customTextBox.Font, FontStyle.Bold);
-            customTextBox.TabStop = false;
-            customTextBox.Padding = new Padding(10, 5, 5, 6);
-
-        }
         private FlowLayoutPanel flowLayoutPanel1;
         private Guna.UI2.WinForms.Guna2TextBox SearchTextBox;
     }

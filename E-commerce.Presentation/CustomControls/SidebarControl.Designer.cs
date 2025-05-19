@@ -295,7 +295,6 @@
             Location = new Point(14, 40);
             Name = "SidebarControl";
             Size = new Size(1893, 891);
-            Load += SidebarControl_Load;
             pnl_sideBarClient.ResumeLayout(false);
             pnl_sideBarClient.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();

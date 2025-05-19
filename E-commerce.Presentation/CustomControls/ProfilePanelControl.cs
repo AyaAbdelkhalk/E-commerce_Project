@@ -312,4 +312,3 @@ namespace E_commerce.Presentation.CustomControls
         }
     }
 }
-

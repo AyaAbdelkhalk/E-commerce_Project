@@ -777,7 +777,7 @@ namespace E_commerce.Presentation
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Dashboard dashboard = new Dashboard(_userServices, _productServices, _cartItemService);
+            Dashboard dashboard = new Dashboard(_userServices, _productServices, _cartItemService,_orderService, _categoryServices);
             dashboard.Show();
             this.Hide();
         }

@@ -7,6 +7,7 @@ using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
 using E_commerce.Shared;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace E_commerce.Presentation
@@ -45,7 +46,7 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new Dashboard());
             //System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
-            System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices,cartItemService,orderService));
+            //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices,cartItemService,orderService));
             //<<<<<<< updd
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Order());
@@ -63,7 +64,7 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
             //sessionmanager.initialize(sessionstorage);
-            ////await sessionmanager.loadlastuser(userservices);
+            //await sessionmanager.loadlastuser(userservices);
             //if (sessionmanager.isloggedin)
             //{
             //    if (sessionmanager.isadmin())
@@ -79,30 +80,30 @@ namespace E_commerce.Presentation
             //else
             //{
             //    system.windows.forms.application.run(new login_form(userservices));
-            //} 
+            //}
             #endregion
 
-            System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService,orderService));
+            //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService,orderService));
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
 
 
 
 
-            //if (SessionManager.IsLoggedIn)
-            //{
-            //    if (SessionManager.IsAdmin())
-            //    {
-            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
-            //    }
-            //    else
-            //    {
-            //        System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService,orderService, categoryServices));
-            //    }
-            //}
-            //else
-            //{
-            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            //}
+            if (SessionManager.IsLoggedIn)
+            {
+                if (SessionManager.IsAdmin())
+                {
+                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
+                }
+                else
+                {
+                    System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService, orderService, categoryServices));
+                }
+            }
+            else
+            {
+                System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            }
 
             ////System.Windows.Forms.Application.Run(new RegisterForm(userServices));
 

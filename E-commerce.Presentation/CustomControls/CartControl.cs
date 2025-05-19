@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using E_commerce.Application.DTOs;
 using E_commerce.Application.Services.ProductServices;
 using Guna.UI2.WinForms;
+using E_commerce.Application.Services.OrderService;
+using E_commerce.Application.DTOs;
 
 namespace E_commerce.Presentation.CustomControls
 {
@@ -16,14 +17,14 @@ namespace E_commerce.Presentation.CustomControls
     {
         private readonly ICartItemService _cartItemService;
         private readonly IProductServices _productService;
+        private readonly IOrderService _orderService;
 
-        public CartControl(ICartItemService cartItemService, IProductServices productServices)
+        public CartControl(ICartItemService cartItemService, IProductServices productServices, IOrderService orderService)
         {
             InitializeComponent();
             _cartItemService = cartItemService;
             _productService = productServices;
-
-
+            _orderService = orderService;
             SetupControl();
             cartDataGridView.CellContentClick += cartDataGridView_CellContentClick;
         }
@@ -31,7 +32,7 @@ namespace E_commerce.Presentation.CustomControls
         private void SetupControl()
         {
             // Initialize and layout controls
-            this.Size = new Size(800, 650); // Reduced width to fit better
+            this.Size = new Size(800, 650);
             this.BackColor = Color.White;
 
             // Position controls with relative positioning
@@ -196,10 +197,34 @@ namespace E_commerce.Presentation.CustomControls
 
         private void CheckoutButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Checkout functionality to be implemented.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var cartItems = (cartDataGridView.DataSource as List<CartItemDTO>)?.ToList() ?? new List<CartItemDTO>();
+            if (cartItems.Count == 0)
+            {
+                MessageBox.Show("Your cart is empty.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Navigate to OrderControl
+            var parentForm = this.FindForm();
+            if (parentForm != null)
+            {
+                // Remove existing controls (except SidebarControl)
+                var existingControls = parentForm.Controls.OfType<UserControl>().Where(c => c != this && c.GetType() != typeof(SidebarControl)).ToList();
+                foreach (var control in existingControls)
+                {
+                    parentForm.Controls.Remove(control);
+                }
+
+                // Add OrderControl
+                var orderControl = new OrderControl(cartItems, _orderService, _cartItemService, _productService);
+                orderControl.Visible = true;
+                orderControl.Dock = DockStyle.Right;
+                parentForm.Controls.Add(orderControl);
+                orderControl.BringToFront();
+
+                // Remove this CartControl
+                parentForm.Controls.Remove(this);
+            }
         }
-
-
     }
 }
-
