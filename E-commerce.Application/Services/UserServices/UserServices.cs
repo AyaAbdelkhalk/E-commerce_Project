@@ -2,6 +2,7 @@
 using E_commerce.Application.Helper;
 using E_commerce.Application.Hepler;
 using E_commerce.Application.Interfaces;
+using E_commerce.Core.Enum;
 using E_commerce.Core.Models;
 using Mapster;
 using System;
@@ -157,6 +158,51 @@ namespace E_commerce.Application.Services.UserServices
             };
         }
 
+        public async Task<Response<User>> UpdateUserR(userdd userdto)
+        {
+            //var response = await IsValidUser(userdto);
+            //if (!response.Succeeded)
+            //{
+            //    return new Response<User>
+            //    {
+            //        Succeeded = false,
+            //        Errors = response.Errors
+            //    };
+            //}
+
+            var existingUser = SessionManager.CurrentUser;
+            if (existingUser == null)
+            {
+                return new Response<User>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "The User does not exist." }
+                };
+            }
+
+            var usr = await _userRepository.GetByIdAsync(existingUser.UserID);
+            if (usr == null)
+            {
+                return new Response<User>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "User not found in the database." }
+                };
+            }
+
+            usr.Role = Enum.TryParse<Role>(userdto.Role, out var parsedRole) ? parsedRole : usr.Role;
+            usr.IsActive = userdto.IsActive == "Active" ? true : false;
+
+
+            var updated = await _userRepository.UpdateAsync(usr);
+
+            return new Response<User>
+            {
+                Data = updated,
+                Succeeded = true
+            };
+        }
+
 
         private async Task<Response<UserDetails>> IsValidUser(AddUserDTO userDTO)
         {
@@ -273,10 +319,108 @@ namespace E_commerce.Application.Services.UserServices
             };
         }
 
+        public async Task<Response<List<ayaDto>>> GetAllUserss()
+        {
+            var currentUser = SessionManager.CurrentUser;
+            if (currentUser == null)
+            {
+                return new Response<List<ayaDto>>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "Current user not found in session." }
+                };
+            }
+
+            var users = await _userRepository.GetAllAsync();
+
+            if (users == null || !users.Any())
+            {
+                return new Response<List<ayaDto>>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "No users found." }
+                };
+            }
+
+            var filteredUsers = users
+                .Where(u => u.UserID != currentUser.UserID)
+                .ToList(); // مهم تحط ToList() هنا عشان تفصل ال LINQ عن EF
+
+            // التحويل إلى DTO
+            var userDetails = filteredUsers.Select(u => new ayaDto
+            {
+                UserName = u.UserName,
+                Email = u.Email,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+         
+            }).ToList();
+
+            return new Response<List<ayaDto>>
+            {
+                Succeeded = true,
+                Data = userDetails
+            };
+        }
+
         public async Task<int> GetTotalUsersAsync()
         {
             var users = await _userRepository.GetAllAsync();
             return users.Count();
+        }
+
+        //search for user
+        public async Task<Response<List<userD>>> SearchUser(string searchTerm)
+        {
+            var users = await _userRepository.GetAllAsync();
+            if (users == null || !users.Any())
+            {
+                return new Response<List<userD>>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "No users found." }
+                };
+            }
+            var filteredUsers = users.ToList()
+                .Where(u => u.UserName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                            u.Email.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+            // التحويل إلى DTO
+            var userDetails = filteredUsers.Select(u => new userD
+            {
+                Id = u.UserID,
+                UserName = u.UserName,
+                Email = u.Email,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                IsActive = u.IsActive ? "Active" : "Inactive",
+                Role = u.Role.ToString()
+            }).ToList();
+            return new Response<List<userD>>
+            {
+                Succeeded = true,
+                Data = userDetails
+            };
+        }
+
+        //delete user service
+        public async Task<Response<string>> DeleteUser(int id)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null)
+            {
+                return new Response<string>
+                {
+                    Succeeded = false,
+                    Errors = new List<string> { "User not found." }
+                };
+            }
+            await _userRepository.DeleteAsync(user.UserID);
+            return new Response<string>
+            {
+                Succeeded = true,
+                Data = "User deleted successfully."
+            };
         }
 
     }

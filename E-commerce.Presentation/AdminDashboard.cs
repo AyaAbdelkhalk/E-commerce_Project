@@ -33,6 +33,7 @@ namespace E_commerce.Presentation
         private readonly ProfilePanelControl profilePanelControl1;
         private readonly AdminDashboardControl _adminDashboardControl;
         private readonly CategoryControl categoryControl;
+        private readonly userControl userControl1;
 
         private bool isUpdateMode = false;
         private int currentProductId = 0;
@@ -90,6 +91,10 @@ namespace E_commerce.Presentation
             categoryControl.Visible = false;
             categoryControl.BringToFront();
 
+            userControl1 = new userControl(userServices);
+            this.Controls.Add(userControl1);
+            userControl1.Visible = false;
+            userControl1.BringToFront();
 
         }
 
@@ -134,12 +139,12 @@ namespace E_commerce.Presentation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button1.BackColor = Color.FromArgb(200, 230, 250);
-            button1.ForeColor = Color.DarkBlue;
+
             _adminDashboardControl.Visible = false;
-            var users = new users(_userServices, _productServices, _categoryServices, _cartItemService, _orderService);
-            users.Show();
-            this.Hide();
+            userControl1.Visible = true;
+            userControl1.BringToFront();
+            userControl1.Location = new Point(300, 20);
+            userControl1.Size = new Size(1500, 800);
         }
 
         private async void AdminDashboard_Load_1(object sender, EventArgs e)

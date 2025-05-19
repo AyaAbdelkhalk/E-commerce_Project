@@ -13,12 +13,19 @@ namespace E_commerce.Application.Services.UserServices
     {
         Task<Response<User>> AddNewUser(AddUserDTO userdto);
         Task<Response<User>> UpdateUser(AddUserDTO userdto);
+        Task<Response<User>> UpdateUserR(userdd userdto);
         Task<Response<User>> Login(LoginDTO loginDto);
         Response<string> Logout();
         Task<User?> GetUserById(int id);
 
         Task<Response<List<userD>>> GetAllUsers();
         Task<int> GetTotalUsersAsync();
+        Task<Response<List<userD>>> SearchUser(string searchTerm);
+
+        Task<Response<string>> DeleteUser(int id);
+
+        Task<Response<List<ayaDto>>> GetAllUserss();
+
 
     }
 }
