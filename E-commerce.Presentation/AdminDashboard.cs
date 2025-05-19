@@ -96,6 +96,8 @@ namespace E_commerce.Presentation
             profilePanelControl1.Visible = false;
 
 
+
+
         }
 
         public AdminDashboard(IProductServices productServices, ICategoryServices categoryServices, IUserServices userServices, ICartItemService cartItemService, IOrderService orderService)
@@ -185,18 +187,8 @@ namespace E_commerce.Presentation
             new products(_productServices, _categoryServices, _userServices, _cartItemService, _orderService).Show();
         }
 
-///////////////////////////////////bhjghdsa
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-            _adminDashboardControl.Visible = false;
-            userControl1.Visible = true;
-            userControl1.BringToFront();
-            userControl1.Location = new Point(300, 20);
-            userControl1.Size = new Size(1500, 800);
-
-        }
-
+      
         private async void AdminDashboard_Load_1(object sender, EventArgs e)
         {
             flowLayoutPanel1.Visible = false;
@@ -212,18 +204,7 @@ namespace E_commerce.Presentation
         #endregion
 
         #region Sidebar Button Handlers
-        private void logoutbutton_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                this.Hide();
-                SessionManager.Logout();
-                _userServices.Logout();
-                var loginForm = new Login_Form(_userServices);
-                loginForm.Show();
-            }
-        }
+
 
         private void logoutpicture_Click(object sender, EventArgs e)
         {
@@ -428,20 +409,23 @@ namespace E_commerce.Presentation
             }
         }
 
-        private void btn_products_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new products(_productServices, _categoryServices, _userServices, _cartItemService, _orderService).Show();
-        }
+        //private void btn_products_Click(object sender, EventArgs e)
+        //{
+        //    this.Hide();
+        //    new products(_productServices, _categoryServices, _userServices, _cartItemService, _orderService).Show();
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
             button1.BackColor = Color.FromArgb(200, 230, 250);
             button1.ForeColor = Color.DarkBlue;
             _adminDashboardControl.Visible = false;
-            var users = new users(_userServices, _productServices, _categoryServices, _cartItemService, _orderService);
-            users.Show();
-            this.Hide();
+            userControl1.Visible = true;
+            userControl1.BringToFront();
+            userControl1.Location = new Point(300, 20);
+            userControl1.Size = new Size(1500, 800);
+            profilePanelControl1.Visible = false;
+
         }
 
         private void productbtn_Click(object sender, EventArgs e)
