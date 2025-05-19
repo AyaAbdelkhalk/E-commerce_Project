@@ -1,6 +1,9 @@
 ﻿using E_commerce.Application.DTOs.User;
 using E_commerce.Application.Helper;
 using E_commerce.Application.Hepler;
+using E_commerce.Application.Services.OrderService;
+using E_commerce.Application.Services.ProductServices;
+using E_commerce.Application.Services;
 using E_commerce.Application.Services.UserServices;
 using System;
 using System.Collections.Generic;
@@ -18,12 +21,27 @@ namespace E_commerce.Presentation.CustomControls
     public partial class ProfilePanelControl : UserControl
     {
         private readonly IUserServices _userServices;
+        private readonly IProductServices _productServices;
+        private readonly ICategoryServices _categoryServices;
+        private readonly ICartItemService _cartItemService;
+        private readonly IOrderService _orderService;
         public ProfilePanelControl(IUserServices userServices)
         {
             InitializeComponent();
 
             _userServices = userServices;
         }
+
+        public ProfilePanelControl(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices, ICartItemService cartItemService, IOrderService orderService)
+        {
+            InitializeComponent();
+            _userServices = userServices;
+            _productServices = productServices;
+            _categoryServices = categoryServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
+        }
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FullName
         {
@@ -212,7 +230,7 @@ namespace E_commerce.Presentation.CustomControls
                 customTextBox212.Text = string.Empty;
 
                 this.Hide();
-                var dashboard = new Dashboard(_userServices, user);
+                var dashboard = new Dashboard(_userServices, user, _productServices, _cartItemService, _orderService, _categoryServices);
                 dashboard.Show();
             }
             else
@@ -312,4 +330,3 @@ namespace E_commerce.Presentation.CustomControls
         }
     }
 }
-

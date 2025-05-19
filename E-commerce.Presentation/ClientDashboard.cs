@@ -45,7 +45,7 @@ namespace E_commerce.Presentation
             adminDashboardControl.Visible = false;
             this.Controls.Add(adminDashboardControl);
 
-            CartControl cartControl = new CartControl( _cartItemService, _productService);
+            CartControl cartControl = new CartControl( _cartItemService, _productService,_orderService);
             cartControl.Visible = false;
             this.Controls.Add(cartControl);
             ProfilePanelControl profilePanelControl = new ProfilePanelControl(_userServices);

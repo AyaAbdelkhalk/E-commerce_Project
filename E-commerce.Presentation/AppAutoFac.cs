@@ -9,6 +9,7 @@ using E_commerce.Core.Models;
 using E_commerce.Infrastructure;
 using E_commerce.Infrastructure.Repository;
 using E_commerce.Shared;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualBasic.ApplicationServices;
 
 namespace E_commerce.Presentation
@@ -40,6 +41,8 @@ namespace E_commerce.Presentation
 
             builder.RegisterType<SessionStorage>().As<ISessionStorage>().SingleInstance();
             builder.RegisterType<products>().AsSelf();
+
+
 
             Container = builder.Build();
             return Container;

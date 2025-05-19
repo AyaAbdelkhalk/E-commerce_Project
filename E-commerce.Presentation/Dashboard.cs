@@ -1,23 +1,18 @@
 ﻿using E_commerce.Application.DTOs.User;
 using E_commerce.Application.Helper;
-using E_commerce.Application.Hepler;
 using E_commerce.Application.Interfaces;
 using E_commerce.Application.Services.ProductServices;
-using E_commerce.Application.Services;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Ecommerce;
+using E_commerce.Presentation.CustomControls;
 using E_commerce.Application.Services.OrderService;
+using E_commerce.Application.Hepler;
+using E_commerce.Application.Services;
+using Ecommerce;
 
 namespace E_commerce.Presentation
 {
@@ -28,39 +23,9 @@ namespace E_commerce.Presentation
         private readonly ICartItemService _cartItemService;
         private readonly IOrderService _orderService;
         private readonly ICategoryServices _categoryServices;
+        private readonly SidebarControl _sidebarControl;
 
-        public Dashboard(User user, IUserServices userServices)
-        {
-            InitializeComponent();
-            roundedPanel1.Visible = false;
-            _userServices = userServices;
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
-            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
-            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
-            customTextBox23.Text += SessionManager.CurrentUser?.Email;
-            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
-            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
-        }
-        public Dashboard(IUserServices userServices, IProductServices productServices, ICartItemService cartItemService)
-        {
-            InitializeComponent();
-            roundedPanel1.Visible = false;
-            _userServices = userServices;
-            _productServices = productServices;
-            _cartItemService = cartItemService;
-
-
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
-            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
-            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
-            customTextBox23.Text += SessionManager.CurrentUser?.Email;
-            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
-            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
-        }
+   
 
 
         public Dashboard()
@@ -69,16 +34,13 @@ namespace E_commerce.Presentation
             roundedPanel1.Visible = false;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
             customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
             customTextBox22.Text += SessionManager.CurrentUser?.UserName;
             customTextBox23.Text += SessionManager.CurrentUser?.Email;
             customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
             customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
-
-
-
-
+            _sidebarControl = new SidebarControl(null, null, null, null, null);
+            this.Controls.Add(_sidebarControl);
         }
 
         public Dashboard(IUserServices userServices, User user)
@@ -87,16 +49,16 @@ namespace E_commerce.Presentation
             roundedPanel1.Visible = false;
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
             customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
             customTextBox22.Text += SessionManager.CurrentUser?.UserName;
             customTextBox23.Text += SessionManager.CurrentUser?.Email;
             customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
-            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString(); _userServices = userServices;
-
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
+            _userServices = userServices;
+            _sidebarControl = new SidebarControl(userServices, null, null, null, null);
+            this.Controls.Add(_sidebarControl);
         }
-
-        public Dashboard(IUserServices userServices, IProductServices productServices, ICartItemService cartItemService, IOrderService orderService ,ICategoryServices categoryServices)
+        public Dashboard(IUserServices userServices, IProductServices productServices, ICartItemService cartItemService, IOrderService orderService, ICategoryServices categoryServices)
         {
             InitializeComponent();
             roundedPanel1.Visible = false;
@@ -105,9 +67,29 @@ namespace E_commerce.Presentation
             _cartItemService = cartItemService;
             _orderService = orderService;
             _categoryServices = categoryServices;
+            _sidebarControl = new SidebarControl(userServices, cartItemService, productServices, orderService, categoryServices);
+            this.Controls.Add(_sidebarControl);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
+            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
+            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
+            customTextBox23.Text += SessionManager.CurrentUser?.Email;
+            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
+            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
+        }
+        public Dashboard(IUserServices userServices, User user, IProductServices productServices, ICartItemService cartItemService, IOrderService orderService, ICategoryServices categoryServices)
+        {
+            InitializeComponent();
+            roundedPanel1.Visible = false;
+            _userServices = userServices;
+            _productServices = productServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
+            _categoryServices = categoryServices;
+            _sidebarControl = new SidebarControl(userServices, cartItemService, productServices, orderService, categoryServices);
+            this.Controls.Add(_sidebarControl);
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
             customTextBox22.Text += SessionManager.CurrentUser?.UserName;
             customTextBox23.Text += SessionManager.CurrentUser?.Email;
@@ -117,78 +99,34 @@ namespace E_commerce.Presentation
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-
             this.WindowState = FormWindowState.Maximized;
-
             this.SuspendLayout();
             roundedPanel1.Visible = false;
-            MakeRoundedPanel(pnl_sideBarClient, 30);
-            //this.BackColor = Color.FromArgb(245, 245, 245) // Very Light Gray
-            this.BackColor =
-            //Color.FromArgb(250, 250, 240) // FloralWhite (أبيض على لمسة أصفر)
-            Color.FromArgb(240, 248, 255); // AliceBlue – أزرق سماوي فاتح جداً
-
+            //_sidebarControl.Location = new Point(12, 30);
+            //_sidebarControl.Size = new Size(283, 571);
+            this.BackColor = Color.FromArgb(240, 248, 255); // AliceBlue
             MakeRoundedPanel(roundedPanel1, 30);
             MakeRoundedPanel(INFOroundedPanel2, 30);
             MakeRoundedPanel(PPProundedPanel3, 30);
             MakeRoundedPanel(DDDroundedPanel2, 30);
-            lbl_UserName.Text += SessionManager.CurrentUser?.FirstName;
-            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
-            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
-            customTextBox23.Text += SessionManager.CurrentUser?.Email;
-            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
-            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
-
-            ClientDashboardbtn.MouseEnter += (s, e) =>
-            {
-                ClientDashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
-                ClientDashboardbtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
-            };
-
-            ClientDashboardbtn.MouseLeave += (s, e) =>
-            {
-                ClientDashboardbtn.BackColor = Color.Transparent;            // يرجع شفاف
-                ClientDashboardbtn.ForeColor = Color.Black;           // يرجع لونه الأصلي
-            };
-
-            ClientDashboardbtn.MouseDown += (s, e) =>
-            {
-                ClientDashboardbtn.BackColor = Color.FromArgb(180, 210, 240); // لون أغمق عند الضغط
-            };
-
-            ClientDashboardbtn.MouseUp += (s, e) =>
-            {
-                ClientDashboardbtn.BackColor = Color.FromArgb(200, 230, 250); // يرجع للهوفر
-            };
             MakeReadOnly(customTextBox21);
             MakeReadOnly(customTextBox22);
             MakeReadOnly(customTextBox23);
             MakeReadOnly(customTextBox24);
             MakeReadOnly(customTextBox25);
 
-
             if (SessionManager.CurrentUser != null)
             {
-                lbl_UserName.Text = "Welcome \n " + SessionManager.CurrentUser.FirstName;
                 customTextBox21.Text = SessionManager.CurrentUser.FirstName + " " + SessionManager.CurrentUser.LastName;
                 customTextBox22.Text = SessionManager.CurrentUser.UserName;
                 customTextBox23.Text = SessionManager.CurrentUser.Email;
                 customTextBox24.Text = SessionManager.CurrentUser.Role.ToString();
-                if (SessionManager.CurrentUser.IsActive == true)
-                    customTextBox25.Text = "Activated";
-                else
-                    customTextBox25.Text = "Deactivated";
-
-
+                customTextBox25.Text = SessionManager.CurrentUser.IsActive ? "Activated" : "Deactivated";
             }
-            else
-            {
-                lbl_UserName.Text = "Guest";
-            }
+
 
             LoadProducts();
-
-
+            this.ResumeLayout();
         }
 
         private async void LoadProducts()
@@ -230,40 +168,6 @@ namespace E_commerce.Presentation
             MessageBox.Show(this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_dashboard_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_employeeName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void logoutpicture_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                this.Hide();
-                // Show the login form again
-                SessionManager.Logout();
-                var loginForm = new Login_Form(_userServices);
-                loginForm.Show();
-            }
-
-
-        }
         private void Dashboard_Paint(object sender, PaintEventArgs e)
         {
             using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle,
@@ -275,107 +179,6 @@ namespace E_commerce.Presentation
             }
         }
 
-        private void pnl_sideBar_Paint(object sender, PaintEventArgs e)
-        {
-            using (LinearGradientBrush brush = new LinearGradientBrush(pnl_sideBarClient.ClientRectangle,
-                    Color.FromArgb(135, 206, 250),   // Sky Blue
-                    Color.FromArgb(255, 223, 102), // Light Yellow (Sunlight)
-
-                //Color.FromArgb(63, 43, 150) , Color.FromArgb(42, 27, 161)
-
-                // Color.FromArgb(255, 175, 189), // مشمشي وردي
-                //Color.FromArgb(255, 195, 160)  // مشمشي فاتح
-
-                LinearGradientMode.Vertical))
-            {
-                e.Graphics.FillRectangle(brush, pnl_sideBarClient.ClientRectangle);
-            }
-        }
-
-        private void PPProundedPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Pinfo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void roundedPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void usrpicture_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void logoutbutton_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                this.Hide();
-                SessionManager.Logout();
-                _userServices.Logout();
-                var loginForm = new Login_Form(_userServices);
-                loginForm.Show();
-            }
-        }
-
-
-        private void roundedPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void INFOroundedPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void CDroundedPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void customTextBox23__TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void customTextBox22__TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PPProundedPanel3_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void DDDroundedPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void roundedPanel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Profilebtn_Click(object sender, EventArgs e)
-        {
-            roundedPanel1.Visible = true;
-            // Change the button color
-            Profilebtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
-            Profilebtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
-            // Hide other panels
-
-        }
-
         private async void button1_Click_1(object sender, EventArgs e) //update
         {
             var user = SessionManager.CurrentUser;
@@ -384,7 +187,7 @@ namespace E_commerce.Presentation
                 var updateDto = new AddUserDTO
                 {
                     UserName = customTextBox27.Text,
-                    Password = user.Password, // خليها نفس الباسورد الأصلي
+                    Password = user.Password,
                     PasswordConfirmed = user.Password,
                     Email = customTextBox26.Text,
                     FirstName = customTextBox28.Text,
@@ -412,7 +215,7 @@ namespace E_commerce.Presentation
                 customTextBox212.Text = string.Empty;
 
                 this.Hide();
-                var dashboard = new Dashboard(_userServices, user);
+                var dashboard = new Dashboard(_userServices, user,_productServices,_cartItemService,_orderService,_categoryServices);
                 dashboard.Show();
             }
             else
@@ -498,25 +301,6 @@ namespace E_commerce.Presentation
             customTextBox29.Text = string.Empty;
         }
 
-        private void pnl_sideBarClient_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-            roundedPanel1.Visible = true;
-            // Change the button color
-            Profilebtn.BackColor = Color.FromArgb(200, 230, 250); // لون ناعم عند المرور
-            Profilebtn.ForeColor = Color.DarkBlue;                // لون الخط أغمق
-            // Hide other panels
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
             var text = SearchTextBox.Text.ToLower();
@@ -538,6 +322,35 @@ namespace E_commerce.Presentation
         {
             LoadProducts();
             flowLayoutPanel1.Visible = true;
+        }
+
+        private void roundedPanel1_Paint_1(object sender, PaintEventArgs e) { }
+        private void PPProundedPanel3_Paint_1(object sender, PaintEventArgs e) { }
+        private void DDDroundedPanel2_Paint(object sender, PaintEventArgs e) { }
+        private void INFOroundedPanel2_Paint(object sender, PaintEventArgs e) { }
+        private void customTextBox23__TextChanged(object sender, EventArgs e) { }
+        private void customTextBox22__TextChanged(object sender, EventArgs e) { }
+
+        private void MakeRoundedPanel(Panel panel, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(0, 0, radius, radius, 180, 90);
+            path.AddArc(panel.Width - radius, 0, radius, radius, 270, 90);
+            path.AddArc(panel.Width - radius, panel.Height - radius, radius, radius, 0, 90);
+            path.AddArc(0, panel.Height - radius, radius, radius, 90, 90);
+            path.CloseAllFigures();
+            panel.Region = new Region(path);
+        }
+
+        public void MakeReadOnly(CustomTextBox2 customTextBox)
+        {
+            customTextBox.Enabled = false;
+            customTextBox.BorderColor = Color.Transparent;
+            customTextBox.BackColor = Color.LightGoldenrodYellow;
+            customTextBox.ForeColor = Color.Black;
+            customTextBox.Font = new Font(customTextBox.Font, FontStyle.Bold);
+            customTextBox.TabStop = false;
+            customTextBox.Padding = new Padding(10, 5, 5, 6);
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)

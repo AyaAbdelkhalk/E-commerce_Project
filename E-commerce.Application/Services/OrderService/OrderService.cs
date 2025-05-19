@@ -97,6 +97,7 @@ namespace E_commerce.Application.Services.OrderService
             {
                 bool canApprove = order.OrderDetails.All(od => od.Product.UnitsInStock >= od.Quantity);
                 order.Status = canApprove ? Status.Approved : Status.Denied;
+                order.DateProcessed = DateTime.UtcNow; // Set DateProcessed for Approved or Denied
             }
             else if (order.Status == Status.Approved)
             {
@@ -136,6 +137,7 @@ namespace E_commerce.Application.Services.OrderService
             if (order.Status != Status.Pending)
                 return new Response<string> { Succeeded = false, Errors = new List<string> { "Only pending orders can be approved." } };
             order.Status = Status.Approved;
+            order.DateProcessed = DateTime.UtcNow; // Set DateProcessed
             await _orderRepository.UpdateAsync(order);
 
             return new Response<string> { Succeeded = true, Data = "Order approved successfully." };
@@ -148,11 +150,52 @@ namespace E_commerce.Application.Services.OrderService
                 return new Response<string> { Succeeded = false, Errors = new List<string> { "Order not found." } };
 
             if (order.Status != Status.Pending)
-                return new Response<string> { Succeeded = false, Errors = new List<string> { "Only pending orders can be approved." } };
+                return new Response<string> { Succeeded = false, Errors = new List<string> { "Only pending orders can be denied." } };
+
+            // Restore product stock
+            var errors = new List<string>();
+            foreach (var orderDetail in order.OrderDetails)
+            {
+                var product = await _productRepository.GetByIdAsync(orderDetail.ProductID);
+                if (product != null)
+                {
+                    product.UnitsInStock += orderDetail.Quantity;
+                    await _productRepository.UpdateAsync(product);
+                }
+                else
+                {
+                    errors.Add($"Product with ID {orderDetail.ProductID} not found.");
+                }
+            }
+
+            if (errors.Any())
+            {
+                return new Response<string>
+                {
+                    Succeeded = false,
+                    Errors = errors
+                };
+            }
+
+            // Update order status to Denied
             order.Status = Status.Denied;
+            order.DateProcessed = DateTime.UtcNow; // Set DateProcessed
             await _orderRepository.UpdateAsync(order);
 
-            return new Response<string> { Succeeded = true, Data = "Order denied  successfully." };
+            return new Response<string> { Succeeded = true, Data = "Order denied successfully." };
+        }
+
+        public async Task<Response<string>> SetPendingAsync(int orderId)
+        {
+            var order = await _orderRepository.GetByIdAsync(orderId);
+            if (order == null)
+                return new Response<string> { Succeeded = false, Errors = new List<string> { "Order not found." } };
+
+            order.Status = Status.Pending;
+            order.DateProcessed = default(DateTime); // Clear DateProcessed
+            await _orderRepository.UpdateAsync(order);
+
+            return new Response<string> { Succeeded = true, Data = "Order status updated to Pending." };
         }
 
         public async Task<List<OrderDisDto>> GetOrderHistoryByUserIdAsync(int userId)
@@ -219,17 +262,14 @@ namespace E_commerce.Application.Services.OrderService
                 TotalAmount = order.TotalAmount,
                 User = order.User != null ? order.User.FirstName + " " + order.User.LastName : "Unknown User",
                 Status = order.Status.ToString(),
-
             }).ToList();
             return o;
-
-
         }
+
         public async Task<int> GetAllOrdersAsync()
         {
             var orders = await _orderRepository.GetAllOrdersAsync();
             return orders.Count;
-
         }
 
         public async Task<Dictionary<string, decimal>> GetMonthlyOrderAmountAsync()
@@ -238,9 +278,24 @@ namespace E_commerce.Application.Services.OrderService
             return orders ?? new Dictionary<string, decimal>();
         }
 
-
-
-
-
+        public async Task<List<OrderDisDto>> GetAllOrdersAsync2()
+        {
+            var orders = await _orderRepository.GetAllOrdersAsync();
+            return orders.Select(order => new OrderDisDto
+            {
+                OrderID = order.OrderID,
+                UserID = order.UserID,
+                OrderDate = order.OrderDate,
+                TotalAmount = order.TotalAmount,
+                Status = order.Status.ToString(),
+                DateProcessed = order.DateProcessed,
+                OrderDetails = order.OrderDetails.Select(od => new OrderDetailDto
+                {
+                    ProductID = od.ProductID,
+                    Quantity = od.Quantity,
+                    Price = od.Price
+                }).ToList()
+            }).ToList();
+        }
     }
 }

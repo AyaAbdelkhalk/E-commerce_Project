@@ -1,5 +1,8 @@
 ﻿using E_commerce.Application.DTOs.User;
 using E_commerce.Application.Helper;
+using E_commerce.Application.Services.OrderService;
+using E_commerce.Application.Services.ProductServices;
+using E_commerce.Application.Services;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
 using System;
@@ -13,6 +16,10 @@ namespace E_commerce.Presentation
     public partial class Login_Form : Form
     {
         private readonly IUserServices _userServices;
+        private readonly IProductServices _productServices;
+        private readonly ICategoryServices _categoryServices;
+        private readonly ICartItemService _cartItemService;
+        private readonly IOrderService _orderService;
 
         //public Login_Form()
         //{
@@ -39,6 +46,22 @@ namespace E_commerce.Presentation
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             REGpanel.BringToFront();
 
+
+        }
+
+        public Login_Form(IUserServices userServices, IProductServices productServices, ICategoryServices categoryServices, ICartItemService cartItemService, IOrderService orderService)
+        {
+            _userServices = userServices;
+            _productServices = productServices;
+            _categoryServices = categoryServices;
+            _cartItemService = cartItemService;
+            _orderService = orderService;
+            InitializeComponent();
+            _userServices = userServices;
+            this.DoubleBuffered = true;
+
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            REGpanel.BringToFront();
 
         }
 
@@ -81,9 +104,9 @@ namespace E_commerce.Presentation
                     this.Hide();
                     SessionManager.Login(result.Data);
                     if (SessionManager.IsAdmin())
-                        new AdminDashboard(_userServices, result.Data).Show();
+                        new AdminDashboard(_userServices, result.Data,_productServices,_categoryServices,_cartItemService,_orderService).Show();
                     else
-                        new Dashboard(_userServices, result.Data).Show();
+                        new Dashboard(_userServices, result.Data,_productServices,_cartItemService,_orderService,_categoryServices).Show();
                 }
                 else
                 {
@@ -175,9 +198,9 @@ namespace E_commerce.Presentation
                     MessageBox.Show("User Regitser sucessfully");
                     this.Hide();
                     if (SessionManager.IsAdmin())
-                        new AdminDashboard(_userServices, result.Data).Show();
+                        new AdminDashboard(_userServices, result.Data, _productServices, _categoryServices, _cartItemService, _orderService).Show();
                     else
-                        new Dashboard(_userServices, result.Data).Show();
+                        new Dashboard(_userServices, result.Data,_productServices,_cartItemService,_orderService,_categoryServices).Show();
                 }
                 else
                 {

@@ -11,6 +11,7 @@ using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Helper;
 using E_commerce.Application.DTOs;
 using E_commerce.Application.Services.ProductServices;
+using E_commerce.Presentation.CustomControls;
 
 namespace E_commerce.Presentation
 {
@@ -21,6 +22,8 @@ namespace E_commerce.Presentation
         private readonly IOrderService _orderService;
         private readonly ICartItemService _cartItemService;
         private readonly IProductServices _productService;
+        private readonly CartControl _cartControl;
+        private readonly int? _orderId; // Added to store order ID
 
         public OrderForm()
         {
@@ -44,13 +47,24 @@ namespace E_commerce.Presentation
             titleLabel.Location = new Point(20, 20);
         }
 
-        public OrderForm(List<CartItemDTO> cartItems, CartItemForm cartForm, IOrderService orderService, ICartItemService cartItemService,IProductServices productServices) : this()
+        public OrderForm(List<CartItemDTO> cartItems, CartItemForm cartForm, IOrderService orderService, ICartItemService cartItemService, IProductServices productServices, int? orderId = null) : this()
         {
             _cartItems = cartItems ?? new List<CartItemDTO>();
             _cartForm = cartForm ?? throw new ArgumentNullException(nameof(cartForm));
             _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
             _cartItemService = cartItemService ?? throw new ArgumentNullException(nameof(cartItemService));
             _productService = productServices ?? throw new ArgumentNullException(nameof(productServices));
+            _orderId = orderId; // Initialize orderId
+        }
+
+        public OrderForm(List<CartItemDTO> cartItems, CartControl cartControl, IOrderService orderService, ICartItemService cartItemService, IProductServices productServices, int? orderId = null) : this()
+        {
+            _cartItems = cartItems ?? new List<CartItemDTO>();
+            _cartControl = cartControl;
+            _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
+            _cartItemService = cartItemService ?? throw new ArgumentNullException(nameof(cartItemService));
+            _productService = productServices ?? throw new ArgumentNullException(nameof(productServices));
+            _orderId = orderId; // Initialize orderId
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
@@ -144,8 +158,8 @@ namespace E_commerce.Presentation
                 }
 
                 // Navigate to MyOrdersForm
-                var myOrdersForm = new MyOrdersForm(_orderService,_productService);
-                myOrdersForm.Show();
+                //var myOrdersForm = new MyOrdersForm(_orderService,_productService);
+                //myOrdersForm.Show();
                 this.Close();
             }
             catch (Exception ex)
@@ -154,11 +168,52 @@ namespace E_commerce.Presentation
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private async void btnCancel_Click(object sender, EventArgs e)
         {
-            // Show the CartItemForm and close the OrderForm
-            _cartForm.Show();
-            this.Close();
+            try
+            {
+                if (_orderId.HasValue)
+                {
+                    // Cancel the existing order
+                    var response = await _orderService.CancelOrderAsync(_orderId.Value);
+                    if (response.Succeeded)
+                    {
+                        MessageBox.Show(response.Data, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Failed to cancel order: {string.Join(", ", response.Errors)}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else if (_cartItems.Any())
+                {
+                    // Clear the cart if no order exists but cart items are present
+                    var userId = SessionManager.CurrentUser?.UserID ?? 3; // Replace with actual user ID
+                    var cartResponse = await _cartItemService.ClearCartAsync(userId);
+                    if (cartResponse.Succeeded)
+                    {
+                        MessageBox.Show("Cart cleared successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Failed to clear cart: {string.Join(", ", cartResponse.Errors)}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                // Navigate back to CartItemForm or refresh CartControl
+                if (_cartForm != null)
+                {
+                    _cartForm.Show();
+                }
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void guna2CircleButtonClose_Click(object sender, EventArgs e)

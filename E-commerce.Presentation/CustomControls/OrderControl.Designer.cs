@@ -1,9 +1,8 @@
-﻿using Guna.UI2.WinForms.Suite;
-using Guna.UI2.WinForms;
+﻿using Guna.UI2.WinForms;
 
-namespace E_commerce.Presentation
+namespace E_commerce.Presentation.CustomControls
 {
-    partial class OrderForm
+    partial class OrderControl
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -21,25 +20,19 @@ namespace E_commerce.Presentation
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            CustomizableEdges customizableEdges1 = new CustomizableEdges();
-            CustomizableEdges customizableEdges2 = new CustomizableEdges();
-            CustomizableEdges customizableEdges3 = new CustomizableEdges();
-            CustomizableEdges customizableEdges4 = new CustomizableEdges();
-            CustomizableEdges customizableEdges5 = new CustomizableEdges();
-            CustomizableEdges customizableEdges6 = new CustomizableEdges();
-            CustomizableEdges customizableEdges7 = new CustomizableEdges();
-            CustomizableEdges customizableEdges8 = new CustomizableEdges();
-            CustomizableEdges customizableEdges9 = new CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
 
-            dataGridViewCart = new Guna2DataGridView();
-            guna2HtmlLabelTotal = new Guna2HtmlLabel();
-            textBoxTotal = new Guna2TextBox();
-            btnOK = new Guna2GradientButton();
-            btnCancel = new Guna2GradientButton();
-            guna2CircleButtonClose = new Guna2CircleButton();
-            guna2CircleButtonMinimize = new Guna2CircleButton();
-            guna2CircleButtonMaximize = new Guna2CircleButton();
-            titleLabel = new Guna2HtmlLabel();
+            dataGridViewCart = new Guna.UI2.WinForms.Guna2DataGridView();
+            guna2HtmlLabelTotal = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            textBoxTotal = new Guna.UI2.WinForms.Guna2TextBox();
+            btnOK = new Guna.UI2.WinForms.Guna2GradientButton();
+            btnCancel = new Guna.UI2.WinForms.Guna2GradientButton();
+            titleLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
 
             ((System.ComponentModel.ISupportInitialize)dataGridViewCart).BeginInit();
             SuspendLayout();
@@ -77,7 +70,7 @@ namespace E_commerce.Presentation
             dataGridViewCart.TabIndex = 0;
             dataGridViewCart.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             dataGridViewCart.ThemeStyle.AlternatingRowsStyle.Font = null;
-            dataGridViewCart.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCart.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
             dataGridViewCart.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
             dataGridViewCart.ThemeStyle.BackColor = SystemColors.ControlDark;
@@ -96,7 +89,6 @@ namespace E_commerce.Presentation
             dataGridViewCart.ThemeStyle.RowsStyle.Height = 30;
             dataGridViewCart.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCart.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCart.CellContentClick += dataGridViewCart_CellContentClick;
 
             // guna2HtmlLabelTotal
             guna2HtmlLabelTotal.BackColor = Color.Transparent;
@@ -162,60 +154,6 @@ namespace E_commerce.Presentation
             btnCancel.Text = "Cancel";
             btnCancel.Click += btnCancel_Click;
 
-            // guna2CircleButtonClose
-            guna2CircleButtonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2CircleButtonClose.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButtonClose.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButtonClose.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButtonClose.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButtonClose.FillColor = Color.IndianRed;
-            guna2CircleButtonClose.Font = new Font("Segoe UI", 9F);
-            guna2CircleButtonClose.ForeColor = Color.White;
-            guna2CircleButtonClose.Location = new Point(839, 12);
-            guna2CircleButtonClose.Name = "guna2CircleButtonClose";
-            guna2CircleButtonClose.ShadowDecoration.CustomizableEdges = customizableEdges7;
-            guna2CircleButtonClose.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButtonClose.Size = new Size(16, 17);
-            guna2CircleButtonClose.TabIndex = 9;
-            guna2CircleButtonClose.Text = "X";
-            guna2CircleButtonClose.Click += guna2CircleButtonClose_Click;
-
-            // guna2CircleButtonMinimize
-            guna2CircleButtonMinimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2CircleButtonMinimize.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButtonMinimize.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButtonMinimize.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButtonMinimize.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButtonMinimize.FillColor = Color.ForestGreen;
-            guna2CircleButtonMinimize.Font = new Font("Segoe UI", 9F);
-            guna2CircleButtonMinimize.ForeColor = Color.White;
-            guna2CircleButtonMinimize.Location = new Point(801, 12);
-            guna2CircleButtonMinimize.Name = "guna2CircleButtonMinimize";
-            guna2CircleButtonMinimize.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2CircleButtonMinimize.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButtonMinimize.Size = new Size(16, 17);
-            guna2CircleButtonMinimize.TabIndex = 10;
-            guna2CircleButtonMinimize.Text = "-";
-            guna2CircleButtonMinimize.Click += guna2CircleButtonMinimize_Click;
-
-            // guna2CircleButtonMaximize
-            guna2CircleButtonMaximize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2CircleButtonMaximize.DisabledState.BorderColor = Color.DarkGray;
-            guna2CircleButtonMaximize.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2CircleButtonMaximize.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2CircleButtonMaximize.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2CircleButtonMaximize.FillColor = Color.Orange;
-            guna2CircleButtonMaximize.Font = new Font("Segoe UI", 9F);
-            guna2CircleButtonMaximize.ForeColor = Color.White;
-            guna2CircleButtonMaximize.Location = new Point(820, 12);
-            guna2CircleButtonMaximize.Name = "guna2CircleButtonMaximize";
-            guna2CircleButtonMaximize.ShadowDecoration.CustomizableEdges = customizableEdges9;
-            guna2CircleButtonMaximize.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            guna2CircleButtonMaximize.Size = new Size(16, 17);
-            guna2CircleButtonMaximize.TabIndex = 11;
-            guna2CircleButtonMaximize.Text = "□";
-            guna2CircleButtonMaximize.Click += guna2CircleButtonMaximize_Click;
-
             // titleLabel
             titleLabel.BackColor = Color.Transparent;
             titleLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
@@ -225,25 +163,18 @@ namespace E_commerce.Presentation
             titleLabel.TabIndex = 13;
             titleLabel.Text = "Your Order";
 
-            // OrderForm
+            // OrderControl
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1386, 788);
             Controls.Add(titleLabel);
-            Controls.Add(guna2CircleButtonMaximize);
-            Controls.Add(guna2CircleButtonMinimize);
-            Controls.Add(guna2CircleButtonClose);
             Controls.Add(btnCancel);
             Controls.Add(btnOK);
             Controls.Add(textBoxTotal);
             Controls.Add(guna2HtmlLabelTotal);
             Controls.Add(dataGridViewCart);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "OrderForm";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Order Details";
-            Load += OrderForm_Load;
+            Name = "OrderControl";
+            Size = new Size(1386, 788);
             ((System.ComponentModel.ISupportInitialize)dataGridViewCart).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -254,9 +185,6 @@ namespace E_commerce.Presentation
         private Guna2TextBox textBoxTotal;
         private Guna2GradientButton btnOK;
         private Guna2GradientButton btnCancel;
-        private Guna2CircleButton guna2CircleButtonClose;
-        private Guna2CircleButton guna2CircleButtonMinimize;
-        private Guna2CircleButton guna2CircleButtonMaximize;
         private Guna2HtmlLabel titleLabel;
     }
 }

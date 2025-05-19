@@ -7,6 +7,7 @@ using E_commerce.Application.Services.ProductServices;
 using E_commerce.Application.Services.UserServices;
 using E_commerce.Core.Models;
 using E_commerce.Shared;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace E_commerce.Presentation
@@ -37,6 +38,7 @@ namespace E_commerce.Presentation
 
 
 
+
             #region Form Region
             // To customize application configuration such as set high DPI settings or default font,  
             // see https://aka.ms/applicationconfiguration.  
@@ -63,7 +65,7 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices));
 
             //sessionmanager.initialize(sessionstorage);
-            ////await sessionmanager.loadlastuser(userservices);
+            //await sessionmanager.loadlastuser(userservices);
             //if (sessionmanager.isloggedin)
             //{
             //    if (sessionmanager.isadmin())
@@ -79,7 +81,7 @@ namespace E_commerce.Presentation
             //else
             //{
             //    system.windows.forms.application.run(new login_form(userservices));
-            //} 
+            //}
             #endregion
 
             //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService,orderService));
@@ -115,6 +117,7 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, orderService, categoryServices, cartItemService));
 
             //System.Windows.Forms.Application.Run(new ClientDashboard(userServices, productServices, orderService, categoryServices, cartItemService));
+            //System.Windows.Forms.Application.Run(new AdminOrderForm(orderService, productServices));
 
 
         }
