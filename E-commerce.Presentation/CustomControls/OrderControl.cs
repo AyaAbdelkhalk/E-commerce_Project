@@ -4,65 +4,64 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using Guna.UI2.WinForms.Suite;
 using E_commerce.Application.DTOs.CartItem;
 using E_commerce.Application.Services;
 using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Helper;
-using E_commerce.Application.DTOs;
 using E_commerce.Application.Services.ProductServices;
-using E_commerce.Presentation.CustomControls;
+using E_commerce.Application.DTOs;
 
-namespace E_commerce.Presentation
+namespace E_commerce.Presentation.CustomControls
 {
-    public partial class OrderForm : Form
+    public partial class OrderControl : UserControl
     {
         private readonly List<CartItemDTO> _cartItems;
-        private readonly CartItemForm _cartForm;
         private readonly IOrderService _orderService;
         private readonly ICartItemService _cartItemService;
         private readonly IProductServices _productService;
-        private readonly CartControl _cartControl;
 
-        public OrderForm()
+        public OrderControl()
         {
             InitializeComponent();
-            // Remove window controls since we're embedding
-            guna2CircleButtonClose.Visible = false;
-            guna2CircleButtonMinimize.Visible = false;
-            guna2CircleButtonMaximize.Visible = false;
-
-            // Adjust layout for embedding
-            this.Padding = new Padding(20);
-            dataGridViewCart.Location = new Point(20, 60);
-            dataGridViewCart.Size = new Size(this.ClientSize.Width - 40, this.ClientSize.Height - 180);
-
-            guna2HtmlLabelTotal.Location = new Point(this.ClientSize.Width - 200, this.ClientSize.Height - 100);
-            textBoxTotal.Location = new Point(this.ClientSize.Width - 120, this.ClientSize.Height - 100);
-
-            btnOK.Location = new Point(this.ClientSize.Width - 300, this.ClientSize.Height - 60);
-            btnCancel.Location = new Point(this.ClientSize.Width - 160, this.ClientSize.Height - 60);
-
-            titleLabel.Location = new Point(20, 20);
         }
 
-        public OrderForm(List<CartItemDTO> cartItems, CartItemForm cartForm, IOrderService orderService, ICartItemService cartItemService,IProductServices productServices) : this()
+        public OrderControl(List<CartItemDTO> cartItems, IOrderService orderService, ICartItemService cartItemService, IProductServices productServices)
         {
+            InitializeComponent();
             _cartItems = cartItems ?? new List<CartItemDTO>();
-            _cartForm = cartForm ?? throw new ArgumentNullException(nameof(cartForm));
             _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
             _cartItemService = cartItemService ?? throw new ArgumentNullException(nameof(cartItemService));
             _productService = productServices ?? throw new ArgumentNullException(nameof(productServices));
+            SetupControl();
         }
-        public OrderForm(List<CartItemDTO> cartItems, CartControl cartControl, IOrderService orderService, ICartItemService cartItemService, IProductServices productServices) : this()
+
+        private void SetupControl()
         {
-            _cartItems = cartItems ?? new List<CartItemDTO>();
-            _cartControl = cartControl;
-            _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
-            _cartItemService = cartItemService ?? throw new ArgumentNullException(nameof(cartItemService));
-            _productService = productServices ?? throw new ArgumentNullException(nameof(productServices));
+            // Initialize and layout controls
+            this.Size = new Size(800, 650);
+            this.BackColor = Color.White;
+
+            // Position controls with relative positioning
+            int margin = 20;
+            dataGridViewCart.Location = new Point(margin, 60);
+            dataGridViewCart.Size = new Size(this.Width - (2 * margin), this.Height - 180);
+
+            guna2HtmlLabelTotal.Location = new Point(this.Width - 200, this.Height - 100);
+            textBoxTotal.Location = new Point(this.Width - 120, this.Height - 100);
+
+            btnOK.Location = new Point(this.Width - 300, this.Height - 60);
+            btnCancel.Location = new Point(this.Width - 160, this.Height - 60);
+
+            titleLabel.Location = new Point(margin, 20);
         }
-        private void OrderForm_Load(object sender, EventArgs e)
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            LoadCartItems();
+        }
+
+        private void LoadCartItems()
         {
             // Configure DataGridView columns
             dataGridViewCart.Columns.Clear();
@@ -119,11 +118,6 @@ namespace E_commerce.Presentation
             textBoxTotal.Text = total.ToString("C2");
         }
 
-        private void dataGridViewCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // No action required for now
-        }
-
         private async void btnOK_Click(object sender, EventArgs e)
         {
             try
@@ -152,10 +146,35 @@ namespace E_commerce.Presentation
                     return;
                 }
 
-                // Navigate to MyOrdersForm
-                //var myOrdersForm = new MyOrdersForm(_orderService,_productService);
-                //myOrdersForm.Show();
-                this.Close();
+                // Navigate to Dashboard content
+                var parentForm = this.FindForm();
+                if (parentForm != null)
+                {
+                    // Remove existing user controls (except SidebarControl)
+                    var existingControls = parentForm.Controls.OfType<UserControl>().Where(c => c != this && c.GetType() != typeof(SidebarControl)).ToList();
+                    foreach (var control in existingControls)
+                    {
+                        parentForm.Controls.Remove(control);
+                    }
+
+                    // Show Dashboard content (flowLayoutPanel1 and SearchTextBox)
+                    var flowLayoutPanel = parentForm.Controls.OfType<FlowLayoutPanel>().FirstOrDefault();
+                    if (flowLayoutPanel != null)
+                    {
+                        flowLayoutPanel.Visible = true;
+                    }
+
+                    var searchTextBox = parentForm.Controls.Find("SearchTextBox", true).FirstOrDefault();
+                    if (searchTextBox != null)
+                    {
+                        searchTextBox.Visible = true;
+                    }
+
+                    
+
+                    // Remove this OrderControl
+                    parentForm.Controls.Remove(this);
+                }
             }
             catch (Exception ex)
             {
@@ -165,24 +184,38 @@ namespace E_commerce.Presentation
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            // Show the CartItemForm and close the OrderForm
-            _cartForm.Show();
-            this.Close();
-        }
+            // Navigate back to CartControl
+            var parentForm = this.FindForm();
+            if (parentForm != null)
+            {
+                // Remove existing controls
+                var existingControls = parentForm.Controls.OfType<UserControl>().Where(c => c != this && c.GetType() != typeof(SidebarControl)).ToList();
+                foreach (var control in existingControls)
+                {
+                    parentForm.Controls.Remove(control);
+                }
 
-        private void guna2CircleButtonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+                // Add CartControl
+                var cartControl = new CartControl(_cartItemService, _productService, _orderService);
+                cartControl.Visible = true;
+                cartControl.Dock = DockStyle.Right;
+                parentForm.Controls.Add(cartControl);
+                cartControl.BringToFront();
 
-        private void guna2CircleButtonMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
+                // Update SidebarControl button colors
+                var sidebar = parentForm.Controls.OfType<SidebarControl>().FirstOrDefault();
+                if (sidebar != null)
+                {
+                    sidebar.Controls["MyCartbtn"].BackColor = Color.LightBlue;
+                    sidebar.Controls["ClientDashboardbtn"].BackColor = Color.Transparent;
+                    sidebar.Controls["Profilebtn"].BackColor = Color.Transparent;
+                    sidebar.Controls["logoutbutton"].BackColor = Color.Transparent;
+                    sidebar.Controls["MyOrderbtn"].BackColor = Color.Transparent;
+                }
 
-        private void guna2CircleButtonMaximize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = this.WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
+                // Remove this OrderControl
+                parentForm.Controls.Remove(this);
+            }
         }
     }
 }

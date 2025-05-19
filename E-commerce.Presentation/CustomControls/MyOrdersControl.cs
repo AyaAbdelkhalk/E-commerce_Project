@@ -2,66 +2,54 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using Guna.UI2.WinForms.Suite;
 using E_commerce.Application.DTOs.Order;
 using E_commerce.Application.Services.OrderService;
 using E_commerce.Application.Helper;
 using Microsoft.Extensions.Logging;
 using E_commerce.Application.Services.ProductServices;
-using E_commerce.Presentation.CustomControls;
-using E_commerce.Application.Services.UserServices;
-using E_commerce.Application.Services;
 
-namespace E_commerce.Presentation
+namespace E_commerce.Presentation.CustomControls
 {
-    public partial class MyOrdersForm : Form
+    public partial class MyOrdersControl : UserControl
     {
         private readonly IOrderService _orderService;
-        private readonly ILogger<MyOrdersForm> _logger;
+        private readonly ILogger<MyOrdersControl> _logger;
         private readonly IProductServices _productServices;
-        private readonly IUserServices _userServices;
-        private readonly ICartItemService _cartItemService;
 
-        public MyOrdersForm()
+        public MyOrdersControl()
         {
             InitializeComponent();
-            // Remove window controls since we're embedding
-            guna2CircleButtonClose.Visible = false;
-            guna2CircleButtonMinimize.Visible = false;
-            guna2CircleButtonMaximize.Visible = false;
-
-            // Adjust layout for embedding
-            this.Padding = new Padding(20);
-            dataGridViewOrders.Location = new Point(20, 60);
-            dataGridViewOrders.Size = new Size(this.ClientSize.Width - 40, this.ClientSize.Height - 180);
-
-            titleLabel.Location = new Point(20, 20);
+            SetupControl();
         }
 
-        public MyOrdersForm(IOrderService orderService, IProductServices productService, ILogger<MyOrdersForm> logger = null) : this()
+        public MyOrdersControl(IOrderService orderService, IProductServices productService, ILogger<MyOrdersControl> logger = null) : this()
         {
             _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
             _productServices = productService ?? throw new ArgumentNullException(nameof(productService));
             _logger = logger;
-        }
-        public MyOrdersForm(IOrderService orderService, IProductServices productService, IUserServices userServices, ICartItemService cartItemService) : this()
-        {
-            _orderService = orderService ?? throw new ArgumentNullException(nameof(orderService));
-            _productServices = productService ?? throw new ArgumentNullException(nameof(productService));
-            _userServices = userServices ?? throw new ArgumentNullException(nameof(userServices));
-            _cartItemService = cartItemService ?? throw new ArgumentNullException(nameof(cartItemService));
             dataGridViewOrders.CellContentClick += dataGridViewOrders_CellContentClick;
-
-
-            SidebarControl sidebarControl = new SidebarControl(_userServices, _cartItemService, _productServices, _orderService);
-            sidebarControl.Visible = true;
-            this.Controls.Add(sidebarControl);
         }
 
-        private async void MyOrdersForm_Load(object sender, EventArgs e)
+        private void SetupControl()
         {
+            // Initialize and layout controls
+            this.Size = new Size(800, 650); // Match CartControl size
+            this.BackColor = Color.White;
+
+            // Position controls with relative positioning
+            int margin = 20;
+            dataGridViewOrders.Location = new Point(margin, 60);
+            dataGridViewOrders.Size = new Size(this.Width - (2 * margin), this.Height - 100);
+
+            titleLabel.Location = new Point(margin, 20);
+        }
+
+        protected override async void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
             await LoadOrders();
         }
 
@@ -76,16 +64,13 @@ namespace E_commerce.Presentation
                     return;
                 }
 
-                var userId = SessionManager.CurrentUser?.UserID ?? 3; // Replace with SessionManager.CurrentUser?.UserID
+                var userId = SessionManager.CurrentUser?.UserID ?? 3;
                 _logger?.LogInformation($"Loading orders for user ID: {userId}");
 
                 var orders = await _orderService.GetOrderHistoryByUserIdAsync(userId);
 
-
                 dataGridViewOrders.Columns.Clear();
                 dataGridViewOrders.AutoGenerateColumns = false;
-
-
 
                 dataGridViewOrders.Columns.Add(new DataGridViewTextBoxColumn
                 {
@@ -182,10 +167,8 @@ namespace E_commerce.Presentation
                 RowHeadersVisible = false
             };
 
-            // Clear any existing columns first
             dataGridView.Columns.Clear();
 
-            // Add columns
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "ProductName",
@@ -221,36 +204,28 @@ namespace E_commerce.Presentation
                 }
             });
 
-            // Verify and set the data source
             if (order.OrderDetails != null && order.OrderDetails.Any())
             {
                 try
                 {
-                    // Enrich order details with product information
                     var enrichedItems = new List<OrderDetailDto>();
 
                     foreach (var item in order.OrderDetails)
                     {
-                        // Fetch product details for each order item
                         var productResponse = await _productServices.GetProducByIdAsync(item.ProductID);
                         if (productResponse.Succeeded)
                         {
-                            // Create a new object with the enriched data
                             enrichedItems.Add(new OrderDetailDto
                             {
-                               
                                 ProductName = productResponse.Data?.Name ?? "Unknown Product",
                                 Price = productResponse.Data?.Price ?? 0m,
                                 Quantity = item.Quantity
-                                // Add other properties if needed
                             });
                         }
                         else
                         {
-                            // Fallback if product fetch fails
                             enrichedItems.Add(new OrderDetailDto
                             {
-                                
                                 ProductName = "Product not found",
                                 Price = 0m,
                                 Quantity = item.Quantity
@@ -287,35 +262,6 @@ namespace E_commerce.Presentation
             detailsForm.Controls.Add(dataGridView);
             detailsForm.Controls.Add(closeButton);
             detailsForm.ShowDialog(this);
-        }
-
-        private void guna2CircleButtonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void guna2CircleButtonMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void guna2CircleButtonMaximize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = this.WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
-        }
-
-        private void dataGridViewOrders_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex < 0 || e.RowIndex < 0) return;
-
-            if (dataGridViewOrders.Columns[e.ColumnIndex].Name == "Details")
-            {
-                var order = dataGridViewOrders.Rows[e.RowIndex].DataBoundItem as OrderDisDto;
-                if (order != null)
-                {
-                    ShowOrderDetails(order);
-                }
-            }
         }
     }
 }

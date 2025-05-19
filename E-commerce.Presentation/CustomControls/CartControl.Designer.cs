@@ -2,15 +2,8 @@
 {
     partial class CartControl
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,12 +13,6 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
@@ -45,9 +32,8 @@
             titleLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)cartDataGridView).BeginInit();
             SuspendLayout();
-            // 
+
             // cartDataGridView
-            // 
             cartDataGridView.AllowUserToAddRows = false;
             cartDataGridView.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = Color.White;
@@ -99,9 +85,8 @@
             cartDataGridView.ThemeStyle.RowsStyle.Height = 30;
             cartDataGridView.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             cartDataGridView.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            // 
+
             // totalLabel
-            // 
             totalLabel.BackColor = Color.Transparent;
             totalLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             totalLabel.Location = new Point(407, 527);
@@ -109,9 +94,8 @@
             totalLabel.Size = new Size(49, 19);
             totalLabel.TabIndex = 1;
             totalLabel.Text = "TOTAL:";
-            // 
+
             // totalTextBox
-            // 
             totalTextBox.CustomizableEdges = customizableEdges1;
             totalTextBox.DefaultText = "0.00";
             totalTextBox.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
@@ -129,9 +113,8 @@
             totalTextBox.ShadowDecoration.CustomizableEdges = customizableEdges2;
             totalTextBox.Size = new Size(75, 36);
             totalTextBox.TabIndex = 2;
-            // 
+
             // updateButton
-            // 
             updateButton.CustomizableEdges = customizableEdges3;
             updateButton.DisabledState.BorderColor = Color.DarkGray;
             updateButton.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -148,9 +131,8 @@
             updateButton.TabIndex = 3;
             updateButton.Text = "Update";
             updateButton.Click += UpdateButton_Click;
-            // 
+
             // checkoutButton
-            // 
             checkoutButton.CustomizableEdges = customizableEdges5;
             checkoutButton.DisabledState.BorderColor = Color.DarkGray;
             checkoutButton.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -167,9 +149,8 @@
             checkoutButton.TabIndex = 4;
             checkoutButton.Text = "Checkout";
             checkoutButton.Click += CheckoutButton_Click;
-            // 
+
             // titleLabel
-            // 
             titleLabel.BackColor = Color.Transparent;
             titleLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             titleLabel.Location = new Point(140, 40);
@@ -177,9 +158,8 @@
             titleLabel.Size = new Size(112, 34);
             titleLabel.TabIndex = 13;
             titleLabel.Text = "Your Cart";
-            // 
+
             // CartControl
-            // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(titleLabel);
@@ -195,8 +175,6 @@
             ResumeLayout(false);
             PerformLayout();
         }
-
-        #endregion
 
         private Guna.UI2.WinForms.Guna2DataGridView cartDataGridView;
         private Guna.UI2.WinForms.Guna2HtmlLabel totalLabel;
