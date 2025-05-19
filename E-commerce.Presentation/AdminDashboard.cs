@@ -32,6 +32,7 @@ namespace E_commerce.Presentation
         private readonly IOrderService _orderService;
         private readonly ProfilePanelControl profilePanelControl1;
         private readonly AdminDashboardControl _adminDashboardControl;
+        private readonly CategoryControl categoryControl;
 
         private bool isUpdateMode = false;
         private int currentProductId = 0;
@@ -83,6 +84,12 @@ namespace E_commerce.Presentation
             this.Controls.Add(_adminDashboardControl);
             _adminDashboardControl.Visible = false;
             SearchTextBox.Visible = false;
+
+            categoryControl = new CategoryControl(_categoryServices);
+            this.Controls.Add(categoryControl);
+            categoryControl.Visible = false;
+            categoryControl.BringToFront();
+
 
         }
 
@@ -178,12 +185,17 @@ namespace E_commerce.Presentation
 
         private async void categorybtn_Click(object sender, EventArgs e)
         {
-            await LoadProducts();
-            await LoadCategories();
+         
             _adminDashboardControl.Visible = false;
-            Form CategoryForm = new Category(_productServices, _categoryServices, _userServices, _cartItemService, _orderService);
-            CategoryForm.Show();
-            this.Hide();
+            categoryControl.Visible = true;
+            categoryControl.BringToFront();
+            categoryControl.Location = new Point(300, 20);
+            categoryControl.Size = new Size(1500, 800);
+
+
+
+
+
         }
         //=======
         #endregion

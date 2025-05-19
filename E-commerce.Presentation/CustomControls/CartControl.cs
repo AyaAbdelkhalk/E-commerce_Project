@@ -199,7 +199,10 @@ namespace E_commerce.Presentation.CustomControls
             MessageBox.Show("Checkout functionality to be implemented.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void CartControl_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 

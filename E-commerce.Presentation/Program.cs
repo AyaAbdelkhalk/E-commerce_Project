@@ -45,7 +45,7 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new Dashboard());
             //System.Windows.Forms.Application.Run(new Login_Form(userServices));
 
-            System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices,cartItemService,orderService));
+            //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices,cartItemService,orderService));
             //<<<<<<< updd
             //System.Windows.Forms.Application.Run(new Category(productServices, categoryServices));
             //System.Windows.Forms.Application.Run(new Order());
@@ -82,27 +82,27 @@ namespace E_commerce.Presentation
             //} 
             #endregion
 
-            System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService,orderService));
+            //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService,orderService));
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
 
 
 
 
-            //if (SessionManager.IsLoggedIn)
-            //{
-            //    if (SessionManager.IsAdmin())
-            //    {
-            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
-            //    }
-            //    else
-            //    {
-            //        System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService,orderService, categoryServices));
-            //    }
-            //}
-            //else
-            //{
-            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            //}
+            if (SessionManager.IsLoggedIn)
+            {
+                if (SessionManager.IsAdmin())
+                {
+                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
+                }
+                else
+                {
+                    System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService, orderService, categoryServices));
+                }
+            }
+            else
+            {
+                System.Windows.Forms.Application.Run(new Login_Form(userServices));
+            }
 
             ////System.Windows.Forms.Application.Run(new RegisterForm(userServices));
 
