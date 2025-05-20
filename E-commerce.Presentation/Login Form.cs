@@ -104,9 +104,9 @@ namespace E_commerce.Presentation
                     this.Hide();
                     SessionManager.Login(result.Data);
                     if (SessionManager.IsAdmin())
-                        new AdminDashboard(_userServices, result.Data,_productServices,_categoryServices,_cartItemService,_orderService).Show();
+                        new AdminDashboard(_userServices, result.Data, _productServices, _categoryServices, _cartItemService, _orderService).Show();
                     else
-                        new Dashboard(_userServices, result.Data,_productServices,_cartItemService,_orderService,_categoryServices).Show();
+                        new Dashboard(_userServices, result.Data, _productServices, _cartItemService, _orderService, _categoryServices).Show();
                 }
                 else
                 {
@@ -200,7 +200,7 @@ namespace E_commerce.Presentation
                     if (SessionManager.IsAdmin())
                         new AdminDashboard(_userServices, result.Data, _productServices, _categoryServices, _cartItemService, _orderService).Show();
                     else
-                        new Dashboard(_userServices, result.Data,_productServices,_cartItemService,_orderService,_categoryServices).Show();
+                        new Dashboard(_userServices, result.Data, _productServices, _cartItemService, _orderService, _categoryServices).Show();
                 }
                 else
                 {
@@ -211,6 +211,11 @@ namespace E_commerce.Presentation
             {
                 MessageBox.Show("حدث خطأ: " + ex.Message);
             }
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
 
         }
     }

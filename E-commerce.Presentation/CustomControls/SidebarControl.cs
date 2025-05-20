@@ -18,6 +18,7 @@ namespace E_commerce.Presentation.CustomControls
         private readonly ICartItemService _cartItemService;
         private readonly IProductServices _productService;
         private readonly IOrderService _orderService;
+
         private readonly ICategoryServices _categoryService;
         private readonly ProfilePanelControl profilePanelControl;
         private readonly CartControl cartControl;
@@ -308,7 +309,7 @@ namespace E_commerce.Presentation.CustomControls
                 this.Parent.Hide();
                 SessionManager.Logout();
                 _userServices.Logout();
-                var loginForm = new Login_Form(_userServices);
+                var loginForm = new Login_Form(_userServices,_productService,_categoryService,_cartItemService,_orderService);
                 loginForm.Show();
             }
         }

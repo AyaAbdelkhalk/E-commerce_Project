@@ -28,36 +28,7 @@ namespace E_commerce.Presentation
    
 
 
-        public Dashboard()
-        {
-            InitializeComponent();
-            roundedPanel1.Visible = false;
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
-            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
-            customTextBox23.Text += SessionManager.CurrentUser?.Email;
-            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
-            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
-            _sidebarControl = new SidebarControl(null, null, null, null, null);
-            this.Controls.Add(_sidebarControl);
-        }
-
-        public Dashboard(IUserServices userServices, User user)
-        {
-            InitializeComponent();
-            roundedPanel1.Visible = false;
-            this.DoubleBuffered = true;
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
-            customTextBox22.Text += SessionManager.CurrentUser?.UserName;
-            customTextBox23.Text += SessionManager.CurrentUser?.Email;
-            customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
-            customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
-            _userServices = userServices;
-            _sidebarControl = new SidebarControl(userServices, null, null, null, null);
-            this.Controls.Add(_sidebarControl);
-        }
+  
         public Dashboard(IUserServices userServices, IProductServices productServices, ICartItemService cartItemService, IOrderService orderService, ICategoryServices categoryServices)
         {
             InitializeComponent();
@@ -71,11 +42,14 @@ namespace E_commerce.Presentation
             this.Controls.Add(_sidebarControl);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+
             customTextBox21.Text += SessionManager.CurrentUser?.FirstName + ' ' + SessionManager.CurrentUser?.LastName;
             customTextBox22.Text += SessionManager.CurrentUser?.UserName;
             customTextBox23.Text += SessionManager.CurrentUser?.Email;
             customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
             customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
+            LoadProducts();
+            this.ResumeLayout();
         }
         public Dashboard(IUserServices userServices, User user, IProductServices productServices, ICartItemService cartItemService, IOrderService orderService, ICategoryServices categoryServices)
         {
@@ -95,6 +69,8 @@ namespace E_commerce.Presentation
             customTextBox23.Text += SessionManager.CurrentUser?.Email;
             customTextBox24.Text += SessionManager.CurrentUser?.Role.ToString();
             customTextBox25.Text += SessionManager.CurrentUser?.IsActive.ToString();
+            LoadProducts();
+            this.ResumeLayout();
         }
 
         private void Dashboard_Load(object sender, EventArgs e)

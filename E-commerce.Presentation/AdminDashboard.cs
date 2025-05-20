@@ -175,7 +175,7 @@ namespace E_commerce.Presentation
         this.Hide();
         SessionManager.Logout();
         _userServices.Logout();
-        var loginForm = new Login_Form(_userServices);
+        var loginForm = new Login_Form(_userServices,_productServices,_categoryServices,_cartItemService,_orderService);
         loginForm.Show();
     }
 
@@ -405,7 +405,7 @@ namespace E_commerce.Presentation
             if (result == DialogResult.Yes)
             {
                 this.Hide();
-                new Login_Form(_userServices).Show();
+                new Login_Form(_userServices, _productServices, _categoryServices, _cartItemService, _orderService).Show();
             }
         }
 
@@ -425,6 +425,7 @@ namespace E_commerce.Presentation
             userControl1.Location = new Point(300, 20);
             userControl1.Size = new Size(1500, 800);
             profilePanelControl1.Visible = false;
+
 
         }
 

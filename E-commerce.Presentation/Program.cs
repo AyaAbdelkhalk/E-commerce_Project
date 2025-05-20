@@ -84,31 +84,12 @@ namespace E_commerce.Presentation
             //}
             #endregion
 
-            //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService,orderService));
+            #region Test
             //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService));
-            System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
+            //System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
             //System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService, orderService, categoryServices));
-
-
-
-
-            //if (SessionManager.IsLoggedIn)
-            //{
-            //    if (SessionManager.IsAdmin())
-            //    {
-            //        System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
-            //    }
-            //    else
-            //    {
-            //        System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService, orderService, categoryServices));
-            //    }
-            //}
-            //else
-            //{
-            //    System.Windows.Forms.Application.Run(new Login_Form(userServices));
-            //}
-
             ////System.Windows.Forms.Application.Run(new RegisterForm(userServices));
+            //System.Windows.Forms.Application.Run(new products(userServices, productServices, categoryServices, cartItemService,orderService));
 
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices, productServices, cartItemService));
             //System.Windows.Forms.Application.Run(new RegisterForm(userServices,  cartItemService, productServices, orderService, categoryServices));
@@ -119,6 +100,27 @@ namespace E_commerce.Presentation
             //System.Windows.Forms.Application.Run(new ClientDashboard(userServices, productServices, orderService, categoryServices, cartItemService));
             //System.Windows.Forms.Application.Run(new AdminOrderForm(orderService, productServices));
 
+
+            #endregion
+
+
+            if (SessionManager.IsLoggedIn)
+            {
+                if (SessionManager.IsAdmin())
+                {
+                    System.Windows.Forms.Application.Run(new AdminDashboard(productServices, categoryServices, userServices, cartItemService, orderService));
+                }
+                else
+                {
+                    System.Windows.Forms.Application.Run(new Dashboard(userServices, productServices, cartItemService, orderService, categoryServices));
+                }
+            }
+            else
+            {
+                System.Windows.Forms.Application.Run(new Login_Form(userServices,productServices,categoryServices,cartItemService,orderService));
+            }
+
+ 
 
         }
     }

@@ -238,10 +238,11 @@ namespace E_commerce.Presentation
             label3.ForeColor = Color.MidnightBlue;
             label3.Location = new Point(3, 61);
             label3.Name = "label3";
-            label3.Size = new Size(353, 80);
+            label3.Size = new Size(332, 80);
             label3.TabIndex = 6;
-            label3.Text = "Welcome To \r\n      Our System";
+            label3.Text = "Welcome To \r\n      Our Store";
             label3.TextAlign = ContentAlignment.MiddleCenter;
+            label3.Click += label3_Click;
             // 
             // loginUnderline
             // 

@@ -13,10 +13,10 @@ namespace E_commerce.Infrastructure
                         //.UseSqlServer("Data Source=DESKTOP-PQOAC0F\\SQL;Initial Catalog=EcommerceDb;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;MultipleActiveResultSets=True");
 
 
-            //.UseSqlServer("Data Source=.;Initial Catalog=EcommerceDb;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;MultipleActiveResultSets=True");
+            .UseSqlServer("Data Source=.;Initial Catalog=EcommerceDbFinal;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;MultipleActiveResultSets=True");
             //.UseSqlServer("Data Source=.;Initial Catalog=OurSystem;Integrated Security=True;Encrypt=False;Trust Server Certificate=True;MultipleActiveResultSets=True");
 
-            .UseSqlServer("Data Source=VIRUS\\SQLEXPRESS;Initial Catalog=EcommerceDb;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
+            //.UseSqlServer("Data Source=VIRUS\\SQLEXPRESS;Initial Catalog=EcommerceDb;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
             //.UseSqlServer("Data Source=DESKTOP-PQOAC0F\\SQL;Initial Catalog=Ecom2merceDbTest;Integrated Security=True;Encrypt=False;Trust Server Certificate=True").EnableRetryOnFailure();
 
         }
