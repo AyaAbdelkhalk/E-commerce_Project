@@ -14,7 +14,7 @@ namespace E_commerce.Core.Models
 
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "UnitsInStock cannot be negative")]
-        public int UnitsInStock { get; set; }
+        public int UnitsInStock { get; set; } 
 
         public int CategoryID { get; set; }
 
